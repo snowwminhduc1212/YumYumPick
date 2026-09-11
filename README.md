@@ -19,9 +19,10 @@
 
 **YumYumPick** ra đời nhằm chấm dứt hội chứng *"Tê liệt quyết định" (Decision Paralysis)* khi chọn món ăn hàng ngày. Thay vì phải đọc những danh sách thực đơn dài vô tận, người dùng chỉ cần tập trung vào **một món ăn tại một thời điểm** và đưa ra quyết định trực giác:
 
-- 👉 **Quẹt Phải (Swipe Right / ❤️):** Chọn món này! Tự động lưu vào bộ sưu tập cá nhân và mở khóa công thức nấu chi tiết kèm danh sách nguyên liệu.
+- 👆 **Nhấp vào thẻ (Tap / ℹ️):** Mở nhanh bảng **Giới thiệu món ăn** (Dish Intro): khám phá nguồn gốc xuất xứ, hương vị đặc trưng, thời gian chế biến, lượng calo và tóm tắt nguyên liệu chính để cân nhắc trước khi quẹt.
+- 👉 **Quẹt Phải (Swipe Right / ❤️):** Chọn món này! Tự động lưu toàn bộ món ăn và công thức nấu chi tiết vào bộ sưu tập `LocalStorage` để bạn xem lại sau khi đã quẹt xong.
+- 📖 **Xem chi tiết công thức sau khi quẹt:** Mở bộ sưu tập món đã lưu để xem toàn bộ công thức chuẩn (danh sách nguyên liệu có checkbox tiện kiểm tra tủ lạnh/đi chợ, hướng dẫn nấu từng bước 1-2-3 và mẹo nhỏ từ đầu bếp).
 - 👈 **Quẹt Trái (Swipe Left / ❌):** Bỏ qua món ăn này và ngay lập tức xem gợi ý tiếp theo.
-- 👆 **Nhấp vào thẻ (Tap / ℹ️):** Mở Bottom Sheet xem nguyên liệu, định lượng và các bước chế biến.
 - 🛒 **Xuất Danh Sách Đi Chợ (Smart Grocery List):** Tự động tổng hợp nguyên liệu của tất cả các món đã lưu để gửi nhanh qua Zalo/Messenger.
 - 💾 **Không cần tài khoản:** Tích hợp `LocalStorage` giúp mọi thao tác lưu trữ diễn ra tức thì, an toàn và bảo mật trên thiết bị.
 

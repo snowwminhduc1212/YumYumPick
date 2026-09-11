@@ -17,24 +17,30 @@ flowchart TD
     Decision -- "Kéo sang Trái (Swipe Left) hoặc bấm nút ❌" --> SkipDish["Bỏ qua món ăn (Skip)"]
     SkipDish --> CheckMore{"Còn thẻ trong danh sách không?"}
     
-    Decision -- "Kéo sang Phải (Swipe Right) hoặc bấm nút ❤️" --> PickDish["Lưu món ăn vào LocalStorage (Pick / Save)"]
+    Decision -- "Kéo sang Phải (Swipe Right) hoặc bấm nút ❤️" --> PickDish["Lưu món & toàn bộ công thức vào LocalStorage (Pick / Save)"]
     PickDish --> ShowToast["Hiển thị Toast Chúc Mừng & Tăng Badge Đã Lưu"]
     ShowToast --> CheckMore
     
-    Decision -- "Nhấp vào Thẻ hoặc bấm nút ℹ️" --> OpenDrawer["Mở Drawer Chi Tiết Món Ăn"]
-    OpenDrawer --> ViewRecipe["Xem danh sách nguyên liệu & cách nấu"]
-    ViewRecipe --> CloseDrawer["Đóng Drawer quay lại thẻ"]
+    Decision -- "Nhấp/Tap vào Thẻ hoặc bấm nút ℹ️" --> OpenIntroDrawer["Mở Drawer Giới Thiệu Món Ăn (Dish Intro Preview)"]
+    OpenIntroDrawer --> ViewIntro["Xem giới thiệu, xuất xứ, thời gian & tóm tắt nguyên liệu"]
+    ViewIntro -- "Bấm nút Chọn Món ❤️" --> PickDish
+    ViewIntro -- "Bấm nút Bỏ Qua ❌" --> SkipDish
+    ViewIntro -- "Vuốt xuống / Bấm Đóng" --> CloseDrawer["Đóng Drawer quay lại tiếp tục quẹt"]
+    CloseDrawer --> MainScreen
     
     Decision -- "Bấm nút Hoàn Tác ↩️" --> UndoAction["Khôi phục thẻ vừa quẹt gần nhất"]
     UndoAction --> MainScreen
     
     Decision -- "Bấm nút Bộ Lọc ⚙️" --> OpenFilter["Mở Modal Bộ Lọc"]
-    OpenFilter --> ApplyFilter["Chọn quốc gia, nguyên liệu, thời gian nấu"]
+    ApplyFilter["Chọn quốc gia, nguyên liệu, thời gian nấu"]
+    OpenFilter --> ApplyFilter
     ApplyFilter --> ReloadFiltered["Tải lại danh sách thẻ theo bộ lọc mới"]
     ReloadFiltered --> MainScreen
     
-    Decision -- "Bấm nút Danh Sách Đã Lưu 📑" --> SavedScreen["Mở Trang / Drawer Danh Sách Đã Lưu"]
-    SavedScreen --> ManageSaved["Xem công thức, xuất danh sách đi chợ, xóa món"]
+    Decision -- "Bấm nút Danh Sách Đã Lưu 📑" --> SavedScreen["Mở Bộ Sưu Tập Món Đã Lưu"]
+    SavedScreen --> SelectSaved["Chọn món ăn từ danh sách đã quẹt"]
+    SelectSaved --> FullRecipeModal["Mở Chi Tiết Công Thức Đầy Đủ (Nguyên liệu + Checkbox, Các bước nấu 1-2-3, Mẹo đầu bếp, Xuất danh sách đi chợ)"]
+    FullRecipeModal --> ManageSaved["Đánh dấu đã nấu, xuất danh sách đi chợ, xóa món"]
 
     CheckMore -- "Còn thẻ" --> NextCard["Hiển thị thẻ tiếp theo mượt mà"]
     NextCard --> MainScreen
@@ -56,7 +62,7 @@ flowchart TD
 
 ### 2.2. Ngưỡng Kích Hoạt Thao Tác (Swipe Thresholds)
 - **Độ dịch chuyển ngang (Drag Distance X):**
-  - Kéo sang phải $> +120\text{px}$ hoặc vận tốc kéo (velocity) $> 500\text{px/s}$ $\rightarrow$ **Kích hoạt PICK (LIKE)**.
+  - Kéo sang phải $> +120\text{px}$ hoặc vận tốc kéo (velocity) $> 500\text{px/s}$ $\rightarrow$ **Kích hoạt PICK (LIKE)**: Tự động lưu toàn bộ dữ liệu món ăn và công thức vào `LocalStorage`.
   - Kéo sang trái $< -120\text{px}$ hoặc vận tốc kéo $< -500\text{px/s}$ $\rightarrow$ **Kích hoạt SKIP**.
   - Nhỏ hơn ngưỡng trên: Thẻ tự động bật nảy (Spring back) trở lại vị trí chính giữa $(x: 0, y: 0, \text{rotate}: 0^\circ)$.
 - **Góc nghiêng xoay của thẻ (Dynamic Rotation):**
@@ -67,6 +73,11 @@ flowchart TD
 - **Khi kéo sang Phải:** Lớp phủ mờ màu xanh lá cây nhạt xuất hiện dần cùng huy hiệu đóng dấu nghiêng: **"YUMMY!"** hoặc **"CHỌN MÓN"** viền xanh neon (`#10B981`).
 - **Khi kéo sang Trái:** Lớp phủ mờ màu đỏ nhạt xuất hiện dần cùng huy hiệu đóng dấu nghiêng: **"BỎ QUA"** hoặc **"NOPE"** viền đỏ cam (`#EF4444`).
 - Độ đậm nhạt (`opacity`) của huy hiệu tăng tỷ lệ thuận với khoảng cách kéo từ $0 \rightarrow 1$.
+
+### 2.4. Phân Biệt Cử Chỉ Kéo (Drag) vs Nhấp (Tap) (Gesture Discrimination)
+Để loại bỏ hoàn toàn xung đột giữa hành vi **kéo quẹt thẻ** và **nhấp xem giới thiệu**:
+- **Nhấp nhẹ (Tap Event):** Nếu ngón tay/chuột chạm vào thẻ và độ dịch chuyển $\Delta x, \Delta y < 5\text{px}$ trong thời gian $< 250\text{ms}$ $\rightarrow$ Hệ thống nhận diện là **TAP** và mở ngay **Dish Intro Drawer** (Giới thiệu món ăn).
+- **Kéo quẹt (Drag Event):** Nếu độ dịch chuyển $> 10\text{px}$ $\rightarrow$ Kích hoạt trạng thái kéo (Dragging), vô hiệu hóa sự kiện Tap để thẻ di chuyển theo ngón tay một cách mượt mà.
 
 ---
 
@@ -83,21 +94,30 @@ flowchart TD
     - Tên món ăn (Font to, đậm, rõ ràng, vd: "Bún Bò Huế").
     - Cờ quốc gia & Tên ẩm thực (vd: 🇻🇳 Việt Nam / Miền Trung).
     - Các chip thông tin nhanh: Thời gian nấu (⏱️ 30p), Độ cay (🌶️ Cay vừa), Lượng calo ước tính.
+    - Nhãn gợi ý tương tác nhỏ: *"Chạm thẻ xem giới thiệu • Quẹt phải để lưu"*.
 - **Cụm Nút Thao Tác Dưới Cùng (Floating Action Buttons):**
   1. ↩️ **Nút Hoàn Tác (Undo):** Màu vàng hổ phách, kích thước vừa (nhỏ hơn nút chính).
   2. ❌ **Nút Bỏ Qua (Skip):** Màu trắng viền đỏ, icon chữ X đỏ rực, kích thước lớn ($64\times 64\text{px}$).
-  3. ℹ️ **Nút Xem Công Thức (Info):** Màu xanh dương nhạt, mở nhanh bảng chi tiết nguyên liệu.
+  3. ℹ️ **Nút Xem Giới Thiệu (Info / Tap Alternative):** Màu xanh dương nhạt, mở nhanh bảng giới thiệu tóm tắt món ăn.
   4. ❤️ **Nút Chọn Món (Pick/Like):** Màu xanh lá gradient hoặc đỏ hồng tình yêu, icon Trái tim / Chiếc dĩa, kích thước lớn ($64\times 64\text{px}$).
 
-### 3.2. Modal / Bottom Sheet Xem Công Thức Chi Tiết (Recipe Drawer)
-- Hỗ trợ vuốt kéo đóng (swipe down to close) trên di động.
+### 3.2. Modal / Bottom Sheet Giới Thiệu Món Ăn Khi Tap Vào Thẻ (Dish Intro Drawer)
+- **Mục đích:** Cung cấp thông tin tổng quan, hấp dẫn để người dùng hiểu món này trước khi đưa ra quyết định quẹt.
+- Hỗ trợ vuốt kéo xuống để đóng (swipe down to close) trên di động.
 - **Nội dung bao gồm:**
-  1. Ảnh bìa toàn cảnh và tên món.
-  2. Tóm tắt khẩu phần (vd: Phù hợp 2-3 người ăn).
-  3. **Danh sách nguyên liệu (Ingredients Checklist):** Có ô tích chọn (checkbox) tiện cho người dùng tích khi mở tủ lạnh kiểm tra đồ.
-  4. **Các bước nấu (Step-by-step Instructions):** Số thứ tự 1, 2, 3 có hướng dẫn chi tiết, thời gian từng bước.
-  5. Mẹo vặt nấu nướng (Chef's Tips).
-  6. Nút hành động nhanh: *"Lưu món này"* hoặc *"Chia sẻ cho bạn bè"*.
+  1. **Header trực quan:** Ảnh món ăn chất lượng cao, tên tiếng Việt & tên quốc tế, cờ quốc gia, vùng miền ẩm thực.
+  2. **Phần Giới Thiệu & Câu Chuyện Món Ăn (`short_description`):** Nguồn gốc, nét độc đáo, trải nghiệm hương vị đặc trưng (vd: vị béo ngậy của nước dùng hầm xương, hương sả ớt nồng nàn...).
+  3. **Bảng Thông Số Nhanh (Key Meta Badges):**
+     - Thời gian chuẩn bị (`prep_time_minutes`) & thời gian nấu (`cook_time_minutes`).
+     - Mức độ cay (`spicy_level` từ 0 - 3 trái ớt).
+     - Ước tính năng lượng calo (`calories_approx` kcal).
+     - Khẩu phần (Serving size: 1-2 người hoặc 3-4 người).
+     - Độ khó chế biến (Dễ / Trung bình / Kỳ công).
+  4. **Tóm Tắt Nguyên Liệu Chủ Đạo (Key Ingredients Preview):** Điểm nhanh 4-5 nguyên liệu chính để người dùng nhận diện nhanh xem có đúng sở thích hoặc có thành phần dị ứng không.
+  5. **Cụm Nút Hành Động Trực Tiếp (Drawer Action Buttons):**
+     - Nút *"❌ Bỏ qua"*: Đóng drawer và quẹt trái món ăn.
+     - Nút *"❤️ Chọn món này & Lưu công thức"*: Lưu món vào bộ sưu tập `LocalStorage`, đóng drawer và chuyển thẻ tiếp theo.
+     - Nút *"Đóng"*: Đóng drawer để tiếp tục quẹt trên màn hình chính.
 
 ### 3.3. Modal Bộ Lọc Nâng Cao (Smart Filter Modal)
 - **Lọc theo Quốc Gia / Nền Ẩm Thực:** Dạng các nút bấm Chip (Tất cả, 🇻🇳 Việt Nam, 🇯🇵 Nhật Bản, 🇰🇷 Hàn Quốc, 🇹🇭 Thái Lan, 🇮🇹 Ý...).
@@ -106,12 +126,25 @@ flowchart TD
 - **Lọc theo Khẩu Vị:** Không cay, Ăn chay (Vegetarian), Ít dầu mỡ / Eat Clean.
 - **Nút bấm:** "Đặt lại mặc định" và "Áp dụng bộ lọc (X món)".
 
-### 3.4. Trang Bộ Sưu Tập Đã Lưu (Saved History & Grocery Page)
-- Hiển thị danh sách thẻ dạng Grid (2 cột trên mobile, 4 cột trên desktop).
-- Mỗi item có nút: "Xem lại công thức", "Đánh dấu đã ăn/nấu", "Xóa bỏ".
-- **Tính năng đặc biệt: "Tạo Danh Sách Đi Chợ" (Smart Grocery List):**
-  - Tự động gộp toàn bộ nguyên liệu của các món đã chọn lại thành 1 danh sách duy nhất.
-  - Cho phép sao chép nhanh (Copy to Clipboard) để gửi qua Zalo / Messenger cho bạn cùng phòng đi chợ mua hộ!
+### 3.4. Trang / Drawer Bộ Sưu Tập Món Đã Lưu & Xem Chi Tiết Công Thức (Saved Dishes & Full Recipe Details)
+- **Mục đích:** Nơi người dùng truy cập sau khi đã quẹt xong để xem lại thực đơn đã chọn, đọc công thức chi tiết, kiểm tra nguyên liệu và lên kế hoạch nấu nướng/đi chợ.
+- **Giao diện Danh Sách Món Đã Lưu:**
+  - Hiển thị dạng thẻ Grid (2 cột trên mobile, 3-4 cột trên desktop).
+  - Mỗi món hiển thị: Ảnh bìa, tên món, quốc gia, thời gian nấu, nút xóa hoặc đánh dấu đã nấu.
+  - Bộ đếm tổng số món đã chọn (vd: "Bạn đã lưu 4 món ngon").
+- **Giao diện Chi Tiết Công Thức Đầy Đủ (Khi bấm vào một món đã lưu):**
+  1. **Toàn cảnh món ăn:** Tên món, xuất xứ, lượng calo, khẩu phần.
+  2. **Danh Sách Nguyên Liệu Tương Tác (Interactive Ingredients Checklist):**
+     - Hiển thị đầy đủ số lượng và đơn vị tính (vd: "300g thịt ba chỉ", "2 quả trứng gà", "1 bó hành lá").
+     - Có ô Checkbox cho từng nguyên liệu: Người dùng có thể tích chọn những nguyên liệu đã có sẵn trong tủ lạnh hoặc đã mua xong.
+     - Phân loại rõ: Nhóm thịt/hải sản, rau củ, gia vị, tinh bột.
+  3. **Hướng Dẫn Nấu Chi Tiết Từng Bước (Step-by-Step Cooking Instructions):**
+     - Các bước 1, 2, 3 có tiêu đề và mô tả rõ ràng, hướng dẫn nhiệt độ lửa và thời gian cụ thể.
+  4. **Mẹo & Bí Quyết Đầu Bếp (Chef's Tips & Secrets):** Các bí quyết đặc biệt giúp món ăn ngon chuẩn vị (vd: mẹo giữ nước dùng trong, cách ướp sườn mềm ngọt).
+  5. **Tính Năng Độc Quyền: "Xuất Danh Sách Đi Chợ" (Smart Grocery List Generator):**
+     - Tự động gộp nguyên liệu của món đang xem (hoặc của tất cả các món đã lưu) thành 1 danh sách đi chợ hoàn chỉnh.
+     - Nút *"Sao chép danh sách đi chợ"* (Copy to Clipboard) để gửi nhanh qua Zalo / Messenger cho người đi chợ hộ.
+  6. **Quản trị trạng thái món:** Nút *"Đã nấu xong"* (chuyển sang tab lịch sử đã nấu) hoặc *"Bỏ lưu"*.
 
 ---
 

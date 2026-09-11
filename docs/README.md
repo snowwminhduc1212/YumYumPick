@@ -23,7 +23,7 @@ Hệ thống tài liệu được phân tách theo các tiêu chuẩn công nghi
 ## ⚡ Tóm Tắt Nhanh Về Dự Án (Quick Executive Summary)
 
 - **Tên dự án:** YumYumPick ("Quẹt là măm - Không lăn tăn nghĩ món")
-- **Ý tưởng cốt lõi:** Lấy cảm hứng từ cơ chế quẹt thẻ tương tác của Tinder. Người dùng quẹt sang **Phải (Right)** để chọn/lưu món, quẹt sang **Trái (Left)** để bỏ qua và xem gợi ý tiếp theo. Nhấp vào thẻ để xem công thức, nguyên liệu và hướng dẫn chế biến.
+- **Ý tưởng cốt lõi:** Lấy cảm hứng từ cơ chế quẹt thẻ tương tác của Tinder. Người dùng nhấp (Tap) nhẹ vào thẻ để xem nhanh bảng **giới thiệu món ăn** (xuất xứ, hương vị, calo, tóm tắt nguyên liệu), quẹt sang **Phải (Right / ❤️)** để chọn và tự động lưu toàn bộ công thức chi tiết vào `LocalStorage` để xem lại cách nấu và danh sách đi chợ sau khi đã quẹt xong, hoặc quẹt sang **Trái (Left / ❌)** để bỏ qua và nhận gợi ý tiếp theo.
 - **Tech Stack:**
   - **Frontend:** React (Vite / Next.js), Tailwind CSS, Framer Motion (xử lý vật lý quẹt thẻ), Lucide Icons.
   - **Backend:** Python FastAPI, Pydantic, Uvicorn.

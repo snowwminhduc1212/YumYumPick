@@ -99,40 +99,104 @@ frontend/
 sequenceDiagram
     autonumber
     actor User as Người dùng
-    participant UI as Card Component
+    participant UI as Card Stack UI
+    participant Intro as DishIntroDrawer
+    participant Saved as SavedDishesModal
     participant Hook as useLocalStorage Hook
     participant Storage as Browser LocalStorage
     participant API as FastAPI Backend
 
     User->>UI: Mở ứng dụng
     UI->>API: GET /api/v1/dishes/random?limit=10
-    API-->>UI: Danh sách 10 món ăn ngẫu nhiên
+    API-->>UI: Danh sách 10 món ăn ngẫu nhiên (Full details)
     UI->>Hook: Đọc danh sách đã lưu trước đó
     Hook->>Storage: getItem("YYP_SAVED_DISHES")
     Storage-->>Hook: Trả về danh sách đã lưu (JSON Array)
-    Hook-->>UI: Cập nhật Badge số món đã lưu
-    
-    User->>UI: Quẹt Phải (Right Swipe) trên món "Phở Bò"
-    UI->>Hook: addSavedDish(dishData)
-    Hook->>Storage: setItem("YYP_SAVED_DISHES", updatedList)
-    UI-->>User: Hiển thị thông báo "Đã lưu món!" + Kích hoạt hiệu ứng thẻ bay
+    Hook-->>UI: Cập nhật Badge số món đã lưu trên Navbar
+
+    Note over User,Intro: TÌNH HUỐNG 1: TAP ĐỂ XEM GIỚI THIỆU MÓN ĂN
+    User->>UI: Nhấp nhẹ vào Thẻ món ăn (Tap / Click)
+    UI->>Intro: Mở DishIntroDrawer(dishData)
+    Intro-->>User: Hiển thị giới thiệu, câu chuyện, khẩu phần & tóm tắt nguyên liệu
+    alt Người dùng quyết định chọn món ngay trong Drawer
+        User->>Intro: Bấm "❤️ Chọn món này"
+        Intro->>Hook: addSavedDish(dishData)
+        Hook->>Storage: setItem("YYP_SAVED_DISHES", updatedList)
+        Intro->>UI: Đóng Drawer & chuyển sang thẻ tiếp theo
+    else Người dùng đóng Drawer
+        User->>Intro: Vuốt xuống hoặc bấm "Đóng"
+        Intro->>UI: Trở lại màn hình quẹt thẻ
+    end
+
+    Note over User,Storage: TÌNH HUỐNG 2: QUẸT PHẢI ĐỂ LƯU CÔNG THỨC CHI TIẾT
+    User->>UI: Quẹt Phải (Right Swipe) trên thẻ
+    UI->>Hook: addSavedDish(fullDishData)
+    Hook->>Storage: setItem("YYP_SAVED_DISHES", fullDishWithRecipe)
+    UI-->>User: Toast thông báo "Đã lưu công thức!" & Thẻ bay sang phải
+
+    Note over User,Saved: TÌNH HUỐNG 3: XEM LẠI CÔNG THỨC CHI TIẾT SAU KHI QUẸT
+    User->>UI: Bấm icon Bộ Sưu Tập Đã Lưu (Navbar)
+    UI->>Saved: Mở SavedDishesModal()
+    Saved->>Hook: getSavedDishes()
+    User->>Saved: Bấm vào một món đã lưu
+    Saved-->>User: Mở Chi Tiết Công Thức Đầy Đủ (Nguyên liệu + Checkbox, Các bước nấu 1-2-3, Mẹo đầu bếp, Xuất danh sách đi chợ)
 ```
 
 ### 3.3. Định Dạng Lưu Trữ LocalStorage (Storage Keys Spec)
 
-1. **`YYP_SAVED_DISHES`** (Key lưu các món đã quẹt phải):
+1. **`YYP_SAVED_DISHES`** (Lưu trữ toàn bộ thông tin và công thức chi tiết của các món đã quẹt phải):
 ```json
 [
   {
     "id": "dish_vn_001",
-    "name": "Phở Bò Tái Lăn",
-    "image": "https://images.unsplash.com/...",
+    "name": "Phở Bò Tái Nạm",
+    "english_name": "Traditional Beef Pho",
     "cuisine": "Vietnam",
-    "savedAt": "2026-09-11T12:00:00Z",
-    "status": "planned"
+    "region": "Miền Bắc",
+    "meal_type": ["breakfast", "lunch", "dinner"],
+    "image": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80",
+    "cook_time_minutes": 60,
+    "prep_time_minutes": 20,
+    "difficulty": "Kỳ công",
+    "spicy_level": 0,
+    "calories_approx": 480,
+    "is_vegetarian": false,
+    "tags": ["Ăn sáng", "Nước lèo", "Truyền thống", "Món nước"],
+    "short_description": "Món quốc hồn quốc túy với bánh phở mềm dai, nước dùng hầm từ xương bò thơm mùi quế hồi thảo quả nức mũi.",
+    "ingredients": [
+      { "name": "Bánh phở tươi", "amount": "500", "unit": "g", "category": "tinh bột" },
+      { "name": "Thịt bò thăn / bắp", "amount": "300", "unit": "g", "category": "thịt" },
+      { "name": "Xương ống bò ninh", "amount": "1", "unit": "kg", "category": "thịt" },
+      { "name": "Gừng và hành tím nướng", "amount": "3", "unit": "củ", "category": "gia vị" },
+      { "name": "Hoa hồi, quế, thảo quả", "amount": "1", "unit": "gói", "category": "gia vị" },
+      { "name": "Hành lá, rau mùi, chanh ớt", "amount": "1", "unit": "bó", "category": "rau" }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Chần xương và hầm nước dùng",
+        "description": "Chần xương bò với nước sôi khử mùi hôi. Cho xương vào nồi lớn hầm nhỏ lửa trong 2 tiếng cùng hành tím, gừng đã nướng cháy xém cạnh."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu thơm hương vị phở",
+        "description": "Rang thơm hoa hồi, quế, thảo quả cho vào túi vải buộc chặt rồi thả vào nồi nước dùng. Nêm nước mắm ngon, muối, đường phèn vừa vị."
+      },
+      {
+        "step_number": 3,
+        "title": "Hoàn thiện và thưởng thức",
+        "description": "Trụng bánh phở qua nước sôi xếp vào tô, đặt thịt bò tái thái mỏng lên trên, rắc hành lá rau mùi rồi chan ngập nước dùng đang sôi sùng sục."
+      }
+    ],
+    "tips": "Nước dùng phở muốn trong thì không được đậy nắp vung kín và phải thường xuyên vớt sạch bọt nổi.",
+    "savedAt": "2026-09-11T23:45:00Z",
+    "isCooked": false
   }
 ]
 ```
+> [!NOTE]
+> Việc lưu trữ đầy đủ `ingredients`, `steps`, `tips` vào `YYP_SAVED_DISHES` giúp người dùng sau khi quẹt có thể xem lại chi tiết công thức ngay lập tức dù đang offline, đi siêu thị mất sóng hoặc không cần phải gửi request tải lại từ server.
+
 2. **`YYP_USER_PREFERENCES`** (Bộ lọc được lưu lại):
 ```json
 {
@@ -142,6 +206,7 @@ sequenceDiagram
   "excludedIngredients": ["hành lá", "đậu phộng"]
 }
 ```
+
 3. **`YYP_SWIPE_HISTORY`** (Lịch sử các thẻ đã quẹt để tránh lặp lại và hỗ trợ Undo):
 ```json
 {
@@ -149,6 +214,15 @@ sequenceDiagram
   "swipedIds": ["dish_vn_001", "dish_jp_004"]
 }
 ```
+
+### 3.4. Kiến Trúc Xử Lý Cử Chỉ Kéo vs Nhấp (Framer Motion Tap & Swipe Architecture)
+Để đảm bảo trải nghiệm người dùng không bị xung đột giữa thao tác **Kéo quẹt (Swipe)** và **Nhấp xem giới thiệu (Tap)**:
+- Thẻ sử dụng component `motion.div` với các thuộc tính:
+  - `drag="x"`: Chỉ cho phép kéo theo trục ngang để quẹt.
+  - `dragConstraints={{ left: 0, right: 0 }}`: Điểm neo đàn hồi quay lại tâm nếu chưa đạt ngưỡng quẹt.
+  - `dragElastic={0.9}`: Tạo lực cản vật lý tự nhiên.
+  - `onTap`: Framer Motion tự động tách biệt giữa sự kiện nhấp chuột/chạm ngón tay và kéo. Nếu người dùng chỉ chạm và nhấc ngón tay lên trong phạm vi $< 5\text{px}$, sự kiện `onTap` được gọi và kích hoạt mở **DishIntroDrawer**.
+  - `onDragStart` / `onDragEnd`: Khi độ dịch chuyển vượt quá ngưỡng kích hoạt, cờ trạng thái `isDragging` được bật, ngăn chặn hoàn toàn việc mở Drawer vô ý.
 
 ---
 

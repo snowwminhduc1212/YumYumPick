@@ -75,33 +75,41 @@ gantt
   - [ ] Viết công thức vật lý tính toán góc xoay thẻ (`rotate = dragX / 15`) và độ đàn hồi (`spring`).
   - [ ] Thiết lập ngưỡng quẹt: Quẹt sang phải $> 120\text{px}$ là LIKE, sang trái $< -120\text{px}$ là SKIP.
   - [ ] Hiển thị stamp đồ họa nổi: Stamp xanh "YUMMY!" khi kéo sang phải, Stamp đỏ "NOPE" khi kéo sang trái.
+- [ ] **Cơ Chế Nhấp Thẻ Xem Giới Thiệu (Tap on Card Gesture):**
+  - [ ] Tách biệt cử chỉ Tap và Drag trong Framer Motion (khoảng cách kéo $< 5\text{px}$ nhận diện là Tap).
+  - [ ] Khi tap thẻ: Kích hoạt mở ngay `DishIntroDrawer.jsx` hiển thị giới thiệu món, xuất xứ, calo, thời gian nấu và tóm tắt nguyên liệu.
 - [ ] **Component Ngăn Xếp Thẻ (CardStack):**
   - [ ] Xây dựng component `CardStack.jsx` xếp tầng 3 thẻ liên tiếp (Top, Middle, Bottom).
   - [ ] Tối ưu hiệu ứng thẻ số 2 tự động phóng to khi thẻ số 1 bị quẹt bay ra khỏi màn hình.
   - [ ] Xử lý màn hình "Hết thẻ" (Empty State) kèm nút "Quẹt lại" và icon hoạt hình.
 - [ ] **Thanh Điều Hướng & Cụm Nút Thao Tác (Action Buttons):**
-  - [ ] Xây dựng cụm nút: Nút Hoàn tác (Undo), Nút Bỏ qua (X), Nút Chi tiết (Info), Nút Chọn món (Heart).
-  - [ ] Bắt sự kiện bàn phím trên máy tính (Phím $\leftarrow$ để Skip, $\rightarrow$ để Like, Space để xem công thức).
+  - [ ] Xây dựng cụm nút: Nút Hoàn tác (Undo), Nút Bỏ qua (X), Nút Giới thiệu (Info), Nút Chọn món (Heart).
+  - [ ] Bắt sự kiện bàn phím trên máy tính (Phím $\leftarrow$ để Skip, $\rightarrow$ để Like, Space để mở giới thiệu).
 
 ---
 
 ### 📱 Member 3: Frontend Dev (Filter, History & LocalStorage)
 - [ ] **Quản Trị Lưu Trữ Trình Duyệt (LocalStorage Integration):**
   - [ ] Viết Custom Hook `useLocalStorage.js` để đọc/ghi dữ liệu an toàn, xử lý ngoại lệ khi bộ nhớ đầy.
-  - [ ] Lưu danh sách món đã quẹt phải vào key `YYP_SAVED_DISHES`.
+  - [ ] **Lưu công thức chi tiết:** Lưu toàn bộ thông tin món ăn (bao gồm cả danh sách `ingredients`, `steps`, `tips`) vào key `YYP_SAVED_DISHES` ngay khi quẹt phải để phục vụ xem lại chi tiết sau này.
   - [ ] Lưu lịch sử các ID đã quẹt vào `YYP_SWIPE_HISTORY` để phục vụ nút Hoàn tác (Undo).
 - [ ] **Modal Bộ Lọc Nâng Cao (Filter Modal):**
   - [ ] Xây dựng component `FilterModal.jsx` dạng popup hoặc bottom sheet.
   - [ ] Các chip chọn quốc gia: Việt Nam, Nhật Bản, Hàn Quốc, Thái Lan, Ý...
   - [ ] Bộ chọn thời gian nấu: Dưới 20 phút, 20-45 phút, Mọi thời gian.
   - [ ] Nút "Áp dụng" gọi lại hàm tải thẻ mới theo tiêu chí lọc.
-- [ ] **Chi Tiết Công Thức Món Ăn (Recipe Drawer):**
-  - [ ] Xây dựng component `RecipeDrawer.jsx` vuốt mở từ dưới lên (Swipe-to-close Bottom Sheet).
-  - [ ] Danh sách nguyên liệu kèm checkbox tương tác cho người dùng đánh dấu khi kiểm tra tủ lạnh.
-  - [ ] Danh sách các bước nấu kèm số thứ tự rõ ràng, mẹo vặt của đầu bếp.
-- [ ] **Trang Danh Sách Món Đã Lưu & Danh Sách Đi Chợ:**
-  - [ ] Xây dựng giao diện hiển thị các món đã chọn kèm ảnh thumbnail, nút xóa từng món hoặc xóa tất cả.
-  - [ ] **Tính năng độc đáo:** Nút "Xuất Danh Sách Đi Chợ" tự động gộp tất cả nguyên liệu các món đã lưu thành 1 danh sách, có nút Copy to Clipboard để gửi Zalo/Messenger.
+- [ ] **Giới Thiệu Món Ăn (Dish Intro Drawer):**
+  - [ ] Xây dựng component `DishIntroDrawer.jsx` (Bottom sheet vuốt mở khi tap vào thẻ).
+  - [ ] Hiển thị hình ảnh, câu chuyện món ăn (`short_description`), meta calo, độ cay, thời gian và tóm tắt nguyên liệu.
+  - [ ] Có nút chuyển đổi trực tiếp: "Chọn món này ❤️" (lưu vào LocalStorage) hoặc "Bỏ qua ❌".
+- [ ] **Bộ Sưu Tập Món Đã Lưu & Xem Chi Tiết Công Thức Đầy Đủ:**
+  - [ ] Xây dựng component `SavedDishesModal.jsx`: Hiển thị danh sách các món đã quẹt phải kèm ảnh, cờ quốc gia, thời gian nấu.
+  - [ ] Xây dựng component `FullRecipeView.jsx`: Hiển thị chi tiết công thức khi người dùng bấm vào một món đã lưu:
+    - [ ] Danh sách nguyên liệu kèm checkbox tương tác để đánh dấu khi đi chợ hoặc kiểm tra tủ lạnh.
+    - [ ] Hướng dẫn từng bước nấu (Step 1, 2, 3...) có thời gian và nhiệt lượng chi tiết.
+    - [ ] Mẹo vặt từ đầu bếp (`tips`).
+    - [ ] Nút "Đã nấu xong" và nút "Bỏ lưu".
+  - [ ] **Tính năng thông minh:** Nút "Xuất Danh Sách Đi Chợ" (Smart Grocery List) tự động tổng hợp nguyên liệu của các món đã lưu và có nút sao chép (Copy to Clipboard) gửi qua Zalo / Messenger.
 - [ ] **Kết Nối API Backend:**
   - [ ] Viết module `src/services/api.js` sử dụng `fetch` hoặc `axios` gọi đến FastAPI server.
   - [ ] Xử lý trạng thái Loading (Skeleton loader khi đang tải thẻ) và trạng thái Error khi mất mạng.

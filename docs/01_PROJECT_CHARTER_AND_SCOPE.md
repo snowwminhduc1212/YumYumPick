@@ -16,13 +16,15 @@
 - Các app giao đồ ăn truyền thống cung cấp danh sách dài vô tận, gây ngợp thị giác và khó lựa chọn nhanh.
 
 ### 1.2. Giải Pháp Của YumYumPick (Solution Statement)
-YumYumPick đơn giản hóa triệt để quyết định ăn uống thông qua cơ chế **Tinder-style Card Swiping (quẹt thẻ ngẫu nhiên)**:
+YumYumPick đơn giản hóa triệt để quyết định ăn uống thông qua cơ chế **Tinder-style Card Swiping (quẹt thẻ ngẫu nhiên)** kết hợp lưu trữ công thức tiện lợi:
 1. **Một món tại một thời điểm:** Giúp não bộ tập trung 100% vào hình ảnh bắt mắt của món ăn.
-2. **Thao tác tức thì (Fast Decisive UX):**
-   - **Quẹt Phải (Right Swipe / Like):** Quyết định chọn món này! Lưu vào danh sách yêu thích & mở khóa công thức/nguyên liệu chi tiết.
-   - **Quẹt Trái (Left Swipe / Skip):** Không ưng món này, bỏ qua và chuyển sang món tiếp theo.
+2. **Thao tác tức thì & Trực quan (Fast Decisive UX):**
+   - **Nhấp nhẹ vào Thẻ (Tap / Click):** Mở nhanh bảng **Giới thiệu món ăn** (Dish Intro): nguồn gốc, hương vị đặc trưng, thời gian chế biến, lượng calo và tóm tắt nguyên liệu chính để người dùng cân nhắc trước khi quyết định.
+   - **Quẹt Phải (Right Swipe / Like / ❤️):** Quyết định chọn món này! Tự động **lưu toàn bộ món ăn và công thức nấu chi tiết** vào bộ sưu tập cá nhân trên `LocalStorage` để người dùng vào xem chi tiết sau khi quẹt xong.
+   - **Quẹt Trái (Left Swipe / Skip / ❌):** Không ưng món này, bỏ qua và chuyển sang món tiếp theo.
 3. **Bộ lọc thông minh (Smart Filters):** Lọc theo quốc gia (Việt, Hàn, Nhật, Thái, Ý...), vùng miền, mức độ cay, nguyên liệu sẵn có trong tủ lạnh.
-4. **Không bắt buộc đăng ký phức tạp:** Sử dụng `LocalStorage` giúp người dùng mở web là quẹt được ngay, dữ liệu lưu trữ tức thì và riêng tư trên thiết bị.
+4. **Xem chi tiết & Đi chợ sau khi quẹt:** Mở bộ sưu tập món đã lưu để xem đầy đủ công thức (nguyên liệu có checkbox, các bước nấu 1-2-3, mẹo đầu bếp) và tự động xuất danh sách đi chợ gửi qua Zalo/Messenger.
+5. **Không bắt buộc đăng ký phức tạp:** Sử dụng `LocalStorage` giúp người dùng mở web là quẹt được ngay, dữ liệu lưu trữ tức thì và riêng tư trên thiết bị.
 
 ---
 
@@ -74,13 +76,17 @@ graph TD
 2. **Random & Recommendation API (FastAPI):**
    - API trả về danh sách món ăn ngẫu nhiên đã được xáo trộn (shuffle) không trùng lặp trong một phiên quẹt.
    - Bộ lọc theo: Quốc gia (Việt Nam, Nhật Bản, Hàn Quốc, Thái Lan, Ý, Trung Quốc, Âu Mỹ), độ cay, loại bữa ăn (Sáng, Trưa, Tối, Ăn vặt), nguyên liệu chính (Thịt bò, Gà, Hải sản, Rau củ/Chay).
-3. **Chi Tiết Món Ăn & Công Thức (Recipe Modal/Drawer):**
-   - Bấm vào thẻ hoặc nút "Xem công thức" để mở Bottom Sheet (trên mobile) hoặc Modal (trên desktop).
-   - Hiển thị: Danh sách nguyên liệu cần chuẩn bị, các bước nấu (Step 1, Step 2,...), thời gian ước tính, mẹo chế biến (Tips).
-4. **Lịch Sử & Bộ Sưu Tập Đã Lưu (Saved History & Bookmarks):**
-   - Tab "Món Đã Chọn": Xem lại tất cả các món đã quẹt phải.
-   - Quản lý: Đánh dấu đã nấu xong, chia sẻ link món ăn, xóa khỏi danh sách đã lưu.
-   - Dữ liệu được lưu trữ tự động trên `LocalStorage` của trình duyệt.
+3. **Giới Thiệu Món Ăn Khi Tap Thẻ (Tap Dish Intro Drawer):**
+   - Tap nhẹ vào thẻ hoặc bấm nút "ℹ️": Mở nhanh Bottom Sheet hiển thị giới thiệu tổng quan, xuất xứ văn hóa, độ cay, calo và tóm tắt nguyên liệu chính để người dùng tham khảo trước khi quẹt.
+   - Hỗ trợ nút thao tác nhanh ngay trong drawer (Chọn món ❤️ hoặc Bỏ qua ❌).
+4. **Lưu Trữ & Xem Chi Tiết Công Thức Sau Khi Quẹt (Saved Dishes & Full Recipe):**
+   - Khi quẹt phải: Tự động lưu toàn bộ dữ liệu món ăn và công thức chi tiết vào `LocalStorage` của trình duyệt.
+   - Màn hình "Món Đã Lưu": Xem danh sách các món đã quẹt chọn. Bấm vào bất kỳ món nào để mở chi tiết công thức:
+     - Danh sách nguyên liệu kèm checkbox tương tác (tiện cho đi chợ / kiểm tra tủ lạnh).
+     - Hướng dẫn chế biến chi tiết từng bước (Step 1, Step 2, Step 3...).
+     - Mẹo & bí quyết đầu bếp (Chef's Tips).
+     - Tính năng "Xuất danh sách đi chợ" (Smart Grocery List) gộp nguyên liệu gửi qua Zalo/Messenger.
+     - Đánh dấu đã nấu hoặc xóa món.
 5. **Giao Diện Responsive Toàn Diện (Mobile-First):**
    - Tối ưu hoàn hảo cho kích thước màn hình điện thoại (375px - 430px) và máy tính bảng / PC (1024px+).
 6. **Bộ Dữ Liệu Ban Đầu (Seed Data):**
@@ -97,11 +103,11 @@ graph TD
 
 ### 4.1. Yêu Cầu Chức Năng (Functional Requirements - FR)
 - **FR-01 (Quẹt thẻ):** Người dùng có thể quẹt trái (Skip) hoặc quẹt phải (Pick) thẻ món ăn. Có hỗ trợ nút bấm vật lý (nút ❌ và nút ❤️) để người dùng không cần dùng cử chỉ kéo chuột.
-- **FR-02 (Xem chi tiết):** Người dùng có thể bấm vào thẻ hoặc nút "Chi tiết" để xem toàn bộ thông tin món, nguyên liệu định lượng và các bước thực hiện.
-- **FR-03 (Bộ lọc tìm kiếm):** Người dùng có thể chọn 1 hoặc nhiều tiêu chí lọc. Khi áp dụng bộ lọc, danh sách thẻ được tải mới theo tiêu chí đã chọn.
-- **FR-04 (Lưu trữ cục bộ):** Các món được quẹt phải tự động lưu vào `LocalStorage`. Khi người dùng reload trang, danh sách đã lưu không bị biến mất.
+- **FR-02 (Tap xem giới thiệu món ăn):** Người dùng nhấp/tap vào thẻ hoặc nút "ℹ️" để mở drawer giới thiệu nhanh món ăn (câu chuyện, xuất xứ, thời gian, calo, độ cay, tóm tắt nguyên liệu).
+- **FR-03 (Lưu công thức chi tiết sau khi quẹt):** Mọi món quẹt phải tự động lưu toàn bộ công thức chi tiết vào `LocalStorage`. Người dùng có thể mở bộ sưu tập đã lưu để xem lại chi tiết nguyên liệu (có checkbox), các bước nấu, và mẹo vặt bất cứ lúc nào.
+- **FR-04 (Bộ lọc tìm kiếm):** Người dùng có thể chọn 1 hoặc nhiều tiêu chí lọc (quốc gia, độ cay, bữa ăn, thời gian). Khi áp dụng bộ lọc, danh sách thẻ được tải mới theo tiêu chí đã chọn.
 - **FR-05 (Undo thao tác):** Cho phép hoàn tác (Undo) lại 1 thẻ gần nhất nếu vô tình quẹt nhầm.
-- **FR-06 (Export danh sách đi chợ):** Tính năng tổng hợp nguyên liệu của các món đã chọn thành danh sách mua sắm (Grocery checklist).
+- **FR-06 (Export danh sách đi chợ):** Tính năng tổng hợp nguyên liệu của các món đã chọn thành danh sách mua sắm (Grocery checklist) để gửi qua tin nhắn.
 
 ### 4.2. Yêu Cầu Phi Chức Năng (Non-Functional Requirements - NFR)
 - **NFR-01 (Hiệu năng quẹt - Performance):** Tốc độ khung hình khi quẹt thẻ đạt tối thiểu 60 FPS trên thiết bị di động tầm trung. Không giật lag khi render thẻ tiếp theo.

@@ -54,6 +54,7 @@ flowchart TD
 - **Trách nhiệm chính:**
   - Setup kiến trúc dự án React (Vite + Tailwind CSS).
   - Xây dựng component `CardStack` và `SwipeCard` bằng **Framer Motion**: xử lý cảm ứng (touch swipe), kéo chuột (mouse drag), xoay góc nghiêng và độ nảy khi thả tay.
+  - Xử lý phân biệt cử chỉ Kéo (Drag) vs Nhấp (Tap) trên thẻ: Nhấp nhẹ mở nhanh `DishIntroDrawer` giới thiệu món ăn.
   - Thiết kế các hiệu ứng thị giác (stamp "YUMMY" / "NOPE", hiệu ứng đổi màu viền thẻ khi kéo lệch tâm).
   - Xây dựng cụm nút điều hướng nổi (Floating Action Buttons: Undo, Skip, Like, Info).
   - Tối ưu hiệu năng hiển thị thẻ tiếp theo (pre-load hình ảnh thẻ sau để tránh giật lag).
@@ -62,9 +63,9 @@ flowchart TD
 - **Sứ mệnh:** Xây dựng toàn bộ các màn hình chức năng bổ trợ, lưu trữ dữ liệu offline và kết nối dữ liệu từ Backend vào giao diện.
 - **Trách nhiệm chính:**
   - Phát triển `FilterModal`: Cho phép người dùng lọc theo quốc gia, bữa ăn, nguyên liệu, thời gian.
-  - Phát triển `RecipeDrawer` (Bottom Sheet / Modal): Hiển thị chi tiết nguyên liệu kèm ô checkbox và các bước chế biến.
-  - Xây dựng màn hình `SavedCollection` & `HistoryView`: Hiển thị danh sách món đã quẹt phải.
-  - Quản trị dữ liệu phía client: Viết Custom Hook `useLocalStorage` để lưu trữ/đọc/xóa danh sách món đã chọn mà không bị mất khi F5.
+  - Phát triển `DishIntroDrawer` (Bottom Sheet / Modal): Hiển thị phần giới thiệu tóm tắt món ăn khi người dùng tap vào thẻ hoặc bấm nút ℹ️.
+  - Phát triển `SavedDishesModal` & `FullRecipeView`: Lưu trữ toàn bộ dữ liệu món ăn và công thức chi tiết vào `LocalStorage` khi quẹt phải; cho phép người dùng mở xem công thức đầy đủ (checkbox nguyên liệu, các bước nấu 1-2-3, mẹo đầu bếp) sau khi đã quẹt.
+  - Quản trị dữ liệu phía client: Viết Custom Hook `useLocalStorage` để lưu trữ/đọc/xóa danh sách món đã chọn mà không bị mất khi F5 hoặc offline.
   - Viết tính năng "Tạo danh sách đi chợ" (Grocery Checklist Generator) từ các món đã lưu.
   - Tích hợp gọi API Backend thông qua Axios/Fetch.
 

@@ -444,8 +444,8 @@ erDiagram
     }
 
     DISH_TAGS {
-        varchar(36) dish_id PK,FK
-        bigint tag_id PK,FK
+        varchar(36) dish_id FK "PK"
+        bigint tag_id FK "PK"
     }
 
     USER_SAVED_DISHES {

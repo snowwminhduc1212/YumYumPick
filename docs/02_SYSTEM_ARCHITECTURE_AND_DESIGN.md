@@ -11,14 +11,21 @@ YumYumPick được xây dựng theo mô hình **Client-Server Decoupled** (Tác
 ```mermaid
 flowchart TD
     subgraph Client["🖥️ Client Layer (Frontend - React)"]
-        UI["UI Interface (Mobile/Desktop Web)"]
-        Framer["Framer Motion (Gesture & Card Physics)"]
-        LS[("LocalStorage (Saved Dishes & History)")]
-        State["Client State (Zustand / React Context)"]
-        
-        UI <--> Framer
-        UI <--> State
-        State <--> LS
+        subgraph UserApp["User Web App (Mobile / Desktop)"]
+            UI["Swipe Interface & Recipe Viewer"]
+            Framer["Framer Motion (Gestures & Physics)"]
+            LS[("LocalStorage (Offline Saved Dishes)")]
+            State["Zustand / Context State"]
+            UI <--> Framer
+            UI <--> State
+            State <--> LS
+        end
+
+        subgraph AdminCMS["Admin / CMS Portal (/admin)"]
+            AdminUI["CMS Dashboard & Dish Manager"]
+            AdminAuth["JWT Token Storage (HttpOnly / Secure)"]
+            AdminUI <--> AdminAuth
+        end
     end
 
     subgraph CDN["☁️ Edge & CDN Layer (Vercel)"]
@@ -27,40 +34,58 @@ flowchart TD
     end
 
     subgraph Server["⚙️ Backend Layer (FastAPI)"]
-        API["FastAPI App (Python 3.10+)"]
-        Router["API Routers (/api/v1/dishes, /filters)"]
+        API["FastAPI Application"]
+        UserRouter["User API Routers (/dishes, /filters)"]
+        AdminRouter["Admin API Routers (/admin/auth, /admin/dishes, /admin/stats)"]
+        AuthMiddleware["JWT Auth Middleware & RBAC"]
         Engine["Randomizer & Filter Engine"]
-        Validator["Pydantic Models (Request / Response Validation)"]
+        Validator["Pydantic Models (Validation)"]
+        ORM["SQLAlchemy 2.0 ORM"]
         
-        API --> Router
-        Router --> Engine
-        Router --> Validator
+        API --> UserRouter
+        API --> AdminRouter
+        AdminRouter --> AuthMiddleware
+        UserRouter --> Engine
+        AdminRouter --> ORM
+        UserRouter --> ORM
+        UserRouter --> Validator
+        AdminRouter --> Validator
     end
 
-    subgraph Database["💾 Data Store (Server-side)"]
-        JSONStore[("Structured JSON Seeds / SQLite DB")]
+    subgraph Database["💾 Database Layer (Supabase PostgreSQL)"]
+        SupaDB[("Supabase PostgreSQL 15+")]
+        UserTables[("User Tables: dishes, ingredients, steps, tags, cuisines, saved_dishes, swipes")]
+        AdminTables[("Admin Tables: admin_users, admin_audit_logs")]
+        SupaDB --- UserTables
+        SupaDB --- AdminTables
     end
 
-    UI -- "HTTPS Fetch (REST API)" --> Router
-    UI -- "Load Images" --> VercelCDN
+    UserApp -- "HTTPS Fetch (Public API)" --> UserRouter
+    AdminCMS -- "HTTPS Fetch (Bearer JWT Auth)" --> AdminRouter
+    UserApp -- "Load Images" --> VercelCDN
     VercelCDN --> Images
-    Engine --> JSONStore
+    ORM -- "Port 5432 / SSL" --> SupaDB
 ```
 
 ---
 
 ## 2. Công Nghệ Sử Dụng (Technology Stack)
 
-| Tầng (Layer) | Công Nghệ | Phiên Bản | Lý Do Lựa Chọn |
+| Tầng (Layer) | Công Nghệ | Phiên Bản | Mục Đích Kỹ Thuật |
 |---|---|---|---|
-| **Frontend Framework** | **React.js** (Vite template) | 18.x / 19.x | Tốc độ build siêu nhanh, hệ sinh thái phong phú, tối ưu cho Single Page Application (SPA). |
-| **Animation & Gestures** | **Framer Motion** | 11.x | Xử lý cảm ứng kéo quẹt mượt mà, hỗ trợ tính toán vận tốc kéo (velocity), độ nảy (spring physics). |
-| **Styling** | **Tailwind CSS** | 3.4+ | Utility-first CSS, thiết kế giao diện nhanh chóng, đảm bảo responsive mobile/PC nhất quán. |
-| **Icons & UI Kit** | **Lucide React** | Mới nhất | Bộ icon hiện đại, nhẹ, đầy đủ biểu tượng món ăn, thao tác quẹt. |
-| **Backend Framework** | **Python FastAPI** | 0.110+ | Bất đồng bộ (async/await), tự động sinh OpenAPI/Swagger Docs, validation chặt chẽ qua Pydantic. |
-| **Data Validation** | **Pydantic v2** | 2.x | Xác thực dữ liệu API chính xác, an toàn kiểu dữ liệu (Type-safe). |
-| **Client Storage** | **Browser LocalStorage** | Web Standard | Lưu danh sách món đã quẹt và lịch sử không cần ép người dùng đăng nhập tài khoản. |
-| **Deployment** | **Vercel / Render** | Cloud | Frontend deploy tự động qua Vercel CI/CD; Backend host trên Render/Railway hoặc Vercel Serverless. |
+| **Frontend Framework** | **React.js** (Vite template) | 18.x / 19.x | Single Page Application (SPA), tích hợp User App và Admin Portal. |
+| **Animation & Gestures** | **Framer Motion** | 11.x | Xử lý vật lý quẹt thẻ (drag, rotation, spring physics) cho User App. |
+| **Styling & UI Kit** | **Tailwind CSS + Lucide** | 3.4+ | Utility-first styling cho cả User Swipe Deck và Admin CMS Table/Forms. |
+| **Backend Framework** | **Python FastAPI** | 0.110+ | RESTful API bất đồng bộ, phân chia router User vs Admin rõ ràng. |
+| **Authentication & Security** | **PyJWT + Passlib (Bcrypt)** | Mới nhất | Mã hóa mật khẩu, sinh và xác thực JSON Web Token cho Admin. |
+| **Data Validation** | **Pydantic v2** | 2.x | Xác thực và serialize dữ liệu I/O (Request/Response models). |
+| **Database ORM & Driver** | **SQLAlchemy 2.0 + psycopg2** | 2.0+ / 2.9+ | Trừu tượng hóa truy vấn quan hệ, connection pooling kết nối Supabase. |
+| **Cloud Database** | **Supabase (PostgreSQL 15+)** | 15+ | Lưu trữ dữ liệu ẩm thực, tương tác người dùng và tài khoản quản trị. |
+| **Client Storage** | **Browser LocalStorage** | Web Standard | Cache lịch sử quẹt và món đã lưu offline phía Client. |
+| **Cloud Hosting** | **Vercel + Render + Supabase** | Cloud | Frontend trên Vercel, Backend trên Render, Database trên Supabase. |
+
+
+
 
 ---
 
@@ -79,13 +104,21 @@ frontend/
 │   │   ├── swipe/          # CardStack, SwipeCard, ActionButtons, UndoButton
 │   │   ├── filter/         # FilterModal, CuisineSelector, IngredientTags
 │   │   ├── recipe/         # RecipeDrawer, IngredientList, CookingSteps
-│   │   └── history/        # HistoryList, SavedDishCard, GroceryExport
-│   ├── hooks/              # Custom hooks: useSwipe, useDishes, useLocalStorage
+│   │   ├── history/        # HistoryList, SavedDishCard, GroceryExport
+│   │   └── admin/          # AdminLayout, DishTable, DishFormModal, StatsOverview, AuditLogView
+│   ├── pages/              # Màn hình ứng dụng & CMS
+│   │   ├── UserHome.jsx    # Giao diện chính người dùng quẹt thẻ
+│   │   └── admin/          # Giao diện Quản trị viên
+│   │       ├── AdminLogin.jsx       # Đăng nhập bảo mật JWT
+│   │       ├── AdminDashboard.jsx   # Thống kê tổng quan & tương tác
+│   │       └── AdminDishes.jsx      # Quản lý CRUD món ăn & công thức
+│   ├── hooks/              # Custom hooks: useSwipe, useDishes, useLocalStorage, useAdminAuth
 │   ├── services/           # Axios/Fetch API client calls
-│   │   └── api.js          # REST API endpoints mapping
+│   │   ├── api.js          # User REST API endpoints mapping
+│   │   └── adminApi.js     # Admin CRUD & Auth API client (kèm Bearer Token Header)
 │   ├── types/              # TypeScript types hoặc JSDoc model definitions
 │   ├── utils/              # Helper functions, formatters, shuffle algorithms
-│   ├── App.jsx             # Root layout & routing
+│   ├── App.jsx             # Root layout & routing (User routes + Protected Admin routes)
 │   ├── index.css           # Tailwind directives & global animation styles
 │   └── main.jsx            # Entry point
 ├── package.json
@@ -235,26 +268,39 @@ backend/
 │   ├── api/
 │   │   └── v1/
 │   │       ├── endpoints/
-│   │       │   ├── dishes.py       # API lấy món ăn, random, chi tiết
-│   │       │   ├── filters.py      # API lấy danh mục lọc (quốc gia, tag)
-│   │       │   └── health.py       # Healthcheck API
-│   │       └── api_router.py       # Gom router v1
+│   │       │   ├── dishes.py       # API người dùng: lấy món ăn, random, chi tiết
+│   │       │   ├── filters.py      # API người dùng: danh mục lọc (quốc gia, tag)
+│   │       │   ├── health.py       # Healthcheck API
+│   │       │   └── admin/          # API Quản trị viên (Admin / CMS)
+│   │       │       ├── auth.py     # POST /admin/auth/login, refresh, me
+│   │       │       ├── dishes.py   # CRUD món ăn, nguyên liệu, bước nấu
+│   │       │       └── stats.py    # Thống kê lượt quẹt, lượt lưu, món trending
+│   │       └── api_router.py       # Gom router v1 (User + Admin routers)
 │   ├── core/
-│   │   ├── config.py               # Cấu hình env, CORS, settings
-│   │   └── security.py             # Middleware bảo mật
+│   │   ├── config.py               # Cấu hình env (DATABASE_URL, SUPABASE_URL, CORS, JWT_SECRET)
+│   │   └── security.py             # Bcrypt hashing, sinh/giải mã JWT, get_current_admin Dependency
+│   ├── db/
+│   │   ├── session.py              # SQLAlchemy Engine, SessionLocal, get_db Dependency
+│   │   ├── base.py                 # Base declarative model
+│   │   ├── seed_supabase.py        # Script nạp seed JSON món ăn + tài khoản admin mặc định vào Supabase
+│   │   └── schema.sql              # File DDL SQL khởi tạo toàn bộ bảng trên Supabase
 │   ├── data/
-│   │   ├── dishes_seed.json        # Dữ liệu 60+ món ăn ban đầu
-│   │   └── seed_loader.py          # Hàm load & cache data vào bộ nhớ
+│   │   └── dishes_seed.json        # Dữ liệu 60+ món ăn ban đầu
 │   ├── models/
-│   │   └── dish.py                 # Pydantic schemas (Dish, Recipe, Filter)
+│   │   ├── orm_models.py           # SQLAlchemy Models (Dishes, Ingredients, Steps, Tags, Cuisines, UserSavedDishes, UserSwipes, AdminUsers, AdminAuditLogs)
+│   │   ├── dish.py                 # Pydantic schemas (Dish Request/Response validation)
+│   │   └── admin.py                # Pydantic schemas (Admin Login, Token, Dish Create/Update, Analytics)
 │   ├── services/
-│   │   └── dish_service.py         # Business logic: lọc, random shuffle
-│   └── main.py                     # Khởi tạo FastAPI app & CORS
+│   │   ├── dish_service.py         # Business logic người dùng: lọc, random shuffle
+│   │   └── admin_service.py        # Business logic CMS: CRUD món ăn, quản lý tag, tổng hợp số liệu
+│   └── main.py                     # Khởi tạo FastAPI app, CORS, lifespan event
+├── alembic/                        # Quản lý Database Migrations (tùy chọn)
 ├── tests/
 │   ├── test_dishes.py
-│   └── test_filters.py
-├── requirements.txt
-└── Dockerfile                      # Dành cho deploy container nếu cần
+│   ├── test_filters.py
+│   └── test_admin_cms.py
+├── requirements.txt                # fastapi, uvicorn, sqlalchemy, psycopg2-binary, supabase, pydantic, pyjwt, passlib[bcrypt]
+└── Dockerfile                      # Dành cho deploy container
 ```
 
 ### 4.2. RESTful API Endpoints Specification
@@ -367,30 +413,188 @@ backend/
 
 ---
 
+### 4.3. Admin & CMS API Endpoints Specification (Secured by Bearer JWT)
+
+Tất cả các endpoint trong nhóm Admin (ngoại trừ endpoint Login) đều yêu cầu Header: `Authorization: Bearer <jwt_access_token>`.
+
+#### 5. Đăng nhập Quản trị viên (Admin Login)
+- **Endpoint:** `POST /api/v1/admin/auth/login`
+- **Request Body:**
+```json
+{
+  "username_or_email": "admin",
+  "password": "AdminSecurePassword2026!"
+}
+```
+- **Response `200 OK`:**
+```json
+{
+  "status": "success",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer",
+  "expires_in": 86400,
+  "admin": {
+    "id": "e0b96901-8ecb-43d2-a7cb-6a3f9e9d9e91",
+    "username": "admin",
+    "email": "admin@yunyumpick.com",
+    "role": "SUPER_ADMIN"
+  }
+}
+```
+- **Response `401 Unauthorized`:** Sai tên đăng nhập hoặc mật khẩu.
+
+#### 6. Lấy danh sách món ăn CMS (Hỗ trợ phân trang, lọc & tìm kiếm)
+- **Endpoint:** `GET /api/v1/admin/dishes`
+- **Query Parameters:**
+  - `page` (int, default=1): Trang hiện tại.
+  - `page_size` (int, default=20, max=100): Kích thước trang.
+  - `search` (string, optional): Tìm kiếm theo tên món hoặc tên tiếng Anh.
+  - `cuisine_id` (string, optional): Lọc theo quốc gia ẩm thực.
+- **Response `200 OK`:**
+```json
+{
+  "status": "success",
+  "total": 65,
+  "page": 1,
+  "page_size": 20,
+  "data": [
+    {
+      "id": "dish_vn_001",
+      "name": "Phở Bò Hà Nội",
+      "english_name": "Hanoi Beef Pho",
+      "cuisine_id": "cui_vn",
+      "cook_time_minutes": 60,
+      "difficulty": "Trung bình",
+      "created_at": "2026-09-11T10:00:00Z",
+      "created_by": "admin"
+    }
+  ]
+}
+```
+
+#### 7. Thêm mới món ăn & công thức nấu (Create Dish)
+- **Endpoint:** `POST /api/v1/admin/dishes`
+- **Request Body:**
+```json
+{
+  "id": "dish_vn_015",
+  "name": "Bún Bò Huế",
+  "english_name": "Hue Spicy Beef Noodle Soup",
+  "cuisine_id": "cui_vn",
+  "region": "Miền Trung",
+  "image_url": "https://images.unsplash.com/photo-example-bunbohue",
+  "cook_time_minutes": 90,
+  "prep_time_minutes": 30,
+  "difficulty": "Kỳ công",
+  "spicy_level": 3,
+  "calories_approx": 520,
+  "is_vegetarian": false,
+  "meal_type": ["breakfast", "lunch"],
+  "short_description": "Món bún bò cay nồng đặc trưng xứ Huế với nước dùng sả mắm ruốc thơm lừng.",
+  "tips": "Nên dùng mắm ruốc Huế xào thơm với dầu màu điều trước khi chắt lấy nước trong.",
+  "tag_ids": ["tag_nuocleo", "tag_cay", "tag_truyenthong"],
+  "ingredients": [
+    { "name": "Bắp bò hoa", "amount": "400", "unit": "g", "category": "thịt", "order_index": 1 },
+    { "name": "Giò heo", "amount": "500", "unit": "g", "category": "thịt", "order_index": 2 },
+    { "name": "Mắm ruốc Huế", "amount": "2", "unit": "muỗng canh", "category": "gia vị", "order_index": 3 },
+    { "name": "Sả cây đập dập", "amount": "6", "unit": "cây", "category": "gia vị", "order_index": 4 }
+  ],
+  "steps": [
+    { "step_number": 1, "title": "Sơ chế thịt và hầm nước dùng", "description": "Chần giò heo và bắp bò qua nước sôi..." },
+    { "step_number": 2, "title": "Nêm gia vị ruốc sả", "description": "Pha mắm ruốc với nước lạnh, chờ lắng lấy nước trong châm vào nồi..." }
+  ]
+}
+```
+- **Response `201 Created`:** Thông tin món ăn vừa tạo kèm ID và timestamp.
+
+#### 8. Cập nhật thông tin món ăn & công thức (Update Dish)
+- **Endpoint:** `PUT /api/v1/admin/dishes/{dish_id}`
+- **Request Body:** Các trường cần sửa đổi (hỗ trợ update toàn bộ hoặc từng phần).
+- **Response `200 OK`:** Bản ghi món ăn sau khi cập nhật thành công.
+
+#### 9. Xóa món ăn khỏi hệ thống (Delete Dish)
+- **Endpoint:** `DELETE /api/v1/admin/dishes/{dish_id}`
+- **Response `200 OK`:**
+```json
+{
+  "status": "success",
+  "message": "Dish 'dish_vn_015' successfully deleted"
+}
+```
+
+#### 10. Báo cáo thống kê tương tác hệ thống (Analytics Dashboard Overview)
+- **Endpoint:** `GET /api/v1/admin/stats/overview`
+- **Response `200 OK`:**
+```json
+{
+  "status": "success",
+  "data": {
+    "total_dishes": 65,
+    "total_cuisines": 5,
+    "total_swipes": 12840,
+    "total_likes": 7520,
+    "total_skips": 5320,
+    "like_ratio": 0.585,
+    "top_liked_dishes": [
+      { "dish_id": "dish_vn_001", "name": "Phở Bò Hà Nội", "likes": 1240 },
+      { "dish_id": "dish_jp_001", "name": "Ramen Tonkotsu", "likes": 980 }
+    ],
+    "top_skipped_dishes": [
+      { "dish_id": "dish_it_003", "name": "Risotto Nấm Trắng", "skips": 410 }
+    ]
+  }
+}
+```
+
+---
+
 ## 5. Chiến Lược Triển Khai & DevOps (Deployment Strategy)
+
+Kiến trúc triển khai hệ thống phân tán 3 tầng (3-Tier Cloud Architecture):
 
 ```mermaid
 flowchart LR
-    Dev["Developer push to Git"] --> GH["GitHub Repository"]
+    Dev["Push Code"] --> GH["GitHub Repository"]
     
     subgraph CI["Continuous Integration"]
         GH --> GHAction["GitHub Actions (Linter & Tests)"]
     end
     
     subgraph CD["Continuous Deployment"]
-        GHAction -->|Frontend Trigger| VercelFE["Vercel Production (Frontend)"]
-        GHAction -->|Backend Trigger| RenderBE["Render / Railway / Vercel API (Backend)"]
+        GHAction -->|FE Deploy| VercelFE["Vercel Production\n(React SPA + Edge CDN)"]
+        GHAction -->|BE Deploy| RenderBE["Render Web Service\n(FastAPI + Uvicorn)"]
     end
 
-    VercelFE <-->|CORS Enabled| RenderBE
+    subgraph DataCloud["Cloud Database Layer"]
+        SupaDB[("Supabase PostgreSQL\n(Dishes, Swipes & Admins)")]
+    end
+
+    VercelFE <-->|REST API (CORS + JWT)| RenderBE
+    RenderBE <-->|Port 5432 / SSL| SupaDB
 ```
 
 1. **Frontend Hosting (Vercel):**
-   - Kết nối trực tiếp repository GitHub.
-   - Mỗi Pull Request tự động tạo một **Preview URL** để cả team và QA test giao diện trước khi merge.
+   - Source: Repository GitHub (`main` $\rightarrow$ Production, `develop` $\rightarrow$ Preview).
    - Build Command: `npm run build`, Output Directory: `dist`.
-2. **Backend Hosting (Render / Railway / Vercel Serverless):**
-   - Cấu hình Environment Variables:
+   - Environment Variable: `VITE_API_BASE_URL=https://yunyumpick-api.onrender.com/api/v1`
+
+2. **Backend Hosting (Render):**
+   - Command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - CORS Middleware: cấu hình `ALLOWED_ORIGINS` cho phép domain Vercel và localhost.
+   - Environment Variables:
      - `ALLOWED_ORIGINS=https://yunyumpick.vercel.app,http://localhost:5173`
-     - `PORT=8000`
-   - Bật CORS Middleware trên FastAPI cho phép Client gọi an toàn.
+     - `DATABASE_URL=postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres`
+     - `SUPABASE_URL=https://[PROJECT_REF].supabase.co`
+     - `SUPABASE_KEY=[ANON_OR_SERVICE_KEY]`
+     - `JWT_SECRET_KEY=[SECURE_HEX_256_BIT_SECRET]`
+     - `JWT_ALGORITHM=HS256`
+     - `ACCESS_TOKEN_EXPIRE_MINUTES=1440`
+
+3. **Database Hosting (Supabase - PostgreSQL):**
+   - Lưu trữ toàn bộ bảng nghiệp vụ:
+     - **Bảng dữ liệu ẩm thực & tương tác người dùng:** `cuisines`, `dishes`, `ingredients`, `cooking_steps`, `tags`, `dish_tags`, `user_saved_dishes`, `user_swipes`.
+     - **Bảng quản trị hệ thống (Admin / CMS):** `admin_users`, `admin_audit_logs`.
+   - Kết nối qua giao thức PostgreSQL chuẩn (Port 5432) hoặc Supabase REST/Client SDK.
+   - Khởi tạo bảng bằng script SQL DDL và nạp dữ liệu qua `python -m app.db.seed_supabase`.
+
+

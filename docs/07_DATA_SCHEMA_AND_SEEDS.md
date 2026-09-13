@@ -349,3 +349,369 @@ Mỗi bản ghi món ăn trong hệ thống **YumYumPick** tuân thủ cấu tr�
 2. **Tham số URL tối ưu (URL Optimization Parameters):**
    - Thêm các query param vào đuôi ảnh Unsplash: `?auto=format&fit=crop&w=800&q=80`
    - Điều này giúp Unsplash tự động trả về định dạng **WebP** nhẹ nhất với chiều rộng $800\text{px}$, tải siêu nhanh trên cả 3G/4G di động.
+
+---
+
+---
+
+## 5. Thiết Kế Cơ Sở Dữ Liệu Supabase (PostgreSQL Schema & ERD)
+
+Hệ thống sử dụng **Supabase (PostgreSQL 15+)** làm cơ sở dữ liệu trung tâm, phục vụ cả người dùng cuối (User App) và ban quản trị nội dung (Admin/CMS Portal).
+
+### 5.1. Sơ Đồ Thực Thể - Mối Quan Hệ (Full System ERD)
+
+```mermaid
+erDiagram
+    ADMIN_USERS ||--o{ DISHES : "manages"
+    ADMIN_USERS ||--o{ ADMIN_AUDIT_LOGS : "performs"
+    CUISINES ||--o{ DISHES : "belongs_to"
+    DISHES ||--o{ INGREDIENTS : "contains"
+    DISHES ||--o{ COOKING_STEPS : "has"
+    DISHES ||--o{ DISH_TAGS : "tagged_with"
+    TAGS ||--o{ DISH_TAGS : "labeled_as"
+    DISHES ||--o{ USER_SAVED_DISHES : "saved_by"
+    DISHES ||--o{ USER_SWIPES : "swiped_by"
+
+    ADMIN_USERS {
+        uuid id PK
+        varchar(64) username UK
+        varchar(128) email UK
+        varchar(255) hashed_password
+        varchar(32) role "super_admin | editor"
+        boolean is_active
+        timestamp created_at
+        timestamp last_login_at
+    }
+
+    ADMIN_AUDIT_LOGS {
+        bigserial id PK
+        uuid admin_id FK
+        varchar(32) action "CREATE | UPDATE | DELETE"
+        varchar(64) target_table
+        varchar(64) target_id
+        jsonb details
+        timestamp created_at
+    }
+
+    CUISINES {
+        varchar(32) id PK
+        varchar(64) name
+        varchar(8) flag
+        varchar(255) description
+    }
+
+    DISHES {
+        varchar(36) id PK
+        varchar(128) name
+        varchar(128) english_name
+        varchar(32) cuisine_id FK
+        uuid created_by_admin_id FK
+        varchar(64) region
+        text meal_types
+        int cook_time_minutes
+        int prep_time_minutes
+        varchar(32) difficulty
+        int spicy_level
+        int calories_approx
+        boolean is_vegetarian
+        varchar(500) image_url
+        varchar(500) short_description
+        text tips
+        timestamp created_at
+    }
+
+    INGREDIENTS {
+        bigserial id PK
+        varchar(36) dish_id FK
+        varchar(128) name
+        varchar(32) amount
+        varchar(32) unit
+        varchar(32) category
+        int order_index
+    }
+
+    COOKING_STEPS {
+        bigserial id PK
+        varchar(36) dish_id FK
+        int step_number
+        varchar(255) title
+        text description
+    }
+
+    TAGS {
+        bigserial id PK
+        varchar(64) name UK
+    }
+
+    DISH_TAGS {
+        varchar(36) dish_id PK,FK
+        bigint tag_id PK,FK
+    }
+
+    USER_SAVED_DISHES {
+        bigserial id PK
+        varchar(64) user_session_id
+        varchar(36) dish_id FK
+        boolean is_cooked
+        timestamp saved_at
+    }
+
+    USER_SWIPES {
+        bigserial id PK
+        varchar(64) user_session_id
+        varchar(36) dish_id FK
+        varchar(16) action
+        timestamp created_at
+    }
+```
+
+### 5.2. Kịch Bản SQL DDL (Supabase SQL Editor)
+
+```sql
+-- Kích hoạt extension UUID
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- 1. Bảng Quản Trị Viên (Admin Users)
+CREATE TABLE IF NOT EXISTS public.admin_users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username VARCHAR(64) NOT NULL UNIQUE,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    hashed_password VARCHAR(255) NOT NULL,
+    role VARCHAR(32) NOT NULL DEFAULT 'editor', -- 'super_admin', 'editor'
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    last_login_at TIMESTAMPTZ
+);
+
+-- Tài khoản Admin mặc định khởi tạo (User: admin / Pass: admin123)
+INSERT INTO public.admin_users (id, username, email, hashed_password, role, is_active)
+VALUES (
+    'a0000000-0000-0000-0000-000000000001',
+    'admin',
+    'admin@yunyumpick.com',
+    '$2b$12$K1jE7C8zB1sWqQkXg4oXeOU6a9mO1nZ6zK9zV7jG3bH8dJ5kL2m1O', -- hashed bcrypt
+    'super_admin',
+    TRUE
+) ON CONFLICT (username) DO NOTHING;
+
+-- 2. Bảng Nhật Ký Hoạt Động Quản Trị (Admin Audit Logs)
+CREATE TABLE IF NOT EXISTS public.admin_audit_logs (
+    id BIGSERIAL PRIMARY KEY,
+    admin_id UUID NOT NULL REFERENCES public.admin_users(id) ON DELETE CASCADE,
+    action VARCHAR(32) NOT NULL, -- 'CREATE_DISH', 'UPDATE_DISH', 'DELETE_DISH'
+    target_table VARCHAR(64) NOT NULL,
+    target_id VARCHAR(64) NOT NULL,
+    details JSONB,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_admin ON public.admin_audit_logs(admin_id);
+
+-- 3. Bảng Quốc Gia / Nền Ẩm Thực
+CREATE TABLE IF NOT EXISTS public.cuisines (
+    id VARCHAR(32) PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
+    flag VARCHAR(8) NOT NULL,
+    description VARCHAR(255)
+);
+
+-- 4. Bảng Món Ăn (Dishes)
+CREATE TABLE IF NOT EXISTS public.dishes (
+    id VARCHAR(36) PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    english_name VARCHAR(128),
+    cuisine_id VARCHAR(32) NOT NULL REFERENCES public.cuisines(id) ON UPDATE CASCADE,
+    created_by_admin_id UUID REFERENCES public.admin_users(id) ON DELETE SET NULL,
+    region VARCHAR(64),
+    meal_types TEXT[] DEFAULT ARRAY['lunch', 'dinner']::TEXT[],
+    cook_time_minutes INT NOT NULL DEFAULT 30,
+    prep_time_minutes INT NOT NULL DEFAULT 15,
+    difficulty VARCHAR(32) NOT NULL DEFAULT 'Trung bình',
+    spicy_level SMALLINT NOT NULL DEFAULT 0,
+    calories_approx INT NOT NULL DEFAULT 400,
+    is_vegetarian BOOLEAN NOT NULL DEFAULT FALSE,
+    image_url VARCHAR(500) NOT NULL,
+    short_description VARCHAR(500) NOT NULL,
+    tips TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_dishes_cuisine ON public.dishes(cuisine_id);
+CREATE INDEX IF NOT EXISTS idx_dishes_difficulty ON public.dishes(difficulty);
+CREATE INDEX IF NOT EXISTS idx_dishes_cook_time ON public.dishes(cook_time_minutes);
+
+-- 5. Bảng Nguyên Liệu (Ingredients)
+CREATE TABLE IF NOT EXISTS public.ingredients (
+    id BIGSERIAL PRIMARY KEY,
+    dish_id VARCHAR(36) NOT NULL REFERENCES public.dishes(id) ON DELETE CASCADE,
+    name VARCHAR(128) NOT NULL,
+    amount VARCHAR(32) NOT NULL,
+    unit VARCHAR(32) NOT NULL,
+    category VARCHAR(32) NOT NULL DEFAULT 'khác',
+    order_index INT NOT NULL DEFAULT 1
+);
+
+CREATE INDEX IF NOT EXISTS idx_ingredients_dish ON public.ingredients(dish_id);
+
+-- 6. Bảng Các Bước Nấu Ăn (Cooking Steps)
+CREATE TABLE IF NOT EXISTS public.cooking_steps (
+    id BIGSERIAL PRIMARY KEY,
+    dish_id VARCHAR(36) NOT NULL REFERENCES public.dishes(id) ON DELETE CASCADE,
+    step_number INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_steps_dish ON public.cooking_steps(dish_id, step_number);
+
+-- 7. Bảng Nhãn Món Ăn (Tags)
+CREATE TABLE IF NOT EXISTS public.tags (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS public.dish_tags (
+    dish_id VARCHAR(36) NOT NULL REFERENCES public.dishes(id) ON DELETE CASCADE,
+    tag_id BIGINT NOT NULL REFERENCES public.tags(id) ON DELETE CASCADE,
+    PRIMARY KEY (dish_id, tag_id)
+);
+
+-- 8. Bảng Món Đã Lưu Của Người Dùng (User Saved Dishes)
+CREATE TABLE IF NOT EXISTS public.user_saved_dishes (
+    id BIGSERIAL PRIMARY KEY,
+    user_session_id VARCHAR(64) NOT NULL,
+    dish_id VARCHAR(36) NOT NULL REFERENCES public.dishes(id) ON DELETE CASCADE,
+    is_cooked BOOLEAN NOT NULL DEFAULT FALSE,
+    saved_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_user_dish UNIQUE (user_session_id, dish_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_saved_session ON public.user_saved_dishes(user_session_id);
+
+-- 9. Bảng Lịch Sử Quẹt Của Người Dùng (User Swipes)
+CREATE TABLE IF NOT EXISTS public.user_swipes (
+    id BIGSERIAL PRIMARY KEY,
+    user_session_id VARCHAR(64) NOT NULL,
+    dish_id VARCHAR(36) NOT NULL REFERENCES public.dishes(id) ON DELETE CASCADE,
+    action VARCHAR(16) NOT NULL CHECK (action IN ('like', 'skip')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_swipes_session ON public.user_swipes(user_session_id);
+```
+
+---
+
+## 6. Kịch Bản Tự Động Nạp Dữ Liệu (Seed Script for Supabase)
+
+Script Python nạp dữ liệu ban đầu và khởi tạo tài khoản quản trị mặc định:
+
+```python
+import json
+import os
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(bind=engine)
+
+def seed_supabase():
+    db = SessionLocal()
+    
+    # 1. Khởi tạo tài khoản Admin mặc định
+    db.execute(text("""
+        INSERT INTO public.admin_users (id, username, email, hashed_password, role, is_active)
+        VALUES (
+            'a0000000-0000-0000-0000-000000000001',
+            'admin',
+            'admin@yunyumpick.com',
+            '$2b$12$K1jE7C8zB1sWqQkXg4oXeOU6a9mO1nZ6zK9zV7jG3bH8dJ5kL2m1O',
+            'super_admin',
+            TRUE
+        ) ON CONFLICT (username) DO NOTHING;
+    """))
+
+    # 2. Nạp danh mục Cuisines
+    cuisines = [
+        ("Vietnam", "Việt Nam", "🇻🇳", "Ẩm thực truyền thống Việt Nam đậm đà, tươi ngon."),
+        ("Korea", "Hàn Quốc", "🇰🇷", "Món ăn cay nồng, đậm vị lên men xứ sở kim chi."),
+        ("Japan", "Nhật Bản", "🇯🇵", "Hương vị thanh tao, tôn vinh nguyên liệu tự nhiên nguyên bản."),
+        ("Thailand", "Thái Lan", "🇹🇭", "Sự bùng nổ hài hòa giữa chua, cay, mặn, ngọt đặc sắc."),
+        ("Italy", "Ý / Phương Tây", "🇮🇹", "Ẩm thực Ý tinh tế với phô mai, dầu ô liu và thảo mộc.")
+    ]
+    for cid, name, flag, desc in cuisines:
+        db.execute(text("""
+            INSERT INTO public.cuisines (id, name, flag, description)
+            VALUES (:id, :name, :flag, :description)
+            ON CONFLICT (id) DO NOTHING;
+        """), {"id": cid, "name": name, "flag": flag, "description": desc})
+
+    # 3. Nạp dữ liệu món ăn từ file JSON
+    json_path = os.path.join(os.path.dirname(__file__), "..", "data", "dishes_seed.json")
+    with open(json_path, "r", encoding="utf-8") as f:
+        dishes = json.load(f)
+
+    for item in dishes:
+        db.execute(text("""
+            INSERT INTO public.dishes (
+                id, name, english_name, cuisine_id, created_by_admin_id, region, cook_time_minutes,
+                prep_time_minutes, difficulty, spicy_level, calories_approx,
+                is_vegetarian, image_url, short_description, tips
+            ) VALUES (
+                :id, :name, :english_name, :cuisine_id, 'a0000000-0000-0000-0000-000000000001',
+                :region, :cook_time_minutes, :prep_time_minutes, :difficulty, :spicy_level,
+                :calories_approx, :is_vegetarian, :image_url, :short_description, :tips
+            ) ON CONFLICT (id) DO NOTHING;
+        """), {
+            "id": item["id"],
+            "name": item["name"],
+            "english_name": item.get("english_name"),
+            "cuisine_id": item["cuisine"],
+            "region": item.get("region"),
+            "cook_time_minutes": item["cook_time_minutes"],
+            "prep_time_minutes": item.get("prep_time_minutes", 15),
+            "difficulty": item["difficulty"],
+            "spicy_level": item.get("spicy_level", 0),
+            "calories_approx": item.get("calories_approx", 400),
+            "is_vegetarian": item.get("is_vegetarian", False),
+            "image_url": item["image"],
+            "short_description": item["short_description"],
+            "tips": item.get("tips")
+        })
+
+        for idx, ing in enumerate(item.get("ingredients", [])):
+            db.execute(text("""
+                INSERT INTO public.ingredients (dish_id, name, amount, unit, category, order_index)
+                VALUES (:dish_id, :name, :amount, :unit, :category, :order_index);
+            """), {
+                "dish_id": item["id"],
+                "name": ing["name"],
+                "amount": str(ing.get("amount", "")),
+                "unit": ing.get("unit", ""),
+                "category": ing.get("category", "khác"),
+                "order_index": idx + 1
+            })
+
+        for step in item.get("steps", []):
+            db.execute(text("""
+                INSERT INTO public.cooking_steps (dish_id, step_number, title, description)
+                VALUES (:dish_id, :step_number, :title, :description);
+            """), {
+                "dish_id": item["id"],
+                "step_number": step["step_number"],
+                "title": step["title"],
+                "description": step["description"]
+            })
+
+    db.commit()
+    db.close()
+    print("Seed Supabase database and admin account completed.")
+
+if __name__ == "__main__":
+    seed_supabase()
+```
+
+
+

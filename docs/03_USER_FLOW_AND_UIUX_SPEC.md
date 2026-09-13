@@ -173,3 +173,95 @@ Lấy cảm hứng từ sự ngon miệng, năng lượng tươi vui và kích t
 ### 4.3. Responsive Breakpoints
 - **Mobile Viewport (Ưu tiên số 1):** `< 640px` (Màn hình điện thoại chiếm toàn màn hình, thanh nút bấm cố định dưới đáy an toàn - Safe Area).
 - **Tablet & Desktop:** `≥ 640px` và `≥ 1024px` (Hiển thị thẻ ở khung giữa mô phỏng giao diện app điện thoại thanh lịch hoặc chia 2 cột: Cột trái quẹt thẻ, Cột phải hiển thị ngay danh sách đã lưu và công thức).
+
+---
+
+## 5. Đặc Tả Luồng Quản Trị Viên & CMS (Admin / CMS Portal Flow & UI Spec)
+
+### 5.1. Sơ Đồ Luồng Nghiệp Vụ Quản Trị (Admin Workflow)
+
+```mermaid
+flowchart TD
+    AdminStart(["Quản trị viên truy cập /admin"]) --> CheckToken{"Đã có JWT Access Token hợp lệ?"}
+    
+    CheckToken -- "Chưa / Hết hạn" --> LoginPage["Màn hình Đăng Nhập (/admin/login)"]
+    LoginPage --> SubmitLogin["Nhập Username/Email + Mật khẩu"]
+    SubmitLogin --> AuthCheck{"Xác thực Backend"}
+    AuthCheck -- "Thất bại" --> ShowLoginError["Báo lỗi sai tài khoản / mật khẩu"]
+    ShowLoginError --> LoginPage
+    AuthCheck -- "Thành công" --> SaveToken["Lưu Access Token vào Session/Memory"]
+    SaveToken --> AdminLayout["Khung Giao Diện Quản Trị (AdminLayout)"]
+
+    CheckToken -- "Hợp lệ" --> AdminLayout
+    
+    AdminLayout --> AdminDashboard["Trang Thống Kê Tổng Quan (/admin/dashboard)"]
+    AdminLayout --> DishManager["Trang Quản Trị Món Ăn (/admin/dishes)"]
+    AdminLayout --> LogoutAction["Đăng Xuất: Xóa Token & Về /admin/login"]
+    
+    DishManager --> DishActions{"Hành động CRUD"}
+    DishActions -- "Thêm món mới" --> OpenCreateModal["Mở Modal Form Soạn Thảo Món Ăn"]
+    DishActions -- "Sửa món" --> LoadDishDetail["Tải chi tiết món & mở Modal Form"]
+    DishActions -- "Xóa món" --> ConfirmDelete["Hộp thoại xác nhận xóa (Modal Confirm)"]
+    DishActions -- "Tìm kiếm / Lọc" --> FilterDishTable["Lọc theo quốc gia, từ khóa tên món"]
+
+    OpenCreateModal --> ValidateForm{"Validate dữ liệu Form"}
+    LoadDishDetail --> ValidateForm
+    ValidateForm -- "Lỗi (thiếu tên, nguyên liệu...)" --> FormInlineError["Báo đỏ trường lỗi"]
+    ValidateForm -- "Hợp lệ" --> SaveToSupabase["Gửi API POST/PUT lên Backend"]
+    SaveToSupabase --> RefreshTable["Cập nhật lại Bảng danh sách món ăn"]
+    ConfirmDelete -- "Xác nhận" --> DeleteAPI["Gửi API DELETE lên Backend"]
+    DeleteAPI --> RefreshTable
+```
+
+### 5.2. Giao Diện Đăng Nhập Quản Trị (Admin Login Screen - `/admin/login`)
+- **Bố cục:** Form đăng nhập nằm chính giữa màn hình (Card đặt trên nền tối sang trọng hoặc gradient thương hiệu YumYumPick).
+- **Thành phần:**
+  - Logo YumYumPick kèm huy hiệu nhãn: **"Admin CMS Portal"**.
+  - Ô nhập liệu 1: *Tên đăng nhập hoặc Email* (kèm icon người dùng).
+  - Ô nhập liệu 2: *Mật khẩu* (kèm nút ẩn/hiện mật khẩu).
+  - Nút bấm: *"Đăng Nhập Quản Trị"* (hiệu ứng spinner khi đang gọi API xác thực).
+  - Khung thông báo lỗi (Alert banner) xuất hiện khi mật khẩu sai hoặc tài khoản bị khóa (`is_active = false`).
+
+### 5.3. Bảng Điều Khiển Thống Kê (Admin Dashboard - `/admin/dashboard`)
+- **4 Thẻ Chỉ Số Trọng Tâm (KPI Cards):**
+  1. 🍲 **Tổng số món ăn đang hoạt động:** Hiển thị tổng số lượng món có trong kho dữ liệu.
+  2. 👆 **Tổng lượt quẹt (Total Swipes):** Tổng tương tác từ người dùng web app.
+  3. ❤️ **Tổng lượt yêu thích / lưu lại (Total Likes):** Tỉ lệ thích chuyển đổi (Conversion Rate %).
+  4. ❌ **Tổng lượt bỏ qua (Total Skips):** Số lượt người dùng vuốt trái.
+- **Biểu đồ & Bảng Xếp Hạng Xu Hướng:**
+  - **Top 5 Món Được Quẹt Phải Nhiều Nhất (Trending Liked):** Ảnh món, tên món, quốc gia, số lượt thích.
+  - **Top 5 Món Bị Bỏ Qua Nhiều Nhất (Most Skipped):** Giúp biên tập viên nhận biết món ăn chưa hấp dẫn để cập nhật lại hình ảnh hoặc mô tả.
+
+### 5.4. Giao Diện Quản Lý Danh Sách Món Ăn (Dishes Table - `/admin/dishes`)
+- **Thanh công cụ trên cùng:**
+  - Ô tìm kiếm nhanh theo tên món (Live Search debounce 300ms).
+  - Bộ lọc dropdown chọn Quốc gia ẩm thực (Tất cả, Việt Nam, Nhật Bản, Hàn Quốc...).
+  - Nút chính nổi bật: `+ Thêm món ăn mới` (màu cam thương hiệu Primary Orange).
+- **Bảng dữ liệu (Data Table):**
+  - Cột 1: Ảnh đại diện thu nhỏ ($48\times 48\text{px}$, bo góc).
+  - Cột 2: Tên món ăn (Tiếng Việt) & Tên tiếng Anh.
+  - Cột 3: Quốc gia / Vùng miền (Badge màu).
+  - Cột 4: Thời gian nấu (⏱️ Phút) & Độ khó.
+  - Cột 5: Ngày tạo & Người tạo.
+  - Cột 6: Thao tác (Nút sửa ✏️ và Nút xóa 🗑️).
+- **Phân trang (Pagination):** Hiển thị số trang 1, 2, 3... và chọn số lượng 20/50 món mỗi trang.
+
+### 5.5. Form Modal Soạn Thảo Món Ăn (Dish Form Modal)
+Modal cỡ lớn (Max-width: 4xl) chia thành các Tab hoặc Accordion rõ ràng:
+1. **Tab 1: Thông tin định danh & Giới thiệu:**
+   - Mã món ăn (`id`, tự sinh hoặc nhập tay, vd: `dish_vn_015`).
+   - Tên món ăn tiếng Việt & Tên tiếng Anh.
+   - Quốc gia (`cuisine_id`) & Vùng miền (`region`).
+   - Đường dẫn ảnh bìa (`image_url`) kèm khung xem trước ảnh (Image Preview).
+   - Thời gian nấu (`cook_time_minutes`), thời gian chuẩn bị (`prep_time_minutes`).
+   - Mức độ cay (0 đến 3), Lượng calo ước tính, Khẩu phần ăn.
+   - Mô tả ngắn / Câu chuyện món ăn (`short_description`).
+   - Mẹo nấu ăn đặc biệt (`tips`).
+2. **Tab 2: Danh sách Nguyên Liệu (Dynamic Ingredients Rows):**
+   - Hỗ trợ thêm/xóa dòng linh hoạt.
+   - Mỗi dòng gồm: Tên nguyên liệu, Định lượng (vd: 300), Đơn vị tính (g, ml, muỗng, quả), Nhóm nguyên liệu (thịt, rau, gia vị, tinh bột).
+3. **Tab 3: Các Bước Nấu Ăn (Step-by-Step Instructions):**
+   - Hỗ trợ thêm/xóa và kéo thả sắp xếp thứ tự bước nấu.
+   - Mỗi bước gồm: Số thứ tự bước, Tiêu đề bước (vd: *Sơ chế nguyên liệu*), Mô tả chi tiết cách nấu.
+4. **Tab 4: Nhãn Phân Loại (Tags Selector):**
+   - Chọn các tag có sẵn (Nước lèo, Ăn sáng, Ít dầu mỡ, Đậm đà...).

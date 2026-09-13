@@ -18,16 +18,18 @@ gantt
     Framer Motion Swipe Physics Deck   :active, s1_1, 2026-09-15, 6d
     FastAPI Randomizer & Filter API    :active, s1_2, 2026-09-15, 6d
     Curate 60+ Seed Dishes & Images    :active, s1_3, 2026-09-15, 5d
-    section Sprint 2: Features & Storage
-    Recipe Drawer & Ingredients List   :s2_1, 2026-09-22, 6d
-    LocalStorage Sync & Saved History  :s2_2, 2026-09-22, 6d
-    Filter Modal Multi-criteria UI     :s2_3, 2026-09-23, 5d
-    Smart Grocery List Generator       :s2_4, 2026-09-24, 4d
-    section Sprint 3: Polish & Release
-    End-to-end Integration Testing    :s3_1, 2026-09-29, 4d
-    CI/CD Automation & Vercel Deploy   :s3_2, 2026-09-29, 3d
-    Lighthouse Optimization & Bugfix   :s3_3, 2026-10-02, 4d
-    Demo Day & Project Handover        :s3_4, 2026-10-06, 2d
+    section Sprint 2: Features, Storage & Admin CMS
+    Recipe Drawer & Ingredients List   :s2_1, 2026-09-22, 5d
+    LocalStorage Sync & Saved History  :s2_2, 2026-09-22, 5d
+    Filter Modal Multi-criteria UI     :s2_3, 2026-09-23, 4d
+    Admin JWT Auth & Security Backend  :s2_4, 2026-09-22, 4d
+    Admin Dish CRUD & Form Modal       :s2_5, 2026-09-24, 6d
+    section Sprint 3: Polish, Release & Analytics
+    Admin Analytics Stats Dashboard    :s3_1, 2026-09-29, 4d
+    End-to-end Integration Testing    :s3_2, 2026-09-29, 4d
+    CI/CD Automation & Cloud Deploy    :s3_3, 2026-10-01, 3d
+    Lighthouse Optimization & Bugfix   :s3_4, 2026-10-02, 4d
+    Demo Day & Project Handover        :s3_5, 2026-10-06, 2d
 ```
 
 ---
@@ -110,72 +112,110 @@ gantt
     - [ ] Mẹo vặt từ đầu bếp (`tips`).
     - [ ] Nút "Đã nấu xong" và nút "Bỏ lưu".
   - [ ] **Tính năng thông minh:** Nút "Xuất Danh Sách Đi Chợ" (Smart Grocery List) tự động tổng hợp nguyên liệu của các món đã lưu và có nút sao chép (Copy to Clipboard) gửi qua Zalo / Messenger.
+- [ ] **Phát triển Cổng Quản Trị Admin / CMS (`/admin`):**
+  - [ ] Màn hình Đăng nhập Quản trị (`AdminLogin.jsx`): Form đăng nhập, xử lý lưu JWT token an toàn, hiển thị lỗi khi sai credentials.
+  - [ ] Khung Layout Quản trị (`AdminLayout.jsx`): Sidebar điều hướng, Header hiển thị thông tin Admin hiện tại, nút Đăng xuất.
+  - [ ] Dashboard Thống kê (`AdminDashboard.jsx`): 4 thẻ KPI (Tổng món, Lượt quẹt, Lượt like, Lượt skip), bảng xếp hạng Top 5 món được thích nhất & bị bỏ qua nhiều nhất.
+  - [ ] Quản lý Món ăn (`AdminDishes.jsx`): Bảng danh sách món ăn kèm bộ lọc theo quốc gia, thanh tìm kiếm live-search, phân trang, nút Thêm món mới, Sửa và Xóa.
+  - [ ] Modal Soạn thảo Món ăn Đa Tab (`DishFormModal.jsx`):
+    - Tab 1: Nhập thông tin tổng quan, thời gian nấu, mức độ cay, calo, link ảnh và preview.
+    - Tab 2: Quản lý danh sách nguyên liệu động (thêm/xóa dòng, định lượng, đơn vị, nhóm nguyên liệu).
+    - Tab 3: Quản lý các bước nấu động (thêm/xóa bước, thứ tự, tiêu đề, mô tả).
+    - Tab 4: Gắn thẻ (Tags multi-select).
+  - [ ] Viết module `src/services/adminApi.js` đóng gói các hàm gọi API Admin đính kèm Header `Authorization: Bearer <token>`.
 - [ ] **Kết Nối API Backend:**
   - [ ] Viết module `src/services/api.js` sử dụng `fetch` hoặc `axios` gọi đến FastAPI server.
   - [ ] Xử lý trạng thái Loading (Skeleton loader khi đang tải thẻ) và trạng thái Error khi mất mạng.
 
 ---
 
-### ⚙️ Member 4: Backend Lead (FastAPI & Randomizer Engine)
-- [ ] **Khởi tạo Kiến Trúc FastAPI:**
-  - [ ] Cài đặt môi trường ảo Python (`venv`), khởi tạo file `requirements.txt` (`fastapi`, `uvicorn`, `pydantic`).
-  - [ ] Cấu hình cấu trúc thư mục phân tầng: `app/api/v1`, `app/models`, `app/services`, `app/core`.
-  - [ ] Cấu hình CORS Middleware (`CORSMiddleware`) cho phép Frontend gọi an toàn.
-- [ ] **Xây Dựng Data Models (Pydantic):**
-  - [ ] Tạo model `Dish`, `IngredientItem`, `CookingStep`, `FilterParams`.
-  - [ ] Đảm bảo dữ liệu trả về có đầy đủ kiểu dữ liệu, có schema mẫu hiển thị trên Swagger UI.
-- [ ] **Thuật Toán Gợi Ý & Randomizer:**
-  - [ ] Viết hàm xáo trộn danh sách món ăn ngẫu nhiên (sử dụng thuật toán Fisher-Yates shuffle).
-  - [ ] Xử lý tham số `exclude_ids` để loại bỏ các món người dùng vừa xem trong phiên hiện tại.
-  - [ ] Viết hàm lọc linh hoạt: Hỗ trợ lọc đồng thời nhiều quốc gia, lọc theo khoảng thời gian nấu, khẩu vị.
-- [ ] **Triển Khai Các Endpoints RESTful:**
-  - [ ] `GET /api/v1/health` (Kiểm tra trạng thái server).
-  - [ ] `GET /api/v1/dishes/random` (Lấy thẻ ngẫu nhiên có lọc).
-  - [ ] `GET /api/v1/dishes/{dish_id}` (Lấy chi tiết công thức 1 món).
-  - [ ] `GET /api/v1/filters/metadata` (Lấy danh mục cờ quốc gia, nhãn bộ lọc).
+### ⚙️ Member 4: Backend Lead (FastAPI, Database ORM, Auth & Admin APIs)
+- [ ] **Khởi tạo Kiến Trúc FastAPI & Database Connection:**
+  - [ ] Khởi tạo môi trường ảo Python (`venv`), cập nhật `requirements.txt` (`fastapi`, `uvicorn`, `sqlalchemy>=2.0`, `psycopg2-binary`, `pydantic>=2.0`, `supabase`, `pyjwt`, `passlib[bcrypt]`).
+  - [ ] Cấu hình thư mục phân tầng: `app/api/v1`, `app/db`, `app/models`, `app/services`, `app/core`.
+  - [ ] Module kết nối CSDL `app/db/session.py`: Cấu hình SQLAlchemy Engine, SessionLocal và dependency `get_db` kết nối Supabase PostgreSQL.
+  - [ ] Cấu hình CORS Middleware (`CORSMiddleware`) cho phép Frontend gọi an toàn từ localhost và Vercel.
+- [ ] **Hệ Thống Bảo Mật & Xác Thực Quản Trị (Admin Auth & Security):**
+  - [ ] Xây dựng `app/core/security.py`:
+    - [ ] Hàm băm mật khẩu `get_password_hash(password)` bằng Bcrypt.
+    - [ ] Hàm xác thực mật khẩu `verify_password(plain, hashed)`.
+    - [ ] Hàm sinh JSON Web Token `create_access_token(data, expires_delta)`.
+    - [ ] Dependency `get_current_admin`: Giải mã JWT từ Header `Authorization: Bearer <token>`, tra cứu tài khoản trong DB, chặn 401 nếu token không hợp lệ hoặc hết hạn.
+  - [ ] Endpoint `POST /api/v1/admin/auth/login`: Xác thực tài khoản admin, trả về access token và thông tin người dùng.
+- [ ] **Xây Dựng Data Models (Pydantic & SQLAlchemy ORM):**
+  - [ ] Xây dựng ORM models (`app/models/orm_models.py`): `Dish`, `Ingredient`, `CookingStep`, `Tag`, `Cuisine`, `UserSavedDish`, `UserSwipe`, `AdminUser`, `AdminAuditLog`.
+  - [ ] Xây dựng Pydantic schemas:
+    - [ ] `app/models/dish.py`: Validation món ăn phía User.
+    - [ ] `app/models/admin.py`: `AdminLoginRequest`, `TokenResponse`, `DishCreateRequest`, `DishUpdateRequest`, `StatsOverviewResponse`.
+- [ ] **Hệ Thống API Quản Trị CMS (Admin CRUD & Stats):**
+  - [ ] `GET /api/v1/admin/dishes`: Phân trang, tìm kiếm theo tên món, lọc theo quốc gia.
+  - [ ] `POST /api/v1/admin/dishes`: Thêm món ăn mới kèm toàn bộ nguyên liệu, bước nấu và tags trong cùng một Database transaction.
+  - [ ] `PUT /api/v1/admin/dishes/{dish_id}`: Cập nhật thông tin chi tiết món ăn và công thức.
+  - [ ] `DELETE /api/v1/admin/dishes/{dish_id}`: Xóa món ăn khỏi hệ thống (cascade xóa nguyên liệu & bước nấu).
+  - [ ] `GET /api/v1/admin/stats/overview`: Thống kê tổng số món, tổng lượt quẹt, tỷ lệ like, top 5 món yêu thích nhất và top món bị bỏ qua.
+- [ ] **Thuật Toán Gợi Ý & Truy Vấn Supabase Cho Người Dùng:**
+  - [ ] Viết hàm truy vấn ngẫu nhiên món ăn từ Supabase PostgreSQL tối ưu thời gian phản hồi $< 100\text{ms}$.
+  - [ ] Xử lý tham số `exclude_ids` để loại trừ các món vừa xem trong session.
+  - [ ] Truy vấn lọc kết hợp nhiều điều kiện (Cuisine, spicy_level, max_time) sử dụng Index trên PostgreSQL.
+- [ ] **Triển Khai Các Endpoints RESTful Người Dùng:**
+  - [ ] `GET /api/v1/health` (Kiểm tra trạng thái server & kết nối CSDL Supabase).
+  - [ ] `GET /api/v1/dishes/random` (Lấy thẻ ngẫu nhiên có bộ lọc).
+  - [ ] `GET /api/v1/dishes/{dish_id}` (Lấy chi tiết công thức 1 món kèm nguyên liệu & các bước nấu).
+  - [ ] `GET /api/v1/filters/metadata` (Lấy danh mục cờ quốc gia, nhãn bộ lọc từ bảng `cuisines`).
   - [ ] `POST /api/v1/dishes/batch` (Lấy thông tin nhiều món từ mảng ID).
 - [ ] **Tài Liệu Hóa API:**
-  - [ ] Viết mô tả chi tiết (Summary, Description, Example Responses) hiển thị tại `/docs` (Swagger UI).
+  - [ ] Tự động sinh Swagger UI tại `/docs` phân tách rõ 2 nhóm tags: `Users` và `Admin / CMS`.
 
 ---
 
-### 🍱 Member 5: Data Engineer & Content Specialist (Dishes Curation)
+### 🍱 Member 5: Data Engineer & Content Specialist (Supabase Schema, Admin Tables & Content)
+- [ ] **Thiết Kế & Khởi Tạo Cơ Sở Dữ Liệu Supabase (Full System Schema):**
+  - [ ] Thiết kế sơ đồ thực thể liên kết (Full ERD): các bảng `cuisines`, `dishes`, `ingredients`, `cooking_steps`, `tags`, `dish_tags`, `user_saved_dishes`, `user_swipes`, `admin_users`, `admin_audit_logs`.
+  - [ ] Viết file kịch bản SQL DDL (`app/db/schema.sql`) cho Supabase SQL Editor: kiểu dữ liệu, khóa ngoại `ON DELETE CASCADE`, chỉ mục tìm kiếm và tài khoản admin mặc định.
 - [ ] **Nghiên Cứu & Thu Thập Dữ Liệu Ẩm Thực:**
-  - [ ] Lập danh sách **tối thiểu 60 món ăn** quen thuộc và hấp dẫn thuộc 5 nhóm văn hóa:
-    - 20 món Việt Nam (Phở bò, Bún chả, Bánh mì chảo, Cơm sườn trứng ốp la, Gỏi cuốn...).
-    - 10 món Hàn Quốc (Cơm trộn Bibimbap, Canh kim chi thịt heo, Gà sốt cay...).
-    - 10 món Nhật Bản (Mì Udon bò, Cơm cà ri Nhật, Trứng cuộn Tamagoyaki...).
-    - 10 món Thái Lan (Pad Thai, Canh Tom Yum, Heo xào lá quế Pad Krapow...).
-    - 10 món Âu / Ý (Mì Ý sốt bò bằm Bolognese, Pizza phô mai, Steak sốt tiêu đen...).
-- [ ] **Biên Tập Nội Dung Công Thức Chuẩn:**
-  - [ ] Viết danh sách nguyên liệu cụ thể có định lượng (gam, thìa, quả, lát).
-  - [ ] Viết 3-5 bước thực hiện ngắn gọn, dễ hiểu, người không biết nấu ăn cũng làm theo được.
-  - [ ] Thêm mẹo vặt nấu nướng (Tips) hữu ích cho từng món.
+  - [ ] Lập danh sách **tối thiểu 60 món ăn** quen thuộc thuộc 5 nhóm văn hóa:
+    - 20 món Việt Nam (Phở bò, Bún chả, Bánh mì chảo, Cơm sườn, Gỏi cuốn...).
+    - 10 món Hàn Quốc (Cơm trộn Bibimbap, Canh kim chi, Gà sốt cay...).
+    - 10 món Nhật Bản (Mì Udon, Cơm cà ri, Trứng cuộn Tamagoyaki...).
+    - 10 món Thái Lan (Pad Thai, Canh Tom Yum, Heo xào Pad Krapow...).
+    - 10 món Âu / Ý (Mì Ý Carbonara, Bolognese, Pizza, Steak...).
+- [ ] **Biên Tập Nội Dung Công Thức:**
+  - [ ] Viết danh sách nguyên liệu cụ thể có định lượng.
+  - [ ] Viết 3-5 bước thực hiện ngắn gọn, dễ hiểu.
+  - [ ] Thêm mẹo vặt nấu nướng (Tips) cho từng món.
 - [ ] **Thu Thập & Tối Ưu Hình Ảnh:**
-  - [ ] Tìm hình ảnh món ăn góc chụp đẹp, độ phân giải cao từ nguồn miễn phí bản quyền (Unsplash, Pexels).
-  - [ ] Nén ảnh sang định dạng WebP, kích thước tối ưu (dưới 150KB/ảnh) để tải nhanh trên di động.
-- [ ] **Tạo File Dữ Liệu JSON & Viết Script Nạp:**
+  - [ ] Tìm hình ảnh món ăn độ phân giải cao từ Unsplash, Pexels.
+  - [ ] Nén ảnh sang định dạng WebP (dưới 150KB/ảnh).
+- [ ] **Tự Động Hóa Nạp Dữ Liệu Vào Supabase (Seeding Automation):**
   - [ ] Đóng gói toàn bộ dữ liệu vào file `backend/app/data/dishes_seed.json`.
-  - [ ] Viết script `seed_loader.py` tự động kiểm tra tính hợp lệ của dữ liệu trước khi server khởi động.
-  - [ ] Viết Unit Tests kiểm tra không có món ăn nào bị thiếu hình ảnh hoặc thiếu nguyên liệu.
+  - [ ] Viết script Python `app/db/seed_supabase.py` tự động import toàn bộ bản ghi JSON vào Supabase PostgreSQL và tự động tạo tài khoản quản trị mặc định (`admin` / `AdminSecurePassword2026!`).
+  - [ ] Kiểm tra tính toàn vẹn dữ liệu: không có món nào bị thiếu thông tin bắt buộc.
 
 ---
 
-### 🚀 Member 6: DevOps & QA Engineer (Cloud, CI/CD & Testing)
+### 🚀 Member 6: DevOps & QA Engineer (Cloud Infrastructure, Security Config & Testing)
+- [ ] **Thiết Lập Cơ Sở Dữ Liệu Supabase:**
+  - [ ] Khởi tạo project Supabase (khu vực Singapore để ping thấp).
+  - [ ] Lấy chuỗi kết nối PostgreSQL (`DATABASE_URL`) và API keys (`SUPABASE_URL`, `SUPABASE_ANON_KEY`).
+  - [ ] Chạy script DDL tạo bảng trên Supabase SQL Editor và thực thi script seed data ban đầu.
 - [ ] **Cấu Hình Tự Động Hóa CI/CD:**
-  - [ ] Tạo workflow GitHub Actions tự động chạy linter (ESLint cho React, Flake8/Black cho Python) khi có PR mới.
-  - [ ] Kết nối repository với **Vercel** để tự động build và cấp phát URL xem trước (Preview Deployment) cho mỗi Pull Request.
-- [ ] **Triển Khai Môi Trường Trực Tuyến (Hosting):**
-  - [ ] Deploy Frontend lên **Vercel**. Cấu hình Custom Domain hoặc subdomain Vercel miễn phí.
-  - [ ] Deploy Backend FastAPI lên **Render / Railway / Fly.io** (hoặc tích hợp Vercel Serverless Functions).
-  - [ ] Cấu hình an toàn biến môi trường: `VITE_API_BASE_URL` trên Frontend và `ALLOWED_ORIGINS` trên Backend.
+  - [ ] Tạo workflow GitHub Actions tự động chạy linter (ESLint, Flake8) khi có PR mới.
+  - [ ] Kết nối repository với **Vercel** để cấp phát URL xem trước (Preview Deployment) cho mỗi Pull Request.
+- [ ] **Triển Khai Hệ Thống 3 Tầng Trực Tuyến:**
+  - [ ] Deploy Frontend lên **Vercel** (React SPA + CDN).
+  - [ ] Deploy Backend FastAPI lên **Render** (Web Service).
+  - [ ] Cấu hình biến môi trường:
+    - Frontend: `VITE_API_BASE_URL` trỏ về Render API.
+    - Backend: `DATABASE_URL` trỏ về Supabase PostgreSQL, `ALLOWED_ORIGINS` cho phép Vercel, `JWT_SECRET_KEY`, `JWT_ALGORITHM=HS256`, `ACCESS_TOKEN_EXPIRE_MINUTES=1440`.
 - [ ] **Xây Dựng Tài Liệu Kiểm Thử Postman:**
-  - [ ] Tạo Postman Collection kiểm thử toàn bộ các API endpoints với các trường hợp dữ liệu hợp lệ và không hợp lệ.
+  - [ ] Tạo Postman Collection kiểm thử toàn bộ các API endpoints:
+    - Nhóm User API (Health, Random, Detail, Filter metadata).
+    - Nhóm Admin Auth API (Login thành công, login sai pass 401).
+    - Nhóm Admin CRUD API (Bearer Token, Create Dish, Update Dish, Delete Dish, Overview Stats).
   - [ ] Xuất file `postman_collection.json` đặt trong thư mục `docs/`.
 - [ ] **Kiểm Thử Toàn Diện (QA Testing Matrix):**
-  - [ ] Kiểm thử độ mượt mà của cử chỉ quẹt thẻ trên nhiều trình duyệt: Chrome, Safari iOS, Edge, Samsung Internet.
-  - [ ] Kiểm thử các tình huống biên:
-    - Người dùng quẹt liên tục 20 thẻ với tốc độ cao (không bị vỡ layout hoặc kẹt thẻ).
-    - Người dùng bật bộ lọc không có món nào thỏa mãn (kiểm tra giao diện thông báo).
-    - Xóa lịch sử trong LocalStorage và kiểm tra ứng dụng khởi tạo lại bình thường.
+  - [ ] Kiểm thử độ trễ truy vấn dữ liệu từ Supabase ($< 200\text{ms}$).
+  - [ ] Kiểm thử bảo mật: Gọi API Admin khi không có Header hoặc Token hết hạn phải trả về `401 Unauthorized`.
+  - [ ] Kiểm thử độ mượt mà của cử chỉ quẹt thẻ trên nhiều trình duyệt: Chrome, Safari iOS, Edge.
+  - [ ] Kiểm thử các tình huống biên: Quẹt nhanh 20 thẻ, mất kết nối mạng, cache LocalStorage.
   - [ ] Chạy kiểm toán Google Lighthouse: Tối ưu điểm Performance $\ge 90$, Accessibility $\ge 95$.

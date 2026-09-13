@@ -4,6 +4,7 @@
 
 [![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Supabase](https://img.shields.io/badge/Database-Supabase_PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 [![React](https://img.shields.io/badge/Frontend-React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![TailwindCSS](https://img.shields.io/badge/Style-Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Framer Motion](https://img.shields.io/badge/Motion-Framer_Motion-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
@@ -24,7 +25,8 @@
 - 📖 **Xem chi tiết công thức sau khi quẹt:** Mở bộ sưu tập món đã lưu để xem toàn bộ công thức chuẩn (danh sách nguyên liệu có checkbox tiện kiểm tra tủ lạnh/đi chợ, hướng dẫn nấu từng bước 1-2-3 và mẹo nhỏ từ đầu bếp).
 - 👈 **Quẹt Trái (Swipe Left / ❌):** Bỏ qua món ăn này và ngay lập tức xem gợi ý tiếp theo.
 - 🛒 **Xuất Danh Sách Đi Chợ (Smart Grocery List):** Tự động tổng hợp nguyên liệu của tất cả các món đã lưu để gửi nhanh qua Zalo/Messenger.
-- 💾 **Không cần tài khoản:** Tích hợp `LocalStorage` giúp mọi thao tác lưu trữ diễn ra tức thì, an toàn và bảo mật trên thiết bị.
+- 🛡️ **Cổng Quản Trị & CMS (`/admin`):** Đăng nhập bảo mật JWT, quản lý CRUD món ăn & công thức nấu nướng, xem báo cáo thống kê tương tác (tổng quẹt, tỉ lệ thích, món trending).
+- 💾 **Không cần tài khoản người dùng:** Tích hợp `LocalStorage` giúp mọi thao tác lưu trữ phía người dùng diễn ra tức thì, an toàn và bảo mật trên thiết bị.
 
 ---
 
@@ -34,13 +36,14 @@ Toàn bộ tài liệu chi tiết của dự án được lưu trữ trong thư 
 
 | # | Tài Liệu Chi Tiết | Mô Tả Tóm Tắt |
 |---|---|---|
-| **01** | [**Project Charter & Scope**](./docs/01_PROJECT_CHARTER_AND_SCOPE.md) | Tầm nhìn, đối tượng người dùng, phạm vi MVP vs Phase 2, tiêu chuẩn nghiệm thu KPIs. |
-| **02** | [**System Architecture & Design**](./docs/02_SYSTEM_ARCHITECTURE_AND_DESIGN.md) | Sơ đồ kiến trúc phân tầng, đặc tả RESTful API FastAPI, mô hình dữ liệu & LocalStorage. |
-| **03** | [**User Flow & UI/UX Specification**](./docs/03_USER_FLOW_AND_UIUX_SPEC.md) | Quy luật vật lý quẹt thẻ Framer Motion, bảng màu Design System, layout Responsive. |
+| **00** | [**Master Project Overview**](./docs/00_PROJECT_OVERVIEW.md) | **Tổng quan hệ thống, ý tưởng, kiến trúc, luồng người dùng & công nghệ (Dành cho người ngoài team).** |
+| **01** | [**Project Charter & Scope**](./docs/01_PROJECT_CHARTER_AND_SCOPE.md) | Tầm nhìn, đối tượng người dùng, phạm vi MVP & Admin CMS, tiêu chuẩn nghiệm thu KPIs. |
+| **02** | [**System Architecture & Design**](./docs/02_SYSTEM_ARCHITECTURE_AND_DESIGN.md) | Sơ đồ kiến trúc phân tầng, đặc tả RESTful API (User + Admin), mô hình Supabase & Deploy. |
+| **03** | [**User Flow & UI/UX Specification**](./docs/03_USER_FLOW_AND_UIUX_SPEC.md) | Cơ chế quẹt thẻ Framer Motion, luồng người dùng & đặc tả giao diện Admin CMS Portal. |
 | **04** | [**Team Roles & RACI Matrix**](./docs/04_TEAM_ROLES_AND_RACI.md) | Phân công công việc chi tiết cho 6 thành viên, ma trận trách nhiệm RACI rõ ràng. |
 | **05** | [**Git Workflow & Collaboration Rules**](./docs/05_GIT_WORKFLOW_AND_COLLABORATION_RULES.md) | Quy chuẩn nhánh Git Flow, Conventional Commits, hướng dẫn tạo PR & giải quyết conflict. |
-| **06** | [**Sprint Roadmap & TODO Per Role**](./docs/06_SPRINT_ROADMAP_AND_TODO_PER_ROLE.md) | Kế hoạch 4 Sprints Agile/Scrum, checklist TODO từng người, Definition of Done (DoD). |
-| **07** | [**Data Schema & Food Seeds**](./docs/07_DATA_SCHEMA_AND_SEEDS.md) | Cấu trúc JSON dữ liệu món ăn, 60+ công thức mẫu (Việt, Hàn, Nhật, Thái, Ý) & hướng dẫn ảnh. |
+| **06** | [**Sprint Roadmap & TODO Per Role**](./docs/06_SPRINT_ROADMAP_AND_TODO_PER_ROLE.md) | Kế hoạch 4 Sprints Agile/Scrum, checklist TODO từng người (User + CMS), DoD. |
+| **07** | [**Data Schema, Supabase & Seeds**](./docs/07_DATA_SCHEMA_AND_SEEDS.md) | Thiết kế CSDL Supabase PostgreSQL chuẩn 3NF (User + Admin), ERD, DDL script, seed data. |
 
 ---
 
@@ -53,23 +56,30 @@ flowchart LR
         Framer["Framer Motion (Gestures)"]
         Tailwind["Tailwind CSS"]
         Lucide["Lucide React Icons"]
+        AdminUI["Admin CMS Portal (/admin)"]
         LS[("LocalStorage")]
     end
 
     subgraph Server["Backend"]
         FastAPI["Python FastAPI"]
         Pydantic["Pydantic Schemas"]
+        SQLAlchemy["SQLAlchemy 2.0 ORM"]
+        Security["PyJWT + Bcrypt (Admin Auth)"]
         Uvicorn["Uvicorn ASGI"]
-        DataSeeds[("JSON Seeds (60+ món)")]
+    end
+
+    subgraph Database["Database (Supabase)"]
+        Supabase[("Supabase PostgreSQL 15+\n(Dishes, Swipes & Admins)")]
     end
 
     subgraph Infra["Cloud & DevOps"]
-        Vercel["Vercel (Frontend & CDN)"]
-        Render["Render / Railway (FastAPI)"]
+        Vercel["Vercel (React Frontend & CDN)"]
+        Render["Render (FastAPI Web Service)"]
         GHAction["GitHub Actions (CI/CD)"]
     end
 
-    Client <-->|REST API / JSON| Server
+    Client <-->|REST API (CORS + JWT)| Server
+    Server <-->|Port 5432 / SSL| Supabase
     GHAction --> Vercel
     GHAction --> Render
 ```
@@ -78,7 +88,7 @@ flowchart LR
 
 ## 🚀 Hướng Dẫn Cài Đặt & Chạy Thử (Quickstart Guide)
 
-### 1. Khởi chạy Backend (Python FastAPI)
+### 1. Khởi chạy Backend (Python FastAPI & Supabase)
 
 ```bash
 # Di chuyển vào thư mục backend
@@ -95,6 +105,14 @@ source venv/bin/activate
 
 # Cài đặt các thư viện cần thiết
 pip install -r requirements.txt
+
+# Cấu hình biến môi trường kết nối Supabase trong file .env:
+# DATABASE_URL=postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres
+# SUPABASE_URL=https://[PROJECT_REF].supabase.co
+# SUPABASE_KEY=[ANON_KEY]
+
+# Khởi tạo bảng và nạp 60+ món ăn mẫu vào Supabase
+python -m app.db.seed_supabase
 
 # Chạy server ở chế độ phát triển
 uvicorn app.main:app --reload --port 8000
@@ -124,10 +142,10 @@ npm run dev
 |---|---|---|
 | **Member 1** | **Tech Lead & Coordinator** | Quản lý kiến trúc hệ thống, điều phối Git, review code, gỡ lỗi kỹ thuật. |
 | **Member 2** | **Frontend Lead** | Xây dựng cơ chế quẹt thẻ (Card Stack, Framer Motion drag physics, stamp Like/Skip). |
-| **Member 3** | **Frontend Developer** | Phát triển Modal Bộ Lọc, Drawer Công thức, kết nối LocalStorage & API Backend. |
-| **Member 4** | **Backend Lead** | Xây dựng FastAPI app, thiết kế Pydantic schemas, thuật toán xáo trộn món ngẫu nhiên. |
-| **Member 5** | **Backend & Data Specialist** | Thu thập, biên tập 60+ món ăn ngon, tối ưu hình ảnh WebP, viết seed loader. |
-| **Member 6** | **DevOps & QA Engineer** | Cấu hình CI/CD Vercel, viết tài liệu Postman, kiểm thử chéo trình duyệt & mobile. |
+| **Member 3** | **Frontend Developer** | Phát triển Modal Lọc, Drawer Công thức, Cổng Quản Trị Admin CMS (`/admin`), LocalStorage & API client. |
+| **Member 4** | **Backend Lead** | Xây dựng FastAPI app, SQLAlchemy ORM, xác thực bảo mật JWT, Admin CRUD API & Stats. |
+| **Member 5** | **Backend & Data Specialist** | Thiết kế Full ERD & Schema Supabase (User + Admin), thu thập 60+ món ăn, script seed data. |
+| **Member 6** | **DevOps & QA Engineer** | Cấu hình Supabase project, CI/CD Vercel/Render, bảo mật biến môi trường, kiểm thử API Postman. |
 
 ---
 

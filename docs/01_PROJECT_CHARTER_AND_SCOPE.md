@@ -42,6 +42,10 @@ YumYumPick đơn giản hóa triệt để quyết định ăn uống thông qua
 - **Hành vi:** Đưa ra ý kiến gì đối phương cũng bảo "Gì cũng được" nhưng thực tế lại không chịu.
 - **Nhu cầu:** Truyền tay nhau chiếc điện thoại để quẹt, món nào được quẹt phải thì ăn món đó.
 
+### Persona 4: "Quản trị viên nội dung & Đầu bếp biên tập" (Admin / Content Editor)
+- **Hành vi:** Thường xuyên bổ sung các món ăn "hot trend", chuẩn hóa công thức nấu, cập nhật mẹo đầu bếp.
+- **Nhu cầu:** Cần giao diện web CMS trực quan để đăng nhập, tạo món mới, chỉnh sửa nguyên liệu/bước nấu và xem thống kê món nào được yêu thích nhất.
+
 ---
 
 ## 3. Phạm Vi Dự Án (Project Scope)
@@ -53,12 +57,13 @@ graph TD
     A --> D["Out of Scope (Không Làm)"]
 
     B --> B1["Tinder-style Swipe UI"]
-    B --> B2["Random & Filter Engine (Quốc gia, Nguyên liệu)"]
+    B --> B2["Random & Filter Engine"]
     B --> B3["Recipe & Ingredient Modal"]
     B --> B4["Saved Dishes & History (LocalStorage)"]
-    B --> B5["Mobile & Desktop Responsive"]
+    B --> B5["Admin / CMS Portal (CRUD Món & Thống Kê)"]
+    B --> B6["Supabase PostgreSQL Cloud DB"]
 
-    C --> C1["Đăng nhập tài khoản (Google / Email)"]
+    C --> C1["Đăng nhập tài khoản User qua Google / Apple"]
     C --> C2["Tạo phòng Room Swipe chung cho cặp đôi (WebSocket)"]
     C --> C3["AI gợi ý công thức từ ảnh chụp tủ lạnh"]
     C --> C4["Tích hợp đặt món qua GrabFood/ShopeeFood link"]
@@ -89,8 +94,14 @@ graph TD
      - Đánh dấu đã nấu hoặc xóa món.
 5. **Giao Diện Responsive Toàn Diện (Mobile-First):**
    - Tối ưu hoàn hảo cho kích thước màn hình điện thoại (375px - 430px) và máy tính bảng / PC (1024px+).
-6. **Bộ Dữ Liệu Ban Đầu (Seed Data):**
-   - Tối thiểu 50-100 món ăn phong phú, hình ảnh đẹp mắt, định dạng chuẩn JSON.
+6. **Cơ Sở Dữ Liệu Supabase (PostgreSQL Cloud Database):**
+   - Thiết kế CSDL PostgreSQL chuẩn hóa trên Supabase lưu trữ toàn bộ dữ liệu món ăn, công thức, nhãn phân loại và tài khoản Admin.
+   - Script tự động nạp (Data Seeding) tối thiểu 60+ món ăn phong phú từ JSON vào Supabase.
+7. **Hệ Thống Quản Trị Nội Dung (Admin / CMS Portal):**
+   - **Xác thực Admin:** Đăng nhập an toàn qua JWT (JSON Web Token), phân quyền quản trị (`super_admin`, `editor`).
+   - **Quản lý Món ăn (CRUD Dishes):** Thêm món mới kèm công thức, chỉnh sửa thông tin, cập nhật hình ảnh, ẩn/xóa món ăn.
+   - **Quản lý Danh mục & Nhãn:** Quản lý danh mục quốc gia (`cuisines`) và từ khóa (`tags`).
+   - **Dashboard Thống kê Tương tác:** Xem tổng số món ăn, lượt Like/Skip và xếp hạng món ăn được người dùng quan tâm nhất.
 
 ### 3.2. Ngoài Phạm Vi (Out of Scope)
 - Không làm ứng dụng Native tải từ App Store/Google Play (tập trung Web App chuẩn PWA).
@@ -104,10 +115,14 @@ graph TD
 ### 4.1. Yêu Cầu Chức Năng (Functional Requirements - FR)
 - **FR-01 (Quẹt thẻ):** Người dùng có thể quẹt trái (Skip) hoặc quẹt phải (Pick) thẻ món ăn. Có hỗ trợ nút bấm vật lý (nút ❌ và nút ❤️) để người dùng không cần dùng cử chỉ kéo chuột.
 - **FR-02 (Tap xem giới thiệu món ăn):** Người dùng nhấp/tap vào thẻ hoặc nút "ℹ️" để mở drawer giới thiệu nhanh món ăn (câu chuyện, xuất xứ, thời gian, calo, độ cay, tóm tắt nguyên liệu).
-- **FR-03 (Lưu công thức chi tiết sau khi quẹt):** Mọi món quẹt phải tự động lưu toàn bộ công thức chi tiết vào `LocalStorage`. Người dùng có thể mở bộ sưu tập đã lưu để xem lại chi tiết nguyên liệu (có checkbox), các bước nấu, và mẹo vặt bất cứ lúc nào.
+- **FR-03 (Lưu công thức chi tiết sau khi quẹt):** Mọi món quẹt phải tự động lưu toàn bộ công thức chi tiết vào `LocalStorage` và đồng bộ vào bảng `user_saved_dishes`. Người dùng có thể mở bộ sưu tập đã lưu để xem lại chi tiết nguyên liệu (có checkbox), các bước nấu, và mẹo vặt bất cứ lúc nào.
 - **FR-04 (Bộ lọc tìm kiếm):** Người dùng có thể chọn 1 hoặc nhiều tiêu chí lọc (quốc gia, độ cay, bữa ăn, thời gian). Khi áp dụng bộ lọc, danh sách thẻ được tải mới theo tiêu chí đã chọn.
 - **FR-05 (Undo thao tác):** Cho phép hoàn tác (Undo) lại 1 thẻ gần nhất nếu vô tình quẹt nhầm.
 - **FR-06 (Export danh sách đi chợ):** Tính năng tổng hợp nguyên liệu của các món đã chọn thành danh sách mua sắm (Grocery checklist) để gửi qua tin nhắn.
+- **FR-A01 (Admin Login):** Đăng nhập xác thực quản trị viên bằng tài khoản/mật khẩu, cấp phát JWT access token bảo mật.
+- **FR-A02 (Admin CRUD Dishes):** Giao diện bảng quản lý danh sách món ăn; form thêm mới món, sửa thông tin, cập nhật nguyên liệu/bước nấu, và xóa món ăn.
+- **FR-A03 (Admin Categories & Tags):** Quản lý thêm/sửa/xóa danh mục quốc gia ẩm thực và bộ thẻ tag.
+- **FR-A04 (Admin Analytics Dashboard):** Biểu đồ và chỉ số tổng quan: tổng số món, lượt Like, lượt Skip, tỷ lệ món được chọn.
 
 ### 4.2. Yêu Cầu Phi Chức Năng (Non-Functional Requirements - NFR)
 - **NFR-01 (Hiệu năng quẹt - Performance):** Tốc độ khung hình khi quẹt thẻ đạt tối thiểu 60 FPS trên thiết bị di động tầm trung. Không giật lag khi render thẻ tiếp theo.
@@ -115,6 +130,7 @@ graph TD
 - **NFR-03 (Khả năng tương thích - Compatibility):** Hoạt động tốt trên Chrome, Safari iOS, Edge, Firefox trên cả iOS, Android, macOS và Windows.
 - **NFR-04 (Kích thước hình ảnh - Asset Optimization):** Toàn bộ hình ảnh món ăn được tối ưu định dạng WebP, dung lượng dưới 150KB/ảnh để tải trang cực nhanh.
 - **NFR-05 (Độ tin cậy & Offline tolerance):** Trường hợp mất kết nối mạng tạm thời, ứng dụng vẫn hiển thị được các món đã lưu từ LocalStorage.
+- **NFR-06 (Bảo mật CMS):** Các endpoints `/api/v1/admin/*` bắt buộc yêu cầu Bearer JWT Token hợp lệ, tự động từ chối `401 Unauthorized` đối với truy cập trái phép.
 
 ---
 
@@ -124,6 +140,9 @@ graph TD
 |---|---|---|
 | **Lighthouse Performance** | $\ge 90$ điểm trên Mobile | Google Lighthouse Audit |
 | **First Contentful Paint (FCP)** | $< 1.5$ giây | Web Vitals / Vercel Analytics |
-| **Dung lượng Data khởi tạo** | $\ge 60$ món ăn đa dạng | Đếm bản ghi trong data seed |
+| **Dung lượng Data khởi tạo** | $\ge 60$ món ăn đa dạng | Đếm bản ghi trong Supabase |
+| **Chuẩn hóa CSDL Supabase** | 100% bảng đạt chuẩn 3NF, có khóa ngoại toàn vẹn | Đánh giá qua sơ đồ ERD & Script DDL |
+| **Tính Năng CMS Hoạt Động** | Thao tác CRUD món ăn tức thì, cập nhật hiển thị lên Client | Test thêm món trên CMS và quẹt thấy món đó trên Client |
+| **Bảo Mật Admin API** | 100% API Admin được bảo vệ bởi JWT Token | Kiểm thử Postman test case 401/403 |
 | **Tỷ lệ Crash / Lỗi UI Swipe** | $0$ lỗi kẹt thẻ khi quẹt liên tục | Kịch bản kiểm thử tự động & QA test |
 | **Thời gian ra quyết định món** | Giảm thời gian chọn món xuống $< 2$ phút | Phỏng vấn người dùng thử nghiệm |

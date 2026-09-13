@@ -73,23 +73,21 @@ mindmap
 ## 4. Đối Tượng Người Dùng (Target Personas)
 
 ```mermaid
-classDiagram
-    class User["Người Dùng Hệ Thống"]
-    class OfficeWorker["Dân Văn Phòng\n(Linh, 24 tuổi)"]
-    class Student["Sinh Viên Bận Rộn\n(Hoàng, 20 tuổi)"]
-    class HomeCook["Người Thích Nấu Ăn\n(Chị Mai, 32 tuổi)"]
-    class AdminEditor["Biên Tập Viên CMS\n(Admin / Chef)"]
-
-    User <|-- OfficeWorker
-    User <|-- Student
-    User <|-- HomeCook
-    User <|-- AdminEditor
-
-    OfficeWorker : Mục tiêu: Chọn bữa trưa trong 1 phút
-    Student : Mục tiêu: Món ngon, rẻ, dưới 20 phút
-    HomeCook : Mục tiêu: Đổi món mới lạ cho gia đình
-    AdminEditor : Mục tiêu: Cập nhật công thức chuẩn & đo lường tương tác
+flowchart TD
+    User["👥 Người Dùng Hệ Thống"]
+    
+    User --> OfficeWorker["🏢 Dân Văn Phòng (Linh, 24 tuổi)<br/>🎯 <b>Mục tiêu:</b> Chọn bữa trưa trong 1 phút"]
+    User --> Student["🎓 Sinh Viên Bận Rộn (Hoàng, 20 tuổi)<br/>🎯 <b>Mục tiêu:</b> Món ngon, rẻ, dưới 20 phút"]
+    User --> HomeCook["🍳 Người Thích Nấu Ăn (Chị Mai, 32 tuổi)<br/>🎯 <b>Mục tiêu:</b> Đổi món mới lạ cho gia đình"]
+    User --> AdminEditor["👨‍🍳 Biên Tập Viên CMS (Admin / Chef)<br/>🎯 <b>Mục tiêu:</b> Cập nhật công thức chuẩn & đo lường tương tác"]
 ```
+
+| Nhóm Đối Tượng | Đại Diện Tiêu Biểu | Nỗi Đau Chính | Mục Tiêu Với YumYumPick |
+|---|---|---|---|
+| **Dân Văn Phòng** | Linh (24 tuổi) | Giờ nghỉ trưa ngắn, ngán thực đơn lặp lại | Chọn nhanh bữa trưa chỉ trong 1 phút |
+| **Sinh Viên** | Hoàng (20 tuổi) | Ngân sách có hạn, ngại nấu nướng cầu kỳ | Gợi ý món ngon, tiết kiệm, làm dưới 20 phút |
+| **Người Nấu Gia Đình** | Chị Mai (32 tuổi) | Cạn kiệt ý tưởng đổi món hàng ngày | Tìm kiếm cảm hứng và đổi vị cho cả gia đình |
+| **Biên Tập Viên CMS** | Admin / Chef | Khó cập nhật thực đơn và đo lường tương tác | Quản lý công thức chuẩn, theo dõi xu hướng ẩm thực |
 
 ---
 

@@ -78,8 +78,8 @@ flowchart TD
 - **Sứ mệnh:** Chuẩn bị kho dữ liệu ẩm thực phong phú, chất lượng cao và kiểm soát chất lượng sản phẩm trên mọi thiết bị.
 - **Nhiệm vụ chính:**
   - **Chuẩn bị dữ liệu (Data Curation):**
-    - Thu thập tối thiểu 40-50 món ăn chuẩn thuộc 5 nền ẩm thực (Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý).
-    - Tìm kiếm và chọn lọc link ảnh chất lượng cao (Unsplash / Pexels) cho từng món.
+    - Thu thập đầy đủ 100 món ăn chuẩn thuộc 5 nền ẩm thực (Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý).
+    - Tìm kiếm và chọn lọc link ảnh chất lượng cao (Unsplash / Pexels) cho từng món, hỗ trợ tải ảnh offline qua script.
     - Soạn thảo danh sách nguyên liệu chi tiết (định lượng, đơn vị tính) và các bước nấu 1-2-3 rõ ràng.
   - **Tự động hóa nạp CSDL (Seeding Script):**
     - Đóng gói dữ liệu vào file `dishes_seed.json`.
@@ -108,7 +108,7 @@ flowchart TD
 | Màn hình Món Đã Lưu & Xuất List Đi Chợ | **I** | **A / R** | **C** | **I** |
 | Xây dựng FastAPI Server & SQLite ORM | **I** | **I** | **A / R** | **C** |
 | Xây dựng API Simple Auth & Saved Dishes | **I** | **C** | **A / R** | **I** |
-| Thu thập 40-50 Món Ăn & Script Seed SQLite | **I** | **I** | **C** | **A / R** |
+| Thu thập 100 Món Ăn, Tải Ảnh & Script Seed SQLite | **I** | **I** | **C** | **A / R** |
 | Kiểm thử chéo E2E trên PC & Mobile | **C** | **C** | **C** | **A / R** |
 | Chuẩn bị Kịch Bản Demo Ngày 5 | **R** | **R** | **R** | **A / R** |
 

@@ -191,21 +191,21 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
   - 1 món Ý (Mì Spaghetti Bolognese).
 - [ ] Tìm link ảnh độ nét cao trên Unsplash/Pexels cho 10 món này.
 
-#### Ngày 2: Thu Thập Đầy Đủ 40+ Món Ăn Phong Phú
-- [ ] Mở rộng danh sách lên **tối thiểu 40-50 món ăn hoàn chỉnh**:
-  - [ ] 15 món Việt Nam (bổ sung: Bún bò Huế, Gỏi cuốn, Canh chua cá, Bánh xèo, Bò kho...).
-  - [ ] 8 món Hàn Quốc (Tokbokki, Gà sốt cay cay chua, Miến xào Japchae, Thịt nướng Bulgogi...).
-  - [ ] 8 món Nhật Bản (Mì Udon bò, Cơm bò Gyudon, Trứng cuộn Tamagoyaki, Cơm lươn Unadon...).
-  - [ ] 8 món Thái Lan (Tom Yum Goong, Heo xào lá quế Pad Krapow, Gỏi đu đủ Som Tum...).
-  - [ ] 8 món Ý / Âu (Mì Ý sốt kem Carbonara, Pizza Margherita, Salad cá ngừ, Beefsteak sốt tiêu...).
-- [ ] Đảm bảo mỗi món có đủ: Định lượng nguyên liệu, 3-4 bước nấu chi tiết, mẹo đầu bếp và thông số calo/độ cay hợp lý.
+#### Ngày 2: Thu Thập & Chuẩn Hóa Đầy Đủ 100 Món Ăn Phong Phú
+- [x] Mở rộng danh sách lên **100 món ăn hoàn chỉnh** kèm link ảnh chất lượng cao:
+  - [x] 30 món Việt Nam (Phở, Cơm tấm, Bún chả, Bánh cuốn, Bún đậu, Bò kho, Thịt kho tàu...).
+  - [x] 20 món Hàn Quốc (Bibimbap, Tokbokki, Kimchi Jjigae, Samgyeopsal, Mì tương đen, Jjamppong...).
+  - [x] 18 món Nhật Bản (Ramen, Udon, Gyudon, Sushi cá hồi, Tonkatsu, Takoyaki, Tempura...).
+  - [x] 16 món Thái Lan (Pad Thai, Tom Yum, Pad Krapow, Som Tum, Cà ri xanh, Xôi xoài, Khao Soi...).
+  - [x] 16 món Ý / Âu (Bolognese, Carbonara, Pizza, Beefsteak, Lasagna, Risotto, Salad Caesar...).
+- [x] Đảm bảo mỗi món có đủ: Ảnh Unsplash độ nét cao, định lượng nguyên liệu, 3 bước nấu chi tiết 1-2-3, mẹo đầu bếp và thông số calo/độ cay hợp lý.
 
-#### Ngày 3: Tự Động Hóa Nạp Dữ Liệu Vào SQLite (Seed Script)
-- [ ] Viết script Python `backend/app/db/seed_sqlite.py`:
-  - [ ] Đọc file `dishes_seed.json`.
-  - [ ] Kết nối SQLite và nạp toàn bộ danh mục ẩm thực, món ăn, nguyên liệu, bước nấu vào CSDL.
-  - [ ] Tạo sẵn 1 tài khoản người dùng mẫu (`demo` / mật khẩu `123`).
-- [ ] Kiểm tra dữ liệu trong SQLite bằng công cụ trực quan **DB Browser for SQLite**.
+#### Ngày 3: Tự Động Hóa Nạp Dữ Liệu & Tải Ảnh Offline
+- [x] Viết script Python `backend/app/db/seed_sqlite.py`: Nạp toàn bộ 100 món ăn vào CSDL SQLite.
+- [x] Viết script Python `backend/app/db/download_images.py`: Hỗ trợ tải toàn bộ 100 ảnh về thư mục cục bộ phục vụ chạy offline.
+- [x] Viết script Python `backend/app/db/validate_data.py`: Kiểm tra 100/100 món hợp lệ 100%.
+- [x] Tạo sẵn 1 tài khoản người dùng mẫu (`demo` / mật khẩu `123`).
+- [x] Kiểm tra dữ liệu trong SQLite bằng công cụ trực quan **DB Browser for SQLite**.
 
 #### Ngày 4: Kiểm Thử Toàn Diện Trên PC & Mobile
 - [ ] Xây dựng bảng kịch bản kiểm thử (Test Matrix):

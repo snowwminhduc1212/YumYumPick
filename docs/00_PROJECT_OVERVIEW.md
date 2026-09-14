@@ -106,7 +106,7 @@ flowchart LR
 | Ngày | Backend Lead | Frontend Swipe Lead | Frontend Features Lead | Data & QA Specialist |
 |---|---|---|---|---|
 | **Ngày 1** | Setup FastAPI + SQLite, tạo bảng theo DDL, chốt API Contract. | Setup Vite + Tailwind, cấu hình Framer Motion. | Dựng Layout chung, thiết kế Navbar, Modal khung. | Soạn 10 món mẫu đầu tiên dạng JSON, chuẩn bị schema. |
-| **Ngày 2** | Viết API Auth (Login/Signup) + API Random/Filter món. | Làm component `SwipeCard` + hiệu ứng Stamp Like/Skip. | Làm Form Login/Signup + Modal Bộ lọc ẩm thực. | Thu thập đủ 40+ món ăn kèm ảnh Unsplash sắc nét. |
-| **Ngày 3** | Viết API Lưu/Xóa món đã quẹt vào SQLite. | Kết nối API Random thẻ, xử lý responsive khung thẻ. | Làm Drawer Giới thiệu món khi tap thẻ. | Viết script `seed_sqlite.py` nạp toàn bộ món vào DB. |
+| **Ngày 2** | Viết API Auth (Login/Signup) + API Random/Filter món. | Làm component `SwipeCard` + hiệu ứng Stamp Like/Skip. | Làm Form Login/Signup + Modal Bộ lọc ẩm thực. | Chuẩn hóa kho 100 món ăn kèm ảnh Unsplash sắc nét. |
+| **Ngày 3** | Viết API Lưu/Xóa món đã quẹt vào SQLite. | Kết nối API Random thẻ, xử lý responsive khung thẻ. | Làm Drawer Giới thiệu món khi tap thẻ. | Nạp 100 món vào SQLite (`seed_sqlite.py`). |
 | **Ngày 4** | Hỗ trợ API gộp nguyên liệu danh sách đi chợ. | Xử lý phím tắt PC (`←`, `→`, `Space`), tinh chỉnh touch mobile. | Làm Màn hình món đã lưu (checkbox công thức + copy list đi chợ). | Test chéo toàn trình (E2E), kiểm tra hiển thị ảnh và font. |
 | **Ngày 5** | Tối ưu truy vấn SQLite, kiểm tra an toàn dữ liệu. | Tinh chỉnh chuyển động 60 FPS, polish UI. | Sửa lỗi giao diện, hỗ trợ flow đăng nhập/đăng xuất. | Chạy kiểm thử trên điện thoại thật + Chuẩn bị kịch bản Demo. |

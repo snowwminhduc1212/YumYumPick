@@ -58,16 +58,17 @@
 
 - [x] **Quy chuẩn dữ liệu (Data Taxonomy & Schema):**
   - Đã định nghĩa file JSON chuẩn `backend/app/data/dishes_seed.json` gồm đầy đủ các trường: `id`, `name`, `english_name`, `cuisine`, `cook_time_minutes`, `prep_time_minutes`, `difficulty`, `spicy_level`, `calories_approx`, `image`, `short_description`, `ingredients` (name, amount, unit, category), `steps` (step_number, title, description), `tips`.
-- [x] **Thu thập & Chuẩn hóa dữ liệu 45 món ăn hoàn chỉnh (100% Sẵn Sàng):**
-  - [x] 15 món Việt Nam (Phở bò, Cơm tấm, Bún chả, Bánh mì chảo, Bún bò Huế, Gỏi cuốn, Canh chua, Bánh xèo, Bò kho, Chả giò, Cá kho tộ, Cơm chiên Dương Châu, Hủ tiếu Nam Vang, Bún riêu, Gà kho gừng).
-  - [x] 8 món Hàn Quốc (Bibimbap, Canh kim chi, Tokbokki, Thịt bò Bulgogi, Miến xào Japchae, Gà sốt cay Yangnyeom, Canh rong biển Miyeok-guk, Trứng hấp Gyeran-jjim).
-  - [x] 8 món Nhật Bản (Mì Ramen xá xíu, Cơm cà ri bò, Cơm bò Gyudon, Mì Udon bò, Trứng cuộn Tamagoyaki, Cơm lươn Unadon, Bánh xèo Okonomiyaki, Gà chiên Karaage).
-  - [x] 7 món Thái Lan (Pad Thai, Tom Yum Goong, Heo xào Pad Krapow, Gỏi đu đủ Som Tum, Cà ri xanh gà, Cơm chiên trái thơm, Súp gà Tom Kha Gai).
-  - [x] 7 món Âu / Ý (Mì Ý Bolognese, Carbonara, Pizza Margherita, Beefsteak sốt tiêu, Salad cá ngừ, Súp bí đỏ kem tươi, Mì Ý hải sản Pescatora).
-- [x] **Bộ công cụ tự động hóa & Kiểm tra dữ liệu:**
-  - [x] Script `backend/app/db/validate_data.py`: Kiểm tra 45/45 món hợp lệ 100%, 227 nguyên liệu, 135 bước chế biến.
-  - [x] Script `backend/app/db/seed_sqlite.py`: Tự động tạo bảng từ `schema.sql` và nạp toàn bộ 45 món ăn vào file `backend/yumyumpick.db` cùng tài khoản test (`demo` / `123`).
-  - [x] File CSDL `backend/yumyumpick.db` đã được khởi tạo và sẵn sàng sử dụng ngay!
+- [x] **Thu thập & Chuẩn hóa dữ liệu 100 món ăn hoàn chỉnh kèm ảnh (100% Sẵn Sàng):**
+  - [x] **30 món Việt Nam:** Phở bò, Cơm tấm sườn bì chả, Bún chả, Bánh mì chảo, Bún bò Huế, Gỏi cuốn, Canh chua cá lóc, Bánh xèo, Bò kho, Chả giò, Cá kho tộ, Cơm chiên Dương Châu, Hủ tiếu Nam Vang, Bún riêu, Gà kho gừng, Bánh cuốn nóng, Mì Quảng, Bún đậu mắm tôm, Thịt kho tàu hột vịt, Canh khổ qua nhồi thịt, Sườn xào chua ngọt, Bánh canh cua, Lẩu Thái hải sản, Bánh canh chả cá Nha Trang, Nem nướng Nha Trang, Cháo sườn quẩy giòn, Bò lúc lắc, Cơm gà Hội An, Vịt nấu chao, Xôi xéo ruốc gà.
+  - [x] **20 món Hàn Quốc:** Cơm trộn Bibimbap, Canh kim chi, Tokbokki, Bò Bulgogi, Miến xào Japchae, Gà sốt cay Yangnyeom, Canh rong biển, Trứng hấp thố, Thịt nướng Samgyeopsal, Mì tương đen Jajangmyeon, Mì cay Jjamppong, Canh sườn bò Galbitang, Bánh xèo kim chi, Canh đậu non Sundubu, Cơm cuộn Kimbap, Gà hầm sâm Samgyetang, Lẩu quân đội Budae Jjigae, Chả cá xiên Eomuk, Cơm chiên kim chi, Mì lạnh Naengmyeon.
+  - [x] **18 món Nhật Bản:** Mì Ramen xá xíu, Cơm cà ri bò, Cơm bò Gyudon, Mì Udon bò Teriyaki, Trứng cuộn Tamagoyaki, Cơm lươn Unadon, Bánh xèo Okonomiyaki, Gà chiên Karaage, Thịt heo chiên xù Tonkatsu, Cơm gà trứng Oyakodon, Sushi cá hồi bơ, Mì Soba lạnh, Bánh bạch tuộc Takoyaki, Mì Udon nước Niku Udon, Há cảo Gyoza, Tôm chiên xù Tempura, Súp Miso đậu hũ, Bò nướng Teriyaki.
+  - [x] **16 món Thái Lan:** Pad Thai tôm, Tom Yum Goong, Heo băm Pad Krapow, Gỏi đu đủ Som Tum, Cà ri xanh gà, Cơm chiên trái thơm, Súp gà Tom Kha Gai, Xôi xoài cốt dừa, Cà ri đỏ vịt quay, Cà ri Massaman bò, Mì cà ri giòn Khao Soi, Cá chẽm hấp chanh ớt, Gỏi miến Yum Woon Sen, Thịt xiên nướng Moo Ping, Cua xào cà ri trứng, Canh sườn cay núi lửa Laeng Saeb.
+  - [x] **16 món Ý / Âu:** Mì Ý Bolognese, Carbonara, Pizza Margherita, Beefsteak sốt tiêu, Salad cá ngừ, Súp bí đỏ kem tươi, Mì Ý hải sản Pescatora, Pizza hải sản sốt Pesto, Cơm Ý Risotto nấm Truffle, Mì ống cay Arrabbiata, Lasagna bò phô mai, Súp hành tây Pháp, Gà áp chảo bơ chanh Piccata, Sandwich gà nướng Panini, Salad Caesar gà nướng, Cánh gà nướng mật ong Rosemary.
+- [x] **Dữ Liệu & Hình Ảnh Sẵn Sàng (Ready-to-use - Không Giữ Code File Thừa):**
+  - [x] **CSDL SQLite nạp sẵn:** `backend/yumyumpick.db` (100 món, 495 nguyên liệu, 300 bước nấu, user test `demo`/`123`).
+  - [x] **Kho 100 ảnh offline:** `backend/images/dishes/<id>.jpg` (tổng ~15MB, đường dẫn cục bộ `/images/dishes/...`).
+  - [x] **File dữ liệu JSON chuẩn:** `backend/app/data/dishes_seed.json`.
+  - [x] **Loại bỏ toàn bộ code phụ trợ:** Đã xóa toàn bộ script helper (`download_images.py`, `seed_sqlite.py`, `validate_data.py`, `schema.sql`) để repository tinh giản 100%, chỉ giữ DB và Images phục vụ các thành viên code theo kế hoạch 5 ngày.
 
 ---
 

@@ -1,4 +1,4 @@
-# 📋 06. Lộ Trình Triển Khai 5 Ngày & TODO Chi Tiết Từng Thành Viên
+# 06. Lộ Trình Triển Khai 5 Ngày & TODO Chi Tiết Từng Thành Viên
 
 Tài liệu này vạch ra lộ trình phát triển cấp tốc trong **5 Ngày (Crash Sprint)** với phương pháp làm việc song song (Parallel Workstreams), kèm danh sách đầu việc chi tiết từng ngày được chỉ định đích danh cho **6 thành viên** của dự án **YumYumPick**.
 
@@ -12,47 +12,47 @@ gantt
     dateFormat  YYYY-MM-DD
     axisFormat  Ngày %d
     
-    section 👑 Minh Đức (Lead, Data, QA)
+    section Minh Đức (Lead, Data, QA)
     Chốt API Contract & Điều phối Sync        :done, md_1, 2026-09-15, 1d
     Đã chuẩn bị 100 món, 100 ảnh & SQLite DB  :done, md_2, 2026-09-15, 1d
     Xây dựng Test Matrix kiểm thử             :active, md_3, 2026-09-17, 1d
     Kiểm thử chéo PC & Mobile qua LAN         :md_4, 2026-09-18, 1d
     Nghiệm thu toàn diện & Tổng duyệt Demo    :md_5, 2026-09-19, 1d
 
-    section ⚙️ Ánh Dương (Backend 1: Core & Auth)
+    section Ánh Dương (Backend 1: Core & Auth)
     Setup FastAPI, CORS & Mount Static /images:active, ad_1, 2026-09-15, 1d
     Kết nối SQLite DB & Tạo Mock API JSON     :active, ad_2, 2026-09-15, 1d
     API Simple Signup & Login (SQLite)        :ad_3, 2026-09-16, 1d
     Hỗ trợ ghép nối Auth với Frontend         :ad_4, 2026-09-17, 1d
     Kiểm thử hiệu năng & Backup CSDL          :ad_5, 2026-09-19, 1d
 
-    section ⚙️ Đăng Huy (Backend 2: Dishes & Saved)
+    section Đăng Huy (Backend 2: Dishes & Saved)
     Xây dựng ORM query Dishes từ SQLite       :active, dh_1, 2026-09-15, 1d
     API Random Dishes & Bộ lọc thông minh     :dh_2, 2026-09-16, 1d
     API Saved Dishes (Lưu, Lấy, Xóa món)      :dh_3, 2026-09-17, 1d
     API Metadata Filters & Tối ưu Index SQLite:dh_4, 2026-09-18, 1d
     Hoàn thiện Swagger Docs tại /docs         :dh_5, 2026-09-19, 1d
 
-    section 🎨 Quang Huy (Frontend 1: Swipe Deck)
+    section Quang Huy (Frontend 1: Swipe Deck)
     Setup Vite, Tailwind & Framer Motion      :active, qh_1, 2026-09-15, 1d
     SwipeCard, CardStack, Stamp YUMMY/NOPE    :qh_2, 2026-09-16, 1d
     Tích hợp API Random & Lưu SQLite          :qh_3, 2026-09-17, 1d
     Responsive PC (Phím tắt) & Mobile (Touch) :qh_4, 2026-09-18, 1d
     Tối ưu chuyển động 60 FPS & Hiệu ứng      :qh_5, 2026-09-19, 1d
 
-    section 📱 Tùng Dương (Frontend 2: UI & Features)
-    Layout chung, Navbar & Cấu trúc State     :active, td_1, 2026-09-15, 1d
-    Auth Modal (LocalStorage) & Filter Modal  :td_2, 2026-09-16, 1d
-    Tích hợp Auth & Filter API                :td_3, 2026-09-17, 1d
-    Liked Dishes & Xem Chi Tiết Công Thức     :td_4, 2026-09-18, 1d
+    section Tùng Dương (Frontend 2: Liked & Recipe)
+    Khởi tạo LikedDishes & DishDetailModal    :active, td_1, 2026-09-15, 1d
+    Giao diện danh sách món đã thích (Grid)   :td_2, 2026-09-16, 1d
+    Tích hợp API Saved Dishes & Nút xóa       :td_3, 2026-09-17, 1d
+    DishDetailModal & Checkbox nguyên liệu    :td_4, 2026-09-18, 1d
     Fix bug tương tác & Hoàn thiện UI         :td_5, 2026-09-19, 1d
 
-    section 📊 Luân (Pitching & Slide Presentation)
-    Nghiên cứu yêu cầu & Lên dàn ý Slide      :active, l_1, 2026-09-15, 1d
-    Thiết kế Slide PowerPoint (Theme ẩm thực) :l_2, 2026-09-16, 1d
-    Viết Kịch bản Thuyết trình & Storytelling :l_3, 2026-09-17, 1d
-    Xây dựng Kịch bản Live Demo & Video dự phòng:l_4, 2026-09-18, 1d
-    Tập dượt thuyết trình & Q&A phản biện     :l_5, 2026-09-19, 1d
+    section Luân (Frontend 3 & Pitching Lead)
+    Navbar Header + Dàn ý Slide báo cáo       :active, l_1, 2026-09-15, 1d
+    FilterModal, AuthModal + Slide Theme ẩm thực:l_2, 2026-09-16, 1d
+    Ghép nối API Filter/Auth + Slide kỹ thuật :l_3, 2026-09-17, 1d
+    Kịch bản Thuyết trình + Video demo dự phòng:l_4, 2026-09-18, 1d
+    Tập dượt Live Demo & Q&A phản biện        :l_5, 2026-09-19, 1d
 ```
 
 ---
@@ -72,7 +72,7 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 
 ---
 
-### 👑 1. Minh Đức — Project Lead, Quản Trị Data & Kiểm Định (QA Lead)
+### 1. Minh Đức — Project Lead, Quản Trị Data & Kiểm Định (QA Lead)
 
 #### Ngày 1: Chốt Kế Hoạch & Đồng Bộ Dữ Liệu
 - [x] Soạn thảo toàn bộ hồ sơ kiến trúc, tài liệu đặc tả và phân công vai trò 6 người.
@@ -108,7 +108,7 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 
 ---
 
-### ⚙️ 2. Ánh Dương — Backend Engineer 1 (Server Core & Simple Auth)
+### 2. Ánh Dương — Backend Engineer 1 (Server Core & Simple Auth)
 
 #### Ngày 1: Setup Dự Án FastAPI & Mount Static Files
 - [ ] Tạo môi trường ảo Python (`python -m venv venv`), cài đặt `fastapi`, `uvicorn`, `sqlalchemy`.
@@ -143,7 +143,7 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 
 ---
 
-### ⚙️ 3. Đăng Huy — Backend Engineer 2 (Dishes & Saved Recipes API)
+### 3. Đăng Huy — Backend Engineer 2 (Dishes & Saved Recipes API)
 
 #### Ngày 1: Khởi Tạo ORM Models Cho Dishes & Recipes
 - [ ] Tạo các SQLAlchemy Models khớp với cấu trúc bảng SQLite:
@@ -183,7 +183,7 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 
 ---
 
-### 🎨 4. Quang Huy — Frontend Engineer 1 (Swipe Deck & Responsive Experience)
+### 4. Quang Huy — Frontend Engineer 1 (Swipe Deck & Responsive Experience)
 
 #### Ngày 1: Setup Dự Án Vite & Cài Đặt Framer Motion
 - [ ] Khởi tạo dự án React bằng Vite: `npm create vite@latest frontend -- --template react`.
@@ -207,8 +207,8 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 - [ ] Khi quẹt phải (LIKE): Tự động gọi API `POST /api/v1/saved-dishes` để ghi nhận vào CSDL SQLite.
 - [ ] Khi quẹt trái (SKIP): Bỏ qua và thêm ID vào danh sách đã xem để không lặp lại.
 - [ ] Xây dựng cụm nút điều khiển nổi phía dưới:
-  - Nút ❌ Bỏ qua.
-  - Nút ❤️ Thích & Lưu.
+  - Nút Bỏ qua (SKIP).
+  - Nút Thích & Lưu (LIKE).
 
 #### Ngày 4: Bố Cục Responsive Chuẩn PC & Mobile
 - [ ] **Tối ưu chế độ Desktop PC:**
@@ -227,96 +227,85 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 
 ---
 
-### 📱 5. Tùng Dương — Frontend Engineer 2 (Modals, Recipes & Liked Dishes)
+### 5. Tùng Dương — Frontend Engineer 2 (Liked Dishes & Detail Recipe View)
 
-#### Ngày 1: Xây Dựng Khung Layout & Thanh Điều Hướng (Navbar)
-- [ ] Xây dựng Header/Navbar trên cùng:
-  - Logo thương hiệu **YumYumPick** (icon nổi bật).
-  - Nút Lọc món ăn (mở Filter Modal).
-  - Nút Món đã lưu kèm badge đếm số món (mở Saved Dishes).
-  - Nút Tài khoản người dùng (mở Auth Modal).
-- [ ] Xây dựng state quản lý phiên người dùng từ `localStorage` (key `yumyum_user`).
+#### Ngày 1: Setup Khung Component Món Đã Lưu & Chi Tiết Công Thức
+- [ ] Khởi tạo thư mục và file component: `LikedDishesView.jsx` và `DishDetailModal.jsx`.
+- [ ] Định nghĩa cấu trúc dữ liệu hiển thị (Dish Title, Image, Badges, Ingredients, Steps, Tips) dựa trên Mock JSON của Backend.
+- [ ] Phối hợp với Luân để thống nhất điểm gắn kết (trigger) mở LikedDishesView từ nút Trái Tim trên Header.
 
-#### Ngày 2: Xây Dựng Auth Modal & Filter Modal
-- [ ] Xây dựng component `AuthModal.jsx`:
-  - Tab Đăng Nhập: Input username, password, nút "Đăng Nhập".
-  - Tab Đăng Ký: Input username, password, họ tên, nút "Đăng Ký".
-  - Kết nối với API của Ánh Dương; lưu thông tin user vào `localStorage`.
-  - Hiển thị tên người dùng và nút "Đăng Xuất" khi đã đăng nhập.
-- [ ] Xây dựng component `FilterModal.jsx`:
-  - Chọn quốc gia: Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý.
-  - Chọn độ cay: 0 (Không cay), 1 (Nhẹ), 2 (Vừa), 3 (Nồng).
-  - Chọn thời gian: <20 phút, 20-45 phút, Mọi thời gian.
-  - Nút "Áp dụng": Kích hoạt tải lại danh sách thẻ quẹt tương ứng.
-
-#### Ngày 3: Tích Hợp Auth Modal & Filter Modal Với API
-- [ ] Ghép nối `AuthModal.jsx` với API của Ánh Dương:
-  - Đăng ký tài khoản mới $\rightarrow$ Lưu thông tin `{ user_id, username }` vào `localStorage`.
-  - Đăng nhập tài khoản $\rightarrow$ Khôi phục phiên làm việc và hiển thị tên người dùng trên Navbar.
-  - Xử lý thông báo lỗi nhẹ nhàng nếu sai mật khẩu hoặc trùng tài khoản.
-- [ ] Ghép nối `FilterModal.jsx` với API của Đăng Huy:
-  - Truyền các tham số `cuisine`, `spicy_level`, `max_cook_time` vào hàm gọi thẻ quẹt.
-  - Kiểm tra xem khi bấm "Áp dụng", bộ thẻ quẹt của Quang Huy có tải đúng món theo bộ lọc không.
-
-#### Ngày 4: Màn Hình Món Đã Thích & Xem Chi Tiết Công Thức
+#### Ngày 2: Xây Dựng Giao Diện Danh Sách Món Đã Thích
 - [ ] Xây dựng component `LikedDishesView.jsx`:
-  - Lấy danh sách món đã lưu từ API `GET /api/v1/saved-dishes/{user_id}` của Đăng Huy.
-  - Danh sách thẻ món ăn dạng lưới/cuộn đơn giản, hiển thị ảnh nhỏ, tên món, quốc gia, thời gian nấu.
-  - Nút biểu tượng thùng rác (🗑️): Bấm vào gọi API `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` để bỏ thích món.
-- [ ] Xây dựng component `DishDetailModal.jsx`:
-  - Bấm vào bất kỳ món nào trong danh sách đã thích $\rightarrow$ Mở popup xem chi tiết công thức nấu ăn.
-  - Hiển thị ảnh lớn, tên món và đoạn giới thiệu câu chuyện món ăn (`short_description`).
-  - **Danh sách nguyên liệu kèm Checkbox tương tác `[ ]`:** Mỗi dòng nguyên liệu có ô checkbox cho phép người dùng click tích chọn đánh dấu nguyên liệu đã mua/đã chuẩn bị trong bếp.
-  - Hiển thị 3 bước nấu chi tiết (Sơ chế $\rightarrow$ Nấu $\rightarrow$ Bày biện) và khung mẹo đầu bếp (`tips`).
+  - Hiển thị danh sách các món ăn đã thích dưới dạng lưới (Grid) hoặc danh sách thẻ trực quan.
+  - Mỗi item gồm: Ảnh thu nhỏ sắc nét, tên món (Việt/Anh), quốc gia, thời gian chế biến.
+  - Nút biểu tượng thùng rác: Thao tác xóa/bỏ thích món ăn khỏi danh sách.
+  - Xử lý trạng thái trống (Empty State): *"Bạn chưa lưu món ăn nào. Hãy quẹt phải để thêm món nhé!"*.
+
+#### Ngày 3: Tích Hợp API Saved Dishes Với Backend
+- [ ] Ghép nối `LikedDishesView.jsx` với API của Đăng Huy:
+  - Gọi `GET /api/v1/saved-dishes/{user_id}` để tải danh sách món đã lưu vào SQLite.
+  - Gọi `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` khi bấm nút thùng rác để cập nhật CSDL SQLite tức thì.
+  - Cập nhật số đếm badge hiển thị trên Header (phối hợp với Luân).
+
+#### Ngày 4: Hoàn Thiện Modal Chi Tiết Công Thức & Checkbox Nguyên Liệu
+- [ ] Xây dựng hoàn thiện component `DishDetailModal.jsx`:
+  - Bấm vào bất kỳ món nào trong danh sách đã thích $\rightarrow$ Mở modal chi tiết công thức nấu ăn.
+  - **Header:** Ảnh lớn sắc nét, tên món (Việt/Anh), badges thông số và đoạn giới thiệu ngắn (`short_description`).
+  - **Danh sách nguyên liệu kèm Checkbox tương tác `[ ]`:**
+    - Mỗi dòng nguyên liệu có ô checkbox cho phép người dùng click/chạm để tích chọn đánh dấu nguyên liệu đã mua/đã chuẩn bị trong bếp (gạch ngang chữ mờ nhẹ).
+  - **Hướng dẫn chế biến chuẩn 3 bước:** Bước 1 (Sơ chế) $\rightarrow$ Bước 2 (Nấu/chế biến) $\rightarrow$ Bước 3 (Trình bày & thưởng thức).
+  - **Khung Mẹo đầu bếp (`tips`):** Hộp viền vàng nổi bật chia sẻ bí quyết nấu ngon.
 
 #### Ngày 5: Kiểm Thử Giao Diện & Tinh Chỉnh Cuối Cùng
-- [ ] Kiểm tra các tình huống biên: Danh sách món đã lưu trống, người dùng chưa đăng nhập.
+- [ ] Kiểm tra responsive trên cả màn hình Mobile và Desktop PC.
 - [ ] Sửa chữa các lỗi vỡ layout hoặc hiển thị không đẹp do Minh Đức báo cáo.
 - [ ] Tham gia tổng duyệt Demo.
 
 ---
 
-### 📊 6. Luân — Pitching Lead (Slide PowerPoint, Kịch Bản & Demo Story)
+### 6. Luân — Frontend Engineer 3 & Pitching Lead (App Shell, Filter, Auth & Presentation)
 
-#### Ngày 1: Nghiên Cứu Đề Tài & Lên Dàn Ý Bài Báo Cáo
-- [ ] Đọc và hiểu toàn bộ ý tưởng sản phẩm, đối tượng người dùng mục tiêu và bài toán cần giải quyết.
-- [ ] Lập dàn ý cấu trúc bộ Slide thuyết trình gồm 12 - 15 slide chuẩn học thuật kết hợp thực tiễn:
-  1. Slide Bìa & Thành viên nhóm (6 người).
-  2. Bối cảnh & Vấn đề nhức nhối: "Hôm nay ăn gì?" và nghịch lý của sự lựa chọn.
-  3. Giải pháp YumYumPick: "Tinder cho ẩm thực".
-  4. Trải nghiệm người dùng: Cơ chế quẹt thẻ trực giác & Responsive PC/Mobile.
-  5. Bộ tính năng tinh gọn: Quẹt thẻ Tinder, Bộ lọc sơ bộ & Xem công thức chi tiết.
-  6. Kiến trúc hệ thống: Client-Server độc lập, CSDL SQLite cục bộ, 100% Offline.
-  7. Dữ liệu chuẩn bị: 100 món ăn 5 quốc gia, 100 ảnh offline, 495 nguyên liệu.
-  8. Lộ trình triển khai 5 ngày & Phân công vai trò RACI.
-  9. Trình diễn sản phẩm trực tiếp (Live Demo).
-  10. Bài học kinh nghiệm & Tiềm năng phát triển.
-  11. Lời cảm ơn & Phiên hỏi đáp (Q&A).
+#### Ngày 1: Khung Layout Chung, Navbar & Dàn Ý Báo Cáo
+- [ ] **Frontend Core:**
+  - Xây dựng Header/Navbar trên cùng:
+    - Logo thương hiệu **YumYumPick**.
+    - Nút Lọc món ăn mở Filter Modal.
+    - Nút Món đã lưu kèm badge đếm số món (mở Liked Dishes).
+    - Nút Tài khoản người dùng (mở Auth Modal).
+  - Xây dựng state quản lý phiên người dùng từ `localStorage` (key `yumyum_user`).
+- [ ] **Pitching & Slide:**
+  - Lập dàn ý cấu trúc bộ Slide thuyết trình gồm 12 - 15 slide chuẩn học thuật kết hợp thực tiễn (Bối cảnh, Giải pháp, Trải nghiệm Tinder, Kiến trúc SQLite 100% Offline, Demo, Q&A).
 
-#### Ngày 2: Thiết Kế Slide PowerPoint Chuyên Nghiệp
-- [ ] Lựa chọn mẫu thiết kế (Template) hiện đại với gam màu ẩm thực ấm áp (Cam, Đỏ, Trắng kem).
-- [ ] Thiết kế các slide từ 1 đến 5: Đưa hình ảnh món ăn thực tế từ kho ảnh của Minh Đức vào slide để tạo sự hấp dẫn thị giác.
-- [ ] Tạo các sơ đồ trực quan (Icons, Infographics) mô tả cơ chế quẹt thẻ trái/phải.
+#### Ngày 2: Xây Dựng Filter Modal, Auth Modal & Slide Nhận Diện Ẩm Thực
+- [ ] **Frontend Core:**
+  - Xây dựng component `FilterModal.jsx`:
+    - Chọn quốc gia: Tất cả, Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý.
+    - Chọn độ cay: 0 (Không cay), 1-3 (Có cay).
+    - Chọn thời gian nấu: <20 phút, >=20 phút, Mọi thời gian.
+    - Nút "Áp dụng" và nút "Đặt lại".
+  - Xây dựng component `AuthModal.jsx`:
+    - Tab Đăng Nhập: Input username, password, nút "Đăng Nhập".
+    - Tab Đăng Ký: Input username, password, họ tên, nút "Đăng Ký".
+- [ ] **Pitching & Slide:**
+  - Thiết kế các slide từ 1 đến 5: Chọn template hiện đại với gam màu cam-đỏ ẩm thực, đưa kho ảnh thực tế vào slide tạo ấn tượng thị giác.
 
-#### Ngày 3: Hoàn Thiện Slide Kiến Trúc Kỹ Thuật & Dữ Liệu
-- [ ] Thiết kế các slide từ 6 đến 10:
-  - Minh họa kiến trúc FastAPI + SQLite gọn nhẹ, chạy 100% Offline.
-  - Bảng thống kê kho dữ liệu: 100 món, 495 nguyên liệu, 300 bước nấu ăn.
-  - Bảng phân công vai trò 6 người rõ ràng, minh bạch.
-- [ ] Lấy ảnh chụp giao diện thực tế (Screenshots) từ Quang Huy & Tùng Dương đưa vào slide.
+#### Ngày 3: Ghép Nối API Filter/Auth & Hoàn Thiện Slide Kỹ Thuật
+- [ ] **Frontend Core:**
+  - Ghép nối `AuthModal.jsx` với Simple Auth API của Ánh Dương; kiểm tra tự khôi phục phiên đăng nhập khi F5 trang.
+  - Ghép nối `FilterModal.jsx` với Dishes API của Đăng Huy; kiểm tra kích hoạt bộ thẻ quẹt của Quang Huy tải lại đúng danh sách món đã lọc.
+- [ ] **Pitching & Slide:**
+  - Thiết kế các slide từ 6 đến 10: Sơ đồ kiến trúc FastAPI + SQLite cục bộ, phân bổ kho 100 món ăn và phân công vai trò trong nhóm.
+  - Lấy ảnh chụp màn hình giao diện thực tế từ Quang Huy & Tùng Dương đưa vào slide.
 
-#### Ngày 4: Soạn Kịch Bản Thuyết Trình & Chuẩn Bị Live Demo
-- [ ] Soạn tài liệu **Kịch Bản Thuyết Trình Chi Tiết (Word/PDF)** chia thời lượng từng phần (Tổng thời gian trình bày: 10 - 12 phút).
-- [ ] Xây dựng cốt truyện thuyết trình (Storytelling) lôi cuốn, tự nhiên, không đọc máy móc:
-  - Mở đầu bằng tình huống đời thường gần gũi.
-  - Dẫn dắt người nghe trải nghiệm tính năng quẹt thẻ.
-- [ ] Lập kịch bản Live Demo chi tiết từng bước: Ai bấm gì, màn hình chiếu gì, nói câu gì.
-- [ ] Phối hợp với Minh Đức quay 1 video màn hình dự phòng (Backup Demo Video phòng khi máy chiếu/mạng gặp sự cố).
+#### Ngày 4: Tinh Chỉnh Giao Diện, Kịch Bản Thuyết Trình & Chuẩn Bị Demo
+- [ ] **Frontend Core:**
+  - Tinh chỉnh giao diện Navbar, Filter Modal và Auth Modal đảm bảo chuẩn đẹp trên cả PC và Mobile.
+- [ ] **Pitching & Slide:**
+  - Soạn tài liệu **Kịch Bản Thuyết Trình Chi Tiết (10 - 12 phút)** với phong cách dẫn dắt lôi cuốn, tự nhiên.
+  - Lập kịch bản Live Demo chi tiết từng bước: Ai bấm gì, màn hình chiếu gì, nói câu gì.
+  - Phối hợp với Minh Đức quay 1 video màn hình dự phòng (Backup Demo Video).
 
 #### Ngày 5: Tổng Duyệt & Chuẩn Bị Phản Biện (Q&A Cheat Sheet)
-- [ ] Soạn bộ câu hỏi phản biện tiềm năng của hội đồng/giảng viên và câu trả lời gợi ý:
-  - *Tại sao chọn SQLite thay vì PostgreSQL/MySQL?* (Gọn nhẹ, không cần setup server rườm rà, phù hợp ứng dụng cá nhân/gia đình, chạy offline mượt mà).
-  - *Làm sao xử lý khi có hàng ngàn món ăn?* (Đã đánh Index trên trường `cuisine_id`, `cook_time_minutes`, dễ dàng mở rộng).
-  - *Tại sao ứng dụng lại tối giản không thêm nhiều tính năng phụ?* (Tập trung tối đa vào trải nghiệm quẹt thẻ mượt mà, giải quyết dứt điểm nỗi đau "Hôm nay ăn gì?" trong 30 giây thay vì làm người dùng phân tâm).
+- [ ] Soạn bộ câu hỏi phản biện tiềm năng của hội đồng/giảng viên và câu trả lời gợi ý (về kiến trúc SQLite, tối ưu hiệu năng, lý do tối giản tính năng).
 - [ ] Cùng cả nhóm chạy thử nghiệm thuyết trình và Live Demo 2 lần trước giờ G.
 - [ ] Tự tin đại diện nhóm tỏa sáng trong buổi báo cáo đồ án!

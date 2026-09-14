@@ -1,121 +1,172 @@
-# 👥 04. Team Roles, Responsibilities & RACI Matrix (Kế Hoạch Song Song 5 Ngày)
+# 👥 04. Phân Công Vai Trò Thành Viên & Ma Trận RACI (Team Roles & RACI Matrix)
 
-Để đảm bảo dự án **YumYumPick** hoàn thành đúng tiến độ trong vòng **5 ngày**, khối lượng công việc được chia thành các module độc lập (Decoupled Modules) để các thành viên có thể **làm việc song song 100% mà không bị phụ thuộc (block) lẫn nhau**.
+Để đảm bảo dự án **YumYumPick** hoàn thành xuất sắc trong vòng **5 ngày**, toàn bộ đội ngũ gồm **6 thành viên** được chỉ định vai trò chuyên biệt, rõ ràng và làm việc song song 100% không phụ thuộc (block) lẫn nhau.
 
 ---
 
-## 1. Cơ Cấu Đội Ngũ & Phân Công Song Song
+## 1. Sơ Đồ Tổ Chức & Cơ Cấu Đội Ngũ (Team Structure)
 
 ```mermaid
 flowchart TD
-    Lead["🎯 Tech Lead & Điều Phối Kế Hoạch 5 Ngày"]
+    Lead["👑 MINH ĐỨC\nProject Lead • Điều Phối Chung\nQuản Trị Data • Kiểm Định Chất Lượng (QA)"]
 
-    subgraph GuildFE["🎨 Nhóm Frontend (Song Song)"]
-        FE1["Thành viên 1: Frontend Swipe & Responsive\n(Framer Motion Deck, Phím tắt PC, Touch Mobile)"]
-        FE2["Thành viên 2: Frontend Features & Auth\n(Auth Modal, Filter, Recipe Drawer, Grocery List)"]
+    subgraph GuildBE["⚙️ NHÓM BACKEND (FastAPI & SQLite)"]
+        BE1["💻 ÁNH DƯƠNG\nFastAPI Server • SQLite Connection\nSimple Auth • CORS & Static Files"]
+        BE2["💻 ĐĂNG HUY\nDishes Random & Filter API\nSaved Dishes API • Tối Ưu Truy Vấn"]
     end
 
-    subgraph GuildBE["⚙️ Nhóm Backend & Data (Song Song)"]
-        BE["Thành viên 3: Backend & SQLite Engineer\n(FastAPI, SQLite ORM, Simple Auth & Endpoints)"]
-        DATA["Thành viên 4: Data Specialist & QA Tester\n(Thu thập 40+ món JSON, Seed Script, Test PC/Mob)"]
+    subgraph GuildFE["🎨 NHÓM FRONTEND (React, Tailwind, Framer Motion)"]
+        FE1["📱 QUANG HUY\nFramer Motion Swipe Deck\nStamp YUMMY/NOPE • Responsive PC & Mobile"]
+        FE2["📱 TÙNG DƯƠNG\nAuth Modal • Filter Modal\nLiked Dishes & Detail Recipe View"]
     end
 
-    Lead --- FE1
-    Lead --- FE2
-    Lead --- BE
-    Lead --- DATA
+    subgraph GuildPitch["🎤 NHÓM TRUYỀN THÔNG & THUYẾT TRÌNH"]
+        PITCH["📊 LUÂN\nThiết Kế Slide PowerPoint\nKịch Bản Thuyết Trình • Demo Story"]
+    end
 
-    FE1 <-->|Thống nhất layout| FE2
-    FE2 <-->|Dùng Mock API từ Ngày 1| BE
-    BE <-->|Cung cấp SQLite file| DATA
+    Lead --- GuildBE
+    Lead --- GuildFE
+    Lead --- GuildPitch
+
+    BE1 <-->|Phối hợp Module API| BE2
+    FE1 <-->|Ghép Khung Giao Diện| FE2
+    GuildBE <-->|Khớp API Contract| GuildFE
+    Lead <-->|Cung cấp Video & Số Liệu Demo| PITCH
 ```
 
 ---
 
-## 2. Mô Tả Chi Tiết Từng Vai Trò (Job Descriptions)
+## 2. Bảng Mô Tả Chi Tiết Nhiệm Vụ Từng Thành Viên
 
-### 🎨 Thành viên 1: Frontend Swipe & Responsive Lead
-- **Sứ mệnh:** Đảm bảo trải nghiệm "quẹt thẻ" đạt độ mượt mà 60 FPS và giao diện hiển thị chuẩn đẹp trên cả điện thoại lẫn máy tính.
-- **Nhiệm vụ chính:**
-  - Khởi tạo khung dự án React (Vite + Tailwind CSS + Framer Motion).
-  - Xây dựng component `SwipeCard.jsx` và `CardStack.jsx`:
-    - Tính toán vật lý kéo thả, góc xoay nghiêng thẻ, lực nảy spring khi thả tay.
-    - Hiệu ứng Stamp đóng dấu nổi: "YUMMY!" màu xanh và "NOPE" màu đỏ.
-  - Xử lý tương thích đa nền tảng (Responsive):
-    - Trên Mobile: vuốt chạm cảm ứng (touch gestures), nút nổi tầm với ngón tay.
-    - Trên Desktop PC: khung thẻ căn giữa đẹp mắt, bắt sự kiện phím mũi tên bàn phím (`←` Skip, `→` Like, `Space` Info).
-  - Ghép API lấy danh sách thẻ ngẫu nhiên khi Backend hoàn thành.
-
-### 📱 Thành viên 2: Frontend Features & Auth Developer
-- **Sứ mệnh:** Xây dựng toàn bộ các màn hình chức năng, giao diện đăng nhập/đăng ký đơn giản và bộ công cụ xem công thức/đi chợ.
-- **Nhiệm vụ chính:**
-  - Xây dựng component `AuthModal.jsx`: Form Đăng ký & Đăng nhập đơn giản (chỉ cần username & password, lưu session vào `localStorage`).
-  - Xây dựng component `FilterModal.jsx`: Bộ lọc quốc gia, độ cay, thời gian chế biến.
-  - Xây dựng component `DishIntroDrawer.jsx`: Drawer bật lên khi tap nhẹ vào thẻ để xem thông tin nhanh trước khi quẹt.
-  - Xây dựng component `SavedDishesModal.jsx` & `FullRecipeView.jsx`:
-    - Danh sách các món người dùng đã quẹt phải.
-    - Xem công thức chi tiết: Danh sách nguyên liệu kèm **Checkbox tương tác** (tiện đi chợ/kiểm tra tủ lạnh), các bước nấu 1-2-3 và mẹo đầu bếp.
-  - Xây dựng tính năng `Smart Grocery List`: Nút tự động tổng hợp nguyên liệu và nút Copy gửi qua Zalo.
-
-### ⚙️ Thành viên 3: Backend & SQLite Engineer
-- **Sứ mệnh:** Xây dựng hệ thống API siêu tốc với FastAPI và CSDL SQLite cục bộ gọn nhẹ.
-- **Nhiệm vụ chính:**
-  - Setup dự án FastAPI, cấu hình CORS cho phép gọi từ Frontend Localhost.
-  - Thiết kế và khởi tạo CSDL SQLite (`yumyumpick.db`) qua SQLAlchemy.
-  - Xây dựng module **Simple Auth**:
-    - `POST /api/v1/auth/signup`: Tạo tài khoản mới.
-    - `POST /api/v1/auth/login`: Xác thực đăng nhập đơn giản.
-  - Xây dựng module **Dishes API**:
-    - `GET /api/v1/dishes/random`: Lấy ngẫu nhiên món ăn có hỗ trợ bộ lọc và loại trừ món đã xem.
-    - `GET /api/v1/dishes/{dish_id}`: Lấy chi tiết công thức.
-  - Xây dựng module **Saved Dishes API**:
-    - `POST /api/v1/saved-dishes`: Lưu món khi quẹt phải.
-    - `GET /api/v1/saved-dishes/{user_id}`: Lấy danh sách món đã lưu.
-    - `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`: Xóa món khỏi bộ sưu tập.
-  - Cung cấp file **Mock API Data (JSON)** ngay ngày đầu tiên để Frontend không phải chờ đợi.
-
-### 🍱 Thành viên 4: Data Specialist & QA Tester
-- **Sứ mệnh:** Chuẩn bị kho dữ liệu ẩm thực phong phú, chất lượng cao và kiểm soát chất lượng sản phẩm trên mọi thiết bị.
-- **Nhiệm vụ chính:**
-  - **Chuẩn bị dữ liệu (Data Curation):**
-    - Thu thập đầy đủ 100 món ăn chuẩn thuộc 5 nền ẩm thực (Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý).
-    - Tìm kiếm và chọn lọc link ảnh chất lượng cao (Unsplash / Pexels) cho từng món, hỗ trợ tải ảnh offline qua script.
-    - Soạn thảo danh sách nguyên liệu chi tiết (định lượng, đơn vị tính) và các bước nấu 1-2-3 rõ ràng.
-  - **Tự động hóa nạp CSDL (Seeding Script):**
-    - Đóng gói dữ liệu vào file `dishes_seed.json`.
-    - Viết script Python `seed_sqlite.py` nạp tự động toàn bộ dữ liệu vào file `yumyumpick.db`.
-  - **Kiểm thử chất lượng (QA Testing):**
-    - Kiểm thử giao diện trên trình duyệt PC (Chrome, Edge) và giả lập Mobile DevTools.
-    - Kiểm thử trực tiếp trên điện thoại thật qua mạng Wi-Fi nội bộ.
-    - Bắt các lỗi tràn chữ, lỗi vỡ layout ảnh, lỗi không lưu được session đăng nhập.
+### 👑 1. Minh Đức — Project Lead, Quản Trị Data & Kiểm Định (QA Lead)
+* **Sứ mệnh:** Giữ nhịp độ dự án 5 ngày, đảm bảo kho dữ liệu món ăn hoàn hảo và kiểm soát chất lượng phần mềm không lỗi.
+* **Nhiệm vụ cụ thể:**
+  1. **Điều phối tiến độ (Sprint Master):** Chủ trì cuộc họp Daily Sync 10 phút mỗi sáng; tháo gỡ điểm nghẽn (blockers) cho 2 nhóm Frontend và Backend.
+  2. **Quản trị kho dữ liệu (Data Curation):**
+     - Đảm bảo tính toàn vẹn của **100 món ăn** đa dạng (30 Việt Nam, 20 Hàn Quốc, 18 Nhật Bản, 16 Thái Lan, 16 Ý) trong file `backend/app/data/dishes_seed.json`.
+     - Quản lý kho **100 ảnh offline** sắc nét tại `backend/images/dishes/`.
+     - Quản lý file CSDL SQLite chuẩn `backend/yumyumpick.db` (495 nguyên liệu, 300 bước nấu ăn, tài khoản test `demo`/`123`).
+  3. **Kiểm định chất lượng (QA Testing):**
+     - Xây dựng kịch bản kiểm thử (Test Matrix) cho toàn bộ tính năng: Đăng ký/Đăng nhập, Quẹt thẻ (kèm description intro), Lọc sơ bộ, Xem công thức, Checkbox tương tác nguyên liệu.
+     - Kiểm thử giao diện chéo trên PC (Chrome, Edge) và Mobile thật qua mạng nội bộ LAN (`http://<IP_LAN>:5173`).
+     - Bắt và phân loại bug để các lập trình viên fix ngay trong ngày 4 và 5.
+     - Phối hợp với Luân kiểm tra kịch bản Live Demo trước giờ thuyết trình.
 
 ---
 
-## 3. Ma Trận Trách Nhiệm RACI (RACI Matrix)
-
-- **R (Responsible):** Người trực tiếp thực hiện công việc.
-- **A (Accountable):** Người chịu trách nhiệm phê duyệt và kết quả cuối cùng.
-- **C (Consulted):** Người được hỏi ý kiến / phối hợp chuyên môn.
-- **I (Informed):** Người nhận thông báo kết quả.
-
-| Hạng Mục Công Việc | TV 1 (FE Swipe) | TV 2 (FE Features) | TV 3 (BE & SQLite) | TV 4 (Data & QA) |
-|---|:---:|:---:|:---:|:---:|
-| Thống nhất API Contract & DDL SQLite | **C** | **C** | **A / R** | **I** |
-| Xây dựng Khung Quẹt Thẻ Framer Motion | **A / R** | **C** | **I** | **I** |
-| Xử lý Responsive PC (Phím tắt) & Mobile (Touch) | **A / R** | **C** | **I** | **C** |
-| Modal Đăng Ký / Đăng Nhập Đơn Giản (UI) | **I** | **A / R** | **C** | **I** |
-| Modal Lọc Ẩm Thực & Dish Intro Drawer | **C** | **A / R** | **I** | **I** |
-| Màn hình Món Đã Lưu & Xuất List Đi Chợ | **I** | **A / R** | **C** | **I** |
-| Xây dựng FastAPI Server & SQLite ORM | **I** | **I** | **A / R** | **C** |
-| Xây dựng API Simple Auth & Saved Dishes | **I** | **C** | **A / R** | **I** |
-| Thu thập 100 Món Ăn, Tải Ảnh & Script Seed SQLite | **I** | **I** | **C** | **A / R** |
-| Kiểm thử chéo E2E trên PC & Mobile | **C** | **C** | **C** | **A / R** |
-| Chuẩn bị Kịch Bản Demo Ngày 5 | **R** | **R** | **R** | **A / R** |
+### ⚙️ 2. Ánh Dương — Backend Engineer 1 (Server Core & Simple Auth)
+* **Sứ mệnh:** Dựng nền tảng server FastAPI vững chắc, kết nối SQLite và cung cấp luồng xác thực đơn giản.
+* **Nhiệm vụ cụ thể:**
+  1. Khởi tạo dự án FastAPI, cấu hình `uvicorn`, CORS middleware cho phép Frontend Localhost gọi thông suốt.
+  2. Mount thư mục tĩnh `backend/images/dishes/` phục vụ 100 ảnh offline với tốc độ cực nhanh.
+  3. Xây dựng Simple Auth API: `POST /api/v1/auth/signup` và `POST /api/v1/auth/login` (kết nối trực tiếp bảng `users` trong CSDL SQLite `yumyumpick.db`).
+  4. Cung cấp Mock Data JSON cho đội ngũ Frontend test độc lập trong Ngày 1 & 2.
+  5. Tối ưu hóa truy vấn SQLite, chống khóa file đồng thời (concurrency lock).
 
 ---
 
-## 4. Cơ Chế Làm Việc Song Song Không Block Nhau (Decoupling Strategy)
+### ⚙️ 3. Đăng Huy — Backend Engineer 2 (Dishes API & Saved Dishes)
+* **Sứ mệnh:** Xây dựng bộ API xử lý nghiệp vụ quẹt món, lọc và lưu trữ món ăn vào CSDL SQLite.
+* **Nhiệm vụ cụ thể:**
+  1. Khởi tạo cấu trúc ORM / Query kết nối với `backend/yumyumpick.db`.
+  2. Xây dựng API gợi ý món ăn ngẫu nhiên: `GET /api/v1/dishes/random` (hỗ trợ lọc theo `cuisine`, `spicy_level`, `max_cook_time`, loại trừ món đã xem/đã lưu, trả về đầy đủ `short_description`).
+  3. Xây dựng API chi tiết món: `GET /api/v1/dishes/{dish_id}` (kèm danh sách nguyên liệu và các bước nấu).
+  4. Xây dựng Saved Dishes API:
+     - `POST /api/v1/saved-dishes/{user_id}`: Lưu món ăn khi quẹt phải (LIKE).
+     - `GET /api/v1/saved-dishes/{user_id}`: Lấy danh sách món đã thích của người dùng.
+     - `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`: Xóa/bỏ thích món ăn.
 
-1. **Ngày 1 chốt cứng Mock Data:** Thành viên 3 (Backend) cung cấp ngay file JSON mẫu cho các API. Thành viên 1 & 2 (Frontend) import file JSON này để code giao diện và hiệu ứng ngay lập tức mà không cần đợi server chạy xong.
-2. **Data độc lập hoàn toàn:** Thành viên 4 (Data) chỉ cần điền thông tin vào file JSON theo đúng mẫu quy định sẵn, sau đó chạy script `seed_sqlite.py` để nạp vào DB khi Backend dựng xong bảng.
-3. **Daily Sync 10 phút:** Mỗi sáng họp nhanh 10 phút để nắm tình hình và xử lý ngay các vướng mắc tích hợp.
+---
+
+### 🎨 4. Quang Huy — Frontend Engineer 1 (Swipe Deck & Responsive Experience)
+* **Sứ mệnh:** Tạo linh hồn cho ứng dụng với hiệu ứng quẹt thẻ mượt mà 60 FPS chuẩn phong cách Tinder và tối ưu trải nghiệm đa thiết bị.
+* **Nhiệm vụ cụ thể:**
+  1. Khởi tạo dự án React bằng Vite + Tailwind CSS + Framer Motion.
+  2. Xây dựng component `SwipeCard.jsx` & `CardStack.jsx`:
+     - Tích hợp đầy đủ trên mặt thẻ: Hình ảnh món lớn sắc nét, tên món (Việt/Anh), huy hiệu thông số và **đoạn mô tả giới thiệu (`short_description`)** giúp người dùng hiểu rõ món ăn để quyết định quẹt trái hay quẹt phải.
+     - Xử lý cử chỉ vuốt kéo (drag gesture), góc nghiêng thẻ $\text{rotate} = \text{dragX}/15$, lực nảy đàn hồi (spring physics).
+     - Hiển thị hiệu ứng Stamp đồ họa: "YUMMY!" (màu xanh lá khi kéo phải) và "NOPE" (màu đỏ khi kéo trái).
+     - Hiệu ứng xếp chồng 3 thẻ, thẻ sau nổi lên khi thẻ trước bay đi.
+     - Xử lý màn hình hết thẻ (Empty State) với nút "Khám phá lại".
+  3. **Tối ưu hóa Responsive toàn diện (Mobile + PC):**
+     - **Trên Mobile:** Giao diện tràn viền (100vw), thao tác vuốt 1 chạm thuận tay cái.
+     - **Trên Desktop PC:** Khung thẻ căn giữa ($420\text{px} \times 600\text{px}$), hỗ trợ phím mũi tên bàn phím (`←` Bỏ qua, `→` Thích).
+  4. Cụm nút bấm nổi phía dưới: Bỏ qua (❌) và Thích (❤️).
+
+---
+
+### 📱 5. Tùng Dương — Frontend Engineer 2 (Auth, Filter & Liked Dishes View)
+* **Sứ mệnh:** Xây dựng các màn hình chức năng cốt lõi tinh giản: Đăng nhập/Đăng ký, Bộ lọc sơ bộ, Danh sách món đã thích và Xem chi tiết công thức nấu ăn.
+* **Nhiệm vụ cụ thể:**
+  1. Xây dựng bố cục chung (App Layout) và thanh Header/Navbar: Logo thương hiệu, nút Bộ Lọc (🔍), nút Món Đã Thích (❤️), nút Tài khoản.
+  2. Xây dựng component `AuthModal.jsx`: Form Đăng nhập & Đăng ký đơn giản, lưu session vào `localStorage` (khôi phục trạng thái tự động khi F5).
+  3. Xây dựng component `FilterModal.jsx` (Bộ lọc sơ bộ):
+     - Lọc quốc gia: Tất cả, Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý.
+     - Lọc độ cay: Tất cả, Không cay, Có cay.
+     - Lọc thời gian: Tất cả, Nấu nhanh (<20'), Kỳ công (>=20').
+     - Nút "Áp dụng" kích hoạt tải lại danh sách thẻ mới.
+  4. Xây dựng component `LikedDishesView.jsx` (Danh sách món đã quẹt phải):
+     - Hiển thị danh sách các món ăn đã thích từ SQLite qua API của Đăng Huy.
+     - Nút xóa/bỏ thích (🗑️) để loại món khỏi danh sách.
+  5. Xây dựng component `DishDetailModal.jsx` (Xem chi tiết công thức):
+     - Bấm vào món trong danh sách $\rightarrow$ Xem chi tiết công thức.
+     - **Danh sách nguyên liệu kèm Checkbox tương tác:** Mỗi dòng nguyên liệu có ô checkbox `[ ]` để tích chọn đánh dấu nguyên liệu đã chuẩn bị/đã có khi nấu.
+     - Hướng dẫn chế biến chuẩn 3 bước (Sơ chế $\rightarrow$ Nấu $\rightarrow$ Trình bày) và khung mẹo đầu bếp.
+
+---
+
+### 📊 6. Luân — Pitching Lead (Slide PowerPoint, Kịch Bản & Demo Story)
+* **Sứ mệnh:** Đóng gói toàn bộ nỗ lực kỹ thuật của team thành bài thuyết trình cuốn hút, thuyết phục giảng viên/hội đồng đạt điểm tối đa.
+* **Nhiệm vụ cụ thể:**
+  1. **Thiết kế bộ Slide PowerPoint báo cáo (12 - 15 slides):**
+     - Thiết kế theo phong cách hiện đại, phối màu cam-đỏ ẩm thực đồng bộ với ứng dụng YumYumPick.
+     - Chèn hình ảnh món ăn thực tế từ kho 100 ảnh và ảnh chụp màn hình ứng dụng trên cả PC lẫn Mobile.
+     - Trình bày trực quan: Sơ đồ kiến trúc SQLite Offline, quy trình quẹt thẻ, ma trận RACI và kết quả 5 ngày sprint.
+  2. **Xây dựng Kịch bản Thuyết trình (Presentation Script):**
+     - Mở đầu ấn tượng: Đặt câu hỏi nhức nhối hàng ngày *"Hôm nay ăn gì?"* và sự quá tải của các app đặt đồ ăn thông thường.
+     - Giới thiệu giải pháp: *"Tinder cho món ăn"* — Vuốt là chọn, lọc sơ bộ và xem ngay công thức nấu chi tiết.
+     - Nêu bật điểm sáng kỹ thuật: Kiến trúc Offline 100%, CSDL SQLite cục bộ siêu nhẹ, không phụ thuộc cloud hay server phức tạp.
+  3. **Tổ chức & Điều phối Live Demo:**
+     - Lên kịch bản Demo chi tiết từng bước (Step-by-step Demo Guide).
+     - Phối hợp với Minh Đức chuẩn bị video demo dự phòng (Backup Video) để ứng phó rủi ro kỹ thuật.
+  4. **Bộ câu hỏi phản biện (Q&A Cheat Sheet):** Soạn sẵn câu trả lời cho các câu hỏi tiềm năng của hội đồng (về hiệu năng, mở rộng dữ liệu, lưu trữ SQLite, tính tiện dụng).
+     - Phối hợp với Minh Đức chuẩn bị video demo dự phòng (Backup Video) để ứng phó rủi ro kỹ thuật.
+  4. **Bộ câu hỏi phản biện (Q&A Cheat Sheet):** Soạn sẵn câu trả lời cho các câu hỏi tiềm năng của hội đồng (về hiệu năng, mở rộng dữ liệu, lưu trữ SQLite, tính tiện dụng).
+
+---
+
+## 3. Ma Trận Trách Nhiệm RACI (RACI Matrix Chi Tiết)
+
+* **R (Responsible):** Người trực tiếp thực hiện công việc.
+* **A (Accountable):** Người chịu trách nhiệm phê duyệt và kết quả cuối cùng.
+* **C (Consulted):** Người được hỏi ý kiến / tư vấn chuyên môn.
+* **I (Informed):** Người nhận thông báo kết quả.
+
+| Hạng Mục Công Việc | Minh Đức (Lead/Data/QA) | Ánh Dương (BE 1) | Đăng Huy (BE 2) | Quang Huy (FE 1) | Tùng Dương (FE 2) | Luân (Pitch/Slide) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Kế hoạch 5 ngày & Điều phối Daily Sync** | **A / R** | **I** | **I** | **I** | **I** | **I** |
+| **Quản trị 100 Món Ăn, 100 Ảnh & CSDL SQLite** | **A / R** | **C** | **C** | **I** | **I** | **C** |
+| **Setup FastAPI Server, CORS & Static Files** | **C** | **A / R** | **C** | **I** | **I** | **I** |
+| **API Simple Auth (Signup/Login SQLite)** | **I** | **A / R** | **C** | **I** | **C** | **I** |
+| **API Dishes Random & Filter Engine** | **I** | **C** | **A / R** | **C** | **C** | **I** |
+| **API Saved Dishes (Lưu, Lấy, Xóa món)** | **I** | **C** | **A / R** | **C** | **C** | **I** |
+| **Khung Quẹt Thẻ Framer Motion & Stamp** | **I** | **I** | **I** | **A / R** | **C** | **I** |
+| **Responsive PC (Phím tắt) & Mobile (Touch)** | **C** | **I** | **I** | **A / R** | **C** | **C** |
+| **UI Auth Modal & LocalStorage Session** | **I** | **C** | **I** | **I** | **A / R** | **I** |
+| **UI Filter Modal (Bộ lọc ẩm thực sơ bộ)** | **I** | **I** | **C** | **C** | **A / R** | **I** |
+| **UI Liked Dishes (Món đã thích) & Xem Chi Tiết** | **C** | **I** | **C** | **I** | **A / R** | **C** |
+| **Kiểm Định Chất Lượng (QA Testing PC & Mobile)** | **A / R** | **C** | **C** | **C** | **C** | **I** |
+| **Thiết Kế Slide PowerPoint Báo Cáo** | **C** | **I** | **I** | **I** | **I** | **A / R** |
+| **Kịch Bản Thuyết Trình, Demo Story & Q&A** | **C** | **I** | **I** | **C** | **C** | **A / R** |
+| **Duyệt Thử Nghiệm Live Demo (Ngày 5)** | **A / R** | **R** | **R** | **R** | **R** | **A / R** |
+
+---
+
+## 4. Cơ Chế Làm Việc Song Song 100% Không Bị Block (Decoupling Strategy)
+
+1. **Ngày 1 chốt cứng Mock Contract:** Ánh Dương & Đăng Huy cung cấp file JSON mẫu cho các API. Quang Huy & Tùng Dương lập tức import dữ liệu này để dựng toàn bộ giao diện và hiệu ứng quẹt thẻ mà không cần đợi server backend chạy xong.
+2. **Dữ liệu & CSDL đã sẵn sàng 100%:** Minh Đức đã chuẩn bị sẵn file CSDL `backend/yumyumpick.db` và 100 ảnh offline tại `backend/images/dishes/`. Backend chỉ việc kết nối vào file DB có sẵn này để query, không cần tốn thời gian thiết kế schema hay tạo dữ liệu giả.
+3. **Slide & Story song hành từ Ngày 2:** Luân bắt tay vào dựng khung slide PowerPoint và kịch bản thuyết trình ngay từ ngày thứ 2, cập nhật dần ảnh chụp tiến độ và video demo từ đội Frontend/Backend.
+4. **Daily Sync 10 phút:** Đúng 09:00 sáng mỗi ngày, Minh Đức điều phối họp nhanh 10 phút online/offline để:
+   - Từng thành viên báo cáo 3 câu hỏi: *Hôm qua đã làm gì? Hôm nay sẽ làm gì? Có vướng mắc gì không?*
+   - Xử lý dứt điểm các vướng mắc tích hợp trong ngày.

@@ -56,17 +56,18 @@
 
 ## 🍲 2. Chuẩn Bị Dữ Liệu (Data Preparation Checklist)
 
-- [ ] **Quy chuẩn dữ liệu (Data Taxonomy & Schema):**
-  - Định nghĩa file JSON chuẩn `dishes_seed.json` gồm các trường: `id`, `name`, `english_name`, `cuisine`, `cook_time_minutes`, `spicy_level`, `calories_approx`, `image`, `short_description`, `ingredients` (name, amount, unit), `steps` (step_number, title, description), `tips`.
-- [ ] **Phân chia thu thập dữ liệu (40-50 món):**
-  - 15 món Việt Nam (Phở bò, Cơm sườn, Bún chả, Bánh mì chảo, Canh chua...).
-  - 8 món Hàn Quốc (Bibimbap, Canh kim chi, Tokbokki, Thịt nướng Bulgogi...).
-  - 8 món Nhật Bản (Ramen, Cơm cà ri bò, Mì Udon, Trứng cuộn...).
-  - 8 món Thái Lan (Pad Thai, Tom Yum Goong, Heo xào lá quế...).
-  - 8 món Âu / Ý (Mì Ý sốt bò băm, Carbonara, Salad cá ngừ, Beefsteak...).
-- [ ] **Thu thập hình ảnh & Script nạp CSDL:**
-  - Link ảnh món ăn sắc nét từ Unsplash / Pexels.
-  - Viết script Python `backend/app/db/seed_sqlite.py` nạp tự động toàn bộ món vào file SQLite `yumyumpick.db`.
+- [x] **Quy chuẩn dữ liệu (Data Taxonomy & Schema):**
+  - Đã định nghĩa file JSON chuẩn `backend/app/data/dishes_seed.json` gồm đầy đủ các trường: `id`, `name`, `english_name`, `cuisine`, `cook_time_minutes`, `prep_time_minutes`, `difficulty`, `spicy_level`, `calories_approx`, `image`, `short_description`, `ingredients` (name, amount, unit, category), `steps` (step_number, title, description), `tips`.
+- [x] **Thu thập & Chuẩn hóa dữ liệu 45 món ăn hoàn chỉnh (100% Sẵn Sàng):**
+  - [x] 15 món Việt Nam (Phở bò, Cơm tấm, Bún chả, Bánh mì chảo, Bún bò Huế, Gỏi cuốn, Canh chua, Bánh xèo, Bò kho, Chả giò, Cá kho tộ, Cơm chiên Dương Châu, Hủ tiếu Nam Vang, Bún riêu, Gà kho gừng).
+  - [x] 8 món Hàn Quốc (Bibimbap, Canh kim chi, Tokbokki, Thịt bò Bulgogi, Miến xào Japchae, Gà sốt cay Yangnyeom, Canh rong biển Miyeok-guk, Trứng hấp Gyeran-jjim).
+  - [x] 8 món Nhật Bản (Mì Ramen xá xíu, Cơm cà ri bò, Cơm bò Gyudon, Mì Udon bò, Trứng cuộn Tamagoyaki, Cơm lươn Unadon, Bánh xèo Okonomiyaki, Gà chiên Karaage).
+  - [x] 7 món Thái Lan (Pad Thai, Tom Yum Goong, Heo xào Pad Krapow, Gỏi đu đủ Som Tum, Cà ri xanh gà, Cơm chiên trái thơm, Súp gà Tom Kha Gai).
+  - [x] 7 món Âu / Ý (Mì Ý Bolognese, Carbonara, Pizza Margherita, Beefsteak sốt tiêu, Salad cá ngừ, Súp bí đỏ kem tươi, Mì Ý hải sản Pescatora).
+- [x] **Bộ công cụ tự động hóa & Kiểm tra dữ liệu:**
+  - [x] Script `backend/app/db/validate_data.py`: Kiểm tra 45/45 món hợp lệ 100%, 227 nguyên liệu, 135 bước chế biến.
+  - [x] Script `backend/app/db/seed_sqlite.py`: Tự động tạo bảng từ `schema.sql` và nạp toàn bộ 45 món ăn vào file `backend/yumyumpick.db` cùng tài khoản test (`demo` / `123`).
+  - [x] File CSDL `backend/yumyumpick.db` đã được khởi tạo và sẵn sàng sử dụng ngay!
 
 ---
 

@@ -14,7 +14,7 @@ flowchart TD
     CheckAuth -- "Đã đăng nhập" --> LoadCards["Tải danh sách món ăn ngẫu nhiên từ SQLite"]
     GuestMode --> LoadCards
     
-    LoadCards --> MainScreen["Màn hình chính: Thẻ món ăn (Swipe Card Deck)"]
+    LoadCards --> MainScreen["Màn hình chính: Thẻ món ăn (Swipe Card Deck)\n• Ảnh lớn + Tên món\n• Huy hiệu: Thời gian, Calo, Độ cay, Cờ quốc gia\n• Description Intro: Giới thiệu hương vị & đặc trưng"]
     
     MainScreen --> Decision{"Hành động của người dùng"}
     
@@ -22,27 +22,21 @@ flowchart TD
     SkipDish --> CheckMore{"Còn thẻ không?"}
     
     Decision -- "Kéo sang Phải (Swipe Right) hoặc phím [→] hoặc nút ❤️" --> PickDish["Lưu món vào CSDL SQLite (Saved Dishes API)"]
-    PickDish --> ShowToast["Hiển thị thông báo Toast & Tăng số đếm món đã lưu"]
+    PickDish --> ShowToast["Ghi nhận vào CSDL SQLite & Tăng số đếm món đã thích"]
     ShowToast --> CheckMore
     
-    Decision -- "Chạm/Tap nhẹ vào Thẻ hoặc phím [Space] hoặc nút ℹ️" --> OpenIntroDrawer["Mở Drawer Giới Thiệu Nhanh (Dish Intro)"]
-    OpenIntroDrawer --> ViewIntro["Xem câu chuyện, xuất xứ, calo, thời gian nấu & tóm tắt nguyên liệu"]
-    ViewIntro -- "Bấm Chọn Món ❤️" --> PickDish
-    ViewIntro -- "Bấm Bỏ Qua ❌" --> SkipDish
-    ViewIntro -- "Đóng Drawer" --> MainScreen
-    
-    Decision -- "Bấm nút Bộ Lọc ⚙️" --> OpenFilter["Mở Modal Bộ Lọc Ẩm Thực"]
+    Decision -- "Bấm nút Bộ Lọc 🔍" --> OpenFilter["Mở Modal Bộ Lọc Ẩm Thực"]
     OpenFilter --> ApplyFilter["Chọn quốc gia, thời gian, độ cay $\rightarrow$ Áp dụng"]
     ApplyFilter --> LoadCards
     
-    Decision -- "Bấm nút Món Đã Lưu 📑" --> SavedScreen["Mở Danh Sách Món Đã Lưu"]
-    SavedScreen --> SelectSaved["Chọn món ăn muốn xem công thức"]
-    SelectSaved --> FullRecipeModal["Mở Công Thức Chi Tiết (Checkbox nguyên liệu, Các bước 1-2-3, Mẹo đầu bếp)"]
-    FullRecipeModal --> SmartGrocery["Bấm 'Xuất Danh Sách Đi Chợ' $\rightarrow$ Copy to Clipboard gửi Zalo"]
+    Decision -- "Bấm nút Món Đã Thích ❤️" --> SavedScreen["Mở Danh Sách Món Đã Thích"]
+    SavedScreen --> SelectSaved["Chọn món ăn để xem chi tiết công thức"]
+    SavedScreen --> DeleteSaved["Bấm nút 🗑️ để bỏ thích món"]
+    SelectSaved --> FullRecipeModal["Xem Công Thức Chi Tiết (Checkbox tương tác nguyên liệu, 3 bước nấu 1-2-3, Mẹo đầu bếp)"]
     
     CheckMore -- "Còn thẻ" --> NextCard["Hiển thị thẻ tiếp theo mượt mà"]
     NextCard --> MainScreen
-    CheckMore -- "Hết thẻ" --> EmptyState["Màn hình hết thẻ: Nút 'Quẹt lại từ đầu' hoặc 'Mở rộng bộ lọc'"]
+    CheckMore -- "Hết thẻ" --> EmptyState["Màn hình hết thẻ: Nút 'Quẹt lại từ đầu'"]
     EmptyState --> LoadCards
 ```
 
@@ -110,19 +104,17 @@ Dự án được thiết kế chuyên biệt để hoạt động mượt mà v
 flowchart LR
     subgraph MobileDevice["📱 Giao Diện Mobile Web (Width < 768px)"]
         direction TB
-        M_Nav["Navbar: Logo + Nút Lọc + Icon Tài Khoản"]
-        M_Card["Thẻ Quẹt Toàn Màn Hình (Chiếm 92% chiều rộng màn hình)"]
-        M_Btns["Cụm 4 Nút Nổi Tròn: [❌ Bỏ qua] [ℹ️ Giới thiệu] [❤️ Thích] [↩️ Undo]"]
-        M_Drawer["Drawer xem công thức trượt từ đáy màn hình (Bottom Sheet)"]
-        M_Nav --> M_Card --> M_Btns --> M_Drawer
+        M_Nav["Navbar: Logo + Nút Lọc + Icon Món Đã Lưu + Icon Tài Khoản"]
+        M_Card["Thẻ Quẹt Toàn Màn Hình (92vw)\n• Ảnh lớn + Tên món + Badges\n• Description Intro giới thiệu món ăn"]
+        M_Btns["Cụm 2 Nút Nổi Tròn: [❌ Bỏ qua] [❤️ Thích]"]
+        M_Nav --> M_Card --> M_Btns
     end
 
     subgraph DesktopPC["💻 Giao Diện Desktop PC (Width >= 1024px)"]
         direction TB
-        D_Nav["Header: Logo + Thanh Điều Hướng + Menu User Đăng Nhập"]
-        subgraph D_Body["Bố Cục 2 Cột Cân Đối (Max Width 1100px)"]
-            D_Col1["Cột 1: Khung Quẹt Thẻ Giả Lập Phone (420x600px)\n• Hỗ trợ kéo chuột kéo thẻ\n• Phím [←] Bỏ qua, [→] Thích, [Space] Xem nhanh\n• Cụm nút bấm chuẩn kích thước"]
-            D_Col2["Cột 2: Bảng Tiện Ích Song Song\n• Danh sách món đã lưu trực quan\n• Checklist đi chợ xuất nhanh Zalo\n• Xem trước công thức chi tiết không che màn hình quẹt"]
+        D_Nav["Header: Logo + Nút Lọc + Nút Món Đã Lưu + Menu User Đăng Nhập"]
+        subgraph D_Body["Bố Cục Căn Giữa Màn Hình Thẩm Mỹ"]
+            D_Col1["Khung Quẹt Thẻ Phong Cách Tinder (420x600px)\n• Ảnh sắc nét + Tên món + Badges\n• Description Intro giới thiệu món trực tiếp trên thẻ\n• Phím bàn phím [←] Bỏ qua, [→] Thích\n• Cụm nút bấm chuẩn kích thước"]
         end
         D_Nav --> D_Body
     end
@@ -132,48 +124,39 @@ flowchart LR
 - **Viewport:** Tối ưu cho độ phân giải từ $375\text{px}$ đến $430\text{px}$ (iPhone, Android phổ thông).
 - **Thao tác:** 100% cảm ứng ngón tay cái:
   - Vuốt sang phải để thích, vuốt trái để bỏ qua.
-  - Nhấp (Tap) nhẹ lên thẻ để đẩy **Bottom Sheet** từ dưới lên xem thông số dinh dưỡng và nguyên liệu.
+  - Đọc ngay đoạn giới thiệu ngắn (**Description Intro**) trên mặt thẻ trước khi quẹt mà không cần mở thêm drawer rườm rà.
 - **Kích thước thẻ:** `w-[92vw] h-[68vh] max-h-[520px] rounded-3xl overflow-hidden shadow-2xl`.
-- **Nút điều hướng:** Cụm nút tròn đường kính $56\text{px}$ vừa vặn tầm với của ngón tay cái.
+- **Nút điều hướng:** Cụm 2 nút tròn đường kính $56\text{px}$ vừa vặn tầm với của ngón tay cái (❌ Bỏ qua, ❤️ Thích).
 
 ### 4.2. Chi Tiết Giao Diện Trên Máy Tính (Desktop PC / Laptop)
 - **Viewport:** Tối ưu cho màn hình $1024\text{px}$ đến $1920\text{px}$.
 - **Tránh vỡ giao diện:** Không để ảnh thẻ món ăn kéo giãn ra 100% màn hình PC gây mờ ảnh và biến dạng. Thay vào đó:
-  - Khung quẹt thẻ giữ tỉ lệ dọc thẩm mỹ ($420\text{px} \times 600\text{px}$) đặt ở vị trí trung tâm.
+  - Khung quẹt thẻ giữ tỉ lệ dọc thẩm mỹ ($420\text{px} \times 600\text{px}$) đặt ở vị trí trung tâm màn hình.
+  - Hiển thị đầy đủ hình ảnh, tên món, huy hiệu và đoạn mô tả giới thiệu hương vị trên mặt thẻ.
   - Hỗ trợ **phím tắt bàn phím tiện lợi**:
     - Phím mũi tên sang trái `←`: Bỏ qua (Skip).
     - Phím mũi tên sang phải `→`: Chọn món (Like).
-    - Phím cách `Space`: Mở Drawer giới thiệu món ăn.
   - Hiển thị badge gợi ý phím tắt nhỏ tinh tế bên dưới các nút bấm (ví dụ: nút Like có nhãn nhỏ "[→]").
 
 ---
 
-## 5. Màn Hình Công Thức Chi Tiết & Danh Sách Đi Chợ
+## 5. Màn Hình Danh Sách Đã Thích & Xem Chi Tiết Công Thức
 
-### 5.1. Xem Công Thức Chi Tiết (Full Recipe Viewer)
-Khi người dùng mở một món trong danh sách đã lưu:
-- **Phần Header:** Ảnh bìa lớn, tên món (Việt/Anh), thời gian chế biến, lượng calo, mức độ cay.
-- **Phần Danh Sách Nguyên Liệu (Interactive Ingredients Checklist):**
-  - Hiển thị từng nguyên liệu kèm định lượng rõ ràng (ví dụ: *Thịt ba chỉ: 400g*).
-  - Có **Checkbox tích chọn tương tác**: người dùng bấm tích vào các món đã có sẵn trong tủ lạnh hoặc đã mua xong khi đi chợ.
+### 5.1. Danh Sách Món Đã Thích (Liked Dishes List)
+- Người dùng bấm vào nút biểu tượng Trái Tim (❤️) trên thanh Header để mở danh sách.
+- Hiển thị danh sách các thẻ món ăn đã lưu:
+  - Ảnh đại diện thu nhỏ, tên món ăn, quốc gia, thời gian chế biến.
+  - Nút **Bỏ thích (🗑️)**: Bấm vào để xóa món ăn khỏi CSDL SQLite nếu không còn nhu cầu nấu.
+- **Mục đích duy nhất:** Bấm vào bất kỳ món ăn nào để mở màn hình xem chi tiết công thức nấu ăn.
+
+### 5.2. Xem Chi Tiết Công Thức Nấu Ăn (Detail Recipe Viewer)
+Khi người dùng mở một món trong danh sách đã thích:
+- **Phần Header:** Ảnh bìa lớn sắc nét, tên món (tiếng Việt & tiếng Anh), thời gian chế biến, lượng calo, mức độ cay và câu chuyện giới thiệu ngắn.
+- **Phần Danh Sách Nguyên Liệu kèm Checkbox tương tác (Interactive Ingredients Checklist):**
+  - Hiển thị danh sách nguyên liệu với ô Checkbox tương tác `[ ]`: Tên nguyên liệu + Định lượng (ví dụ: `[ ] Thịt ba chỉ: 400g`, `[ ] Nước dừa tươi: 1 trái`).
+  - Người dùng có thể chạm/click vào checkbox để đánh dấu nguyên liệu đã mua hoặc đã chuẩn bị sẵn trong bếp (gạch ngang chữ mờ nhẹ giúp theo dõi tiện lợi khi nấu).
 - **Phần Hướng Dẫn Từng Bước (Step-by-step 1-2-3):**
-  - Bước 1: Sơ chế nguyên liệu.
-  - Bước 2: Nêm nếm và xào nấu.
-  - Bước 3: Trình bày và thưởng thức.
-- **Mẹo Đầu Bếp (Chef's Tips):** Khung viền vàng nổi bật chia sẻ mẹo vặt nấu nhanh và ngon hơn.
-
-### 5.2. Xuất Danh Sách Đi Chợ Thông Minh (Smart Grocery List)
-- Nút bấm nổi bật: **"Xuất Danh Sách Đi Chợ 🛒"**.
-- Khi bấm: Hệ thống tự động duyệt qua tất cả các món đã lưu và tổng hợp toàn bộ nguyên liệu lại thành định dạng văn bản súc tích:
-  ```text
-  🛒 DANH SÁCH ĐI CHỢ - YUMYUMPICK
-  ═══════════════════════════════
-  [ ] Thịt bò thăn: 300g (Phở bò)
-  [ ] Bánh phở tươi: 500g (Phở bò)
-  [ ] Kim chi cải thảo: 200g (Canh kim chi)
-  [ ] Đậu hũ non: 1 hộp (Canh kim chi)
-  [ ] Trứng gà: 4 quả (Cơm trộn Hàn Quốc)
-  ═══════════════════════════════
-  Chúc bạn nấu những bữa ăn thật ngon miệng!
-  ```
-- Kèm nút **"Sao chép vào bộ nhớ tạm (Copy)"** hiển thị thông báo "Đã copy thành công! Bạn có thể dán ngay vào Zalo / Messenger".
+  - **Bước 1 — Sơ chế:** Rửa sạch, thái lát, ướp gia vị theo định lượng.
+  - **Bước 2 — Chế biến:** Nấu nước dùng, kho, xào, chiên hoặc nướng.
+  - **Bước 3 — Trình bày:** Bày biện ra tô/đĩa, rắc rau thơm, thưởng thức khi còn nóng.
+- **Mẹo Đầu Bếp (Chef's Tips):** Khung viền vàng nổi bật chia sẻ bí quyết thực tế giúp món ăn đậm đà chuẩn vị.

@@ -14,14 +14,12 @@ flowchart TD
         subgraph UserApp["User Web App (Responsive: Mobile + PC)"]
             UI["Swipe Deck Interface (Framer Motion)"]
             AuthUI["Simple Auth Modal (Login / Sign Up)"]
-            Drawer["Dish Intro Drawer & Recipe Viewer"]
-            Filter["Smart Filter Modal"]
-            Grocery["Smart Grocery List Generator"]
+            Filter["Basic Filter Modal (Quốc gia, Cay, Thời gian)"]
+            LikedList["Liked Dishes & Recipe Detail Modal"]
             LS[("LocalStorage\n(Lưu phiên đăng nhập: user_id, username)")]
             
-            UI <--> Drawer
             UI <--> Filter
-            Drawer <--> Grocery
+            UI <--> LikedList
             AuthUI <--> LS
         end
     end
@@ -117,7 +115,7 @@ flowchart TD
     - Bố cục căn giữa màn hình hoặc 2 cột cân đối
     - Khung thẻ quẹt chuẩn tỉ lệ điện thoại (max-w: 420px, h: 620px)
     - Hỗ trợ phím tắt bàn phím: [←] Skip, [→] Like, [Space] Info
-    - Cột bên cạnh (nếu có): Hiển thị nhanh danh sách món đã lưu / Giỏ đi chợ"]
+    - Cột bên cạnh (nếu có): Hiển thị nhanh danh sách các món đã thích"]
 ```
 
 ### 4.1. Chi Tiết Breakpoints & Kích Thước
@@ -127,8 +125,8 @@ flowchart TD
   - Hành vi: Ưu tiên gesture touch cảm ứng, vuốt thẻ bay mượt.
 - **Tablet / Laptop / PC (`>= 768px` đến `1440px+`):**
   - Khung ứng dụng chính: Đặt trong container căn giữa `max-w-md mx-auto` (mô phỏng app điện thoại hiện đại) hoặc layout 2 cột `max-w-5xl mx-auto flex gap-8 items-start`:
-    - **Cột trái:** Khung quẹt thẻ kích thước chuẩn ($400\text{px} \times 580\text{px}$) với các phím tắt hướng dẫn trực quan (Badge phím `←` Bỏ qua, `→` Thích, `Space` Xem nhanh).
-    - **Cột phải:** Panel xem danh sách món đã quẹt chọn và danh sách đi chợ theo thời gian thực.
+    - **Cột trái:** Khung quẹt thẻ kích thước chuẩn ($400\text{px} \times 580\text{px}$) với các phím tắt hướng dẫn trực quan (Badge phím `←` Bỏ qua, `→` Thích).
+    - **Cột phải:** Panel xem danh sách món đã thích theo thời gian thực.
   - Ngăn ngừa tình trạng thẻ bị bè ngang làm vỡ tỉ lệ ảnh món ăn trên màn hình PC rộng.
 
 ---
@@ -204,7 +202,7 @@ Không cần token JWT hay mã hóa phức tạp, xác thực trực tiếp qua 
 
 ---
 
-### 5.3. Nhóm API Món Đã Lưu & Đi Chợ (Saved Dishes & Grocery)
+### 5.3. Nhóm API Món Đã Thích (Liked Dishes API)
 
 #### 1. Lưu món ăn khi quẹt phải (`POST /api/v1/saved-dishes`)
 - **Request Body:**

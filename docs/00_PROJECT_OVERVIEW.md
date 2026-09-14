@@ -19,17 +19,17 @@
 ## 2. Ý Tưởng Giải Pháp: "Tinder For Food"
 
 Lấy cảm hứng từ cơ chế tương tác gây nghiện nổi tiếng của ứng dụng hẹn hò **Tinder**:
-1. Thay vì hiển thị danh sách dài vô tận gây mệt mỏi, màn hình chỉ hiển thị **DUY NHẤT MỘT MÓN ĂN** tại một thời điểm dưới dạng thẻ ảnh lớn bắt mắt.
+1. Thay vì hiển thị danh sách dài vô tận gây mệt mỏi, màn hình chỉ hiển thị **DUY NHẤT MỘT MÓN ĂN** tại một thời điểm dưới dạng thẻ ảnh lớn bắt mắt kèm **đoạn mô tả giới thiệu (description intro)** trực tiếp trên mặt thẻ giúp người dùng hiểu ngay món ăn.
 2. Người dùng chỉ cần đưa ra quyết định nhị phân siêu nhanh theo cảm xúc:
-   - **Thích (Pick / Like ❤️):** Quẹt sang Phải $\rightarrow$ Lưu món ăn và công thức chi tiết vào tài khoản cá nhân trên CSDL SQLite.
+   - **Thích (Pick / Like ❤️):** Quẹt sang Phải $\rightarrow$ Lưu món ăn vào tài khoản cá nhân trên CSDL SQLite.
    - **Không thích (Skip ❌):** Quẹt sang Trái để chuyển ngay sang món kế tiếp.
-3. Muốn tìm hiểu thêm trước khi quẹt? **Nhấp nhẹ (Tap / ℹ️) vào thẻ** để mở Drawer xem câu chuyện xuất xứ, thời gian nấu, calo, độ cay và tóm tắt nguyên liệu.
-4. Sau khi quẹt xong: Mở bộ sưu tập món đã lưu để xem **công thức chi tiết** (nguyên liệu có checkbox tiện kiểm tra tủ lạnh/đi chợ, các bước nấu 1-2-3, mẹo đầu bếp) và có thể **xuất danh sách đi chợ** để gửi qua Zalo/Messenger chỉ bằng 1 nút bấm.
+3. Muốn thu hẹp phạm vi? **Bấm nút Bộ Lọc (🔍)** để lọc sơ bộ theo quốc gia (Việt, Hàn, Nhật, Thái, Ý), độ cay và thời gian nấu.
+4. Sau khi quẹt xong: Vào danh sách món đã quẹt chỉ để xem **chi tiết công thức nấu ăn** (danh sách nguyên liệu có Checkbox tương tác `[ ]`, 3 bước nấu chuẩn 1-2-3, mẹo đầu bếp).
 
 ```mermaid
 flowchart LR
     Problem["Nỗi đau:\n'Hôm nay ăn gì?'\nNgập lụt trong menu dài"] --> Solution["Giải pháp YumYumPick:\nChỉ 1 món tại 1 thời điểm\nQuẹt cảm xúc siêu nhanh"]
-    Solution --> Outcome["Kết quả:\nQuyết định trong 30 giây\nCó ngay công thức & list đi chợ"]
+    Solution --> Outcome["Kết quả:\nQuyết định trong 30 giây\nCó ngay công thức nấu ăn"]
 ```
 
 ---
@@ -43,10 +43,10 @@ mindmap
       Framer Motion Physics
       Stamp Yummy vs Nope
       Vuốt chạm trên Mobile & Phím tắt PC
-    Xem Nhanh & Chi Tiết
-      Tap thẻ mở Drawer giới thiệu
-      Công thức chi tiết kèm Checkbox
-      Xuất danh sách đi chợ 1 chạm
+    Bộ Tính Năng Core
+      Quẹt thẻ Tinder mượt mà
+      Bộ lọc sơ bộ 5 nước
+      Xem danh sách đã thích & công thức
     Kiến Trúc Tối Giản
       FastAPI + SQLite file duy nhất
       Không cần cài đặt Cloud / Deploy
@@ -101,12 +101,16 @@ flowchart LR
 
 ---
 
-## 5. Kế Hoạch 5 Ngày & Phân Chia Song Song (No Blockers)
+## 5. Đội Ngũ Thực Hiện & Kế Hoạch Song Song 5 Ngày
 
-| Ngày | Backend Lead | Frontend Swipe Lead | Frontend Features Lead | Data & QA Specialist |
-|---|---|---|---|---|
-| **Ngày 1** | Setup FastAPI + SQLite, tạo bảng theo DDL, chốt API Contract. | Setup Vite + Tailwind, cấu hình Framer Motion. | Dựng Layout chung, thiết kế Navbar, Modal khung. | Soạn 10 món mẫu đầu tiên dạng JSON, chuẩn bị schema. |
-| **Ngày 2** | Viết API Auth (Login/Signup) + API Random/Filter món. | Làm component `SwipeCard` + hiệu ứng Stamp Like/Skip. | Làm Form Login/Signup + Modal Bộ lọc ẩm thực. | Chuẩn hóa kho 100 món ăn kèm ảnh Unsplash sắc nét. |
-| **Ngày 3** | Viết API Lưu/Xóa món đã quẹt vào SQLite. | Kết nối API Random thẻ, xử lý responsive khung thẻ. | Làm Drawer Giới thiệu món khi tap thẻ. | Nạp 100 món vào SQLite (`seed_sqlite.py`). |
-| **Ngày 4** | Hỗ trợ API gộp nguyên liệu danh sách đi chợ. | Xử lý phím tắt PC (`←`, `→`, `Space`), tinh chỉnh touch mobile. | Làm Màn hình món đã lưu (checkbox công thức + copy list đi chợ). | Test chéo toàn trình (E2E), kiểm tra hiển thị ảnh và font. |
-| **Ngày 5** | Tối ưu truy vấn SQLite, kiểm tra an toàn dữ liệu. | Tinh chỉnh chuyển động 60 FPS, polish UI. | Sửa lỗi giao diện, hỗ trợ flow đăng nhập/đăng xuất. | Chạy kiểm thử trên điện thoại thật + Chuẩn bị kịch bản Demo. |
+Dự án gồm **6 thành viên** với phân công nhiệm vụ độc lập, phối hợp song song nhịp nhàng:
+
+| Thành Viên | Vai Trò Chính | Trách Nhiệm Trọng Tâm Trong 5 Ngày |
+|---|---|---|
+| **👑 Minh Đức** | **Project Lead • Data • QA** | Điều phối chung sprint 5 ngày, Daily Sync; Quản trị kho 100 món ăn, 100 ảnh offline và CSDL SQLite; Kiểm định chất lượng (QA) trên PC & Mobile. |
+| **⚙️ Ánh Dương** | **Backend Engineer 1** | Setup FastAPI Server, CORS, Static files mount `/images`; Xây dựng Simple Auth API (Signup/Login vào SQLite); Cung cấp Mock Data JSON cho FE. |
+| **⚙️ Đăng Huy** | **Backend Engineer 2** | Xây dựng Dishes Core API (lấy ngẫu nhiên, bộ lọc quốc gia, độ cay, thời gian, loại trừ món đã xem); Xây dựng Saved Dishes API (lưu/xóa món vào SQLite). |
+| **🎨 Quang Huy** | **Frontend Engineer 1** | Xây dựng bộ Swipe Deck Framer Motion (SwipeCard, CardStack, Stamp YUMMY/NOPE); Tối ưu Responsive PC (phím tắt bàn phím) & Mobile (touch gestures). |
+| **📱 Tùng Dương** | **Frontend Engineer 2** | Xây dựng Layout tổng thể, Header/Navbar, Auth Modal (LocalStorage session), Filter Modal (bộ lọc sơ bộ), Liked Dishes View & Dish Detail Modal (công thức dạng text). |
+| **📊 Luân** | **Pitching Lead • Slide Presentation** | Thiết kế bộ Slide PowerPoint báo cáo đồ án chuyên nghiệp (12-15 slides); Soạn Kịch bản Thuyết trình (Storytelling 10-12'); Lập kịch bản Live Demo & Q&A phản biện. |
+

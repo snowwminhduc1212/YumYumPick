@@ -47,7 +47,7 @@ graph TD
     B --> B6["Saved Dishes & Công thức chi tiết (Có checkbox nguyên liệu)"]
     B --> B7["Smart Grocery List (Xuất danh sách đi chợ 1 chạm)"]
     B --> B8["Responsive hoàn chỉnh (Mobile Web + Desktop PC)"]
-    B --> B9["Chuẩn bị dữ liệu 40-50 món ăn & Script Seed SQLite"]
+    B --> B9["Chuẩn bị dữ liệu 100 món ăn đa dạng kèm ảnh & Script Seed"]
 
     C --> C1["Cổng Quản Trị Admin CMS Portal (/admin)"]
     C --> C2["Cloud Deployment (Vercel, Render, Supabase Cloud)"]
@@ -70,7 +70,7 @@ graph TD
    - Trang/Modal chi tiết công thức nấu chuẩn kèm danh sách checkbox nguyên liệu.
 5. **Smart Grocery List:** Tự động gộp nguyên liệu các món đã lưu thành checklist, nút copy để gửi qua mạng xã hội.
 6. **Responsive Đa Nền Tảng:** Thiết kế tương thích hoàn hảo cả màn hình nhỏ (Mobile 375px - 430px) và màn hình lớn (Laptop/PC 1024px+).
-7. **Data Preparation:** Chuẩn bị 40-50 món ăn chuẩn định dạng JSON và nạp sẵn vào CSDL SQLite.
+7. **Data Preparation (Kho 100 Món Đa Dạng):** Chuẩn bị 100 món ăn chuẩn định dạng JSON, đầy đủ ảnh sắc nét, nguyên liệu, bước nấu và nạp sẵn vào CSDL SQLite.
 
 ### 3.2. Các Hạng Mục Đã Bỏ Đi Để Hoàn Thành Trong 5 Ngày (Out-of-Scope)
 - **Bỏ Deploy Cloud (Vercel, Render, Supabase):** Tránh mọi lỗi liên quan đến kết nối mạng, biến môi trường cloud, CORS domain, build failure. Dự án chạy 100% localhost ổn định.

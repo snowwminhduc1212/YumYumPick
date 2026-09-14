@@ -5,7 +5,7 @@
     "english_name": "Traditional Beef Pho",
     "cuisine": "Vietnam",
     "region": "Miền Bắc",
-    "image": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_001.jpg",
     "cook_time_minutes": 45,
     "prep_time_minutes": 15,
     "difficulty": "Trung bình",
@@ -67,7 +67,8 @@
         "title": "Hoàn thiện & Thưởng thức",
         "description": "Trụng bánh phở vào tô, xếp thịt bò thái mỏng lên trên, chan nước dùng thật sôi vào để thịt chín tái, rắc hành lá và ớt tươi."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_002",
@@ -75,7 +76,7 @@
     "english_name": "Broken Rice with Grilled Pork Chops",
     "cuisine": "Vietnam",
     "region": "Miền Nam",
-    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_002.jpg",
     "cook_time_minutes": 35,
     "prep_time_minutes": 20,
     "difficulty": "Trung bình",
@@ -137,7 +138,8 @@
         "title": "Trình bày",
         "description": "Xới cơm tấm nóng ra đĩa, đặt sườn nướng, chả trứng, bì heo lên trên, chan mỡ hành béo ngậy và ăn kèm nước mắm tỏi ớt kẹo."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_003",
@@ -145,7 +147,7 @@
     "english_name": "Hanoi Grilled Pork with Vermicelli",
     "cuisine": "Vietnam",
     "region": "Miền Bắc",
-    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_003.jpg",
     "cook_time_minutes": 30,
     "prep_time_minutes": 20,
     "difficulty": "Trung bình",
@@ -201,7 +203,8 @@
         "title": "Pha nước chấm",
         "description": "Pha nước mắm, giấm, đường, nước ấm theo tỉ lệ 1:1:1:5, thả đu đủ muối chua, tỏi ớt băm và chả nóng vào tô."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_004",
@@ -209,7 +212,7 @@
     "english_name": "Vietnamese Combination Pan Bread",
     "cuisine": "Vietnam",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_004.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -265,7 +268,8 @@
         "title": "Thưởng thức",
         "description": "Rắc hạt tiêu đen, ngò rí lên trên và dùng nóng ngay với bánh mì nướng giòn tan."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_005",
@@ -273,7 +277,7 @@
     "english_name": "Hue Spicy Beef Noodle Soup",
     "cuisine": "Vietnam",
     "region": "Miền Trung",
-    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_005.jpg",
     "cook_time_minutes": 50,
     "prep_time_minutes": 20,
     "difficulty": "Kỳ công",
@@ -335,7 +339,8 @@
         "title": "Lên tô bún",
         "description": "Trụng bún sợi to, xếp bắp bò thái lát, chả cua, rưới nước dùng sôi sùng sục, ăn kèm hoa chuối bào và ớt ngâm giấm."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_006",
@@ -343,7 +348,7 @@
     "english_name": "Vietnamese Fresh Spring Rolls",
     "cuisine": "Vietnam",
     "region": "Miền Nam",
-    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_006.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -405,7 +410,8 @@
         "title": "Pha sốt tương",
         "description": "Đun ấm tương đen với chút bơ đậu phộng, múc ra chén rắc đậu phộng rang giã nhỏ và ớt băm."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_007",
@@ -413,7 +419,7 @@
     "english_name": "Mekong Sour Fish Soup",
     "cuisine": "Vietnam",
     "region": "Miền Nam",
-    "image": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_007.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -469,7 +475,8 @@
         "title": "Hoàn tất",
         "description": "Cho giá và cá trở lại nồi, rắc ngò gai, ngò ôm thái nhỏ cùng tỏi phi vàng thơm lừng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_008",
@@ -477,7 +484,7 @@
     "english_name": "Crispy Vietnamese Sizzling Pancake",
     "cuisine": "Vietnam",
     "region": "Miền Nam",
-    "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_008.jpg",
     "cook_time_minutes": 30,
     "prep_time_minutes": 20,
     "difficulty": "Trung bình",
@@ -539,7 +546,8 @@
         "title": "Gấp bánh",
         "description": "Mở nắp, rưới thêm chút dầu quanh vành bánh đến khi mép bánh giòn rụm bong ra thì gấp đôi lại và gắp ra đĩa."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_009",
@@ -547,7 +555,7 @@
     "english_name": "Vietnamese Braised Beef Stew",
     "cuisine": "Vietnam",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_009.jpg",
     "cook_time_minutes": 45,
     "prep_time_minutes": 15,
     "difficulty": "Trung bình",
@@ -603,7 +611,8 @@
         "title": "Thêm cà rốt",
         "description": "Cho cà rốt vào hầm thêm 10 phút, khuấy chút bột năng cho nước sốt sánh sệt rồi múc ra tô rắc húng quế."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_010",
@@ -611,7 +620,7 @@
     "english_name": "Crispy Vietnamese Spring Rolls",
     "cuisine": "Vietnam",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_010.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 20,
     "difficulty": "Dễ",
@@ -667,7 +676,8 @@
         "title": "Chiên 2 lửa",
         "description": "Chiên lửa 1 cho chín nhân, trước khi ăn chiên nhanh lửa 2 trên chảo ngập dầu nóng già để vỏ giòn tan khó cưỡng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_001",
@@ -675,7 +685,7 @@
     "english_name": "Korean Mixed Rice",
     "cuisine": "Korea",
     "region": "Seoul",
-    "image": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_001.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -737,7 +747,8 @@
         "title": "Trình bày",
         "description": "Xới cơm ra tô, xếp rau củ và thịt bò theo vòng tròn, đặt trứng ốp la lòng đào vào giữa kèm muỗng sốt Gochujang."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_002",
@@ -745,7 +756,7 @@
     "english_name": "Kimchi Jjigae with Pork Belly",
     "cuisine": "Korea",
     "region": "Busan",
-    "image": "https://images.unsplash.com/photo-1583032015879-c5c2491a329d?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_002.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -801,7 +812,8 @@
         "title": "Thêm đậu hũ",
         "description": "Cắt đậu hũ non thành khối vuông thả vào nồi đun sôi thêm 5 phút, rắc hành boa-rô thái vát rồi tắt bếp."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_003",
@@ -809,7 +821,7 @@
     "english_name": "Spicy Korean Rice Cakes",
     "cuisine": "Korea",
     "region": "Seoul",
-    "image": "https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_003.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -865,7 +877,8 @@
         "title": "Hoàn thiện",
         "description": "Thêm bắp cải, trứng luộc xắt đôi, đun đến khi sốt sệt lại thì rắc mè trắng rang thơm lừng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_004",
@@ -873,7 +886,7 @@
     "english_name": "Korean Marinated Beef Bulgogi",
     "cuisine": "Korea",
     "region": "Seoul",
-    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_004.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 20,
     "difficulty": "Dễ",
@@ -929,7 +942,8 @@
         "title": "Thưởng thức",
         "description": "Thịt vừa chín tới ngả màu nâu bóng thì tắt bếp, rắc mè rang và cuộn ăn cùng lá xà lách chấm ssamjang."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_001",
@@ -937,7 +951,7 @@
     "english_name": "Japanese Chashu Ramen",
     "cuisine": "Japan",
     "region": "Tokyo",
-    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_001.jpg",
     "cook_time_minutes": 30,
     "prep_time_minutes": 10,
     "difficulty": "Trung bình",
@@ -993,7 +1007,8 @@
         "title": "Xếp tô mì",
         "description": "Cho mì vào tô sâu lòng, rót nước súp nóng, xếp thịt xá xíu thái lát, nửa quả trứng lòng đào và lá rong biển lên trên."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_002",
@@ -1001,7 +1016,7 @@
     "english_name": "Japanese Beef Curry Rice",
     "cuisine": "Japan",
     "region": "Osaka",
-    "image": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_002.jpg",
     "cook_time_minutes": 35,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -1057,7 +1072,8 @@
         "title": "Hòa tan sốt cà ri",
         "description": "Tắt bếp, thả viên cà ri vào khuấy tan hoàn toàn rồi bật lửa nhỏ liu riu đun 5 phút cho nước sốt sánh mịn quyến rũ."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_003",
@@ -1065,7 +1081,7 @@
     "english_name": "Japanese Beef Bowl Gyudon",
     "cuisine": "Japan",
     "region": "Tokyo",
-    "image": "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_003.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -1121,7 +1137,8 @@
         "title": "Lên tô cơm",
         "description": "Xới cơm trắng ra bát tô, múc thịt bò và hành tây phủ kín mặt cơm, rưới nước sốt ngọt dịu và đập quả trứng lòng đào lên giữa."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_004",
@@ -1129,7 +1146,7 @@
     "english_name": "Stir-fried Beef Udon Noodles",
     "cuisine": "Japan",
     "region": "Kyoto",
-    "image": "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_004.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -1185,7 +1202,8 @@
         "title": "Hoàn tất",
         "description": "Gắp mì ra đĩa, rắc cá ngừ bào lên trên để từng mảnh cá nhảy múa theo làn khói nóng hổi."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_001",
@@ -1193,7 +1211,7 @@
     "english_name": "Traditional Pad Thai",
     "cuisine": "Thailand",
     "region": "Bangkok",
-    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_001.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -1249,7 +1267,8 @@
         "title": "Hoàn tất",
         "description": "Thêm giá đỗ và hẹ lá, đảo thêm 30 giây rồi tắt bếp. Múc ra đĩa, rắc đậu phộng rang và vắt chanh thưởng thức."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_002",
@@ -1257,7 +1276,7 @@
     "english_name": "Thai Spicy Shrimp Soup",
     "cuisine": "Thailand",
     "region": "Chiang Mai",
-    "image": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_002.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -1313,7 +1332,8 @@
         "title": "Nêm chanh ớt",
         "description": "Nêm nước mắm ngon, tắt bếp rồi vắt nước cốt chanh tươi, rắc ngò gai thưởng thức khi còn sôi ùng ục."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_003",
@@ -1321,7 +1341,7 @@
     "english_name": "Thai Basil Minced Pork",
     "cuisine": "Thailand",
     "region": "Bangkok",
-    "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_003.jpg",
     "cook_time_minutes": 12,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -1377,7 +1397,8 @@
         "title": "Thêm húng quế",
         "description": "Tắt bếp, trút toàn bộ lá húng quế vào đảo đều trong 15 giây cho húng quế vừa chín tái tỏa hương thơm ngát."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_004",
@@ -1385,7 +1406,7 @@
     "english_name": "Thai Green Papaya Salad",
     "cuisine": "Thailand",
     "region": "Isan",
-    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_004.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -1441,7 +1462,8 @@
         "title": "Trộn đu đủ",
         "description": "Cho đu đủ bào sợi vào cối, vừa giã vừa dùng muỗng đảo đều cho sợi đu đủ thấm đẫm sốt, rắc đậu phộng rang dọn ra đĩa."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_001",
@@ -1449,7 +1471,7 @@
     "english_name": "Spaghetti Bolognese",
     "cuisine": "Italy",
     "region": "Bologna",
-    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281691?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_001.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -1505,7 +1527,8 @@
         "title": "Trình bày",
         "description": "Gắp mì ra đĩa tròn, rưới sốt bò băm đỏ sánh lên trên và rắc phô mai bột thơm béo."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_002",
@@ -1513,7 +1536,7 @@
     "english_name": "Classic Spaghetti Carbonara",
     "cuisine": "Italy",
     "region": "Rome",
-    "image": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_002.jpg",
     "cook_time_minutes": 18,
     "prep_time_minutes": 5,
     "difficulty": "Trung bình",
@@ -1569,7 +1592,8 @@
         "title": "Trộn mì mượt mà",
         "description": "Vớt mì luộc thả thẳng vào chảo thịt, tắt bếp rồi đổ sốt trứng vào đảo nhanh tay cùng 2 vá nước luộc mì cho sốt sánh ngậy mượt mà."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_003",
@@ -1577,7 +1601,7 @@
     "english_name": "Margherita Neapolitan Pizza",
     "cuisine": "Italy",
     "region": "Naples",
-    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_003.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -1633,7 +1657,8 @@
         "title": "Hoàn tất",
         "description": "Lấy bánh ra đĩa, đặt lá húng tây Basil tươi lên trên, rưới chút dầu ô-liu và cắt thành 6 miếng thưởng thức nóng giòn."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_004",
@@ -1641,7 +1666,7 @@
     "english_name": "Pan-seared Beef Steak with Black Pepper Sauce",
     "cuisine": "Italy",
     "region": "Florence",
-    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_004.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 10,
     "difficulty": "Trung bình",
@@ -1697,7 +1722,8 @@
         "title": "Nấu sốt tiêu & Phục vụ",
         "description": "Cho miếng thịt ra đĩa nghỉ, tận dụng chảo cho sốt tiêu đen vào đun nóng sánh mịn, rưới lên đĩa steak ăn cùng khoai tây giòn rụm."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_011",
@@ -1705,7 +1731,7 @@
     "english_name": "Claypot Braised Snakehead Fish",
     "cuisine": "Vietnam",
     "region": "Miền Nam",
-    "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_011.jpg",
     "cook_time_minutes": 30,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -1761,7 +1787,8 @@
         "title": "Kho liu riu",
         "description": "Châm thêm chút nước sôi xăm xắp mặt cá, hạ lửa liu riu 20 phút cho nước cạn sệt, rắc hành lá tiêu ớt rồi tắt bếp."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_012",
@@ -1769,7 +1796,7 @@
     "english_name": "Yangzhou Fried Rice",
     "cuisine": "Vietnam",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_012.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -1825,7 +1852,8 @@
         "title": "Chiên cơm tơi giòn",
         "description": "Phi tỏi thơm, đổ cơm vào đảo liên tục trên lửa lớn 7 phút cho hạt cơm săn giòn, trút toàn bộ topping vào đảo đều nêm nước mắm hạt tiêu."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_013",
@@ -1833,7 +1861,7 @@
     "english_name": "Nam Vang Pork & Seafood Noodle Soup",
     "cuisine": "Vietnam",
     "region": "Miền Nam",
-    "image": "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_013.jpg",
     "cook_time_minutes": 35,
     "prep_time_minutes": 15,
     "difficulty": "Trung bình",
@@ -1895,7 +1923,8 @@
         "title": "Trụng hủ tiếu & Trình bày",
         "description": "Trụng sợi hủ tiếu dai cho vào tô, xếp tôm, thịt băm, gan tim, trứng cút, chan nước lèo sôi sùng sục và rắc ngập tỏi phi tóp mỡ."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_014",
@@ -1903,7 +1932,7 @@
     "english_name": "Crab Paste Vermicelli Noodle Soup",
     "cuisine": "Vietnam",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_014.jpg",
     "cook_time_minutes": 30,
     "prep_time_minutes": 15,
     "difficulty": "Trung bình",
@@ -1965,7 +1994,8 @@
         "title": "Hoàn thiện tô bún",
         "description": "Cho bún vào tô, múc tảng riêu cua, đậu hũ chiên, chan nước dùng cà chua nóng hổi, rắc hành hoa tía tô."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_vn_015",
@@ -1973,7 +2003,7 @@
     "english_name": "Braised Ginger Chicken",
     "cuisine": "Vietnam",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_vn_015.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2023,7 +2053,8 @@
         "title": "Kho kẹo nước",
         "description": "Thêm 1 chén nước nhỏ, hạ lửa đun liu riu 15 phút đến khi nước sốt keo lại bám đều quanh từng miếng gà nâu bóng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_005",
@@ -2031,7 +2062,7 @@
     "english_name": "Korean Stir-fried Glass Noodles Japchae",
     "cuisine": "Korea",
     "region": "Seoul",
-    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_005.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 15,
     "difficulty": "Trung bình",
@@ -2087,7 +2118,8 @@
         "title": "Trộn miến tổng hợp",
         "description": "Trút toàn bộ rau củ, thịt bò và miến vào âu lớn, rưới sốt tương mè đảo đều tay và rắc mè trắng rang thơm phức."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_006",
@@ -2095,7 +2127,7 @@
     "english_name": "Korean Sweet & Spicy Fried Chicken",
     "cuisine": "Korea",
     "region": "Seoul",
-    "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_006.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -2151,7 +2183,8 @@
         "title": "Đảo sốt Yangnyeom",
         "description": "Đun sôi hỗn hợp Gochujang, mật ong, tương cà, tỏi phi cho sệt lại. Thả gà chiên vào đảo nhanh tay bám đều sốt rồi rắc đậu phộng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_007",
@@ -2159,7 +2192,7 @@
     "english_name": "Korean Seaweed Soup with Beef",
     "cuisine": "Korea",
     "region": "Toàn quốc",
-    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_007.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2209,7 +2242,8 @@
         "title": "Nấu canh ngọt thanh",
         "description": "Đổ 600ml nước vào đun sôi, nêm nước tương súp và muối, hạ lửa ninh 15 phút cho vị ngọt tiết ra trọn vẹn."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_kr_008",
@@ -2217,7 +2251,7 @@
     "english_name": "Korean Volcano Steamed Eggs",
     "cuisine": "Korea",
     "region": "Seoul",
-    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_kr_008.jpg",
     "cook_time_minutes": 10,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -2267,7 +2301,8 @@
         "title": "Ủ phồng núi lửa",
         "description": "Khi trứng đông 80%, úp một chiếc thố/bát sâu lòng lên trên, hạ lửa thật nhỏ trong 3 phút cho trứng bung phồng rực rỡ."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_005",
@@ -2275,7 +2310,7 @@
     "english_name": "Japanese Rolled Sweet Omelette",
     "cuisine": "Japan",
     "region": "Tokyo",
-    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_005.jpg",
     "cook_time_minutes": 12,
     "prep_time_minutes": 5,
     "difficulty": "Trung bình",
@@ -2325,7 +2360,8 @@
         "title": "Hoàn tất thanh trứng",
         "description": "Đổ tiếp lớp trứng thứ 2 lùa xuống dưới cuộn trứng cũ, cuộn tiếp tục lặp lại 3-4 lần cho thành khối chữ nhật vàng ươm."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_006",
@@ -2333,7 +2369,7 @@
     "english_name": "Japanese Grilled Eel Rice Bowl",
     "cuisine": "Japan",
     "region": "Nagoya",
-    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_006.jpg",
     "cook_time_minutes": 15,
     "prep_time_minutes": 5,
     "difficulty": "Dễ",
@@ -2383,7 +2419,8 @@
         "title": "Trình bày Unadon",
         "description": "Đặt miếng lươn nướng nóng hổi lên trên, rắc mè rang và rong biển vụn thưởng thức ngay."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_007",
@@ -2391,7 +2428,7 @@
     "english_name": "Osaka Savory Cabbage Pancake",
     "cuisine": "Japan",
     "region": "Osaka",
-    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_007.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2447,7 +2484,8 @@
         "title": "Trang trí hoàn thiện",
         "description": "Rưới zíc-zắc sốt Okonomi và sốt Mayonnaise, rắc rong biển và cá ngừ bào mỏng lên thưởng thức khi bánh còn nóng bỏng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_jp_008",
@@ -2455,7 +2493,7 @@
     "english_name": "Japanese Crispy Fried Chicken Karaage",
     "cuisine": "Japan",
     "region": "Tokyo",
-    "image": "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_jp_008.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 15,
     "difficulty": "Dễ",
@@ -2505,7 +2543,8 @@
         "title": "Chiên ngập dầu giòn rụm",
         "description": "Chiên gà ở nhiệt độ 170°C trong 4 phút cho vàng nhạt, vớt ra 2 phút rồi chiên lại ở 185°C trong 1 phút cho vỏ nâu vàng giòn tan."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_005",
@@ -2513,7 +2552,7 @@
     "english_name": "Thai Green Chicken Curry",
     "cuisine": "Thailand",
     "region": "Bangkok",
-    "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_005.jpg",
     "cook_time_minutes": 25,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2569,7 +2608,8 @@
         "title": "Nêm nếm thảo mộc",
         "description": "Nêm nước mắm và đường thốt nốt, thả lá húng quế lá chanh xé nhỏ vào đảo đều rồi múc ra tô ăn cùng bún hoặc cơm."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_006",
@@ -2577,7 +2617,7 @@
     "english_name": "Thai Pineapple Seafood Fried Rice",
     "cuisine": "Thailand",
     "region": "Phuket",
-    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_006.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2633,7 +2673,8 @@
         "title": "Nhồi vào trái thơm",
         "description": "Trút hải sản và hạt điều vào cơm đảo đều 1 phút, múc toàn bộ cơm vào vỏ quả dứa, rắc chà bông lên trên cùng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_th_007",
@@ -2641,7 +2682,7 @@
     "english_name": "Thai Coconut Chicken Soup",
     "cuisine": "Thailand",
     "region": "Chiang Mai",
-    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_th_007.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2697,7 +2738,8 @@
         "title": "Hoàn thiện vị chua thanh",
         "description": "Tắt bếp, vắt nước cốt chanh tươi, thả ớt hiểm đập dập và ngò gai thưởng thức nóng."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_005",
@@ -2705,7 +2747,7 @@
     "english_name": "Mediterranean Tuna Salad",
     "cuisine": "Italy",
     "region": "Sicily",
-    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_005.jpg",
     "cook_time_minutes": 10,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2761,7 +2803,8 @@
         "title": "Trộn sốt giấm",
         "description": "Rưới đều sốt dầu giấm Balsamic lên toàn bộ đĩa salad, rắc chút tiêu đen xay vỡ và thưởng thức thanh mát."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_006",
@@ -2769,7 +2812,7 @@
     "english_name": "Creamy Roasted Pumpkin Soup",
     "cuisine": "Italy",
     "region": "Tuscany",
-    "image": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_006.jpg",
     "cook_time_minutes": 20,
     "prep_time_minutes": 10,
     "difficulty": "Dễ",
@@ -2825,7 +2868,8 @@
         "title": "Thêm kem tươi",
         "description": "Hạ nhỏ lửa, rót kem tươi vào khuấy đều nêm muối tiêu vừa miệng, múc ra bát rắc hạt bí giòn rụm."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "dish_it_007",
@@ -2833,7 +2877,7 @@
     "english_name": "Seafood Spaghetti alla Pescatora",
     "cuisine": "Italy",
     "region": "Naples",
-    "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/dishes/dish_it_007.jpg",
     "cook_time_minutes": 22,
     "prep_time_minutes": 10,
     "difficulty": "Trung bình",
@@ -2889,6 +2933,3540 @@
         "title": "Đảo mì ngấm vị",
         "description": "Cho mì luộc và toàn bộ hải sản vào chảo sốt đảo đều trong 1 phút trên lửa lớn, rắc ngò tây thái nhỏ rồi dọn ra đĩa."
       }
-    ]
+    ],
+    "image_url": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_016",
+    "name": "Bánh Cuốn Nóng Hà Nội",
+    "english_name": "Hanoi Steamed Rice Rolls",
+    "cuisine": "Vietnam",
+    "region": "Miền Bắc",
+    "image": "/images/dishes/dish_vn_016.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 390,
+    "short_description": "Lớp bánh tráng mỏng tang mướt mát cuốn nhân thịt băm mộc nhĩ, rắc hành phi giòn rụm chấm nước mắm cà cuống ấm nóng.",
+    "tips": "Tráng bánh thật mỏng và hấp bằng hơi nước sôi già để bánh mềm dẻo không bị nát.",
+    "ingredients": [
+      {
+        "name": "Bột gạo pha bột năng",
+        "amount": "200",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Thịt nạc vai băm nhỏ",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Mộc nhĩ nấm mèo ngâm nở",
+        "amount": "50",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Hành phi vàng giòn",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Chả lụa quế & Rau thơm",
+        "amount": "100",
+        "unit": "g",
+        "category": "thịt"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào nhân bánh",
+        "description": "Phi thơm hành tím, cho thịt băm và mộc nhĩ thái sợi vào xào chín nêm nước mắm hạt tiêu."
+      },
+      {
+        "step_number": 2,
+        "title": "Tráng bánh mỏng",
+        "description": "Múc một muôi bột láng đều mặt chảo chống dính, đậy nắp 30 giây rồi úp bánh ra mâm thoa dầu ăn."
+      },
+      {
+        "step_number": 3,
+        "title": "Cuộn & Thưởng thức",
+        "description": "Rải nhân thịt vào giữa cuộn tròn lại, cắt khúc vừa ăn, rắc hành phi và chấm nước mắm chua ngọt ấm."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_017",
+    "name": "Mì Quảng Tôm Thịt Trứng Cút",
+    "english_name": "Quang Style Turmeric Noodles",
+    "cuisine": "Vietnam",
+    "region": "Miền Trung",
+    "image": "/images/dishes/dish_vn_017.jpg",
+    "cook_time_minutes": 30,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 1,
+    "calories_approx": 510,
+    "short_description": "Sợi mì vàng nghệ óng ả chan nước nhưỡng đậm đà sâm sấp, topping tôm rim thịt heo, trứng cút và bánh tráng mè nướng giòn rụm.",
+    "tips": "Nước lèo mì Quảng chỉ chan vừa xâm xấp đáy tô chứ không chan ngập như phở.",
+    "ingredients": [
+      {
+        "name": "Mì Quảng sợi vàng nghệ",
+        "amount": "350",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Tôm đất & Thịt ba rọi",
+        "amount": "250",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng cút luộc bóc vỏ",
+        "amount": "6",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Bánh tráng nướng & Đậu phộng rang",
+        "amount": "1",
+        "unit": "cái",
+        "category": "khác"
+      },
+      {
+        "name": "Rau búp chuối, cải non, húng lủi",
+        "amount": "1",
+        "unit": "rổ",
+        "category": "rau sống"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Rim tôm thịt",
+        "description": "Phi dầu củ nén thơm lừng, cho tôm và thịt ba chỉ vào rim săn đượm màu dầu điều trong 10 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu nước nhưỡng",
+        "description": "Châm nước dùng xương vào nồi tôm thịt, đun sôi nhỏ lửa cho vị ngọt tiết ra sánh đậm."
+      },
+      {
+        "step_number": 3,
+        "title": "Lên tô Mì Quảng",
+        "description": "Xếp rau sống dưới đáy, đặt mì Quảng lên, múc tôm thịt trứng cút, chan 1 vá nước nhưỡng, rắc đậu phộng bẻ bánh tráng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_018",
+    "name": "Bún Đậu Mắm Tôm Thập Cẩm",
+    "english_name": "Tofu & Pork Vermicelli with Shrimp Paste",
+    "cuisine": "Vietnam",
+    "region": "Miền Bắc",
+    "image": "/images/dishes/dish_vn_018.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 2,
+    "calories_approx": 580,
+    "short_description": "Mẹt bún lá cắt miếng ăn kèm đậu hũ chiên phồng lướt ván, thịt chân giò luộc, chả cốm dẻo thơm chấm mắm tôm đánh sủi bọt trắng xóa.",
+    "tips": "Đánh mắm tôm với rượu trắng, đường, quất (tắc) và rưới một muôi dầu rán đậu sôi sùng sục vào mắm tôm sẽ dậy mùi thơm ngất ngây.",
+    "ingredients": [
+      {
+        "name": "Bún lá vắt miếng",
+        "amount": "300",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Đậu hũ Mơ cắt vuông chiên phồng",
+        "amount": "3",
+        "unit": "miếng",
+        "category": "khác"
+      },
+      {
+        "name": "Thịt chân giò luộc cuộn tròn",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Chả cốm chiên giòn",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Mắm tôm Thanh Hóa & Quất, ớt",
+        "amount": "1",
+        "unit": "bát nhỏ",
+        "category": "gia vị"
+      },
+      {
+        "name": "Rau kinh giới, tía tô, dưa leo",
+        "amount": "1",
+        "unit": "đĩa",
+        "category": "rau sống"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Chiên đậu & Chả cốm",
+        "description": "Chiên ngập dầu đậu hũ cho vỏ ngoài vàng giòn rụm bên trong mềm béo. Chiên chả cốm cho phồng thơm."
+      },
+      {
+        "step_number": 2,
+        "title": "Luộc thịt chân giò",
+        "description": "Bó tròn thịt chân giò luộc cùng hành củ, vớt ra ngâm nước đá rồi thái lát mỏng mướt."
+      },
+      {
+        "step_number": 3,
+        "title": "Đánh mắm tôm",
+        "description": "Khuấy mắm tôm với đường quất cho sủi bọt tăm, rưới dầu rán đậu sôi lên. Bày bún, đậu, chả cốm ra mẹt thưởng thức."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_019",
+    "name": "Thịt Kho Tàu Nước Dừa Hột Vịt",
+    "english_name": "Caramelized Pork Belly with Eggs",
+    "cuisine": "Vietnam",
+    "region": "Miền Nam",
+    "image": "/images/dishes/dish_vn_019.jpg",
+    "cook_time_minutes": 50,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 680,
+    "short_description": "Khối thịt ba chỉ vuông vức mỡ trong veo mềm rục ninh cùng nước dừa xiêm ngọt lịm và trứng vịt đậm đà màu hổ phách.",
+    "tips": "Không đậy nắp nồi khi kho thịt với nước dừa để nước kho trong vắt và mỡ thịt trong veo đẹp mắt.",
+    "ingredients": [
+      {
+        "name": "Thịt ba rọi rút sườn cắt vuông",
+        "amount": "500",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Nước dừa xiêm tươi",
+        "amount": "600",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Trứng vịt luộc bóc vỏ",
+        "amount": "5",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Nước mắm ngon & Đường phèn",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Tỏi, ớt sừng giã nhuyễn",
+        "amount": "1",
+        "unit": "muỗng",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ướp thịt ba rọi",
+        "description": "Ướp thịt với tỏi ớt băm, nước mắm, đường phèn, chút rượu trắng trong 30 phút dưới ánh nắng cho mỡ trong."
+      },
+      {
+        "step_number": 2,
+        "title": "Đun sôi nước dừa",
+        "description": "Đun sôi nước dừa tươi trong nồi, trút thịt đã ướp vào đun lửa lớn hớt sạch bọt cho nước thật trong."
+      },
+      {
+        "step_number": 3,
+        "title": "Kho liu riu với trứng",
+        "description": "Hạ lửa liu riu kho 40 phút, thả trứng vịt vào kho thêm 10 phút đến khi thịt mềm tan nước kho màu cánh gián rực rỡ."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_020",
+    "name": "Canh Khổ Qua Nhồi Thịt",
+    "english_name": "Stuffed Bitter Melon Soup",
+    "cuisine": "Vietnam",
+    "region": "Miền Nam",
+    "image": "/images/dishes/dish_vn_020.jpg",
+    "cook_time_minutes": 30,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 310,
+    "short_description": "Món canh thanh nhiệt giải độc với vị đắng nhẹ đầu lưỡi chuyển thành ngọt hậu sâu lắng, nhân thịt bọc mộc nhĩ thơm nức tiêu sọ.",
+    "tips": "Ngâm khổ qua đã khoét ruột vào nước đá lạnh 10 phút sẽ giảm bớt vị đắng gắt.",
+    "ingredients": [
+      {
+        "name": "Trái khổ qua (mướp đắng)",
+        "amount": "3",
+        "unit": "trái",
+        "category": "rau củ"
+      },
+      {
+        "name": "Thịt nạc dăm xay nhuyễn",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Giò sống quết dai",
+        "amount": "50",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Mộc nhĩ, miến cắt nhỏ",
+        "amount": "30",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Hành lá, ngò rí, tiêu sọ trắng",
+        "amount": "1",
+        "unit": "ít",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Trộn nhân nhồi",
+        "description": "Trộn đều thịt xay, giò sống, mộc nhĩ, miến, tiêu sọ và hạt nêm cho thật dẻo dai quết dính."
+      },
+      {
+        "step_number": 2,
+        "title": "Nhồi khổ qua",
+        "description": "Rọc một đường dọc quả khổ qua, móc sạch ruột rồi nhét nhân thịt vào vuốt phẳng mép quả."
+      },
+      {
+        "step_number": 3,
+        "title": "Nấu canh thanh trong",
+        "description": "Đun sôi nước hầm xương, thả khổ qua vào nấu trên lửa vừa trong 20 phút không đậy nắp, nêm gia vị rồi rắc hành ngò."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_021",
+    "name": "Sườn Xào Chua Ngọt",
+    "english_name": "Sweet & Sour Pork Ribs",
+    "cuisine": "Vietnam",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_vn_021.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Từng dẻ sườn non rán vàng xém cạnh ngập trong sốt chua ngọt đỏ au óng ả từ giấm táo, cà chua và dứa thơm lừng.",
+    "tips": "Luộc sơ sườn non với chút muối và gừng trước khi rán để sườn sạch bọt và khi rim ngấm trọn sốt.",
+    "ingredients": [
+      {
+        "name": "Sườn non heo chặt khúc nhỏ",
+        "amount": "450",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Dứa chín & Ớt chuông",
+        "amount": "100",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Giấm gạo, đường, tương cà",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nước mắm ngon & Tỏi băm",
+        "amount": "1",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Rán vàng sườn",
+        "description": "Luộc sơ sườn, thấm khô rồi rán trên chảo dầu nóng cho vàng đều hai mặt thơm lừng."
+      },
+      {
+        "step_number": 2,
+        "title": "Pha sốt chua ngọt",
+        "description": "Khuấy đều giấm, đường, tương cà, nước mắm và chút nước lọc thành hỗn hợp sốt chua ngọt cân bằng."
+      },
+      {
+        "step_number": 3,
+        "title": "Đảo sườn ngấm sốt",
+        "description": "Phi thơm tỏi, đổ nước sốt vào đun sôi sền sệt, trút sườn và dứa vào đảo đều trên lửa nhỏ 10 phút đến khi sốt keo bóng bám quanh dẻ sườn."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_022",
+    "name": "Bánh Canh Cua Giò Heo",
+    "english_name": "Crab & Pork Hock Tapioca Noodle Soup",
+    "cuisine": "Vietnam",
+    "region": "Miền Nam",
+    "image": "/images/dishes/dish_vn_022.jpg",
+    "cook_time_minutes": 40,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 1,
+    "calories_approx": 590,
+    "short_description": "Nước dùng bánh canh sền sệt đỏ au gạch cua biển, sợi bánh canh bột lọc dai trong suốt hòa cùng giò heo giòn sần sật.",
+    "tips": "Hòa một muôi bột năng với nước lạnh đổ từ từ vào nồi nước dùng để tạo độ sánh mịn như súp.",
+    "ingredients": [
+      {
+        "name": "Sợi bánh canh bột lọc",
+        "amount": "400",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Thịt cua biển xào dầu điều",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Khoanh giò heo luộc mềm",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng cút & Huyết heo",
+        "amount": "100",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Hành lá, ngò rí, tiêu đen",
+        "amount": "1",
+        "unit": "nắm",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Nấu nước dùng sánh",
+        "description": "Ninh xương heo lấy nước ngọt, khuấy bột năng cho nước sánh nhẹ, nêm nước mắm và dầu màu điều."
+      },
+      {
+        "step_number": 2,
+        "title": "Xào thịt cua biển",
+        "description": "Phi hành tỏi thơm, xào nhanh thịt cua biển với tiêu đen cho săn và thơm nức mũi."
+      },
+      {
+        "step_number": 3,
+        "title": "Lên tô bánh canh",
+        "description": "Trụng sợi bánh canh dai trong, múc khoanh giò heo, trứng cút, thịt cua biển lên trên, chan nước súp sánh đỏ và rắc hành ngò tiêu."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_023",
+    "name": "Lẩu Thái Chua Cay Hải Sản",
+    "english_name": "Vietnamese-Thai Seafood Hotpot",
+    "cuisine": "Vietnam",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_vn_023.jpg",
+    "cook_time_minutes": 30,
+    "prep_time_minutes": 20,
+    "difficulty": "Dễ",
+    "spicy_level": 2,
+    "calories_approx": 480,
+    "short_description": "Nồi lẩu bốc khói nghi ngút thơm lừng sả riềng ớt hiểm, nước dùng chua thanh cay xé lưỡi nhúng ngập tôm, mực, bò và nấm tươi.",
+    "tips": "Nấu nước lẩu với xương ống và một chút nước dừa tươi để vị ngọt sâu dịu dàng trung hòa độ chua cay.",
+    "ingredients": [
+      {
+        "name": "Tôm sú tươi & Mực ống cắt khoanh",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Thịt ba chỉ bò cuộn nấm",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Gói gia vị lẩu Thái & Sả, riềng",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      },
+      {
+        "name": "Rau muống non, hoa chuối, nấm kim châm",
+        "amount": "300",
+        "unit": "g",
+        "category": "rau sống"
+      },
+      {
+        "name": "Bún tươi hoặc mì tôm ăn kèm",
+        "amount": "300",
+        "unit": "g",
+        "category": "tinh bột"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Nấu nước lẩu",
+        "description": "Phi thơm sả riềng ớt, đổ nước hầm xương vào đun sôi cùng gói sốt lẩu Thái, nêm nước mắm và nước cốt chanh."
+      },
+      {
+        "step_number": 2,
+        "title": "Bày đĩa hải sản",
+        "description": "Xếp tôm sú, mực ống, thịt bò cuộn nấm kim châm ra đĩa tròn thật bắt mắt."
+      },
+      {
+        "step_number": 3,
+        "title": "Nhúng lẩu sôi sùng sục",
+        "description": "Đặt nồi lẩu lên bếp mini, nước sôi thả hải sản và rau vào nhúng chín tái gắp ra ăn cùng bún tươi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_024",
+    "name": "Bánh Canh Chả Cá Nha Trang",
+    "english_name": "Nha Trang Fish Cake Noodle Soup",
+    "cuisine": "Vietnam",
+    "region": "Miền Trung",
+    "image": "/images/dishes/dish_vn_024.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 1,
+    "calories_approx": 420,
+    "short_description": "Tô bánh canh ngọt lịm nấu từ xương cá cờ cá thu, chả cá chiên và chả cá hấp dai giòn sần sật chấm mắm ớt xiêm xanh cay nồng.",
+    "tips": "Ninh nước lèo bằng đầu và xương cá biển tươi với hành tây nướng để nước ngọt thanh tuyệt đối không bị tanh.",
+    "ingredients": [
+      {
+        "name": "Sợi bánh canh bột gạo hoặc bột lọc",
+        "amount": "350",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Chả cá thu chiên và hấp",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Cá ngừ hoặc cá cờ hấp xé miếng",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Hành lá, hẹ lá, ớt xiêm xanh",
+        "amount": "1",
+        "unit": "nắm",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Hành phi thơm & Tiêu sọ",
+        "amount": "2",
+        "unit": "muỗng",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Nấu nước lèo cá ngọt lịm",
+        "description": "Ninh xương cá biển tươi với hành tím nướng trong 25 phút, lọc lấy nước trong nêm muối và chút nước mắm nhĩ."
+      },
+      {
+        "step_number": 2,
+        "title": "Cắt chả cá",
+        "description": "Thái chả cá chiên và chả cá hấp thành từng lát mỏng dài vừa miệng."
+      },
+      {
+        "step_number": 3,
+        "title": "Trình bày",
+        "description": "Trụng bánh canh cho vào tô, xếp chả cá chiên, chả hấp, cá xé, chan nước lèo sôi sùng sục, rắc hẹ và ớt xiêm xanh."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_025",
+    "name": "Nem Nướng Nha Trang Cuốn Bánh Tráng",
+    "english_name": "Nha Trang Grilled Pork Sausage Rolls",
+    "cuisine": "Vietnam",
+    "region": "Miền Trung",
+    "image": "/images/dishes/dish_vn_025.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 20,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 560,
+    "short_description": "Cây nem thịt nướng vàng xém thơm mùi tỏi tiêu, cuốn bánh tráng ram chiên giòn tan, xoài chua dưa leo chấm nước sốt tương nếp béo ngậy.",
+    "tips": "Nước chấm tương nếp nấu từ gan heo xay và nếp dẻo xay nhuyễn sẽ tạo vị bùi béo màu vàng cam đặc trưng xứ trầm hương.",
+    "ingredients": [
+      {
+        "name": "Giò sống & Thịt heo xay quết dai",
+        "amount": "350",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bánh tráng ram chiên giòn (bánh tráng chiên cuộn)",
+        "amount": "1",
+        "unit": "đĩa",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Bánh tráng dẻo cuốn",
+        "amount": "1",
+        "unit": "xấp",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Xoài xanh thái lát, dưa leo, hẹ",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau sống"
+      },
+      {
+        "name": "Sốt tương nếp gan heo chấm nem",
+        "amount": "1",
+        "unit": "bát",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Quết & Nướng nem",
+        "description": "Quết giò sống với thịt xay, tỏi băm, tiêu cho dai bóng. Bọc quanh que tre rồi nướng than hoa vàng xém."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu sốt tương nếp",
+        "description": "Nấu gạo nếp nhuyễn cùng gan heo xay, tôm băm, màu điều và bơ đậu phộng thành hỗn hợp sệt béo vàng cam."
+      },
+      {
+        "step_number": 3,
+        "title": "Cuốn nem",
+        "description": "Trải bánh tráng, đặt rau sống xoài chua, cây nem nướng cắt dọc, que ram giòn rụm cuộn chặt chấm đẫm sốt tương nếp."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_026",
+    "name": "Cháo Sườn Hà Nội Quẩy Giòn",
+    "english_name": "Hanoi Creamy Rib Porridge with Crullers",
+    "cuisine": "Vietnam",
+    "region": "Miền Bắc",
+    "image": "/images/dishes/dish_vn_026.jpg",
+    "cook_time_minutes": 35,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 410,
+    "short_description": "Bát cháo sườn sánh mịn như kem xay từ bột gạo tẻ, ngọt lịm nước ninh sườn sụn non, ăn cùng ruốc thịt bông tơi và quẩy giòn rụm.",
+    "tips": "Dùng bột gạo tẻ xay nước ngâm nở khuấy trên lửa nhỏ để cháo mịn mượt không một hạt lợn cợn.",
+    "ingredients": [
+      {
+        "name": "Bột gạo tẻ xay mịn",
+        "amount": "150",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Sườn sụn heo ninh mềm",
+        "amount": "250",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Ruốc thịt heo (chà bông) sợi tơi",
+        "amount": "50",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Quẩy giòn cắt khúc",
+        "amount": "2",
+        "unit": "cái",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Tiêu đen xay & Ớt bột",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ninh sườn sụn",
+        "description": "Ninh sườn sụn trên lửa nhỏ 30 phút cho mềm ngọt lấy nước cốt trong."
+      },
+      {
+        "step_number": 2,
+        "title": "Khuấy cháo mịn",
+        "description": "Hòa bột gạo với nước hầm sườn, bắc lên bếp khuấy đều tay liên tục trong 15 phút cho cháo sánh mịn như kem."
+      },
+      {
+        "step_number": 3,
+        "title": "Múc cháo & Thưởng thức",
+        "description": "Múc cháo nóng ra bát, rải sườn sụn, ruốc bông, quẩy giòn cắt nhỏ và rắc ngập tiêu đen."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_027",
+    "name": "Bò Lúc Lắc Khoai Tây Chiên",
+    "english_name": "Vietnamese Shaking Beef with Fries",
+    "cuisine": "Vietnam",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_vn_027.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 1,
+    "calories_approx": 620,
+    "short_description": "Những khối thịt bò thăn vuông vức áp chảo xóc 'lắc lắc' trên lửa bùng cháy, thịt mọng nước thơm mùi bơ tỏi ăn cùng khoai tây giòn tan.",
+    "tips": "Chảo phải thật bốc khói và xào lửa cực đại trong đúng 2 phút để thịt cháy cạnh ngoài mà bên trong mềm mọng đỏ hồng.",
+    "ingredients": [
+      {
+        "name": "Thịt thăn bò cắt quân cờ",
+        "amount": "350",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Ớt chuông đỏ xanh & Hành tây",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Khoai tây chiên giòn",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Dầu hào, nước tương, bơ lạt, tiêu",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Muối tiêu chanh chấm kèm",
+        "amount": "1",
+        "unit": "chén nhỏ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ướp bò quân cờ",
+        "description": "Ướp thịt bò với tỏi băm, dầu hào, nước tương, đường và dầu ăn trong 15 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Xào lúc lắc lửa lớn",
+        "description": "Đun chảo thật nóng với bơ tỏi, đổ thịt bò vào xóc lắc chảo thật nhanh tay trong 90 giây cho xém mặt."
+      },
+      {
+        "step_number": 3,
+        "title": "Thêm rau củ",
+        "description": "Trút ớt chuông và hành tây vào đảo thêm 30 giây rồi trút ra đĩa ăn kèm khoai tây chiên và xà lách cà chua."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_028",
+    "name": "Cơm Gà Hội An Xé Phay",
+    "english_name": "Hoi An Shredded Chicken Rice",
+    "cuisine": "Vietnam",
+    "region": "Miền Trung",
+    "image": "/images/dishes/dish_vn_028.jpg",
+    "cook_time_minutes": 35,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 1,
+    "calories_approx": 580,
+    "short_description": "Hạt cơm nấu nước luộc gà vàng ươm bột nghệ bóng mỡ gà, thịt gà ta xé phay trộn gỏi hành tây rau răm và sốt ớt mạ cay xè đầu lưỡi.",
+    "tips": "Xào gạo với mỡ gà và nghệ tươi trước khi nấu để hạt cơm săn chắc, bóng bẩy và thơm phức vị gà.",
+    "ingredients": [
+      {
+        "name": "Thịt gà ta thả vườn",
+        "amount": "400",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Gạo tẻ thơm",
+        "amount": "250",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Hành tây thái mỏng ngâm đá",
+        "amount": "1",
+        "unit": "củ",
+        "category": "rau củ"
+      },
+      {
+        "name": "Rau răm, ngò gai & Ớt sa tế Hội An",
+        "amount": "1",
+        "unit": "nắm",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Nước mắm chua ngọt trộn gỏi gà",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Luộc gà & Nấu cơm vàng",
+        "description": "Luộc gà với nghệ gừng cho da vàng óng. Lấy nước luộc gà nấu cơm cùng mỡ gà cho thơm dẻo."
+      },
+      {
+        "step_number": 2,
+        "title": "Trộn gà xé phay",
+        "description": "Xé nhỏ thịt gà, bóp gỏi với hành tây ngâm giấm đường, rau răm, tiêu và nước mắm ớt."
+      },
+      {
+        "step_number": 3,
+        "title": "Bày đĩa cơm gà",
+        "description": "Xới cơm vàng ươm ra đĩa, xếp gà xé trộn gỏi bên cạnh, kèm chén đồ chua và ớt sa tế Hội An cay nồng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_029",
+    "name": "Vịt Nấu Chao Cần Nước Miền Tây",
+    "english_name": "Mekong Duck Stewed with Fermented Tofu",
+    "cuisine": "Vietnam",
+    "region": "Miền Nam",
+    "image": "/images/dishes/dish_vn_029.jpg",
+    "cook_time_minutes": 40,
+    "prep_time_minutes": 20,
+    "difficulty": "Trung bình",
+    "spicy_level": 1,
+    "calories_approx": 610,
+    "short_description": "Thịt vịt xiêm săn chắc thơm béo ngập trong nước lẩu chao đỏ đậm đà ngọt bùi khoai môn dẻo quánh, nhúng ngập rau muống và cần nước.",
+    "tips": "Ướp thịt vịt với rượu trắng và gừng giã nát để khử sạch mùi hôi lông trước khi ướp chao đỏ.",
+    "ingredients": [
+      {
+        "name": "Thịt vịt xiêm chặt miếng",
+        "amount": "500",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Chao trắng & Chao đỏ",
+        "amount": "4",
+        "unit": "viên",
+        "category": "gia vị"
+      },
+      {
+        "name": "Khoai môn sáp cắt khối chiên sơ",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước dừa tươi",
+        "amount": "500",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Rau cần nước, rau muống, bún tươi",
+        "amount": "300",
+        "unit": "g",
+        "category": "rau sống"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ướp vịt với chao",
+        "description": "Dằm nhuyễn chao với tỏi ớt băm, đường, hạt nêm rồi ướp đều vào thịt vịt trong 30 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Xào săn & Hầm nước dừa",
+        "description": "Xào thịt vịt trên lửa lớn cho săn lại tươm mỡ, đổ nước dừa tươi vào hầm nhỏ lửa 25 phút cho vịt mềm."
+      },
+      {
+        "step_number": 3,
+        "title": "Thêm khoai môn & Nhúng rau",
+        "description": "Cho khoai môn chiên vào đun thêm 10 phút cho bở bùi, đặt lên bếp lẩu nhúng rau cần nước ăn cùng bún tươi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_vn_030",
+    "name": "Xôi Xéo Hà Nội Mỡ Hành Ruốc Gà",
+    "english_name": "Hanoi Turmeric Sticky Rice with Mung Bean",
+    "cuisine": "Vietnam",
+    "region": "Miền Bắc",
+    "image": "/images/dishes/dish_vn_030.jpg",
+    "cook_time_minutes": 30,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Hạt xôi nếp cái hoa vàng óng dẻo quánh, từng lát đỗ xanh nắm thái mỏng mịn màng như lụa, rưới ngập mỡ hành thơm nức và ruốc gà cay ngọt.",
+    "tips": "Nắm đậu xanh thật chặt khi còn nóng hổi rồi dùng dao sắc thái mỏng vát lên xôi để lớp đậu xanh tơi xốp bao bọc từng hạt xôi.",
+    "ingredients": [
+      {
+        "name": "Gạo nếp cái hoa vàng ngâm nghệ",
+        "amount": "300",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Đậu xanh đãi vỏ hấp chín giã nhuyễn",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Hành phi vàng giòn & Mỡ gà",
+        "amount": "4",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Ruốc gà cay (chà bông gà)",
+        "amount": "50",
+        "unit": "g",
+        "category": "thịt"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Đồ xôi vàng dẻo",
+        "description": "Hấp gạo nếp ngâm nước nghệ trong chõ 25 phút cho hạt xôi nở dẻo bóng hạt."
+      },
+      {
+        "step_number": 2,
+        "title": "Nắm & Thái đỗ xanh",
+        "description": "Hấp chín đậu xanh giã nhuyễn, vo chặt thành nắm tròn to bằng nắm tay khi còn nóng."
+      },
+      {
+        "step_number": 3,
+        "title": "Gói xôi xéo",
+        "description": "Xới xôi ra lá chuối, dùng dao sắc xắt từng lát mỏng đậu xanh phủ kín mặt xôi, rưới mỡ gà thơm lừng, rắc hành phi và ruốc gà."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_009",
+    "name": "Thịt Ba Chỉ Nướng Samgyeopsal",
+    "english_name": "Grilled Pork Belly Samgyeopsal",
+    "cuisine": "Korea",
+    "region": "Seoul",
+    "image": "/images/dishes/dish_kr_009.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 1,
+    "calories_approx": 650,
+    "short_description": "Những dải thịt ba chỉ heo nướng xèo xèo trên chảo gang vàng ươm cháy cạnh, cuộn lá mè tỏi nướng chấm đẫm sốt tương Ssamjang bùi béo.",
+    "tips": "Nướng kèm tỏi nguyên tép và kim chi trên phần mỡ heo chảy ra để kim chi xém cạnh chua ngọt đậm đà.",
+    "ingredients": [
+      {
+        "name": "Thịt ba chỉ heo tươi thái dày 1cm",
+        "amount": "400",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Lá mè (lá kê nhíp) & Lá xà lách",
+        "amount": "1",
+        "unit": "rổ",
+        "category": "rau sống"
+      },
+      {
+        "name": "Tương chấm thịt Ssamjang",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Dầu mè & Muối tiêu chấm thịt",
+        "amount": "1",
+        "unit": "chén nhỏ",
+        "category": "gia vị"
+      },
+      {
+        "name": "Tỏi tép & Ớt xanh Hàn Quốc",
+        "amount": "50",
+        "unit": "g",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Làm nóng chảo nướng",
+        "description": "Làm nóng chảo nướng gang không dính, đặt từng dải ba chỉ vào nướng trên lửa vừa."
+      },
+      {
+        "step_number": 2,
+        "title": "Cắt miếng vừa ăn",
+        "description": "Nướng vàng xém hai mặt thì dùng kéo cắt thịt thành từng miếng nhỏ vừa miệng, nướng tiếp tỏi và kim chi."
+      },
+      {
+        "step_number": 3,
+        "title": "Cuộn thịt thưởng thức",
+        "description": "Đặt thịt lên lá xà lách và lá mè, quệt sốt Ssamjang, thêm tỏi nướng cuộn tròn lại và ăn trọn một miếng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_010",
+    "name": "Mì Tương Đen Jajangmyeon",
+    "english_name": "Black Bean Noodles Jajangmyeon",
+    "cuisine": "Korea",
+    "region": "Incheon",
+    "image": "/images/dishes/dish_kr_010.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 580,
+    "short_description": "Tô mì sợi to dai giòn ngập tràn sốt tương đen Chunjang xào thịt ba chỉ và hành tây ngọt lịm, món ăn biểu tượng của phim ảnh Hàn Quốc.",
+    "tips": "Xào tương đen Chunjang với dầu ăn trong 3 phút trước khi cho rau củ vào để khử vị đắng chát của tương đen.",
+    "ingredients": [
+      {
+        "name": "Sợi mì tươi Jajangmyeon",
+        "amount": "2",
+        "unit": "vắt (300g)",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Sốt tương đen Chunjang",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Thịt ba chỉ heo thái hạt lựu",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bí ngòi, khoai tây, hành tây thái hạt lựu",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Dưa leo thái sợi & Trứng luộc",
+        "amount": "1",
+        "unit": "quả",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào tương đen",
+        "description": "Đun nóng dầu ăn, cho sốt tương đen Chunjang vào xào nhỏ lửa 3 phút cho dậy mùi thơm."
+      },
+      {
+        "step_number": 2,
+        "title": "Xào nhân sốt sệt",
+        "description": "Xào thịt ba chỉ săn lại, thêm khoai tây hành tây bí ngòi vào đảo chín, đổ sốt tương đen vào cùng 1 vá nước bột năng cho sánh bóng."
+      },
+      {
+        "step_number": 3,
+        "title": "Trộn mì thưởng thức",
+        "description": "Trụng sợi mì tươi cho ra tô, múc sốt tương đen phủ ngập mặt mì, đặt dưa leo thái sợi và trứng luộc lên trên rồi trộn đều."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_011",
+    "name": "Mì Cay Hải Sản Jjamppong",
+    "english_name": "Spicy Seafood Noodle Soup Jjamppong",
+    "cuisine": "Korea",
+    "region": "Busan",
+    "image": "/images/dishes/dish_kr_011.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 3,
+    "calories_approx": 540,
+    "short_description": "Tô mì hải sản đỏ rực màu ớt bột Gochugaru, ngập tràn tôm sú mực giòn nghêu mở vỏ, nước súp cay nồng bốc khói thơm mùi khói chảo khè.",
+    "tips": "Xào ớt bột và tỏi trên lửa cực lớn cùng rau củ để tạo hương khói 'Wok Hei' đặc trưng của quán Trung - Hàn.",
+    "ingredients": [
+      {
+        "name": "Mì sợi tươi Hàn Quốc",
+        "amount": "300",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Mực tươi, tôm sú, nghêu (vẹm)",
+        "amount": "250",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Thịt heo thái sợi mỏng",
+        "amount": "80",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bắp cải, hành tây, nấm mèo thái sợi",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Ớt bột Hàn Quốc Gochugaru",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào tạo khói",
+        "description": "Phi tỏi gừng ớt bột trên chảo lớn lửa to cho thơm lừng, trút thịt heo và rau củ vào đảo xém lửa."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu súp hải sản",
+        "description": "Đổ nước dùng xương vào đun sôi bùng, thả tôm, mực, nghêu vào nấu trong 4 phút cho hải sản chín mọng nước."
+      },
+      {
+        "step_number": 3,
+        "title": "Lên tô mì cay",
+        "description": "Trụng mì cho vào tô sâu lòng, múc ngập tràn hải sản và chan nước súp đỏ rực cay nồng thưởng thức toát mồ hôi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_012",
+    "name": "Canh Sườn Bò Hầm Galbitang",
+    "english_name": "Korean Short Rib Soup Galbitang",
+    "cuisine": "Korea",
+    "region": "Seoul",
+    "image": "/images/dishes/dish_kr_012.jpg",
+    "cook_time_minutes": 50,
+    "prep_time_minutes": 15,
+    "difficulty": "Kỳ công",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Những dẻ sườn bò hầm mềm rục róc xương trong làn nước súp trong vắt ngọt lịm ninh cùng củ cải trắng và miến khoai lang dẻo dai.",
+    "tips": "Ngâm sườn bò vào nước lạnh 1 tiếng để rút sạch máu thừa, nước canh hầm sẽ trong vắt thanh tao tuyệt đối.",
+    "ingredients": [
+      {
+        "name": "Dẻ sườn bò cắt khúc vừa ăn",
+        "amount": "500",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Củ cải trắng Hàn Quốc cắt khúc",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Miến khoai lang Dangmyeon",
+        "amount": "50",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Hành boa-rô & Tỏi nguyên tép",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Trứng gà tráng mỏng thái sợi",
+        "amount": "1",
+        "unit": "quả",
+        "category": "trứng"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Trần sườn bò",
+        "description": "Ngâm sườn bò xả máu, đun sôi bùng 5 phút rồi vớt ra rửa sạch dưới vòi nước lạnh."
+      },
+      {
+        "step_number": 2,
+        "title": "Hầm nước súp thanh",
+        "description": "Cho sườn bò, củ cải, hành boa-rô, tỏi vào nồi ninh lửa nhỏ trong 45 phút, hớt sạch bọt cho nước trong vắt."
+      },
+      {
+        "step_number": 3,
+        "title": "Hoàn thiện thố súp",
+        "description": "Vớt củ cải cắt lát, cho miến đã ngâm vào thố đá đun sôi 2 phút, rắc hành boa-rô tiêu đen và trứng thái chỉ."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_013",
+    "name": "Bánh Xèo Kim Chi Kimchijeon",
+    "english_name": "Crispy Kimchi Pancake Kimchijeon",
+    "cuisine": "Korea",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_kr_013.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 1,
+    "calories_approx": 380,
+    "short_description": "Chiếc bánh xèo giòn rụm viền mỏng đỏ cam rực rỡ, vị chua cay đậm đà của kim chi muối lâu ngày hòa cùng bột bánh dẻo bùi khó cưỡng.",
+    "tips": "Dùng nước kim chi chua hòa vào bột thay cho nước lọc để bánh có màu sắc và hương vị thơm ngon nhất.",
+    "ingredients": [
+      {
+        "name": "Kim chi cải thảo chua cắt nhỏ kèm nước",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Bột mì & Bột bắp",
+        "amount": "150",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Hành lá & Ớt xanh thái lát",
+        "amount": "2",
+        "unit": "nhánh",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Nước tương chấm pha giấm mè",
+        "amount": "1",
+        "unit": "chén",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Khuấy bột kim chi",
+        "description": "Trộn kim chi cắt nhỏ, nước kim chi, bột mì, bột bắp và nước đá lạnh thành hỗn hợp sệt lỏng."
+      },
+      {
+        "step_number": 2,
+        "title": "Rán bánh giòn viền",
+        "description": "Đun nóng nhiều dầu trên chảo, múc bột dàn thật mỏng, rán lửa vừa 3-4 phút mỗi mặt cho giòn rụm."
+      },
+      {
+        "step_number": 3,
+        "title": "Thưởng thức",
+        "description": "Cắt bánh thành từng miếng vuông nhỏ, chấm cùng nước tương chua ngọt pha dầu mè hạt mè."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_014",
+    "name": "Canh Đậu Phụ Non Cay Sundubu Jjigae",
+    "english_name": "Spicy Soft Tofu Stew Sundubu",
+    "cuisine": "Korea",
+    "region": "Seoul",
+    "image": "/images/dishes/dish_kr_014.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 3,
+    "calories_approx": 340,
+    "short_description": "Thố đất sôi sục đỏ rực với đậu hũ non mềm mịn núng nính tan ngay trên đầu lưỡi, hòa cùng thịt băm tôm tươi và quả trứng lòng đào sóng sánh.",
+    "tips": "Đập một quả trứng gà sống trực tiếp vào thố canh đang sôi sùng sục ngay khi vừa bắc khỏi bếp.",
+    "ingredients": [
+      {
+        "name": "Đậu hũ non (Sundubu)",
+        "amount": "1",
+        "unit": "cây (350g)",
+        "category": "khác"
+      },
+      {
+        "name": "Thịt heo băm hoặc nghêu tôm",
+        "amount": "100",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Ớt bột Gochugaru & Dầu mè",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Hành boa-rô & Nấm kim châm",
+        "amount": "50",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Trứng gà tươi",
+        "amount": "1",
+        "unit": "quả",
+        "category": "trứng"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào dầu ớt thơm",
+        "description": "Đun dầu mè trong thố đất, cho tỏi băm, hành boa-rô và ớt bột vào xào lửa nhỏ thành lớp dầu ớt đỏ au."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu súp đậu non",
+        "description": "Cho thịt băm vào xào săn, đổ nước dùng cá cơm đun sôi, múc từng thìa lớn đậu hũ non thả vào thố nấu 5 phút."
+      },
+      {
+        "step_number": 3,
+        "title": "Đập trứng lòng đào",
+        "description": "Nêm nước mắm hoặc muối, đập 1 quả trứng gà sống vào giữa thố đang sôi sục rồi mang ra bàn ăn ngay."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_015",
+    "name": "Cơm Cuộn Rong Biển Kimbap",
+    "english_name": "Traditional Korean Seaweed Rice Rolls",
+    "cuisine": "Korea",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_kr_015.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 420,
+    "short_description": "Cuộn cơm rong biển tròn xoe đa sắc màu với thanh cua, củ cải muối vàng giòn, trứng rán, cà rốt xào dầu mè thơm nức mũi.",
+    "tips": "Thoa một lớp dầu mè nguyên chất lên bề mặt dao trước khi cắt để từng khoanh Kimbap cắt ra mượt mà không vỡ nát.",
+    "ingredients": [
+      {
+        "name": "Lá rong biển khô cuộn Kimbap",
+        "amount": "5",
+        "unit": "lá",
+        "category": "gia vị"
+      },
+      {
+        "name": "Cơm dẻo trộn dầu mè và muối",
+        "amount": "3",
+        "unit": "chén",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Củ cải vàng muối Hàn Quốc Danmuji",
+        "amount": "5",
+        "unit": "thanh",
+        "category": "rau củ"
+      },
+      {
+        "name": "Thanh cua & Xúc xích",
+        "amount": "100",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng rán thái sợi & Cà rốt xào",
+        "amount": "100",
+        "unit": "g",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Chuẩn bị nhân sợi",
+        "description": "Thái sợi dài trứng rán, thanh cua, cà rốt xào chín tới và củ cải muối vàng."
+      },
+      {
+        "step_number": 2,
+        "title": "Trải cơm lên mành tre",
+        "description": "Đặt lá rong biển lên mành tre, dàn đều một lớp cơm mỏng 2/3 lá rong biển."
+      },
+      {
+        "step_number": 3,
+        "title": "Cuốn chặt & Cắt khoanh",
+        "description": "Xếp các loại nhân vào giữa, cuộn tròn thật chặt tay bằng mành tre, thoa dầu mè lên mặt cuốn rồi cắt khoanh 1.5cm."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_016",
+    "name": "Canh Gà Hầm Sâm Samgyetang",
+    "english_name": "Ginseng Chicken Soup Samgyetang",
+    "cuisine": "Korea",
+    "region": "Seoul",
+    "image": "/images/dishes/dish_kr_016.jpg",
+    "cook_time_minutes": 55,
+    "prep_time_minutes": 15,
+    "difficulty": "Kỳ công",
+    "spicy_level": 0,
+    "calories_approx": 650,
+    "short_description": "Con gà tơ nhồi gạo nếp dẻo thơm, củ nhân sâm tươi, táo đỏ và tỏi ninh mềm rục trong nước súp thảo mộc đại bổ phục hồi sinh lực.",
+    "tips": "Bắt chéo hai chân gà gài vào bụng để giữ chặt phần gạo nếp và nhân sâm không bị trào ra khi ninh sôi.",
+    "ingredients": [
+      {
+        "name": "Gà tơ nguyên con làm sạch (khoảng 800g)",
+        "amount": "1",
+        "unit": "con",
+        "category": "thịt"
+      },
+      {
+        "name": "Gạo nếp ngâm nở",
+        "amount": "100",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Củ nhân sâm tươi & Táo đỏ khô",
+        "amount": "1",
+        "unit": "củ",
+        "category": "gia vị"
+      },
+      {
+        "name": "Hạt sen, tỏi tép nguyên vỏ",
+        "amount": "50",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Hành boa-rô & Muối tiêu chấm gà",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Nhồi bụng gà",
+        "description": "Nhồi gạo nếp, nhân sâm, táo đỏ, tỏi vào bụng gà rồi bắt chéo chân khép kín bụng lại."
+      },
+      {
+        "step_number": 2,
+        "title": "Ninh gà mềm rục",
+        "description": "Đặt gà vào nồi ngập nước, đun sôi vớt sạch bọt rồi hạ nhỏ lửa đun 45 phút cho gà chín nhừ mọng nước."
+      },
+      {
+        "step_number": 3,
+        "title": "Thưởng thức trong thố",
+        "description": "Múc gà ra thố đá nóng hổi, chan nước súp ngọt thanh, rắc hành boa-rô và chấm thịt gà với muối tiêu."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_017",
+    "name": "Lẩu Quân Đội Budae Jjigae",
+    "english_name": "Korean Army Base Stew Budae Jjigae",
+    "cuisine": "Korea",
+    "region": "Uijeongbu",
+    "image": "/images/dishes/dish_kr_017.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 2,
+    "calories_approx": 620,
+    "short_description": "Nồi lẩu phong phú hấp dẫn với xúc xích xông khói, thịt hộp Spam béo ngậy, kim chi cay, phô mai Cheddar tan chảy và vắt mì tôm Hàn Quốc giòn dai.",
+    "tips": "Cho một lát phô mai lát Cheddar lên vắt mì khi vừa sôi để nước lẩu thơm béo ngậy chuẩn phong cách Budae Jjigae.",
+    "ingredients": [
+      {
+        "name": "Thịt hộp Spam & Xúc xích xông khói",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Kim chi cải thảo chua",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Vắt mì ramen Hàn Quốc",
+        "amount": "1",
+        "unit": "gói",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Phô mai lát Cheddar",
+        "amount": "1",
+        "unit": "lát",
+        "category": "khác"
+      },
+      {
+        "name": "Sốt ớt Gochujang pha tỏi tương",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xếp topping quanh chảo",
+        "description": "Cắt lát Spam, xúc xích, kim chi, đậu hũ xếp đều quanh lòng chảo lẩu nông."
+      },
+      {
+        "step_number": 2,
+        "title": "Đổ nước dùng & Đun sôi",
+        "description": "Cho thìa sốt cay vào giữa, đổ 500ml nước dùng cá cơm đun sôi bùng cho gia vị hòa tan."
+      },
+      {
+        "step_number": 3,
+        "title": "Thả mì & Phô mai",
+        "description": "Thả vắt mì tôm vào giữa, đặt lát phô mai Cheddar lên trên đun 3 phút cho phô mai tan chảy quyện vào sợi mì."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_018",
+    "name": "Chả Cá Xiên Nước Dùng Eomuk Tang",
+    "english_name": "Korean Fish Cake Skewers Eomuk Tang",
+    "cuisine": "Korea",
+    "region": "Busan",
+    "image": "/images/dishes/dish_kr_018.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 280,
+    "short_description": "Những xiên chả cá gấp zíc-zắc ngập trong nồi nước dùng củ cải cá cơm thanh ngọt ấm nóng, món ăn đường phố mùa đông nổi tiếng xứ Hàn.",
+    "tips": "Ninh nước dùng với củ cải trắng và đầu hành boa-rô để nước súp có vị ngọt thanh dịu xua tan giá rét.",
+    "ingredients": [
+      {
+        "name": "Miếng chả cá Hàn Quốc Eomuk",
+        "amount": "6",
+        "unit": "miếng",
+        "category": "thịt"
+      },
+      {
+        "name": "Xiên tre dài",
+        "amount": "6",
+        "unit": "que",
+        "category": "khác"
+      },
+      {
+        "name": "Củ cải trắng cắt lát vuông",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước dùng cá cơm và rong biển Dasima",
+        "amount": "600",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Nước tương chấm pha hành tỏi ớt",
+        "amount": "1",
+        "unit": "bát",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xiên que chả cá",
+        "description": "Gấp miếng chả cá theo hình lượn sóng zíc-zắc rồi dùng xiên tre xiên dọc giữ nếp."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu nước dùng thanh",
+        "description": "Đun sôi nước dùng cá cơm với củ cải trắng và chút nước tương cho ngọt nước."
+      },
+      {
+        "step_number": 3,
+        "title": "Nấu mềm xiên cá",
+        "description": "Thả các xiên chả cá vào nồi nước dùng đun 5 phút cho chả cá nở mềm thơm nức, chấm nước tương ăn kèm nước súp nóng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_019",
+    "name": "Cơm Chiên Kim Chi Trứng Lòng Đào",
+    "english_name": "Kimchi Fried Rice with Fried Egg",
+    "cuisine": "Korea",
+    "region": "Seoul",
+    "image": "/images/dishes/dish_kr_019.jpg",
+    "cook_time_minutes": 12,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 1,
+    "calories_approx": 480,
+    "short_description": "Từng hạt cơm chiên đỏ au bóng bẩy ngấm vị chua cay của kim chi và dầu mè, bên trên là quả trứng ốp la lòng đào tan chảy béo ngậy.",
+    "tips": "Cho một muỗng nước kim chi chua và một muỗng bơ lạt vào đảo cùng cơm để cơm dậy mùi béo thơm hấp dẫn.",
+    "ingredients": [
+      {
+        "name": "Cơm nguội",
+        "amount": "2",
+        "unit": "chén",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Kim chi cải thảo băm nhỏ",
+        "amount": "120",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Thịt hộp Spam hoặc xúc xích hạt lựu",
+        "amount": "60",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng gà ốp la lòng đào",
+        "amount": "1",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Rong biển vụn & Mè rang",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào kim chi & thịt hộp",
+        "description": "Phi tỏi thơm, xào kim chi và thịt hộp trên chảo với dầu mè trong 3 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Chiên cơm săn hạt",
+        "description": "Đổ cơm nguội vào đảo tơi trên lửa lớn cùng sốt Gochujang và nước kim chi cho hạt cơm săn đỏ."
+      },
+      {
+        "step_number": 3,
+        "title": "Trình bày",
+        "description": "Xới cơm ra đĩa, đặt trứng ốp la lòng đào lên trên, rắc rong biển sợi và mè rang thơm ngát."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_kr_020",
+    "name": "Mì Lạnh Hàn Quốc Naengmyeon",
+    "english_name": "Korean Cold Noodles Naengmyeon",
+    "cuisine": "Korea",
+    "region": "Pyongyang",
+    "image": "/images/dishes/dish_kr_020.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 390,
+    "short_description": "Bát mì kiều mạch dai ngon trong làn nước súp dăm đá mát lạnh tê buốt chân răng, ăn cùng lát thịt bò luộc, dưa leo và lê ngọt thanh.",
+    "tips": "Để nước dùng thịt bò vào ngăn đá tủ lạnh cho đóng lớp dăm đá mỏng trước khi chan vào bát mì.",
+    "ingredients": [
+      {
+        "name": "Sợi mì kiều mạch Naengmyeon",
+        "amount": "200",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Nước súp thịt bò ướp đá dăm",
+        "amount": "400",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Lê Hàn Quốc & Dưa leo thái sợi",
+        "amount": "80",
+        "unit": "g",
+        "category": "hoa quả"
+      },
+      {
+        "name": "Thịt bắp bò luộc thái mỏng",
+        "amount": "80",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng luộc & Mù tạt vàng cay nồng",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Luộc mì kiều mạch",
+        "description": "Luộc mì trong nước sôi đúng 1 phút, vớt ra vò mạnh tay dưới vòi nước đá lạnh cho sợi mì dai săn."
+      },
+      {
+        "step_number": 2,
+        "title": "Chuẩn bị thố đá lạnh",
+        "description": "Cuộn mì vào giữa thố inox lớn, rót nước súp lạnh có dăm đá mỏng bao quanh."
+      },
+      {
+        "step_number": 3,
+        "title": "Bày topping mát lạnh",
+        "description": "Xếp bắp bò, dưa leo, lê thái mỏng, nửa quả trứng luộc, thêm chút giấm táo và mù tạt vàng giải nhiệt mùa hè."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_009",
+    "name": "Thịt Heo Chiên Xù Tonkatsu",
+    "english_name": "Crispy Pork Cutlet Tonkatsu",
+    "cuisine": "Japan",
+    "region": "Tokyo",
+    "image": "/images/dishes/dish_jp_009.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 580,
+    "short_description": "Miếng thăn heo dày tẩm vụn bánh mì Panko chiên vàng giòn rụm, thịt bên trong mềm mọng chấm sốt Tonkatsu ngọt sánh.",
+    "tips": "Dần nhẹ miếng thịt thăn và khía nhẹ viền mỡ để miếng thịt không bị cong vênh khi thả vào chảo dầu nóng.",
+    "ingredients": [
+      {
+        "name": "Thịt thăn heo cắt lát dày 1.5cm",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Vụn bánh mì chiên xù Panko",
+        "amount": "100",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Bột mì & Trứng gà đánh tan",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Bắp cải thái sợi mỏng như tơ",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Sốt Tonkatsu mè rang",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Áo bột 3 lớp",
+        "description": "Lăn miếng thịt heo qua bột mì, nhúng ngập trứng gà rồi phủ đều lớp vụn bánh mì Panko xù bông."
+      },
+      {
+        "step_number": 2,
+        "title": "Chiên giòn 170°C",
+        "description": "Thả thịt vào chảo dầu ngập nóng ở 170°C, chiên trong 5 phút cho vàng ươm hai mặt rồi vớt ra ráo dầu."
+      },
+      {
+        "step_number": 3,
+        "title": "Thái lát & Thưởng thức",
+        "description": "Cắt thịt thành các dải dài đều nhau, xếp cạnh bắp cải thái sợi và rưới sốt Tonkatsu mè thơm lừng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_010",
+    "name": "Cơm Gà Trứng Oyakodon",
+    "english_name": "Chicken & Egg Rice Bowl Oyakodon",
+    "cuisine": "Japan",
+    "region": "Kyoto",
+    "image": "/images/dishes/dish_jp_010.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 510,
+    "short_description": "Món cơm gia đình ấm áp với thịt đùi gà mềm thơm rim nước Dashi ngọt dịu, phủ lớp trứng gà lòng đào béo ngậy mềm mượt.",
+    "tips": "Chỉ đánh tan trứng nhẹ 2-3 nhát để lòng đỏ và lòng trắng không hòa tan hoàn toàn, tạo vân đẹp mắt khi chín tới.",
+    "ingredients": [
+      {
+        "name": "Má đùi gà cắt miếng vừa ăn",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng gà tươi",
+        "amount": "2",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Hành tây thái múi mỏng",
+        "amount": "1/2",
+        "unit": "củ",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước Dashi, Shoyu, Mirin",
+        "amount": "100",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Cơm trắng gạo Nhật",
+        "amount": "1",
+        "unit": "tô",
+        "category": "tinh bột"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ninh gà & Hành tây",
+        "description": "Đun sôi nước Dashi, Shoyu, Mirin trong chảo nhỏ, thả hành tây và thịt gà vào đun nhỏ lửa 5 phút cho gà chín mềm."
+      },
+      {
+        "step_number": 2,
+        "title": "Đổ trứng lòng đào",
+        "description": "Rưới 2/3 lượng trứng đánh nhẹ quanh chảo đậy nắp 1 phút, rưới nốt 1/3 trứng còn lại vào rồi tắt bếp ngay."
+      },
+      {
+        "step_number": 3,
+        "title": "Trút lên tô cơm",
+        "description": "Lắc nhẹ chảo trút toàn bộ lớp gà trứng sánh mướt phủ trọn mặt cơm nóng, rắc chút rong biển vụn thưởng thức."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_011",
+    "name": "Cơm Cuộn Sushi Cá Hồi & Bơ",
+    "english_name": "Salmon Avocado Sushi Roll",
+    "cuisine": "Japan",
+    "region": "Hokkaido",
+    "image": "/images/dishes/dish_jp_011.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 380,
+    "short_description": "Cuộn sushi thanh nhã với cá hồi tươi béo ngậy, quả bơ sáp dẻo quậy và cơm giấm chua ngọt bọc trong lá rong biển Nori thơm lừng.",
+    "tips": "Dùng quạt phe phẩy làm nguội cơm nhanh khi vừa trộn giấm sushi để hạt cơm bóng bẩy và dẻo dai.",
+    "ingredients": [
+      {
+        "name": "Cá hồi phi-lê tươi chuẩn ăn sống (Sashimi grade)",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trái bơ sáp chín thái que",
+        "amount": "1",
+        "unit": "trái",
+        "category": "hoa quả"
+      },
+      {
+        "name": "Cơm trộn giấm Sushi dẻo",
+        "amount": "2",
+        "unit": "chén",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Lá rong biển Nori",
+        "amount": "4",
+        "unit": "lá",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nước tương Shoyu & Wasabi cay nồng",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Chuẩn bị nhân cá hồi bơ",
+        "description": "Thái cá hồi tươi và bơ sáp thành các thanh dài dày 1cm đều đặn."
+      },
+      {
+        "step_number": 2,
+        "title": "Trải cơm & Cuốn sushi",
+        "description": "Đặt rong biển lên mành tre, dàn lớp cơm mỏng, xếp cá hồi bơ vào giữa rồi cuộn tròn chặt tay."
+      },
+      {
+        "step_number": 3,
+        "title": "Cắt khoanh mượt mà",
+        "description": "Dùng dao nhúng nước lạnh cắt cuộn sushi thành 8 khoanh đều nhau, chấm nước tương pha wasabi the cay."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_012",
+    "name": "Mì Soba Kiều Mạch Lạnh Zaru Soba",
+    "english_name": "Chilled Buckwheat Soba Noodles",
+    "cuisine": "Japan",
+    "region": "Nagano",
+    "image": "/images/dishes/dish_jp_012.jpg",
+    "cook_time_minutes": 10,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 310,
+    "short_description": "Món mì giải nhiệt thanh tao mùa hè Nhật Bản với sợi mì kiều mạch nâu sẫm đặt trên nia tre, chấm nước sốt Tsuyu lạnh the mát wasabi.",
+    "tips": "Sau khi luộc xong phải vò mì kỹ trong thau nước đá lạnh để trôi sạch bột thừa, sợi mì sẽ giòn dai sần sật.",
+    "ingredients": [
+      {
+        "name": "Mì kiều mạch khô Soba",
+        "amount": "200",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Nước sốt chấm mì lạnh Tsuyu pha đá",
+        "amount": "150",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Wasabi cay nồng & Hành lá thái nhuyễn",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "gia vị"
+      },
+      {
+        "name": "Rong biển khô Kizami Nori thái sợi",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Luộc mì kiều mạch",
+        "description": "Thả mì vào nước sôi luộc trong 4 phút, vớt ra xả mạnh dưới vòi nước đá lạnh rồi để ráo."
+      },
+      {
+        "step_number": 2,
+        "title": "Bày nia tre Zaru",
+        "description": "Gắp mì cuộn tròn bày lên khay nia tre có rãnh thoát nước, rắc rong biển sợi lên mặt."
+      },
+      {
+        "step_number": 3,
+        "title": "Pha nước chấm Tsuyu",
+        "description": "Rót sốt Tsuyu lạnh vào chén nhỏ, thả hành lá và wasabi khuấy đều, gắp từng gắp mì nhúng đẫm sốt rồi húp xì xụp."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_013",
+    "name": "Bánh Bạch Tuộc Nướng Takoyaki",
+    "english_name": "Japanese Octopus Balls Takoyaki",
+    "cuisine": "Japan",
+    "region": "Osaka",
+    "image": "/images/dishes/dish_jp_013.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 10,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 460,
+    "short_description": "Những viên bánh tròn xoe vàng rụm bên ngoài bọc nhân bạch tuộc giòn sần sật, phủ đẫm sốt Takoyaki nâu bóng, mayonnaise và cá ngừ bào nhảy múa.",
+    "tips": "Dùng xiên que lật xoay liên tục từng góc 90 độ trên chảo khuôn tròn để viên bánh tròn xoe hoàn hảo.",
+    "ingredients": [
+      {
+        "name": "Bột bánh Takoyaki pha nước Dashi",
+        "amount": "200",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Bạch tuộc luộc cắt hạt lựu",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Gừng đỏ Beni Shoga & Hành lá băm",
+        "amount": "30",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Sốt Takoyaki & Mayonnaise béo ngậy",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Cá ngừ bào Katsuobushi",
+        "amount": "1",
+        "unit": "gói nhỏ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Đổ bột vào khuôn",
+        "description": "Làm nóng chảo khuôn lỗ thoa dầu ăn, rót bột ngập khuôn rồi thả miếng bạch tuộc, gừng đỏ và hành lá vào từng lỗ."
+      },
+      {
+        "step_number": 2,
+        "title": "Xoay tròn viên bánh",
+        "description": "Khi mép bánh chín se lại, dùng que tre vạch ranh giới và xoay lật 90 độ liên tục cho bánh tròn xoe vàng ươm."
+      },
+      {
+        "step_number": 3,
+        "title": "Trang trí sốt cá ngừ",
+        "description": "Gắp 6 viên bánh ra thuyền giấy, rưới sốt Takoyaki, mayonnaise, rắc cá ngừ bào mỏng lên trên cho nhảy múa theo hơi nóng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_014",
+    "name": "Mì Udon Nước Thịt Bò Niku Udon",
+    "english_name": "Hot Beef Udon Noodle Soup Niku Udon",
+    "cuisine": "Japan",
+    "region": "Kagawa",
+    "image": "/images/dishes/dish_jp_014.jpg",
+    "cook_time_minutes": 18,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 480,
+    "short_description": "Tô mì Udon bốc khói với sợi mì trắng nõn dai béo, ngập tràn thịt ba chỉ bò rim nước tương ngọt dịu và nước súp Dashi trong vắt ấm áp.",
+    "tips": "Rim thịt bò với hành tây và chút đường phèn trước để vị ngọt thịt quyện vào nước súp khi chan lên mì.",
+    "ingredients": [
+      {
+        "name": "Mì Udon tươi sợi lớn",
+        "amount": "1",
+        "unit": "gói (200g)",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Thịt ba chỉ bò thái lát mỏng",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Nước súp Dashi cá ngừ & Tảo bẹ",
+        "amount": "500",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Hành boa-rô thái vát mỏng",
+        "amount": "1",
+        "unit": "cây",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Gừng tươi mài nhuyễn & Ớt bột Shichimi",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào thịt bò ngọt dịu",
+        "description": "Xào nhanh thịt bò với hành boa-rô, rượu Mirin, nước tương Shoyu trong 3 phút cho thịt bò săn mềm ngấm vị."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu nước dùng Dashi",
+        "description": "Đun sôi nước súp Dashi nêm chút muối và Shoyu nhạt cho nước trong thanh."
+      },
+      {
+        "step_number": 3,
+        "title": "Lên tô Udon nóng",
+        "description": "Trụng mì Udon nở mềm vào tô, múc thịt bò rim lên trên, chan nước súp Dashi thật nóng và rắc ớt bột 7 vị Shichimi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_015",
+    "name": "Há Cảo Nhật Áp Chảo Gyoza",
+    "english_name": "Pan-fried Japanese Pork Dumplings Gyoza",
+    "cuisine": "Japan",
+    "region": "Utsunomiya",
+    "image": "/images/dishes/dish_jp_015.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 420,
+    "short_description": "Những chiếc há cảo xếp hình cánh quạt, đáy bánh áp chảo vàng ruộm giòn tan rụm, vỏ trên mềm mướt bọc nhân thịt heo bắp cải mọng nước ngọt ngào.",
+    "tips": "Rót một muôi nước bột bắp loãng vào chảo đậy nắp hấp sẽ tạo lớp viền ren giòn tan rôm rốp nối liền các chiếc bánh.",
+    "ingredients": [
+      {
+        "name": "Vỏ bánh Gyoza tròn mỏng",
+        "amount": "12",
+        "unit": "lá",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Thịt heo nạc vai xay nhuyễn",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bắp cải & Hẹ lá băm nhuyễn vắt ráo",
+        "amount": "100",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Dầu mè, tỏi mài, gừng mài",
+        "amount": "1",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nước tương pha giấm gạo & Dầu ớt Rayu",
+        "amount": "1",
+        "unit": "chén nhỏ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Gói há cảo xếp nếp",
+        "description": "Trộn thịt xay với bắp cải, hẹ, dầu mè. Đặt nhân vào vỏ bánh, miết nước quanh mép rồi xếp 4-5 nếp gấp hình bán nguyệt."
+      },
+      {
+        "step_number": 2,
+        "title": "Áp chảo & Hấp hơi",
+        "description": "Xếp bánh vào chảo dầu nóng rán vàng đáy 2 phút, đổ 60ml nước pha chút bột bắp rồi đậy nắp hấp hơi 4 phút."
+      },
+      {
+        "step_number": 3,
+        "title": "Úp bánh ra đĩa",
+        "description": "Mở nắp cho cạn sạch nước tạo viền ren giòn tan, úp ngược đĩa lấy bánh ra chấm nước tương giấm ớt Rayu."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_016",
+    "name": "Tôm Chiên Xù Tempura Giòn Rụm",
+    "english_name": "Crispy Prawn Tempura",
+    "cuisine": "Japan",
+    "region": "Tokyo",
+    "image": "/images/dishes/dish_jp_016.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 450,
+    "short_description": "Những con tôm sú thẳng tắp bọc trong lớp áo bột Tempura xù hoa tuyết giòn tan nhẹ tênh không ngấm dầu, chấm nước sốt Tentsuyu ấm áp.",
+    "tips": "Dùng nước đá lạnh buốt pha bột và không khuấy kỹ (để lại các cục bột nhỏ) để lớp áo chiên giòn bung xòe như hoa tuyết.",
+    "ingredients": [
+      {
+        "name": "Tôm sú tươi bóc vỏ chừa đuôi",
+        "amount": "6",
+        "unit": "con lớn",
+        "category": "thịt"
+      },
+      {
+        "name": "Bột Tempura pha nước đá lạnh",
+        "amount": "100",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Nước chấm Tentsuyu ấm nóng",
+        "amount": "100",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Củ cải trắng mài nhuyễn & Gừng mài",
+        "amount": "30",
+        "unit": "g",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Sơ chế thẳng con tôm",
+        "description": "Khía vài đường nhẹ dưới bụng tôm và ấn nắn nhẹ để thân tôm duỗi thẳng tắp không bị cong khi chiên."
+      },
+      {
+        "step_number": 2,
+        "title": "Nhúng bột đá lạnh",
+        "description": "Lăn tôm qua lớp bột khô mỏng, nhúng vào âu bột đá lạnh rồi thả vào chảo dầu sôi 175°C."
+      },
+      {
+        "step_number": 3,
+        "title": "Vẩy hoa tuyết giòn",
+        "description": "Dùng tay vẩy thêm chút bột lên thân tôm tạo lớp áo hoa tuyết xù giòn, chiên 2 phút vớt ra ráo dầu chấm nước sốt Tentsuyu củ cải mài."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_017",
+    "name": "Súp Tương Miso Đậu Hũ Rong Biển",
+    "english_name": "Classic Tofu & Wakame Miso Soup",
+    "cuisine": "Japan",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_jp_017.jpg",
+    "cook_time_minutes": 10,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 160,
+    "short_description": "Chén súp linh hồn trong mâm cơm Nhật Bản với đậu hũ non mềm tan, rong biển Wakame mát lành trong nước súp tương đậu nành Miso đậm đà thanh dịu.",
+    "tips": "Tắt bếp rồi dùng rây tán nhuyễn tương Miso vào nồi nước dùng, tuyệt đối không đun sôi bùng Miso để giữ trọn men vi sinh và hương thơm.",
+    "ingredients": [
+      {
+        "name": "Tương Miso Nhật Bản (Shiro hoặc Aka Miso)",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Đậu hũ non cắt hạt lựu vuông nhỏ",
+        "amount": "100",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Rong biển khô Wakame ngâm nở",
+        "amount": "10",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước dùng cá ngừ Dashi",
+        "amount": "400",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Hành lá thái nhỏ",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Đun nước Dashi & Đậu non",
+        "description": "Đun sôi nước Dashi, thả đậu hũ non và rong biển Wakame vào nấu sôi lăn tăn trong 2 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Hòa tan tương Miso",
+        "description": "Tắt bếp, múc một vá nước dùng vào rây, cho tương Miso vào dùng muỗng tán tan mịn vào nồi canh."
+      },
+      {
+        "step_number": 3,
+        "title": "Múc bát giữ ấm",
+        "description": "Múc súp ra chén gốm nhỏ, rắc hành lá thái nhuyễn và thưởng thức ấm nồng trước bữa ăn."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_jp_018",
+    "name": "Bò Nướng Sốt Teriyaki Teppanyaki",
+    "english_name": "Teppanyaki Beef Teriyaki",
+    "cuisine": "Japan",
+    "region": "Kobe",
+    "image": "/images/dishes/dish_jp_018.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 590,
+    "short_description": "Từng lát thăn bò Wagyu áp chảo gang nóng xèo xèo phủ đẫm sốt Teriyaki nâu đen óng ánh ngọt mặn hài hòa, thơm nức mùi tỏi phi giòn tan.",
+    "tips": "Áp chảo bò ở mức lửa lớn thật nhanh để giữ độ mọng nước ngọt mềm bên trong miếng thịt.",
+    "ingredients": [
+      {
+        "name": "Thịt thăn bò mềm cắt lát 1cm",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Sốt Teriyaki Nhật Bản đậm đặc",
+        "amount": "4",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Tỏi lát chiên giòn (Garlic chips)",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Bông cải xanh & Giá đỗ xào bơ",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Áp chảo bò lửa lớn",
+        "description": "Đun chảo gang thật nóng với chút dầu ăn, cho từng lát thịt bò vào áp chảo mỗi mặt 90 giây cho xém vàng."
+      },
+      {
+        "step_number": 2,
+        "title": "Rưới sốt Teriyaki keo bóng",
+        "description": "Hạ nhỏ lửa, rưới sốt Teriyaki vào chảo đảo nhanh tay trong 30 giây cho nước sốt bám bóng quanh thớ thịt bò."
+      },
+      {
+        "step_number": 3,
+        "title": "Bày đĩa hoàn thiện",
+        "description": "Gắp thịt ra đĩa ăn kèm bông cải xanh luộc, rắc ngập tỏi lát chiên giòn và mè rang thơm ngậy."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_008",
+    "name": "Xôi Xoài Nước Cốt Dừa Thái Lan",
+    "english_name": "Mango Sticky Rice Khao Niew Mamuang",
+    "cuisine": "Thailand",
+    "region": "Bangkok",
+    "image": "/images/dishes/dish_th_008.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 480,
+    "short_description": "Món tráng miệng huyền thoại xứ Chùa Vàng với xôi nếp dẻo thơm ngấm đượm nước cốt dừa béo ngậy, ăn kèm từng lát xoài cát chín vàng ngọt lịm.",
+    "tips": "Trộn nước cốt dừa ấm đun với đường và chút muối vào xôi vừa đồ xong, đậy nắp ủ 15 phút cho hạt xôi hút no nước dừa căng bóng.",
+    "ingredients": [
+      {
+        "name": "Gạo nếp Thái dẻo thơm",
+        "amount": "250",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Xoài cát chín vàng ngọt lịm thái lát",
+        "amount": "2",
+        "unit": "trái",
+        "category": "hoa quả"
+      },
+      {
+        "name": "Nước cốt dừa nguyên chất béo ngậy",
+        "amount": "250",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Đậu xanh đãi vỏ rang vàng giòn",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Lá dứa thơm & Đường cát, muối",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Đồ xôi nếp lá dứa",
+        "description": "Hấp gạo nếp ngâm cùng lá dứa trong 20 phút cho hạt xôi chín dẻo mềm."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu nước dừa & Trộn xôi",
+        "description": "Đun sôi nước cốt dừa với đường muối, rưới phân nửa vào xôi nếp đảo đều rồi ủ 15 phút cho ngấm bóng."
+      },
+      {
+        "step_number": 3,
+        "title": "Bày đĩa xôi xoài",
+        "description": "Xới xôi ra đĩa, xếp xoài chín thái lát cánh quạt, rưới phần nước sốt cốt dừa sánh mịn lên trên và rắc đậu xanh giòn tan."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_009",
+    "name": "Cà Ri Đỏ Vịt Quay Khóm Cà Chua",
+    "english_name": "Thai Red Curry with Roasted Duck",
+    "cuisine": "Thailand",
+    "region": "Bangkok",
+    "image": "/images/dishes/dish_th_009.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 10,
+    "difficulty": "Trung bình",
+    "spicy_level": 2,
+    "calories_approx": 590,
+    "short_description": "Nước cà ri đỏ rực thơm lừng hòa quyện vị béo ngậy của nước cốt dừa, vị ngọt mềm của thịt vịt quay da giòn và vị chua ngọt của khóm, cà chua bi.",
+    "tips": "Cho dứa và cà chua bi vào ở 5 phút cuối để trái cây không bị nát nhũn mà giữ được độ tươi mọng nước.",
+    "ingredients": [
+      {
+        "name": "Thịt vịt quay chặt miếng",
+        "amount": "350",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Sốt cà ri đỏ Thái (Red Curry Paste)",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nước cốt dừa béo",
+        "amount": "350",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Khóm (dứa) & Cà chua bi, nho không hạt",
+        "amount": "150",
+        "unit": "g",
+        "category": "hoa quả"
+      },
+      {
+        "name": "Lá húng quế Thái & Lá chanh Kaffir",
+        "amount": "1",
+        "unit": "nắm",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào thơm bột cà ri đỏ",
+        "description": "Đun sôi 1 muôi nước cốt dừa cho tách dầu, cho bột cà ri đỏ vào xào dậy mùi thơm nức mũi."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu vịt quay & Cốt dừa",
+        "description": "Thả vịt quay vào xào ngấm sốt đỏ, đổ nước cốt dừa còn lại và nước dùng vào đun sôi 10 phút."
+      },
+      {
+        "step_number": 3,
+        "title": "Thêm trái cây nhiệt đới",
+        "description": "Thả dứa, cà chua bi, lá húng quế lá chanh vào nấu sôi thêm 3 phút nêm nước mắm đường thốt nốt vừa miệng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_010",
+    "name": "Cà Ri Massaman Thịt Bò Khoai Tây",
+    "english_name": "Thai Massaman Beef Curry",
+    "cuisine": "Thailand",
+    "region": "Ayutthaya",
+    "image": "/images/dishes/dish_th_010.jpg",
+    "cook_time_minutes": 45,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 1,
+    "calories_approx": 650,
+    "short_description": "Món cà ri được CNN bình chọn ngon nhất thế giới với thịt bắp bò hầm mềm nhừ, khoai tây bở bùi, đậu phộng rang và sốt cà ri thơm ngát hương quế hồi.",
+    "tips": "Ninh bắp bò nhỏ lửa với nước cốt dừa loãng trước cho thịt bò mềm rục ngấm sâu vị béo ngậy.",
+    "ingredients": [
+      {
+        "name": "Bắp bò hoa cắt khối vuông",
+        "amount": "400",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Gói bột sốt cà ri Massaman",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Khoai tây cắt khối & Hành tây",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước cốt dừa & Đậu phộng rang nguyên hạt",
+        "amount": "300",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Nước me chua, đường thốt nốt, quế hồi",
+        "amount": "2",
+        "unit": "muỗng",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào sốt Massaman",
+        "description": "Xào thơm sốt cà ri Massaman với nước cốt dừa và thanh quế cho dậy mùi thơm nức."
+      },
+      {
+        "step_number": 2,
+        "title": "Hầm bắp bò mềm",
+        "description": "Cho bắp bò vào xào săn, đổ nước dừa vào hầm nhỏ lửa trong 35 phút cho thịt bò mềm rục rã."
+      },
+      {
+        "step_number": 3,
+        "title": "Thêm khoai tây & Đậu phộng",
+        "description": "Thả khoai tây, hành tây, đậu phộng rang vào hầm thêm 10 phút, nêm nước me đường thốt nốt cho chua ngọt béo bùi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_011",
+    "name": "Mì Cà Ri Xào Giòn Khao Soi",
+    "english_name": "Northern Thai Crispy Noodle Curry Khao Soi",
+    "cuisine": "Thailand",
+    "region": "Chiang Mai",
+    "image": "/images/dishes/dish_th_011.jpg",
+    "cook_time_minutes": 30,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 2,
+    "calories_approx": 570,
+    "short_description": "Đặc sản nức danh miền Bắc Thái Lan: sợi mì trứng mềm chan ngập nước cà ri gà vàng óng béo ngậy, bên trên phủ chỏm mì chiên giòn tan rụm.",
+    "tips": "Chia mì trứng làm 2 phần: 1 phần luộc mềm chan nước súp, 1 phần chiên giòn phồng để tạo kết cấu tương phản độc đáo.",
+    "ingredients": [
+      {
+        "name": "Mì sợi trứng tươi",
+        "amount": "300",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Đùi tỏi gà chặt miếng",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bột cà ri Khao Soi & Nước cốt dừa",
+        "amount": "300",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Hành tím thái lát, dưa chua, chanh tươi",
+        "amount": "1",
+        "unit": "đĩa nhỏ",
+        "category": "rau củ"
+      },
+      {
+        "name": "Ớt xào dầu giòn cay",
+        "amount": "1",
+        "unit": "muỗng",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Chiên mì giòn",
+        "description": "Lấy 1/3 lượng mì trứng thả vào chảo dầu sôi chiên phồng giòn rụm trong 30 giây rồi vớt ra ráo dầu."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu súp gà cà ri",
+        "description": "Xào bột cà ri với cốt dừa cho thơm, thả gà vào om nhỏ lửa 20 phút cho gà chín mềm đậm đà."
+      },
+      {
+        "step_number": 3,
+        "title": "Lên tô Khao Soi",
+        "description": "Trụng phần mì mềm vào tô, múc đùi gà và chan nước súp cà ri béo ngậy, đặt chỏm mì chiên giòn lên trên ăn kèm hành tím và dưa chua."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_012",
+    "name": "Cá Chẽm Hấp Chanh Ớt Tỏi",
+    "english_name": "Steamed Sea Bass with Lime, Garlic & Chili",
+    "cuisine": "Thailand",
+    "region": "Pattaya",
+    "image": "/images/dishes/dish_th_012.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 3,
+    "calories_approx": 350,
+    "short_description": "Con cá chẽm tươi ngọt thịt hấp ngập trong nước sốt chanh ớt tỏi băm rực rỡ, vị chua cay xé lưỡi bốc khói kích thích vị giác tột cùng.",
+    "tips": "Khía vài đường chéo trên thân cá và nhét sả đập dập vào bụng cá để cá chín đều và thơm ngát không tanh.",
+    "ingredients": [
+      {
+        "name": "Cá chẽm tươi nguyên con làm sạch (khoảng 700g)",
+        "amount": "1",
+        "unit": "con",
+        "category": "thịt"
+      },
+      {
+        "name": "Nước cốt chanh tươi nguyên chất",
+        "amount": "5",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Tỏi tép & Ớt hiểm xanh đỏ băm nhuyễn",
+        "amount": "4",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nước mắm ngon & Đường thốt nốt",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Rau ngò rí cọng tươi",
+        "amount": "1",
+        "unit": "nắm",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Hấp chín cá",
+        "description": "Khía thân cá, nhét sả gừng vào bụng rồi đặt cá vào xửng hấp cách thủy trong 15 phút cho cá vừa chín tới."
+      },
+      {
+        "step_number": 2,
+        "title": "Pha sốt chanh tỏi ớt",
+        "description": "Khuấy đều nước cốt chanh, nước mắm, đường thốt nốt cùng ngập tràn tỏi ớt băm nhuyễn."
+      },
+      {
+        "step_number": 3,
+        "title": "Rưới sốt lên cá nóng",
+        "description": "Chắt bỏ nước hấp cá đọng lại trong đĩa, rưới đều toàn bộ sốt chanh tỏi ớt lên thân cá nóng hổi, rải ngò rí và thưởng thức khi còn bốc khói."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_013",
+    "name": "Gỏi Miến Hải Sản Yum Woon Sen",
+    "english_name": "Spicy Glass Noodle Seafood Salad",
+    "cuisine": "Thailand",
+    "region": "Bangkok",
+    "image": "/images/dishes/dish_th_013.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 2,
+    "calories_approx": 320,
+    "short_description": "Sợi miến đậu xanh trong suốt dai ngon trộn cùng tôm mực giòn sần sật, thịt băm và cần tây trong nước sốt chua cay mặn ngọt bùng nổ.",
+    "tips": "Trộn sốt vào miến khi miến còn ấm nóng để sợi miến hút trọn vẹn vị chua cay đậm đà của nước sốt.",
+    "ingredients": [
+      {
+        "name": "Miến đậu xanh Thái Lan",
+        "amount": "150",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Tôm sú tươi & Mực nang",
+        "amount": "200",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Thịt heo nạc băm chần chín",
+        "amount": "80",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Cần tây, hành tây, cà chua bi",
+        "amount": "100",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước mắm chanh tỏi ớt đường thốt nốt",
+        "amount": "4",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Trần miến & Hải sản",
+        "description": "Trụng miến trong nước sôi 2 phút vớt ra để ráo. Luộc chín tôm mực và thịt băm."
+      },
+      {
+        "step_number": 2,
+        "title": "Pha nước sốt Yum",
+        "description": "Giã nhuyễn tỏi ớt, pha với nước cốt chanh, nước mắm, đường thốt nốt thành sốt chua cay đậm đà."
+      },
+      {
+        "step_number": 3,
+        "title": "Trộn gỏi đều tay",
+        "description": "Cho miến, hải sản, thịt băm, cần tây cà chua vào tô, rưới nước sốt trộn đều tay rắc đậu phộng rang giòn."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_014",
+    "name": "Thịt Heo Xiên Nướng Nước Cốt Dừa Moo Ping",
+    "english_name": "Thai Grilled Coconut Pork Skewers Moo Ping",
+    "cuisine": "Thailand",
+    "region": "Bangkok",
+    "image": "/images/dishes/dish_th_014.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 20,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Những xiên thịt heo nướng than hoa vàng ươm mướt mượt, thớ thịt mềm ngọt đậm đà thơm béo ngậy nước cốt dừa chấm xôi nếp.",
+    "tips": "Phết nước cốt dừa liên tục lên xiên thịt trong khi nướng để thịt luôn mềm ẩm mọng nước không bị khô xơ.",
+    "ingredients": [
+      {
+        "name": "Thịt nạc dăm heo thái lát mỏng",
+        "amount": "400",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Nước cốt dừa đặc",
+        "amount": "100",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Hắc xì dầu, dầu hào, nước mắm",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Đường thốt nốt & Rễ ngò rí giã nhuyễn",
+        "amount": "2",
+        "unit": "muỗng",
+        "category": "gia vị"
+      },
+      {
+        "name": "Xôi trắng ăn kèm",
+        "amount": "1",
+        "unit": "gói",
+        "category": "tinh bột"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ướp thịt cốt dừa",
+        "description": "Giã rễ ngò, tỏi tiêu, ướp cùng thịt heo, nước cốt dừa, hắc xì dầu, dầu hào, đường thốt nốt trong 30 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Xiên que tre",
+        "description": "Xiên thịt theo hình lượn sóng zíc-zắc vào từng que tre đã ngâm nước."
+      },
+      {
+        "step_number": 3,
+        "title": "Nướng than hoa phết dừa",
+        "description": "Nướng xiên thịt trên than hoa đỏ rực, vừa nướng vừa phết nước cốt dừa cho thịt chín xém vàng óng thơm ngậy."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_015",
+    "name": "Cua Xào Bột Cà Ri Trứng Poo Pad Pong Karee",
+    "english_name": "Yellow Curry Stir-fried Crab",
+    "cuisine": "Thailand",
+    "region": "Bangkok",
+    "image": "/images/dishes/dish_th_015.jpg",
+    "cook_time_minutes": 20,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 1,
+    "calories_approx": 540,
+    "short_description": "Thịt cua biển ngọt đậm xào cùng sốt cà ri vàng thơm béo ngậy quện đều lớp trứng sữa mềm mịn như kem tan trong miệng.",
+    "tips": "Đánh trứng gà với sữa tươi không đường và bột cà ri rồi đổ vào chảo lửa nhỏ đảo nhẹ tay để tạo vân trứng mịn màng.",
+    "ingredients": [
+      {
+        "name": "Thịt cua biển hoặc cua lột chặt miếng",
+        "amount": "350",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bột cà ri vàng & Sữa đặc không đường (Evaporated milk)",
+        "amount": "100",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Trứng gà tươi",
+        "amount": "2",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Hành tây, cần tây, ớt sừng thái sợi",
+        "amount": "100",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Sa tế tôm Thái Nam Prik Pao",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Chiên sơ cua",
+        "description": "Lăn cua qua chút bột bắp, chiên sơ trên dầu nóng 2 phút cho thịt cua săn chắc và đỏ vỏ."
+      },
+      {
+        "step_number": 2,
+        "title": "Pha sốt trứng cà ri",
+        "description": "Đánh tan trứng gà với sữa tươi, bột cà ri vàng, sa tế ớt Nam Prik Pao và dầu hào."
+      },
+      {
+        "step_number": 3,
+        "title": "Xào sốt sánh mịn",
+        "description": "Phi tỏi thơm xào hành tây cần tây, trút cua và hỗn hợp sốt trứng vào đảo nhẹ tay trên lửa vừa cho sốt sệt lại mịn như nhung."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_th_016",
+    "name": "Canh Sườn Cay Núi Lửa Laeng Saeb",
+    "english_name": "Volcano Spicy Pork Rib Soup Laeng Saeb",
+    "cuisine": "Thailand",
+    "region": "Bangkok",
+    "image": "/images/dishes/dish_th_016.jpg",
+    "cook_time_minutes": 50,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 3,
+    "calories_approx": 560,
+    "short_description": "Tháp sườn heo khổng lồ ninh mềm rục xếp cao như núi lửa, phủ ngập tràn ớt hiểm xanh băm nhuyễn và nước dùng chua cay tê tái.",
+    "tips": "Ninh sườn trên lửa nhỏ liu riu cho thịt róc xương, khi ăn dùng tay róc từng thớ thịt chấm nước súp ớt xanh cay xé.",
+    "ingredients": [
+      {
+        "name": "Xương sống và sườn heo nguyên tảng",
+        "amount": "700",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Ớt hiểm xanh băm nhuyễn",
+        "amount": "50",
+        "unit": "g",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nước cốt chanh tươi & Nước mắm ngon",
+        "amount": "5",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Ngò gai & Ngò rí thái nhỏ",
+        "amount": "1",
+        "unit": "nắm lớn",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Hành củ, sả, gừng hầm nước dùng",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ninh sườn mềm rục",
+        "description": "Chần sạch xương sườn, hầm cùng củ cải, hành gừng sả trong 45 phút cho thịt mềm róc khỏi xương."
+      },
+      {
+        "step_number": 2,
+        "title": "Pha sốt ớt xanh núi lửa",
+        "description": "Múc 1 tô nước dùng sườn đang sôi, hòa tan nước cốt chanh, nước mắm và toàn bộ ớt hiểm xanh băm nhuyễn cùng ngò gai."
+      },
+      {
+        "step_number": 3,
+        "title": "Dựng tháp núi lửa",
+        "description": "Xếp các tảng sườn cao vút thành hình tháp trên đĩa lớn, dội nước súp ớt xanh phủ kín ngập tháp sườn thưởng thức cay toát mồ hôi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_008",
+    "name": "Pizza Hải Sản Sốt Pesto Húng Tây",
+    "english_name": "Seafood Basil Pesto Pizza",
+    "cuisine": "Italy",
+    "region": "Genoa",
+    "image": "/images/dishes/dish_it_008.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 590,
+    "short_description": "Đế bánh nướng củi giòn xốp phủ lớp sốt Pesto xanh ngát thơm ngậy hạt thông, tôm sú tươi, mực giòn và phô mai Mozzarella kéo sợi.",
+    "tips": "Nướng bánh ở nhiệt độ cực đại 240°C trong lò để hải sản vừa chín tới giữ độ mọng nước mà đế bánh giòn tan.",
+    "ingredients": [
+      {
+        "name": "Đế bánh Pizza tươi cán mỏng",
+        "amount": "1",
+        "unit": "chiếc (24cm)",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Sốt Pesto húng tây hạt thông",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Tôm sú bóc vỏ & Mực ống cắt khoanh",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Phô mai sợi Mozzarella",
+        "amount": "150",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Cà chua bi & Dầu ô-liu",
+        "amount": "50",
+        "unit": "g",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Phết sốt Pesto",
+        "description": "Phết đều lớp sốt Pesto xanh thơm nức lên đế bánh pizza."
+      },
+      {
+        "step_number": 2,
+        "title": "Rải hải sản & Phô mai",
+        "description": "Rải phô mai Mozzarella đều mặt bánh, xếp tôm sú, mực ống và cà chua bi bổ đôi lên trên."
+      },
+      {
+        "step_number": 3,
+        "title": "Nướng bánh giòn tan",
+        "description": "Nướng trong lò ở 240°C trong 10 phút đến khi viền bánh phồng nở vàng ruộm phô mai sôi xèo xèo."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_009",
+    "name": "Cơm Ý Nấm Truffle Risotto",
+    "english_name": "Creamy Truffle Mushroom Risotto",
+    "cuisine": "Italy",
+    "region": "Milan",
+    "image": "/images/dishes/dish_it_009.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 10,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Từng hạt gạo Ý Arborio nấu ngấm nước súp gà sánh mượt như kem, hòa cùng nấm Portobello thơm bùi và hương nấm Truffle đen quý phái.",
+    "tips": "Châm từng vá nước dùng gà đang sôi vào đảo liên tục để hạt gạo tiết ra tinh bột sánh kem tự nhiên.",
+    "ingredients": [
+      {
+        "name": "Gạo Ý hạt tròn Arborio",
+        "amount": "200",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Nấm mỡ và nấm đùi gà cắt lát",
+        "amount": "150",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước dùng gà đun sôi nóng",
+        "amount": "600",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Bơ lạt & Phô mai Parmesan bào nhuyễn",
+        "amount": "40",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Dầu nấm Truffle đen thơm lừng",
+        "amount": "1",
+        "unit": "muỗng cà phê",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào gạo với rượu trắng",
+        "description": "Phi thơm hành tây với bơ, cho gạo Arborio vào xào trong 2 phút, rưới 50ml rượu vang trắng đảo cho cạn."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu gạo sánh kem",
+        "description": "Châm từng vá nước dùng gà nóng vào khuấy đều tay, đợi cạn lại châm tiếp trong 18 phút cho hạt gạo chín dẻo Al dente."
+      },
+      {
+        "step_number": 3,
+        "title": "Hoàn thiện Mantecatura",
+        "description": "Tắt bếp, cho bơ lạt, phô mai Parmesan và nấm xào vào đánh mạnh tay cho sánh mượt, rưới dầu Truffle đen dọn ra đĩa."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_010",
+    "name": "Mì Ống Sốt Cà Cay Penne all'Arrabbiata",
+    "english_name": "Spicy Tomato Penne all'Arrabbiata",
+    "cuisine": "Italy",
+    "region": "Rome",
+    "image": "/images/dishes/dish_it_010.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 2,
+    "calories_approx": 460,
+    "short_description": "Món mì 'giận dữ' nổi tiếng thành Rome với sợi mì ống Penne dai sần sật ngập trong sốt cà chua tỏi phi và ớt bột cay nồng kích thích.",
+    "tips": "Phi tỏi băm và ớt khô trong dầu ô-liu trên lửa nhỏ liu riu để tinh chất cay thơm ngấm trọn vào dầu mà không bị cháy đắng.",
+    "ingredients": [
+      {
+        "name": "Mì ống Penne Rigate",
+        "amount": "200",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Cà chua bi nghiền Pomodoro",
+        "amount": "250",
+        "unit": "ml",
+        "category": "gia vị"
+      },
+      {
+        "name": "Ớt khô Peperoncino & Tỏi băm",
+        "amount": "2",
+        "unit": "muỗng cà phê",
+        "category": "gia vị"
+      },
+      {
+        "name": "Dầu ô-liu Extra Virgin",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Ngò tây Parsley & Phô mai Pecorino",
+        "amount": "1",
+        "unit": "nhúm",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Luộc mì ống Penne",
+        "description": "Luộc mì trong nước sôi mặn đúng 9 phút cho chín Al dente, vớt ra để ráo giữ lại 1 vá nước luộc."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu sốt Arrabbiata cay",
+        "description": "Phi thơm tỏi băm và ớt khô trong dầu ô-liu, trút cà chua xay vào đun nhỏ lửa 6 phút cho sốt sánh đậm đà."
+      },
+      {
+        "step_number": 3,
+        "title": "Đảo mì ngấm sốt",
+        "description": "Trút mì ống vào chảo sốt cùng vá nước luộc mì đảo đều 1 phút trên lửa lớn, rắc ngò tây và phô mai bào thưởng thức nóng bỏng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_011",
+    "name": "Mì Lasagna Bò Phô Mai Đút Lò",
+    "english_name": "Baked Beef Lasagna with Mozzarella",
+    "cuisine": "Italy",
+    "region": "Bologna",
+    "image": "/images/dishes/dish_it_011.jpg",
+    "cook_time_minutes": 35,
+    "prep_time_minutes": 20,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 670,
+    "short_description": "Từng lớp lá mì Lasagna xếp tầng xen kẽ sốt bò băm Bolognese đượm vị và sốt kem trắng Béchamel béo ngậy, phủ lớp phô mai nướng vàng xém thơm nức.",
+    "tips": "Để khay Lasagna nghỉ 10 phút sau khi ra lò trước khi cắt để các lớp mì kết dính chắc chắn không bị sụp đổ.",
+    "ingredients": [
+      {
+        "name": "Lá mì Lasagna",
+        "amount": "6",
+        "unit": "lá",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Sốt bò băm Bolognese cà chua",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Sốt kem bơ sữa Béchamel",
+        "amount": "200",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Phô mai sợi Mozzarella & Parmesan",
+        "amount": "150",
+        "unit": "g",
+        "category": "khác"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xếp lớp Lasagna",
+        "description": "Phết 1 lớp sốt kem Béchamel dưới đáy khay nướng, đặt 2 lá mì, múc sốt bò băm, rắc phô mai Mozzarella."
+      },
+      {
+        "step_number": 2,
+        "title": "Lặp lại các tầng",
+        "description": "Lặp lại thêm 2 tầng tương tự, tầng trên cùng phủ đẫm sốt kem Béchamel và ngập tràn phô mai Parmesan."
+      },
+      {
+        "step_number": 3,
+        "title": "Nướng đút lò vàng xém",
+        "description": "Nướng ở nhiệt độ 200°C trong 25 phút đến khi lớp phô mai trên mặt sôi sùng sục và xém vàng đốm nâu quyến rũ."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_012",
+    "name": "Súp Hành Tây Kiểu Pháp Bánh Mì Phô Mai",
+    "english_name": "French Onion Soup Gratinée",
+    "cuisine": "Italy",
+    "region": "Châu Âu",
+    "image": "/images/dishes/dish_it_012.jpg",
+    "cook_time_minutes": 35,
+    "prep_time_minutes": 10,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 420,
+    "short_description": "Hành tây xào caramen hóa ngọt lịm ninh trong nước dùng bò thơm lừng, bên trên là lát bánh mì giòn phủ phô mai Gruyère đút lò tan chảy.",
+    "tips": "Xào hành tây thật kiên nhẫn trên lửa nhỏ trong 20 phút cho hành ngả màu nâu caramen đậm đà ngọt tự nhiên.",
+    "ingredients": [
+      {
+        "name": "Hành tây vàng thái lát mỏng",
+        "amount": "3",
+        "unit": "củ lớn",
+        "category": "rau củ"
+      },
+      {
+        "name": "Nước dùng bò hầm đậm đà",
+        "amount": "500",
+        "unit": "ml",
+        "category": "nước dùng"
+      },
+      {
+        "name": "Bánh mì Pháp Baguette cắt lát",
+        "amount": "2",
+        "unit": "khoanh",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Phô mai Gruyère hoặc Mozzarella bào sợi",
+        "amount": "80",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Bơ lạt, rượu vang đỏ, lá thyme",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Xào caramen hành tây",
+        "description": "Xào hành tây với bơ lạt trên lửa nhỏ trong 20 phút cho hành mềm nhũn và chuyển màu nâu cánh gián óng ả."
+      },
+      {
+        "step_number": 2,
+        "title": "Ninh súp bò thảo mộc",
+        "description": "Rưới chút rượu vang đỏ cho thơm đáy nồi, đổ nước dùng bò và lá thyme vào ninh nhỏ lửa 15 phút."
+      },
+      {
+        "step_number": 3,
+        "title": "Đút lò phô mai",
+        "description": "Múc súp ra thố sứ, đặt lát bánh mì nướng lên trên, phủ ngập phô mai cho vào lò nướng 5 phút cho phô mai tan chảy xém vàng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_013",
+    "name": "Gà Áp Chảo Sốt Bơ Chanh Caper Piccata",
+    "english_name": "Chicken Piccata with Lemon & Capers",
+    "cuisine": "Italy",
+    "region": "Milan",
+    "image": "/images/dishes/dish_it_013.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 450,
+    "short_description": "Miếng ức gà dần mỏng áp chảo vàng ươm ngập trong làn sốt bơ chanh vàng óng chua thanh thanh, điểm xuyết nụ bạch hoa Caper mằn mặn đặc trưng nước Ý.",
+    "tips": "Dần miếng ức gà mỏng đều 0.5cm giúp thịt chín siêu nhanh trong 3 phút mà không bị khô xơ.",
+    "ingredients": [
+      {
+        "name": "Ức gà phi-lê dần mỏng",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Nước cốt chanh vàng & Vang trắng",
+        "amount": "50",
+        "unit": "ml",
+        "category": "gia vị"
+      },
+      {
+        "name": "Nụ bạch hoa ngâm Caper",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Bơ lạt & Ngò tây Ý băm nhuyễn",
+        "amount": "30",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Bột mì mỏng áo ngoài",
+        "amount": "30",
+        "unit": "g",
+        "category": "tinh bột"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Áp chảo ức gà",
+        "description": "Áo thịt gà qua bột mì mỏng, áp chảo với dầu ô-liu mỗi mặt 2 phút cho vàng xém thơm lừng rồi gắp ra đĩa."
+      },
+      {
+        "step_number": 2,
+        "title": "Nấu sốt bơ chanh",
+        "description": "Tận dụng chảo, rót rượu vang trắng và nước cốt chanh vào đun sôi, thả bơ lạt và nụ Caper vào khuấy cho sốt sánh mịn."
+      },
+      {
+        "step_number": 3,
+        "title": "Hoàn thiện đĩa gà",
+        "description": "Đặt thịt gà trở lại chảo sốt đảo 30 giây cho ngấm đều, rưới sốt bơ chanh lên đĩa gà rắc ngò tây thưởng thức."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_014",
+    "name": "Bánh Kẹp Sandwich Gà Nướng Sốt Pesto Panini",
+    "english_name": "Grilled Chicken Pesto Panini",
+    "cuisine": "Italy",
+    "region": "Florence",
+    "image": "/images/dishes/dish_it_014.jpg",
+    "cook_time_minutes": 12,
+    "prep_time_minutes": 5,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Chiếc bánh mì Panini nướng ép giòn rụm với những sọc nướng đẹp mắt, nhân thịt gà nướng thơm lừng, phô mai Mozzarella chảy sợi và sốt Pesto húng tây xanh mướt.",
+    "tips": "Dùng chảo nướng có rãnh và ép chặt một vật nặng lên mặt bánh khi nướng để bánh giòn rụm đúng chuẩn Panini Ý.",
+    "ingredients": [
+      {
+        "name": "Bánh mì Ý Ciabatta hoặc Focaccia",
+        "amount": "1",
+        "unit": "ổ",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Ức gà nướng thái lát",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Sốt Pesto lá húng tây",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Phô mai tươi Mozzarella thái lát",
+        "amount": "80",
+        "unit": "g",
+        "category": "khác"
+      },
+      {
+        "name": "Cà chua thái khoanh & Lá rocket",
+        "amount": "50",
+        "unit": "g",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Phết sốt & Kẹp nhân",
+        "description": "Cắt đôi ổ bánh mì, phết sốt Pesto lên hai mặt ruột bánh, xếp thịt gà nướng, phô mai Mozzarella và cà chua vào giữa."
+      },
+      {
+        "step_number": 2,
+        "title": "Nướng ép Panini",
+        "description": "Đặt bánh lên chảo rãnh nướng thật nóng, dùng nắp phẳng ép chặt bánh nướng 3 phút mỗi mặt cho giòn tan."
+      },
+      {
+        "step_number": 3,
+        "title": "Cắt đôi thưởng thức",
+        "description": "Cắt vát đôi ổ bánh mì khi phô mai còn đang tan chảy kéo sợi béo ngậy thơm lừng."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_015",
+    "name": "Salad Hoàng Đế Caesar Gà Nướng",
+    "english_name": "Classic Chicken Caesar Salad",
+    "cuisine": "Italy",
+    "region": "Rome",
+    "image": "/images/dishes/dish_it_015.jpg",
+    "cook_time_minutes": 15,
+    "prep_time_minutes": 10,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 390,
+    "short_description": "Món salad danh tiếng toàn cầu với xà lách Romaine giòn ngọt ngập trong sốt Caesar béo ngậy tỏi phô mai, ức gà nướng thơm lừng và vụn bánh mì nướng bơ tỏi.",
+    "tips": "Dùng xà lách Romaine ngâm nước đá lạnh cho thật giòn trước khi trộn sốt để giữ được độ tươi giòn rôm rốp.",
+    "ingredients": [
+      {
+        "name": "Xà lách búp Romaine tươi giòn",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Ức gà nướng bơ tỏi thái lát",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Sốt salad Caesar (sốt mayonnaise cá cơm phô mai)",
+        "amount": "3",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Bánh mì sấy giòn bơ tỏi (Croutons)",
+        "amount": "50",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Phô mai Parmesan bào phiến mỏng",
+        "amount": "20",
+        "unit": "g",
+        "category": "khác"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Sơ chế xà lách",
+        "description": "Rửa sạch xà lách Romaine, vắt ráo nước hoàn toàn rồi cắt khúc vừa ăn 3cm."
+      },
+      {
+        "step_number": 2,
+        "title": "Trộn sốt Caesar",
+        "description": "Cho xà lách vào âu lớn, rưới sốt Caesar vào xóc đều nhẹ tay cho từng lá rau bóng mượt lớp sốt béo ngậy."
+      },
+      {
+        "step_number": 3,
+        "title": "Bày đĩa hoàn tất",
+        "description": "Trút salad ra đĩa, xếp các lát thịt gà nướng lên trên, rải bánh mì bơ tỏi giòn tan và rắc phô mai Parmesan bào phiến."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "dish_it_016",
+    "name": "Cánh Gà Nướng Mật Ong Rosemary",
+    "english_name": "Honey Rosemary Roasted Chicken Wings",
+    "cuisine": "Italy",
+    "region": "Tuscany",
+    "image": "/images/dishes/dish_it_016.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 0,
+    "calories_approx": 520,
+    "short_description": "Những chiếc cánh gà nướng vàng rộm cánh gián bóng bẩy mật ong, lớp da giòn sần sật quyện đều hương thơm quyến rũ của thảo mộc hương thảo tươi.",
+    "tips": "Ướp cánh gà với mật ong và lá hương thảo tươi vò nát để tinh dầu thảo mộc ngấm sâu vào từng thớ thịt.",
+    "ingredients": [
+      {
+        "name": "Cánh gà tươi cắt khúc giữa",
+        "amount": "400",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Mật ong rừng nguyên chất",
+        "amount": "2",
+        "unit": "muỗng canh",
+        "category": "gia vị"
+      },
+      {
+        "name": "Lá hương thảo tươi Rosemary thái nhỏ",
+        "amount": "2",
+        "unit": "nhánh",
+        "category": "rau thơm"
+      },
+      {
+        "name": "Dầu ô-liu, tỏi băm, tiêu đen, muối",
+        "amount": "1",
+        "unit": "bộ",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ướp cánh gà thảo mộc",
+        "description": "Ướp cánh gà với mật ong, lá rosemary băm, tỏi băm, dầu ô-liu và muối tiêu trong 20 phút."
+      },
+      {
+        "step_number": 2,
+        "title": "Nướng lò 200°C",
+        "description": "Xếp cánh gà lên khay nướng, cho vào lò ở 200°C nướng trong 15 phút cho chín vàng đều."
+      },
+      {
+        "step_number": 3,
+        "title": "Phết mật ong & Nướng bóng",
+        "description": "Lấy gà ra phết thêm một lớp mật ong bóng bẩy, nướng tiếp 5 phút cho da gà vàng xém giòn rụm thơm ngát."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80"
   }
 ]

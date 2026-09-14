@@ -1,221 +1,222 @@
-# 📋 06. Sprint Roadmap & Role-Based Actionable TODOs
+# 📋 06. Lộ Trình Triển Khai 5 Ngày & TODO Checklist Từng Vai Trò
 
-Tài liệu này vạch ra lộ trình phát triển theo phương pháp Agile/Scrum qua 4 Sprint (tương ứng 4 tuần), kèm danh sách đầu việc (TODO Checklist) chi tiết và có thể tích chọn (checkbox) cho từng thành viên trong số 6 kỹ sư của dự án **YumYumPick**.
+Tài liệu này vạch ra lộ trình phát triển cấp tốc trong **5 Ngày (Crash Sprint)** với phương pháp làm việc song song (Parallel Workstreams), kèm danh sách đầu việc (Actionable Checklist) chi tiết từng ngày cho 4 thành viên chủ chốt của dự án **YumYumPick**.
 
 ---
 
-## 1. Lộ Trình Phát Triển 4 Sprints (Sprint Timeline)
+## 1. Lộ Trình Triển Khai Chi Tiết 5 Ngày (5-Day Gantt Timeline)
 
 ```mermaid
 gantt
-    title Kế Hoạch Triển Khai YumYumPick (4 Sprints)
+    title Lộ Trình Phát Triển YumYumPick (5 Ngày)
     dateFormat  YYYY-MM-DD
-    section Sprint 0: Foundation
-    Setup Git, Repo & Branching        :done, s0_1, 2026-09-11, 3d
-    API Contract & Data Schema         :done, s0_2, 2026-09-11, 4d
-    Spike Framer Motion & Boilerplate  :done, s0_3, 2026-09-12, 4d
-    section Sprint 1: Core Engine
-    Framer Motion Swipe Physics Deck   :active, s1_1, 2026-09-15, 6d
-    FastAPI Randomizer & Filter API    :active, s1_2, 2026-09-15, 6d
-    Curate 60+ Seed Dishes & Images    :active, s1_3, 2026-09-15, 5d
-    section Sprint 2: Features, Storage & Admin CMS
-    Recipe Drawer & Ingredients List   :s2_1, 2026-09-22, 5d
-    LocalStorage Sync & Saved History  :s2_2, 2026-09-22, 5d
-    Filter Modal Multi-criteria UI     :s2_3, 2026-09-23, 4d
-    Admin JWT Auth & Security Backend  :s2_4, 2026-09-22, 4d
-    Admin Dish CRUD & Form Modal       :s2_5, 2026-09-24, 6d
-    section Sprint 3: Polish, Release & Analytics
-    Admin Analytics Stats Dashboard    :s3_1, 2026-09-29, 4d
-    End-to-end Integration Testing    :s3_2, 2026-09-29, 4d
-    CI/CD Automation & Cloud Deploy    :s3_3, 2026-10-01, 3d
-    Lighthouse Optimization & Bugfix   :s3_4, 2026-10-02, 4d
-    Demo Day & Project Handover        :s3_5, 2026-10-06, 2d
+    axisFormat  Ngày %d
+    
+    section Ngày 1: Setup & Schema
+    Chốt API Contract & Mock Data      :done, d1_1, 2026-09-15, 1d
+    Khởi tạo Backend FastAPI & SQLite  :done, d1_2, 2026-09-15, 1d
+    Setup Frontend Vite & Tailwind CSS :done, d1_3, 2026-09-15, 1d
+    Soạn 10 món mẫu đầu tiên dạng JSON :done, d1_4, 2026-09-15, 1d
+    
+    section Ngày 2: Parallel Coding
+    FastAPI Auth & Dishes Random API   :active, d2_1, 2026-09-16, 1d
+    Framer Motion Swipe Deck & Physics :active, d2_2, 2026-09-16, 1d
+    Auth Modal & Filter Modal UI       :active, d2_3, 2026-09-16, 1d
+    Thu thập hoàn tất 40+ món ăn       :active, d2_4, 2026-09-16, 1d
+    
+    section Ngày 3: Tích Hợp API
+    Kết nối API Quẹt thẻ & Lưu SQLite  :d3_1, 2026-09-17, 1d
+    Dish Intro Drawer (Tap vào thẻ)    :d3_2, 2026-09-17, 1d
+    Tinh chỉnh Responsive PC & Mobile  :d3_3, 2026-09-17, 1d
+    Script nạp tự động seed SQLite     :d3_4, 2026-09-17, 1d
+    
+    section Ngày 4: Recipe & Grocery
+    Màn hình Saved Dishes & Checkbox   :d4_1, 2026-09-18, 1d
+    Smart Grocery List & Copy Zalo     :d4_2, 2026-09-18, 1d
+    Phím tắt PC (←, →, Space)          :d4_3, 2026-09-18, 1d
+    Kiểm thử luồng E2E ban đầu         :d4_4, 2026-09-18, 1d
+    
+    section Ngày 5: Testing & Demo
+    Test chéo trên PC & Điện thoại thật:d5_1, 2026-09-19, 1d
+    Sửa lỗi biên & Polish chuyển động  :d5_2, 2026-09-19, 1d
+    Đóng gói báo cáo & Kịch bản Demo   :d5_3, 2026-09-19, 1d
 ```
 
 ---
 
-## 2. Tiêu Chuẩn Nghiệm Thu Công Việc (DoR & DoD)
+## 2. Tiêu Chuẩn Nghiệm Thu Công Việc (Definition of Done - DoD)
 
-### 2.1. Definition of Ready (DoR - Điều kiện để BẮT ĐẦU làm Task)
-- [ ] Task có mô tả rõ ràng: Người dùng muốn làm gì và kết quả mong muốn là gì.
-- [ ] Đã có giao diện phác thảo (Wireframe) hoặc API Contract (định dạng JSON).
-- [ ] Không bị phụ thuộc (block) bởi một task chưa hoàn thành khác.
-
-### 2.2. Definition of Done (DoD - Điều kiện để ĐÓNG Task)
-- [ ] Code chạy ổn định trên máy cá nhân, không có lỗi runtime hoặc crash.
-- [ ] Đã qua định dạng code (Prettier/Black), xóa sạch `console.log` và debug thừa.
-- [ ] Đã test giao diện trên ít nhất 2 kích thước màn hình: Mobile (390px) và Laptop (1440px).
-- [ ] Đã tạo Pull Request, có ít nhất 1 phê duyệt (Approved) từ đồng đội.
-- [ ] Đã merge thành công vào nhánh `develop` mà không làm hỏng build.
+Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các tiêu chí sau:
+- [ ] Code chạy cục bộ trơn tru, không có lỗi console báo đỏ hay crash server.
+- [ ] Đã kiểm tra hiển thị trên cả 2 chế độ: Màn hình PC (1024px+) và Màn hình Mobile (giả lập 390px trên DevTools).
+- [ ] Dữ liệu kết nối đúng với file CSDL SQLite `yumyumpick.db`.
+- [ ] Đã xóa bỏ các đoạn `console.log` và dữ liệu debug thừa.
 
 ---
 
-## 3. Bảng TODO Chi Tiết Cho Từng Thành Viên (Actionable Checklists)
+## 3. Bảng TODO Chi Tiết Từng Ngày Cho Từng Thành Viên
 
-### 👑 Member 1: Tech Lead & Fullstack Coordinator
-- [ ] **Khởi tạo & Cấu hình Repo:**
-  - [ ] Tạo repository GitHub, khởi tạo nhánh `main` và `develop`.
-  - [ ] Thiết lập file `.gitignore`, README và bộ tài liệu trong thư mục `docs/`.
-  - [ ] Thiết lập Branch Protection Rules trên GitHub (cấm force push, yêu cầu 1 review trước khi merge).
-- [ ] **Kiến trúc & Tiêu chuẩn:**
-  - [ ] Khóa đặc tả API Contract với Member 4 (Backend Lead).
-  - [ ] Tổ chức cuộc họp Kick-off phân chia task đầu tuần.
-  - [ ] Điều phối Daily Standup (10 phút mỗi ngày lúc 9:00 AM).
-- [ ] **Code Review & Tích hợp:**
-  - [ ] Review toàn bộ các Pull Request lớn kết nối giữa Frontend và Backend.
-  - [ ] Hỗ trợ đồng đội xử lý Merge Conflicts phức tạp nếu phát sinh.
-  - [ ] Chuẩn bị kịch bản Demo Day cho buổi báo cáo cuối kỳ.
+### 🎨 Thành viên 1: Frontend Swipe & Responsive Lead
+
+#### Ngày 1: Setup Dự Án & Spike Framer Motion
+- [ ] Tạo dự án React bằng Vite (`npm create vite@latest frontend -- --template react`).
+- [ ] Cài đặt các package cần thiết: `framer-motion`, `lucide-react`, `clsx`, `tailwind-merge`.
+- [ ] Cấu hình Tailwind CSS, thiết lập font chữ và bảng màu chủ đạo (Cam/Đỏ ẩm thực).
+- [ ] Tạo file mock data cục bộ từ JSON mẫu của Ngày 1 để thử nghiệm thẻ quẹt.
+
+#### Ngày 2: Hoàn Thiện Cơ Chế Quẹt Thẻ (Swipe Deck)
+- [ ] Xây dựng component `SwipeCard.jsx` bằng Framer Motion:
+  - [ ] Bắt cử chỉ kéo chuột (mouse drag) và vuốt ngón tay (touch gesture).
+  - [ ] Công thức xoay nghiêng động: $\text{rotate} = \text{dragX} / 15$.
+  - [ ] Ngưỡng quẹt: Sang phải $> 120\text{px}$ là LIKE, sang trái $< -120\text{px}$ là SKIP.
+  - [ ] Hiển thị stamp đồ họa nổi: "YUMMY!" (xanh) và "NOPE" (đỏ) tăng dần độ đậm khi kéo.
+- [ ] Xây dựng component `CardStack.jsx`: Xếp lớp 3 thẻ kế tiếp nhau, hiệu ứng phóng to mượt khi thẻ trên cùng bay đi.
+- [ ] Xử lý trạng thái hết thẻ (Empty State) kèm nút "Quẹt lại từ đầu".
+
+#### Ngày 3: Tích Hợp API & Bố Cục Responsive PC/Mobile
+- [ ] Kết nối hàm lấy danh sách thẻ từ API Backend `GET /api/v1/dishes/random`.
+- [ ] Khi quẹt phải: Gửi request `POST /api/v1/saved-dishes` để lưu món vào SQLite.
+- [ ] Tinh chỉnh giao diện Responsive:
+  - [ ] Trên Mobile: Thẻ chiếm toàn màn hình, nút bấm vừa vặn ngón tay cái.
+  - [ ] Trên PC: Giới hạn khung thẻ trong kích thước $420\text{px} \times 600\text{px}$ căn giữa.
+
+#### Ngày 4: Bổ Sung Phím Tắt PC & Điều Hướng
+- [ ] Bắt sự kiện bàn phím trên máy tính:
+  - [ ] Phím `←` (Mũi tên trái): Bỏ qua thẻ hiện tại.
+  - [ ] Phím `→` (Mũi tên phải): Thích và lưu thẻ hiện tại.
+  - [ ] Phím `Space` (Phím cách): Mở nhanh Drawer giới thiệu món ăn.
+- [ ] Xây dựng cụm nút bấm nổi: Undo (hoàn tác thẻ vừa quẹt), Skip, Like, Info.
+
+#### Ngày 5: Tối Ưu Animation & Phối Hợp Demo
+- [ ] Tinh chỉnh độ đàn hồi (spring physics) đạt 60 FPS không giật lag.
+- [ ] Kiểm thử chuyển động trên các trình duyệt khác nhau (Chrome, Edge, Safari di động).
+- [ ] Cùng team tổng duyệt kịch bản demo sản phẩm.
 
 ---
 
-### 🎨 Member 2: Frontend Lead (Swipe UI & Framer Motion)
-- [ ] **Khởi tạo Dự Án Frontend:**
-  - [ ] Khởi tạo dự án bằng Vite (`npm create vite@latest frontend -- --template react`).
-  - [ ] Cấu hình Tailwind CSS, cài đặt các thư viện `framer-motion`, `lucide-react`, `clsx`, `tailwind-merge`.
-- [ ] **Phát triển Cơ Chế Quẹt Thẻ (Core Swipe Deck):**
-  - [ ] Xây dựng component `SwipeCard.jsx` với motion drag của Framer Motion.
-  - [ ] Viết công thức vật lý tính toán góc xoay thẻ (`rotate = dragX / 15`) và độ đàn hồi (`spring`).
-  - [ ] Thiết lập ngưỡng quẹt: Quẹt sang phải $> 120\text{px}$ là LIKE, sang trái $< -120\text{px}$ là SKIP.
-  - [ ] Hiển thị stamp đồ họa nổi: Stamp xanh "YUMMY!" khi kéo sang phải, Stamp đỏ "NOPE" khi kéo sang trái.
-- [ ] **Cơ Chế Nhấp Thẻ Xem Giới Thiệu (Tap on Card Gesture):**
-  - [ ] Tách biệt cử chỉ Tap và Drag trong Framer Motion (khoảng cách kéo $< 5\text{px}$ nhận diện là Tap).
-  - [ ] Khi tap thẻ: Kích hoạt mở ngay `DishIntroDrawer.jsx` hiển thị giới thiệu món, xuất xứ, calo, thời gian nấu và tóm tắt nguyên liệu.
-- [ ] **Component Ngăn Xếp Thẻ (CardStack):**
-  - [ ] Xây dựng component `CardStack.jsx` xếp tầng 3 thẻ liên tiếp (Top, Middle, Bottom).
-  - [ ] Tối ưu hiệu ứng thẻ số 2 tự động phóng to khi thẻ số 1 bị quẹt bay ra khỏi màn hình.
-  - [ ] Xử lý màn hình "Hết thẻ" (Empty State) kèm nút "Quẹt lại" và icon hoạt hình.
-- [ ] **Thanh Điều Hướng & Cụm Nút Thao Tác (Action Buttons):**
-  - [ ] Xây dựng cụm nút: Nút Hoàn tác (Undo), Nút Bỏ qua (X), Nút Giới thiệu (Info), Nút Chọn món (Heart).
-  - [ ] Bắt sự kiện bàn phím trên máy tính (Phím $\leftarrow$ để Skip, $\rightarrow$ để Like, Space để mở giới thiệu).
+### 📱 Thành viên 2: Frontend Features & Auth Developer
 
----
+#### Ngày 1: Setup Layout Chung & Navbar
+- [ ] Xây dựng khung ứng dụng chính: Navbar phía trên (Logo, Nút Lọc, Nút Món đã lưu, Nút Tài khoản).
+- [ ] Xây dựng cấu trúc state quản lý phiên đăng nhập (lấy từ `localStorage` key `auth_user`).
+- [ ] Thiết lập thư mục `components/` và `services/api.js`.
 
-### 📱 Member 3: Frontend Dev (Filter, History & LocalStorage)
-- [ ] **Quản Trị Lưu Trữ Trình Duyệt (LocalStorage Integration):**
-  - [ ] Viết Custom Hook `useLocalStorage.js` để đọc/ghi dữ liệu an toàn, xử lý ngoại lệ khi bộ nhớ đầy.
-  - [ ] **Lưu công thức chi tiết:** Lưu toàn bộ thông tin món ăn (bao gồm cả danh sách `ingredients`, `steps`, `tips`) vào key `YYP_SAVED_DISHES` ngay khi quẹt phải để phục vụ xem lại chi tiết sau này.
-  - [ ] Lưu lịch sử các ID đã quẹt vào `YYP_SWIPE_HISTORY` để phục vụ nút Hoàn tác (Undo).
-- [ ] **Modal Bộ Lọc Nâng Cao (Filter Modal):**
-  - [ ] Xây dựng component `FilterModal.jsx` dạng popup hoặc bottom sheet.
-  - [ ] Các chip chọn quốc gia: Việt Nam, Nhật Bản, Hàn Quốc, Thái Lan, Ý...
+#### Ngày 2: Xây Dựng Auth Modal & Filter Modal
+- [ ] Xây dựng component `AuthModal.jsx`:
+  - [ ] Form Đăng nhập: Ô nhập `username`, `password`, nút "Đăng Nhập".
+  - [ ] Form Đăng ký: Ô nhập `username`, `password`, `full_name`, nút "Tạo Tài Khoản".
+  - [ ] Gọi API Backend tương ứng và lưu thông tin `{user_id, username}` vào `localStorage`.
+  - [ ] Hiển thị thông báo lỗi trực quan nếu sai mật khẩu hoặc trùng tên đăng nhập.
+- [ ] Xây dựng component `FilterModal.jsx`:
+  - [ ] Chip chọn quốc gia: Việt Nam, Hàn Quốc, Nhật Bản, Thái Lan, Ý.
   - [ ] Bộ chọn thời gian nấu: Dưới 20 phút, 20-45 phút, Mọi thời gian.
-  - [ ] Nút "Áp dụng" gọi lại hàm tải thẻ mới theo tiêu chí lọc.
-- [ ] **Giới Thiệu Món Ăn (Dish Intro Drawer):**
-  - [ ] Xây dựng component `DishIntroDrawer.jsx` (Bottom sheet vuốt mở khi tap vào thẻ).
-  - [ ] Hiển thị hình ảnh, câu chuyện món ăn (`short_description`), meta calo, độ cay, thời gian và tóm tắt nguyên liệu.
-  - [ ] Có nút chuyển đổi trực tiếp: "Chọn món này ❤️" (lưu vào LocalStorage) hoặc "Bỏ qua ❌".
-- [ ] **Bộ Sưu Tập Món Đã Lưu & Xem Chi Tiết Công Thức Đầy Đủ:**
-  - [ ] Xây dựng component `SavedDishesModal.jsx`: Hiển thị danh sách các món đã quẹt phải kèm ảnh, cờ quốc gia, thời gian nấu.
-  - [ ] Xây dựng component `FullRecipeView.jsx`: Hiển thị chi tiết công thức khi người dùng bấm vào một món đã lưu:
-    - [ ] Danh sách nguyên liệu kèm checkbox tương tác để đánh dấu khi đi chợ hoặc kiểm tra tủ lạnh.
-    - [ ] Hướng dẫn từng bước nấu (Step 1, 2, 3...) có thời gian và nhiệt lượng chi tiết.
-    - [ ] Mẹo vặt từ đầu bếp (`tips`).
-    - [ ] Nút "Đã nấu xong" và nút "Bỏ lưu".
-  - [ ] **Tính năng thông minh:** Nút "Xuất Danh Sách Đi Chợ" (Smart Grocery List) tự động tổng hợp nguyên liệu của các món đã lưu và có nút sao chép (Copy to Clipboard) gửi qua Zalo / Messenger.
-- [ ] **Phát triển Cổng Quản Trị Admin / CMS (`/admin`):**
-  - [ ] Màn hình Đăng nhập Quản trị (`AdminLogin.jsx`): Form đăng nhập, xử lý lưu JWT token an toàn, hiển thị lỗi khi sai credentials.
-  - [ ] Khung Layout Quản trị (`AdminLayout.jsx`): Sidebar điều hướng, Header hiển thị thông tin Admin hiện tại, nút Đăng xuất.
-  - [ ] Dashboard Thống kê (`AdminDashboard.jsx`): 4 thẻ KPI (Tổng món, Lượt quẹt, Lượt like, Lượt skip), bảng xếp hạng Top 5 món được thích nhất & bị bỏ qua nhiều nhất.
-  - [ ] Quản lý Món ăn (`AdminDishes.jsx`): Bảng danh sách món ăn kèm bộ lọc theo quốc gia, thanh tìm kiếm live-search, phân trang, nút Thêm món mới, Sửa và Xóa.
-  - [ ] Modal Soạn thảo Món ăn Đa Tab (`DishFormModal.jsx`):
-    - Tab 1: Nhập thông tin tổng quan, thời gian nấu, mức độ cay, calo, link ảnh và preview.
-    - Tab 2: Quản lý danh sách nguyên liệu động (thêm/xóa dòng, định lượng, đơn vị, nhóm nguyên liệu).
-    - Tab 3: Quản lý các bước nấu động (thêm/xóa bước, thứ tự, tiêu đề, mô tả).
-    - Tab 4: Gắn thẻ (Tags multi-select).
-  - [ ] Viết module `src/services/adminApi.js` đóng gói các hàm gọi API Admin đính kèm Header `Authorization: Bearer <token>`.
-- [ ] **Kết Nối API Backend:**
-  - [ ] Viết module `src/services/api.js` sử dụng `fetch` hoặc `axios` gọi đến FastAPI server.
-  - [ ] Xử lý trạng thái Loading (Skeleton loader khi đang tải thẻ) và trạng thái Error khi mất mạng.
+  - [ ] Bộ chọn độ cay: Không cay, Cay nhẹ, Cay nhiều.
+  - [ ] Nút "Áp dụng bộ lọc" kích hoạt tải lại danh sách thẻ mới.
+
+#### Ngày 3: Xây Dựng Dish Intro Drawer (Xem Nhanh Khi Tap)
+- [ ] Xây dựng component `DishIntroDrawer.jsx` (Bottom sheet trượt từ đáy lên):
+  - [ ] Kích hoạt khi người dùng chạm (Tap) nhẹ vào thẻ hoặc bấm nút ℹ️.
+  - [ ] Hiển thị hình ảnh lớn, xuất xứ, calo, độ cay, thời gian chế biến và tóm tắt các nguyên liệu chính.
+  - [ ] Cung cấp nút thao tác nhanh: "Bỏ qua ❌" hoặc "Chọn món này ❤️".
+- [ ] Tinh chỉnh drawer hoạt động trơn tru cả khi vuốt xuống trên điện thoại hoặc bấm nút đóng trên PC.
+
+#### Ngày 4: Màn Hình Công Thức Chi Tiết & Danh Sách Đi Chợ
+- [ ] Xây dựng component `SavedDishesModal.jsx`: Danh sách các món ăn đã lưu lấy từ API Backend `GET /api/v1/saved-dishes/{user_id}`.
+- [ ] Xây dựng component `FullRecipeView.jsx`:
+  - [ ] Danh sách nguyên liệu kèm **Checkbox tương tác** để đánh dấu khi đi chợ hoặc kiểm tra đồ trong tủ lạnh.
+  - [ ] Các bước nấu chi tiết 1-2-3 có hướng dẫn rõ ràng.
+  - [ ] Mẹo đầu bếp (`tips`) trong khung viền vàng bắt mắt.
+  - [ ] Nút "Bỏ lưu món" (gọi API xóa khỏi SQLite).
+- [ ] Xây dựng tính năng `Smart Grocery List`:
+  - [ ] Nút bấm "Xuất Danh Sách Đi Chợ 🛒".
+  - [ ] Tự động gộp nguyên liệu của tất cả món đã lưu thành định dạng văn bản tiện lợi.
+  - [ ] Nút "Sao chép (Copy)" để gửi nhanh qua Zalo/Messenger.
+
+#### Ngày 5: Kiểm Thử Giao Diện & Sửa Lỗi Tương Tác
+- [ ] Kiểm tra tính toàn vẹn khi đăng xuất và đăng nhập bằng tài khoản khác.
+- [ ] Xử lý các tình huống biên: Chưa có món nào được lưu, mất kết nối mạng cục bộ.
+- [ ] Hoàn thiện giao diện và phối hợp tổng duyệt demo.
 
 ---
 
-### ⚙️ Member 4: Backend Lead (FastAPI, Database ORM, Auth & Admin APIs)
-- [ ] **Khởi tạo Kiến Trúc FastAPI & Database Connection:**
-  - [ ] Khởi tạo môi trường ảo Python (`venv`), cập nhật `requirements.txt` (`fastapi`, `uvicorn`, `sqlalchemy>=2.0`, `psycopg2-binary`, `pydantic>=2.0`, `supabase`, `pyjwt`, `passlib[bcrypt]`).
-  - [ ] Cấu hình thư mục phân tầng: `app/api/v1`, `app/db`, `app/models`, `app/services`, `app/core`.
-  - [ ] Module kết nối CSDL `app/db/session.py`: Cấu hình SQLAlchemy Engine, SessionLocal và dependency `get_db` kết nối Supabase PostgreSQL.
-  - [ ] Cấu hình CORS Middleware (`CORSMiddleware`) cho phép Frontend gọi an toàn từ localhost và Vercel.
-- [ ] **Hệ Thống Bảo Mật & Xác Thực Quản Trị (Admin Auth & Security):**
-  - [ ] Xây dựng `app/core/security.py`:
-    - [ ] Hàm băm mật khẩu `get_password_hash(password)` bằng Bcrypt.
-    - [ ] Hàm xác thực mật khẩu `verify_password(plain, hashed)`.
-    - [ ] Hàm sinh JSON Web Token `create_access_token(data, expires_delta)`.
-    - [ ] Dependency `get_current_admin`: Giải mã JWT từ Header `Authorization: Bearer <token>`, tra cứu tài khoản trong DB, chặn 401 nếu token không hợp lệ hoặc hết hạn.
-  - [ ] Endpoint `POST /api/v1/admin/auth/login`: Xác thực tài khoản admin, trả về access token và thông tin người dùng.
-- [ ] **Xây Dựng Data Models (Pydantic & SQLAlchemy ORM):**
-  - [ ] Xây dựng ORM models (`app/models/orm_models.py`): `Dish`, `Ingredient`, `CookingStep`, `Tag`, `Cuisine`, `UserSavedDish`, `UserSwipe`, `AdminUser`, `AdminAuditLog`.
-  - [ ] Xây dựng Pydantic schemas:
-    - [ ] `app/models/dish.py`: Validation món ăn phía User.
-    - [ ] `app/models/admin.py`: `AdminLoginRequest`, `TokenResponse`, `DishCreateRequest`, `DishUpdateRequest`, `StatsOverviewResponse`.
-- [ ] **Hệ Thống API Quản Trị CMS (Admin CRUD & Stats):**
-  - [ ] `GET /api/v1/admin/dishes`: Phân trang, tìm kiếm theo tên món, lọc theo quốc gia.
-  - [ ] `POST /api/v1/admin/dishes`: Thêm món ăn mới kèm toàn bộ nguyên liệu, bước nấu và tags trong cùng một Database transaction.
-  - [ ] `PUT /api/v1/admin/dishes/{dish_id}`: Cập nhật thông tin chi tiết món ăn và công thức.
-  - [ ] `DELETE /api/v1/admin/dishes/{dish_id}`: Xóa món ăn khỏi hệ thống (cascade xóa nguyên liệu & bước nấu).
-  - [ ] `GET /api/v1/admin/stats/overview`: Thống kê tổng số món, tổng lượt quẹt, tỷ lệ like, top 5 món yêu thích nhất và top món bị bỏ qua.
-- [ ] **Thuật Toán Gợi Ý & Truy Vấn Supabase Cho Người Dùng:**
-  - [ ] Viết hàm truy vấn ngẫu nhiên món ăn từ Supabase PostgreSQL tối ưu thời gian phản hồi $< 100\text{ms}$.
-  - [ ] Xử lý tham số `exclude_ids` để loại trừ các món vừa xem trong session.
-  - [ ] Truy vấn lọc kết hợp nhiều điều kiện (Cuisine, spicy_level, max_time) sử dụng Index trên PostgreSQL.
-- [ ] **Triển Khai Các Endpoints RESTful Người Dùng:**
-  - [ ] `GET /api/v1/health` (Kiểm tra trạng thái server & kết nối CSDL Supabase).
-  - [ ] `GET /api/v1/dishes/random` (Lấy thẻ ngẫu nhiên có bộ lọc).
-  - [ ] `GET /api/v1/dishes/{dish_id}` (Lấy chi tiết công thức 1 món kèm nguyên liệu & các bước nấu).
-  - [ ] `GET /api/v1/filters/metadata` (Lấy danh mục cờ quốc gia, nhãn bộ lọc từ bảng `cuisines`).
-  - [ ] `POST /api/v1/dishes/batch` (Lấy thông tin nhiều món từ mảng ID).
-- [ ] **Tài Liệu Hóa API:**
-  - [ ] Tự động sinh Swagger UI tại `/docs` phân tách rõ 2 nhóm tags: `Users` và `Admin / CMS`.
+### ⚙️ Thành viên 3: Backend & SQLite Engineer
+
+#### Ngày 1: Khởi Tạo FastAPI & CSDL SQLite
+- [ ] Khởi tạo môi trường ảo Python (`venv`), file `requirements.txt` (`fastapi`, `uvicorn`, `sqlalchemy>=2.0`, `pydantic>=2.0`).
+- [ ] Cấu hình kết nối CSDL SQLite trong `app/db/session.py`: `sqlite:///./yumyumpick.db`.
+- [ ] Xây dựng ORM models (`app/models/orm_models.py`): `User`, `Cuisine`, `Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`.
+- [ ] Thiết lập CORS Middleware cho phép gọi API từ `http://localhost:5173`.
+- [ ] Cung cấp file định dạng API Contract JSON cho đội Frontend.
+
+#### Ngày 2: Xây Dựng Simple Auth & Dishes Random API
+- [ ] Endpoint `POST /api/v1/auth/signup`:
+  - [ ] Kiểm tra trùng username trong SQLite.
+  - [ ] Tạo bản ghi user mới và trả về ID, username, họ tên.
+- [ ] Endpoint `POST /api/v1/auth/login`:
+  - [ ] Kiểm tra username và password khớp với CSDL SQLite.
+  - [ ] Trả về thông tin user nếu đúng, trả về mã 401 nếu sai.
+- [ ] Endpoint `GET /api/v1/dishes/random`:
+  - [ ] Truy vấn ngẫu nhiên danh sách món ăn từ SQLite.
+  - [ ] Hỗ trợ các query params: `cuisine`, `max_time`, `spicy_level`, `exclude_ids`.
+- [ ] Endpoint `GET /api/v1/dishes/{dish_id}`: Trả về chi tiết món ăn kèm toàn bộ nguyên liệu và bước nấu.
+
+#### Ngày 3: Xây Dựng Saved Dishes API & Tích Hợp
+- [ ] Endpoint `POST /api/v1/saved-dishes`: Lưu món vào bảng `user_saved_dishes`.
+- [ ] Endpoint `GET /api/v1/saved-dishes/{user_id}`: Lấy danh sách các món kèm công thức chi tiết của user.
+- [ ] Endpoint `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`: Xóa món khỏi danh sách lưu.
+- [ ] Endpoint `GET /api/v1/filters/metadata`: Trả về danh sách quốc gia và siêu dữ liệu bộ lọc.
+- [ ] Kiểm thử toàn bộ API qua Swagger UI tại `http://localhost:8000/docs`.
+
+#### Ngày 4: Hỗ Trợ Tích Hợp & Tinh Chỉnh Hiệu Năng
+- [ ] Hỗ trợ Frontend ghép nối các API, xử lý lỗi CORS hoặc format dữ liệu nếu có.
+- [ ] Tối ưu hóa truy vấn SQLite với Index trên các trường `cuisine_id` và `cook_time_minutes`.
+- [ ] Đảm bảo cơ chế SQLite không bị khóa file (SQLite concurrency timeout).
+
+#### Ngày 5: Kiểm Thử An Toàn & Chuẩn Bị Tài Liệu Kỹ Thuật
+- [ ] Kiểm tra tính toàn vẹn dữ liệu: Xóa user hoặc món ăn cascade an toàn.
+- [ ] Backup file CSDL SQLite sạch sẵn sàng cho buổi trình diễn Demo.
+- [ ] Hỗ trợ đội ngũ chạy thử nghiệm E2E.
 
 ---
 
-### 🍱 Member 5: Data Engineer & Content Specialist (Supabase Schema, Admin Tables & Content)
-- [ ] **Thiết Kế & Khởi Tạo Cơ Sở Dữ Liệu Supabase (Full System Schema):**
-  - [ ] Thiết kế sơ đồ thực thể liên kết (Full ERD): các bảng `cuisines`, `dishes`, `ingredients`, `cooking_steps`, `tags`, `dish_tags`, `user_saved_dishes`, `user_swipes`, `admin_users`, `admin_audit_logs`.
-  - [ ] Viết file kịch bản SQL DDL (`app/db/schema.sql`) cho Supabase SQL Editor: kiểu dữ liệu, khóa ngoại `ON DELETE CASCADE`, chỉ mục tìm kiếm và tài khoản admin mặc định.
-- [ ] **Nghiên Cứu & Thu Thập Dữ Liệu Ẩm Thực:**
-  - [ ] Lập danh sách **tối thiểu 60 món ăn** quen thuộc thuộc 5 nhóm văn hóa:
-    - 20 món Việt Nam (Phở bò, Bún chả, Bánh mì chảo, Cơm sườn, Gỏi cuốn...).
-    - 10 món Hàn Quốc (Cơm trộn Bibimbap, Canh kim chi, Gà sốt cay...).
-    - 10 món Nhật Bản (Mì Udon, Cơm cà ri, Trứng cuộn Tamagoyaki...).
-    - 10 món Thái Lan (Pad Thai, Canh Tom Yum, Heo xào Pad Krapow...).
-    - 10 món Âu / Ý (Mì Ý Carbonara, Bolognese, Pizza, Steak...).
-- [ ] **Biên Tập Nội Dung Công Thức:**
-  - [ ] Viết danh sách nguyên liệu cụ thể có định lượng.
-  - [ ] Viết 3-5 bước thực hiện ngắn gọn, dễ hiểu.
-  - [ ] Thêm mẹo vặt nấu nướng (Tips) cho từng món.
-- [ ] **Thu Thập & Tối Ưu Hình Ảnh:**
-  - [ ] Tìm hình ảnh món ăn độ phân giải cao từ Unsplash, Pexels.
-  - [ ] Nén ảnh sang định dạng WebP (dưới 150KB/ảnh).
-- [ ] **Tự Động Hóa Nạp Dữ Liệu Vào Supabase (Seeding Automation):**
-  - [ ] Đóng gói toàn bộ dữ liệu vào file `backend/app/data/dishes_seed.json`.
-  - [ ] Viết script Python `app/db/seed_supabase.py` tự động import toàn bộ bản ghi JSON vào Supabase PostgreSQL và tự động tạo tài khoản quản trị mặc định (`admin` / `AdminSecurePassword2026!`).
-  - [ ] Kiểm tra tính toàn vẹn dữ liệu: không có món nào bị thiếu thông tin bắt buộc.
+### 🍱 Thành viên 4: Data Specialist & QA Tester
 
----
+#### Ngày 1: Thiết Lập Danh Mục & Chuẩn Bị 10 Món Đầu Tiên
+- [ ] Thống nhất taxonomy ẩm thực: 5 quốc gia (`Vietnam`, `Korea`, `Japan`, `Thailand`, `Italy`).
+- [ ] Soạn thảo 10 món ăn đầu tiên vào file `dishes_seed.json` theo đúng cấu trúc schema quy định:
+  - 4 món Việt Nam (Phở bò, Cơm tấm sườn nướng, Bún chả Hà Nội, Bánh mì chảo).
+  - 2 món Hàn Quốc (Bibimbap, Canh kim chi thịt heo).
+  - 2 món Nhật Bản (Mì Ramen xá xíu, Cơm cà ri Nhật).
+  - 1 món Thái Lan (Pad Thai tôm).
+  - 1 món Ý (Mì Spaghetti Bolognese).
+- [ ] Tìm link ảnh độ nét cao trên Unsplash/Pexels cho 10 món này.
 
-### 🚀 Member 6: DevOps & QA Engineer (Cloud Infrastructure, Security Config & Testing)
-- [ ] **Thiết Lập Cơ Sở Dữ Liệu Supabase:**
-  - [ ] Khởi tạo project Supabase (khu vực Singapore để ping thấp).
-  - [ ] Lấy chuỗi kết nối PostgreSQL (`DATABASE_URL`) và API keys (`SUPABASE_URL`, `SUPABASE_ANON_KEY`).
-  - [ ] Chạy script DDL tạo bảng trên Supabase SQL Editor và thực thi script seed data ban đầu.
-- [ ] **Cấu Hình Tự Động Hóa CI/CD:**
-  - [ ] Tạo workflow GitHub Actions tự động chạy linter (ESLint, Flake8) khi có PR mới.
-  - [ ] Kết nối repository với **Vercel** để cấp phát URL xem trước (Preview Deployment) cho mỗi Pull Request.
-- [ ] **Triển Khai Hệ Thống 3 Tầng Trực Tuyến:**
-  - [ ] Deploy Frontend lên **Vercel** (React SPA + CDN).
-  - [ ] Deploy Backend FastAPI lên **Render** (Web Service).
-  - [ ] Cấu hình biến môi trường:
-    - Frontend: `VITE_API_BASE_URL` trỏ về Render API.
-    - Backend: `DATABASE_URL` trỏ về Supabase PostgreSQL, `ALLOWED_ORIGINS` cho phép Vercel, `JWT_SECRET_KEY`, `JWT_ALGORITHM=HS256`, `ACCESS_TOKEN_EXPIRE_MINUTES=1440`.
-- [ ] **Xây Dựng Tài Liệu Kiểm Thử Postman:**
-  - [ ] Tạo Postman Collection kiểm thử toàn bộ các API endpoints:
-    - Nhóm User API (Health, Random, Detail, Filter metadata).
-    - Nhóm Admin Auth API (Login thành công, login sai pass 401).
-    - Nhóm Admin CRUD API (Bearer Token, Create Dish, Update Dish, Delete Dish, Overview Stats).
-  - [ ] Xuất file `postman_collection.json` đặt trong thư mục `docs/`.
-- [ ] **Kiểm Thử Toàn Diện (QA Testing Matrix):**
-  - [ ] Kiểm thử độ trễ truy vấn dữ liệu từ Supabase ($< 200\text{ms}$).
-  - [ ] Kiểm thử bảo mật: Gọi API Admin khi không có Header hoặc Token hết hạn phải trả về `401 Unauthorized`.
-  - [ ] Kiểm thử độ mượt mà của cử chỉ quẹt thẻ trên nhiều trình duyệt: Chrome, Safari iOS, Edge.
-  - [ ] Kiểm thử các tình huống biên: Quẹt nhanh 20 thẻ, mất kết nối mạng, cache LocalStorage.
-  - [ ] Chạy kiểm toán Google Lighthouse: Tối ưu điểm Performance $\ge 90$, Accessibility $\ge 95$.
+#### Ngày 2: Thu Thập Đầy Đủ 40+ Món Ăn Phong Phú
+- [ ] Mở rộng danh sách lên **tối thiểu 40-50 món ăn hoàn chỉnh**:
+  - [ ] 15 món Việt Nam (bổ sung: Bún bò Huế, Gỏi cuốn, Canh chua cá, Bánh xèo, Bò kho...).
+  - [ ] 8 món Hàn Quốc (Tokbokki, Gà sốt cay cay chua, Miến xào Japchae, Thịt nướng Bulgogi...).
+  - [ ] 8 món Nhật Bản (Mì Udon bò, Cơm bò Gyudon, Trứng cuộn Tamagoyaki, Cơm lươn Unadon...).
+  - [ ] 8 món Thái Lan (Tom Yum Goong, Heo xào lá quế Pad Krapow, Gỏi đu đủ Som Tum...).
+  - [ ] 8 món Ý / Âu (Mì Ý sốt kem Carbonara, Pizza Margherita, Salad cá ngừ, Beefsteak sốt tiêu...).
+- [ ] Đảm bảo mỗi món có đủ: Định lượng nguyên liệu, 3-4 bước nấu chi tiết, mẹo đầu bếp và thông số calo/độ cay hợp lý.
+
+#### Ngày 3: Tự Động Hóa Nạp Dữ Liệu Vào SQLite (Seed Script)
+- [ ] Viết script Python `backend/app/db/seed_sqlite.py`:
+  - [ ] Đọc file `dishes_seed.json`.
+  - [ ] Kết nối SQLite và nạp toàn bộ danh mục ẩm thực, món ăn, nguyên liệu, bước nấu vào CSDL.
+  - [ ] Tạo sẵn 1 tài khoản người dùng mẫu (`demo` / mật khẩu `123`).
+- [ ] Kiểm tra dữ liệu trong SQLite bằng công cụ trực quan **DB Browser for SQLite**.
+
+#### Ngày 4: Kiểm Thử Toàn Diện Trên PC & Mobile
+- [ ] Xây dựng bảng kịch bản kiểm thử (Test Matrix):
+  - [ ] Test luồng tạo tài khoản mới và đăng nhập.
+  - [ ] Test quẹt liên tục 20 món ăn, kiểm tra độ mượt.
+  - [ ] Test bộ lọc: Lọc chỉ món Việt Nam $\rightarrow$ Kiểm tra danh sách thẻ có đúng 100% món Việt không.
+  - [ ] Test lưu món và xem công thức: Kiểm tra checkbox nguyên liệu có lưu trạng thái không.
+  - [ ] Test nút "Xuất danh sách đi chợ" và dán thử nội dung vào Zalo.
+- [ ] Ghi lại danh sách lỗi phát sinh (Bug List) để Frontend/Backend xử lý ngay trong ngày.
+
+#### Ngày 5: Kiểm Thử Trên Thiết Bị Thật & Hỗ Trợ Demo
+- [ ] Chạy kiểm thử trên điện thoại thật bằng cách mở địa chỉ IP LAN của máy tính chạy server (ví dụ: `http://192.168.1.x:5173`).
+- [ ] Kiểm tra cử chỉ vuốt ngón tay thật trên màn hình cảm ứng điện thoại.
+- [ ] Soạn thảo tài liệu tóm tắt kết quả dự án và hỗ trợ thuyết trình Demo.

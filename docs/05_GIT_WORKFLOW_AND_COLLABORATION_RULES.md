@@ -1,4 +1,4 @@
-# 🐙 05. Git Workflow & Professional Collaboration Guidelines
+# 05. Git Workflow & Professional Collaboration Guidelines
 
 Tài liệu này là "kim chỉ nam" bắt buộc áp dụng cho toàn bộ 6 thành viên của dự án **YumYumPick**. Mọi quy trình từ đặt tên nhánh, viết commit, tạo Pull Request cho tới review code đều được chuẩn hóa theo tiêu chuẩn của các công ty công nghệ chuyên nghiệp (Enterprise / Silicon Valley Standard).
 
@@ -85,7 +85,7 @@ Mọi commit bắt buộc tuân theo cú pháp:
 
 - **Bảng Ví Dụ Thực Tế:**
 
-| ✅ Commit Đạt Chuẩn (Chuyên Nghiệp) | ❌ Commit Không Hợp Lệ (Cấm Sử Dụng) |
+| Commit Đạt Chuẩn (Chuyên Nghiệp) | Commit Không Hợp Lệ (Cấm Sử Dụng) |
 |---|---|
 | `feat(swipe): add rotation and drag threshold using Framer Motion` | `update code` |
 | `fix(api): fix NoneType error when query params are missing` | `fix bug` |

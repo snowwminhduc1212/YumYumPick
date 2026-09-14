@@ -1,4 +1,4 @@
-# 🍲 07. Cẩm Nang Chuẩn Bị Dữ Liệu & Danh Mục 100 Món Ăn (Data Preparation & Catalog)
+# 07. Cẩm Nang Chuẩn Bị Dữ Liệu & Danh Mục 100 Món Ăn (Data Preparation & Catalog)
 
 Tài liệu này là cẩm nang toàn diện về **Quy trình chuẩn bị dữ liệu**, từ điển phân loại, cấu trúc CSDL SQLite, **danh mục đầy đủ 100 món ăn kèm link ảnh sắc nét**, bộ công cụ tải ảnh offline (`download_images.py`), script kiểm toán (`validate_data.py`) và script tự động nạp CSDL (`seed_sqlite.py`) cho dự án **YumYumPick**.
 
@@ -121,7 +121,7 @@ File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](file:///D:/LT/Yun
 
 ## 4. Bảng Tra Cứu Toàn Bộ 100 Món Ăn Kèm Ảnh Chi Tiết
 
-### 🇻🇳 1. Ẩm Thực Việt Nam (30 Món)
+### 1. Ẩm Thực Việt Nam (30 Món)
 
 | # | ID | Tên Món Ăn | English Name | Link Ảnh Minh Họa | Thời Gian | Calo | Cay | Khó |
 |---|---|---|---|:---:|:---:|:---:|:---:|:---:|
@@ -158,7 +158,7 @@ File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](file:///D:/LT/Yun
 
 ---
 
-### 🇰🇷 2. Ẩm Thực Hàn Quốc (20 Món)
+### 2. Ẩm Thực Hàn Quốc (20 Món)
 
 | # | ID | Tên Món Ăn | English Name | Link Ảnh Minh Họa | Thời Gian | Calo | Cay | Khó |
 |---|---|---|---|:---:|:---:|:---:|:---:|:---:|
@@ -185,7 +185,7 @@ File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](file:///D:/LT/Yun
 
 ---
 
-### 🇯🇵 3. Ẩm Thực Nhật Bản (18 Món)
+### 3. Ẩm Thực Nhật Bản (18 Món)
 
 | # | ID | Tên Món Ăn | English Name | Link Ảnh Minh Họa | Thời Gian | Calo | Cay | Khó |
 |---|---|---|---|:---:|:---:|:---:|:---:|:---:|
@@ -210,7 +210,7 @@ File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](file:///D:/LT/Yun
 
 ---
 
-### 🇹🇭 4. Ẩm Thực Thái Lan (16 Món)
+### 4. Ẩm Thực Thái Lan (16 Món)
 
 | # | ID | Tên Món Ăn | English Name | Link Ảnh Minh Họa | Thời Gian | Calo | Cay | Khó |
 |---|---|---|---|:---:|:---:|:---:|:---:|:---:|
@@ -233,7 +233,7 @@ File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](file:///D:/LT/Yun
 
 ---
 
-### 🇮🇹 5. Ẩm Thực Ý / Phương Tây (16 Món)
+### 5. Ẩm Thực Ý / Phương Tây (16 Món)
 
 | # | ID | Tên Món Ăn | English Name | Link Ảnh Minh Họa | Thời Gian | Calo | Cay | Khó |
 |---|---|---|---|:---:|:---:|:---:|:---:|:---:|

@@ -1,4 +1,4 @@
-# 🏗️ 02. System Architecture & Design Specification (SQLite & Local 5-Day Plan)
+# 02. System Architecture & Design Specification (SQLite & Local 5-Day Plan)
 
 Tài liệu này định nghĩa chi tiết kiến trúc kỹ thuật của hệ thống **YumYumPick** sau khi tinh giản để phát triển và hoàn thiện trong **5 ngày**: sử dụng CSDL **SQLite cục bộ**, bỏ hạ tầng Deploy/Cloud, loại bỏ Admin CMS, bổ sung **Simple User Auth** và quy chuẩn **Responsive Đa Nền Tảng (PC & Mobile)**.
 
@@ -10,7 +10,7 @@ Hệ thống được thiết kế theo mô hình **Client-Server Decoupled (Tá
 
 ```mermaid
 flowchart TD
-    subgraph Client["🖥️ Client Layer (Frontend - React + Vite :5173)"]
+    subgraph Client["Client Layer (Frontend - React + Vite :5173)"]
         subgraph UserApp["User Web App (Responsive: Mobile + PC)"]
             UI["Swipe Deck Interface (Framer Motion)"]
             AuthUI["Simple Auth Modal (Login / Sign Up)"]
@@ -24,7 +24,7 @@ flowchart TD
         end
     end
 
-    subgraph Server["⚙️ Backend Layer (FastAPI :8000)"]
+    subgraph Server["Backend Layer (FastAPI :8000)"]
         API["FastAPI Application"]
         AuthRouter["Auth Router (/api/v1/auth)"]
         DishRouter["Dish Router (/api/v1/dishes)"]
@@ -43,7 +43,7 @@ flowchart TD
         ORM --> Pydantic
     end
 
-    subgraph Database["💾 Database Layer (Local SQLite File)"]
+    subgraph Database["Database Layer (Local SQLite File)"]
         SQLite[("SQLite 3 Database File\n(backend/yumyumpick.db)")]
         DBTool["DB Browser for SQLite\n(Quản trị viên tự thêm/sửa món)"]
         
@@ -105,13 +105,13 @@ Hiện tại, hệ thống đã bổ sung **Simple User Auth (Đăng nhập đơ
 flowchart TD
     ScreenCheck{"Kích Thước Màn Hình (Viewport Width)"}
     
-    ScreenCheck -- "< 768px (Mobile Phone)" --> MobileLayout["📱 Giao Diện Mobile Web:
+    ScreenCheck -- "< 768px (Mobile Phone)" --> MobileLayout["Giao Diện Mobile Web:
     - Thẻ quẹt chiếm 92vw - 96vw, bo góc mềm mại
     - Thao tác chính: Vuốt ngón tay cái (Touch Swipe)
     - Cụm nút thao tác nổi phía dưới màn hình (FAB buttons)
     - Modal mở dạng Bottom Sheet vuốt từ dưới lên"]
     
-    ScreenCheck -- ">= 768px (Desktop / Laptop)" --> DesktopLayout["💻 Giao Diện Desktop PC:
+    ScreenCheck -- ">= 768px (Desktop / Laptop)" --> DesktopLayout["Giao Diện Desktop PC:
     - Bố cục căn giữa màn hình hoặc 2 cột cân đối
     - Khung thẻ quẹt chuẩn tỉ lệ điện thoại (max-w: 420px, h: 620px)
     - Hỗ trợ phím tắt bàn phím: [←] Skip, [→] Like, [Space] Info

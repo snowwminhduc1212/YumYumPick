@@ -1,4 +1,4 @@
-# 🎯 01. Project Charter & Scope Document (Kế Hoạch 5 Ngày)
+# 01. Project Charter & Scope Document (Kế Hoạch 5 Ngày)
 
 ## 1. Tổng Quan & Bối Cảnh Dự Án (Project Overview)
 
@@ -22,8 +22,8 @@
 ### 2.2. Giải Pháp Tinh Gọn Của YumYumPick (Solution)
 1. **Một món tại một thời điểm:** Giúp não bộ tập trung 100% vào hình ảnh bắt mắt của món ăn.
 2. **Thao tác tức thì & Trực quan (Fast Decisive UX):**
-   - **Quẹt Phải (Swipe Right / ❤️):** Quyết định chọn món này! Lưu món vào danh sách yêu thích trên CSDL SQLite.
-   - **Quẹt Trái (Swipe Left / ❌):** Bỏ qua món này và chuyển sang món tiếp theo.
+   - **Quẹt Phải (Swipe Right / Thích):** Quyết định chọn món này! Lưu món vào danh sách yêu thích trên CSDL SQLite.
+   - **Quẹt Trái (Swipe Left / Bỏ qua):** Bỏ qua món này và chuyển sang món tiếp theo.
 3. **Bộ lọc sơ bộ (Basic Filters):** Lọc nhanh theo quốc gia (Việt, Hàn, Nhật, Thái, Ý), mức độ cay, thời gian chế biến.
 4. **Xem danh sách đã quẹt & Chi tiết công thức:** Mở danh sách các món đã thích để xem công thức (danh sách nguyên liệu dạng văn bản rõ ràng, 3 bước nấu chuẩn 1-2-3, mẹo đầu bếp).
 5. **Đăng ký & Đăng nhập cực kỳ đơn giản:** Chỉ cần nhập `username` và `password`, không cần xác thực email/OTP phiền phức.
@@ -35,8 +35,8 @@
 
 ```mermaid
 graph TD
-    A["YumYumPick 5-Day Scope"] --> B["✅ Trong Phạm Vi Cốt Lõi (In-Scope)"]
-    A --> C["❌ Đã Cắt Bỏ Hoàn Toàn (Out-of-Scope)"]
+    A["YumYumPick 5-Day Scope"] --> B["Trong Phạm Vi Cốt Lõi (In-Scope)"]
+    A --> C["Đã Cắt Bỏ Hoàn Toàn (Out-of-Scope)"]
 
     B --> B1["Core 1: Tinder-style Swipe UI (Có ảnh, tên, badges & Description Intro)"]
     B --> B2["Core 2: Bộ Lọc Món Ăn Sơ Bộ (Quốc gia, Cay, Thời gian)"]
@@ -45,19 +45,19 @@ graph TD
     B --> B5["Lưu trữ: SQLite Cục Bộ (File yumyumpick.db & 100 Ảnh)"]
     B --> B6["Responsive hoàn chỉnh (Mobile Web + Desktop PC)"]
 
-    C --> C1["❌ Smart Grocery List (Xuất danh sách đi chợ)"]
-    C --> C2["❌ Nút Copy gửi Zalo / Messenger & Toast thông báo"]
-    C --> C3["❌ Drawer phụ đa tầng (Dish Intro Drawer)"]
-    C --> C4["❌ Cổng Quản Trị Admin CMS Portal (/admin)"]
-    C --> C5["❌ Cloud Deployment (Vercel, Render)"]
-    C --> C6["❌ Xác minh Email, SMS, OTP, Forgot Password"]
+    C --> C1["Smart Grocery List (Xuất danh sách đi chợ)"]
+    C --> C2["Nút Copy gửi Zalo / Messenger & Toast thông báo"]
+    C --> C3["Drawer phụ đa tầng (Dish Intro Drawer)"]
+    C --> C4["Cổng Quản Trị Admin CMS Portal (/admin)"]
+    C --> C5["Cloud Deployment (Vercel, Render)"]
+    C --> C6["Xác minh Email, SMS, OTP, Forgot Password"]
 ```
 
 ### 3.1. Chi Tiết Các Hạng Mục Trong Phạm Vi (In-Scope)
 1. **Core 1 — Swipe Card Deck (Thẻ quẹt tích hợp Intro):** Bộ thẻ vuốt mượt mà 60 FPS, stamp "YUMMY" / "NOPE", hiển thị ảnh sắc nét, tên món, huy hiệu và đoạn mô tả giới thiệu (`short_description`) trực tiếp trên mặt thẻ. Hỗ trợ touch trên điện thoại và drag chuột/phím mũi tên trên PC.
 2. **Core 2 — Bộ Lọc Sơ Bộ:** Modal chọn quốc gia (5 nước), độ cay, thời gian nấu để tải lại danh sách thẻ tương ứng từ SQLite.
 3. **Core 3 — Danh Sách Đã Thích & Xem Chi Tiết Công Thức:**
-   - Danh sách món đã thích (kèm nút xóa 🗑️).
+   - Danh sách món đã thích (kèm nút xóa).
    - Xem chi tiết công thức: Danh sách nguyên liệu kèm **Checkbox tương tác `[ ]`**, hướng dẫn 3 bước nấu ăn chuẩn mực và mẹo đầu bếp.
 4. **Simple Auth (Đăng nhập đơn giản):**
    - Đăng ký tài khoản: `POST /api/v1/auth/signup` (username, password, full_name).

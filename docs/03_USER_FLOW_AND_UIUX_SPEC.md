@@ -1,4 +1,4 @@
-# 🎨 03. User Flow & UI/UX Design Specification (Responsive & Simple Auth)
+# 03. User Flow & UI/UX Design Specification (Responsive & Simple Auth)
 
 Tài liệu này chi tiết hóa toàn bộ hành trình trải nghiệm người dùng (User Journey), quy chuẩn vật lý quẹt thẻ Tinder (Card Swiping Physics), luồng xác thực người dùng đơn giản (Simple Auth) và đặc tả chi tiết giao diện Responsive trên cả **Điện Thoại Di Động (Mobile Web)** lẫn **Máy Tính Để Bàn (Desktop PC)**.
 
@@ -14,24 +14,24 @@ flowchart TD
     CheckAuth -- "Đã đăng nhập" --> LoadCards["Tải danh sách món ăn ngẫu nhiên từ SQLite"]
     GuestMode --> LoadCards
     
-    LoadCards --> MainScreen["Màn hình chính: Thẻ món ăn (Swipe Card Deck)\n• Ảnh lớn + Tên món\n• Huy hiệu: Thời gian, Calo, Độ cay, Cờ quốc gia\n• Description Intro: Giới thiệu hương vị & đặc trưng"]
+    LoadCards --> MainScreen["Màn hình chính: Thẻ món ăn (Swipe Card Deck)\n• Ảnh lớn + Tên món\n• Huy hiệu: Thời gian, Calo, Độ cay, Quốc gia\n• Description Intro: Giới thiệu hương vị & đặc trưng"]
     
     MainScreen --> Decision{"Hành động của người dùng"}
     
-    Decision -- "Kéo sang Trái (Swipe Left) hoặc phím [←] hoặc nút ❌" --> SkipDish["Bỏ qua món ăn (Skip)"]
+    Decision -- "Kéo sang Trái (Swipe Left) hoặc phím [←] hoặc nút Bỏ qua" --> SkipDish["Bỏ qua món ăn (Skip)"]
     SkipDish --> CheckMore{"Còn thẻ không?"}
     
-    Decision -- "Kéo sang Phải (Swipe Right) hoặc phím [→] hoặc nút ❤️" --> PickDish["Lưu món vào CSDL SQLite (Saved Dishes API)"]
+    Decision -- "Kéo sang Phải (Swipe Right) hoặc phím [→] hoặc nút Thích" --> PickDish["Lưu món vào CSDL SQLite (Saved Dishes API)"]
     PickDish --> ShowToast["Ghi nhận vào CSDL SQLite & Tăng số đếm món đã thích"]
     ShowToast --> CheckMore
     
-    Decision -- "Bấm nút Bộ Lọc 🔍" --> OpenFilter["Mở Modal Bộ Lọc Ẩm Thực"]
+    Decision -- "Bấm nút Bộ Lọc" --> OpenFilter["Mở Modal Bộ Lọc Ẩm Thực"]
     OpenFilter --> ApplyFilter["Chọn quốc gia, thời gian, độ cay $\rightarrow$ Áp dụng"]
     ApplyFilter --> LoadCards
     
-    Decision -- "Bấm nút Món Đã Thích ❤️" --> SavedScreen["Mở Danh Sách Món Đã Thích"]
+    Decision -- "Bấm nút Món Đã Thích" --> SavedScreen["Mở Danh Sách Món Đã Thích"]
     SavedScreen --> SelectSaved["Chọn món ăn để xem chi tiết công thức"]
-    SavedScreen --> DeleteSaved["Bấm nút 🗑️ để bỏ thích món"]
+    SavedScreen --> DeleteSaved["Bấm nút Xóa để bỏ thích món"]
     SelectSaved --> FullRecipeModal["Xem Công Thức Chi Tiết (Checkbox tương tác nguyên liệu, 3 bước nấu 1-2-3, Mẹo đầu bếp)"]
     
     CheckMore -- "Còn thẻ" --> NextCard["Hiển thị thẻ tiếp theo mượt mà"]
@@ -102,15 +102,15 @@ Dự án được thiết kế chuyên biệt để hoạt động mượt mà v
 
 ```mermaid
 flowchart LR
-    subgraph MobileDevice["📱 Giao Diện Mobile Web (Width < 768px)"]
+    subgraph MobileDevice["Giao Diện Mobile Web (Width < 768px)"]
         direction TB
-        M_Nav["Navbar: Logo + Nút Lọc + Icon Món Đã Lưu + Icon Tài Khoản"]
+        M_Nav["Navbar: Logo + Nút Lọc + Nút Món Đã Lưu + Nút Tài Khoản"]
         M_Card["Thẻ Quẹt Toàn Màn Hình (92vw)\n• Ảnh lớn + Tên món + Badges\n• Description Intro giới thiệu món ăn"]
-        M_Btns["Cụm 2 Nút Nổi Tròn: [❌ Bỏ qua] [❤️ Thích]"]
+        M_Btns["Cụm 2 Nút Nổi Tròn: [Bỏ qua] [Thích]"]
         M_Nav --> M_Card --> M_Btns
     end
 
-    subgraph DesktopPC["💻 Giao Diện Desktop PC (Width >= 1024px)"]
+    subgraph DesktopPC["Giao Diện Desktop PC (Width >= 1024px)"]
         direction TB
         D_Nav["Header: Logo + Nút Lọc + Nút Món Đã Lưu + Menu User Đăng Nhập"]
         subgraph D_Body["Bố Cục Căn Giữa Màn Hình Thẩm Mỹ"]
@@ -126,7 +126,7 @@ flowchart LR
   - Vuốt sang phải để thích, vuốt trái để bỏ qua.
   - Đọc ngay đoạn giới thiệu ngắn (**Description Intro**) trên mặt thẻ trước khi quẹt mà không cần mở thêm drawer rườm rà.
 - **Kích thước thẻ:** `w-[92vw] h-[68vh] max-h-[520px] rounded-3xl overflow-hidden shadow-2xl`.
-- **Nút điều hướng:** Cụm 2 nút tròn đường kính $56\text{px}$ vừa vặn tầm với của ngón tay cái (❌ Bỏ qua, ❤️ Thích).
+- **Nút điều hướng:** Cụm 2 nút tròn đường kính $56\text{px}$ vừa vặn tầm với của ngón tay cái (Bỏ qua, Thích).
 
 ### 4.2. Chi Tiết Giao Diện Trên Máy Tính (Desktop PC / Laptop)
 - **Viewport:** Tối ưu cho màn hình $1024\text{px}$ đến $1920\text{px}$.
@@ -143,10 +143,10 @@ flowchart LR
 ## 5. Màn Hình Danh Sách Đã Thích & Xem Chi Tiết Công Thức
 
 ### 5.1. Danh Sách Món Đã Thích (Liked Dishes List)
-- Người dùng bấm vào nút biểu tượng Trái Tim (❤️) trên thanh Header để mở danh sách.
+- Người dùng bấm vào nút biểu tượng Món Đã Lưu trên thanh Header để mở danh sách.
 - Hiển thị danh sách các thẻ món ăn đã lưu:
   - Ảnh đại diện thu nhỏ, tên món ăn, quốc gia, thời gian chế biến.
-  - Nút **Bỏ thích (🗑️)**: Bấm vào để xóa món ăn khỏi CSDL SQLite nếu không còn nhu cầu nấu.
+  - Nút **Bỏ thích (Xóa)**: Bấm vào để xóa món ăn khỏi CSDL SQLite nếu không còn nhu cầu nấu.
 - **Mục đích duy nhất:** Bấm vào bất kỳ món ăn nào để mở màn hình xem chi tiết công thức nấu ăn.
 
 ### 5.2. Xem Chi Tiết Công Thức Nấu Ăn (Detail Recipe Viewer)

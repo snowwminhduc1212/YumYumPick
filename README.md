@@ -1,4 +1,4 @@
-# 🍔 YumYumPick — "Tinder For Food" (Quẹt Là Măm)
+# YumYumPick — "Tinder For Food" (Quẹt Là Măm)
 
 <div align="center">
 
@@ -15,22 +15,22 @@
 
 ---
 
-## 📖 1. Giới Thiệu Dự Án (About YumYumPick)
+## 1. Giới Thiệu Dự Án (About YumYumPick)
 
 **YumYumPick** ra đời nhằm chấm dứt hội chứng *"Tê liệt quyết định" (Decision Paralysis)* khi chọn món ăn hàng ngày. Thay vì phải đọc những danh sách thực đơn dài vô tận, người dùng chỉ cần tập trung vào **một món ăn tại một thời điểm** và đưa ra quyết định trực giác:
 
-- 🎴 **Thẻ quẹt tích hợp Description Intro:** Mặt thẻ hiển thị hình ảnh lớn sắc nét, tên món (Việt/Anh), huy hiệu thông số (thời gian, calo, độ cay, quốc gia) và **đoạn mô tả giới thiệu ngắn (`short_description`)** giúp người dùng hiểu ngay hương vị đặc trưng để quyết định quẹt trái hay quẹt phải.
-- 👉 **Quẹt Phải (Swipe Right / ❤️):** Thích món này! Tự động lưu món ăn vào tài khoản cá nhân trên CSDL SQLite.
-- 👈 **Quẹt Trái (Swipe Left / ❌):** Bỏ qua món ăn này và ngay lập tức xem gợi ý tiếp theo.
-- 🔍 **Bộ lọc nhanh (Quick Filter):** Lọc theo quốc gia (Việt, Hàn, Nhật, Thái, Ý), độ cay, thời gian nấu trước khi quẹt.
-- 📖 **Xem chi tiết công thức sau khi quẹt:** Vào danh sách món đã quẹt chỉ để xem chi tiết công thức chuẩn (danh sách nguyên liệu có **Checkbox tương tác `[ ]`** tiện đánh dấu khi chuẩn bị/nấu ăn, hướng dẫn nấu từng bước 1-2-3 và mẹo nhỏ từ đầu bếp).
-- 👤 **Đăng ký & Đăng nhập siêu đơn giản:** Chỉ cần nhập `username` & `password` để tạo tài khoản hoặc đăng nhập, lưu session qua `localStorage`.
-- 📱💻 **Responsive toàn diện:** Trải nghiệm mượt mà trên cả điện thoại (Mobile touch swipe) và máy tính (Desktop PC kèm phím tắt `←`, `→`).
-- 🗄️ **Quản lý dữ liệu qua SQLite:** Quản trị 100 món ăn và 100 ảnh offline trực tiếp thông qua file CSDL SQLite `backend/yumyumpick.db`.
+- **Thẻ quẹt tích hợp Description Intro:** Mặt thẻ hiển thị hình ảnh lớn sắc nét, tên món (Việt/Anh), huy hiệu thông số (thời gian, calo, độ cay, quốc gia) và **đoạn mô tả giới thiệu ngắn (`short_description`)** giúp người dùng hiểu ngay hương vị đặc trưng để quyết định quẹt trái hay quẹt phải.
+- **Quẹt Phải (Swipe Right / LIKE):** Thích món này! Tự động lưu món ăn vào tài khoản cá nhân trên CSDL SQLite.
+- **Quẹt Trái (Swipe Left / SKIP):** Bỏ qua món ăn này và ngay lập tức xem gợi ý tiếp theo.
+- **Bộ lọc nhanh (Quick Filter):** Lọc theo quốc gia (Việt, Hàn, Nhật, Thái, Ý), độ cay, thời gian nấu trước khi quẹt.
+- **Xem chi tiết công thức sau khi quẹt:** Vào danh sách món đã quẹt chỉ để xem chi tiết công thức chuẩn (danh sách nguyên liệu có **Checkbox tương tác `[ ]`** tiện đánh dấu khi chuẩn bị/nấu ăn, hướng dẫn nấu từng bước 1-2-3 và mẹo nhỏ từ đầu bếp).
+- **Đăng ký & Đăng nhập siêu đơn giản:** Chỉ cần nhập `username` & `password` để tạo tài khoản hoặc đăng nhập, lưu session qua `localStorage`.
+- **Responsive toàn diện:** Trải nghiệm mượt mà trên cả điện thoại (Mobile touch swipe) và máy tính (Desktop PC kèm phím tắt `←`, `→`).
+- **Quản lý dữ liệu qua SQLite:** Quản trị 100 món ăn và 100 ảnh offline trực tiếp thông qua file CSDL SQLite `backend/yumyumpick.db`.
 
 ---
 
-## 💡 2. Giải Đáp Các Quyết Định Kiến Trúc Mới
+## 2. Giải Đáp Các Quyết Định Kiến Trúc Mới
 
 ### 2.1. Bỏ phần Deploy & Bỏ Admin CMS
 - **Bỏ Deploy (Cloud/CI/CD):** Chuyển 100% về chạy Localhost (`npm run dev` + `uvicorn`). Giảm thiểu toàn bộ rủi ro về cấu hình port, SSL, CORS cloud, chi phí hosting và lỗi deploy.
@@ -51,7 +51,7 @@
 
 ---
 
-## 🛠️ 3. Công Nghệ Sử Dụng (Tech Stack Tinh Gọn)
+## 3. Công Nghệ Sử Dụng (Tech Stack Tinh Gọn)
 
 ```mermaid
 flowchart LR
@@ -91,7 +91,7 @@ flowchart LR
 
 ---
 
-## 🚀 4. Hướng Dẫn Cài Đặt & Chạy Thử (Quickstart Guide)
+## 4. Hướng Dẫn Cài Đặt & Chạy Thử (Quickstart Guide)
 
 ### Bước 1: Khởi chạy Backend & SQLite DB
 
@@ -136,31 +136,31 @@ npm run dev
 
 ---
 
-## 👥 5. Phân Chia Vai Trò Thành Viên (Team Structure & Parallel Breakdown)
+## 5. Phân Chia Vai Trò Thành Viên (Team Structure & Parallel Breakdown)
 
 Dự án gồm **6 thành viên** với vai trò được chuyên biệt hóa, vận hành theo mô hình làm việc song song không nghẽn:
 
 ```mermaid
 flowchart TD
-    Lead["👑 Minh Đức: Project Lead • Data • QA"]
-    Lead --> BE["⚙️ Backend: Ánh Dương & Đăng Huy\n(FastAPI • SQLite • Simple Auth • Dishes & Saved APIs)"]
-    Lead --> FE["🎨 Frontend: Quang Huy & Tùng Dương\n(Vite React • Framer Motion Deck • Modals • Responsive)"]
-    Lead --> PITCH["📊 Thuyết Trình: Luân\n(Slide PowerPoint • Kịch Bản • Live Demo Story)"]
+    Lead["Minh Đức: Project Lead • Data • QA"]
+    Lead --> BE["Backend: Ánh Dương & Đăng Huy\n(FastAPI • SQLite • Simple Auth • Dishes & Saved APIs)"]
+    Lead --> FE["Frontend: Quang Huy, Tùng Dương & Luân\n(Vite React • Framer Motion Deck • Modals & Checkbox • Responsive)"]
+    Lead --> PITCH["Thuyết Trình: Luân (Phụ trách Pitching Lead & Slide)"]
 ```
 
 | Thành Viên | Vai Trò Chính | Nhiệm Vụ Cốt Lõi (Song Song) | Sản Phẩm Bàn Giao (Deliverables) |
 |---|---|---|---|
-| **👑 Minh Đức** | **Project Lead • Data & QA** | Điều phối tiến độ 5 ngày, Daily Sync; Quản trị kho 100 món ăn, 100 ảnh offline, CSDL SQLite; Kiểm định chất lượng (QA) PC & Mobile. | `backend/yumyumpick.db`, `backend/images/dishes/`, Test Matrix |
-| **⚙️ Ánh Dương** | **Backend Engineer 1** | Setup FastAPI server, CORS, Static mount `/images`; Xây dựng Simple Auth API (`signup`, `login` vào SQLite); Mock Data JSON cho FE. | `app/main.py`, `app/api/auth.py`, Mock API Contract |
-| **⚙️ Đăng Huy** | **Backend Engineer 2** | Xây dựng Dishes Core API (`random`, bộ lọc 5 nước, độ cay, thời gian, loại trừ món đã quẹt) và Saved Dishes API (`POST`, `GET`, `DELETE`). | `app/api/dishes.py`, `app/api/saved_dishes.py`, Swagger Docs |
-| **🎨 Quang Huy** | **Frontend Engineer 1** | Xây dựng Swipe Deck Framer Motion (SwipeCard, CardStack, Stamp YUMMY/NOPE); Tối ưu Responsive PC (phím tắt bàn phím) & Mobile touch. | `SwipeCard.jsx`, `CardStack.jsx`, Responsive layout |
-| **📱 Tùng Dương** | **Frontend Engineer 2** | Xây dựng Layout/Navbar, Auth Modal (LocalStorage session), Filter Modal (bộ lọc sơ bộ), Liked Dishes View & Dish Detail Modal (công thức dạng text). | `AuthModal.jsx`, `FilterModal.jsx`, `LikedDishes.jsx`, `RecipeDetail.jsx` |
-| **📊 Luân** | **Pitching Lead** | Thiết kế bộ Slide PowerPoint báo cáo đồ án (12-15 slides phong cách ẩm thực); Soạn Kịch bản Thuyết trình; Kịch bản Live Demo & Q&A phản biện. | `presentation/Slide_YumYumPick.pptx`, Kịch bản thuyết trình, Q&A |
+| **Minh Đức** | **Project Lead • Data & QA** | Điều phối tiến độ 5 ngày, Daily Sync; Quản trị kho 100 món ăn, 100 ảnh offline, CSDL SQLite; Kiểm định chất lượng (QA) PC & Mobile. | `backend/yumyumpick.db`, `backend/images/dishes/`, Test Matrix |
+| **Ánh Dương** | **Backend Engineer 1** | Setup FastAPI server, CORS, Static mount `/images`; Xây dựng Simple Auth API (`signup`, `login` vào SQLite); Mock Data JSON cho FE. | `app/main.py`, `app/api/auth.py`, Mock API Contract |
+| **Đăng Huy** | **Backend Engineer 2** | Xây dựng Dishes Core API (`random`, bộ lọc 5 nước, độ cay, thời gian, loại trừ món đã quẹt) và Saved Dishes API (`POST`, `GET`, `DELETE`). | `app/api/dishes.py`, `app/api/saved_dishes.py`, Swagger Docs |
+| **Quang Huy** | **Frontend Engineer 1 (Swipe Deck & Motion)** | Xây dựng Swipe Deck Framer Motion (SwipeCard, CardStack, Stamp YUMMY/NOPE); Tích hợp Description Intro lên thẻ; Tối ưu Responsive PC (phím tắt `←`/`→`) & Mobile touch. | `SwipeCard.jsx`, `CardStack.jsx`, Responsive layout |
+| **Tùng Dương** | **Frontend Engineer 2 (Liked & Recipe Detail)** | Xây dựng Liked Dishes View (danh sách món đã thích, nút xóa) và Dish Detail Modal (xem chi tiết công thức kèm Checkbox tương tác nguyên liệu, 3 bước nấu, mẹo bếp). | `LikedDishesView.jsx`, `DishDetailModal.jsx` |
+| **Luân** | **Frontend Engineer 3 & Pitching Lead** | Xây dựng App Layout, Header/Navbar, Auth Modal (LocalStorage session), Filter Modal (bộ lọc 5 nước); Thiết kế Slide PowerPoint (12-15 slides), Kịch bản Thuyết trình & Live Demo. | `Navbar.jsx`, `AuthModal.jsx`, `FilterModal.jsx`, `Slide_YumYumPick.pptx`, Kịch bản Demo |
 
 
 ---
 
-## 📅 6. Kế Hoạch Triển Khai 5 Ngày (5-Day Crash Plan)
+## 6. Kế Hoạch Triển Khai 5 Ngày (5-Day Crash Plan)
 
 - **Ngày 1 (Foundation & Schema):** Chốt định dạng dữ liệu (API Contract), khởi tạo cấu trúc thư mục Frontend & Backend, kết nối CSDL SQLite `yumyumpick.db` (100 món, 100 ảnh offline đã sẵn sàng).
 - **Ngày 2 (Core Features in Parallel):**
@@ -183,7 +183,7 @@ flowchart TD
 
 ---
 
-## 📚 7. Danh Mục Tài Liệu Chi Tiết
+## 7. Danh Mục Tài Liệu Chi Tiết
 
 Mọi tài liệu chi tiết của dự án nằm trong thư mục [`docs/`](./docs/README.md):
 - [**00. Master Project Overview**](./docs/00_PROJECT_OVERVIEW.md): Tổng quan hệ thống sau khi tinh giản.

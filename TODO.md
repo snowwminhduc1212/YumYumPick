@@ -81,7 +81,7 @@
 ### Ngày 1: Setup Môi Trường & Chốt API Contract
 - [ ] **Minh Đức (Lead, Data & QA):** Bàn giao CSDL SQLite `yumyumpick.db` (đầy đủ 100 món, 100 ảnh offline) và tài liệu đặc tả cho cả nhóm; chủ trì chốt API Contract.
 - [X] **Ánh Dương (Backend 1):** Setup FastAPI, CORS, Static Files mount `/images`; cung cấp Mock Data JSON cho Frontend.
-- [ ] **Đăng Huy (Backend 2):** Khởi tạo ORM Models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) kết nối `backend/yumyumpick.db`.
+- [x] **Đăng Huy (Backend 2):** Khởi tạo ORM Models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) kết nối `backend/yumyumpick.db`.
 - [ ] **Quang Huy (Frontend 1):** Khởi tạo project React (Vite + Tailwind CSS + Framer Motion); setup thư viện và khung thẻ quẹt.
 - [ ] **Tùng Dương (Frontend 2):** Khởi tạo cấu trúc các component chi tiết món ăn: `LikedDishesView.jsx` và `DishDetailModal.jsx`.
 - [ ] **Luân (Frontend 3 & Pitching Lead):** Xây dựng Layout tổng thể ứng dụng, Navbar/Header và state quản lý phiên `localStorage`; lên dàn ý Slide PowerPoint (12 - 15 slides).
@@ -89,7 +89,7 @@
 ### Ngày 2: Code Song Song Độc Lập
 - [ ] **Minh Đức:** Điều phối Daily Sync 09:00; xây dựng bộ kịch bản kiểm thử (Test Matrix 20 Test Cases) cho PC và Mobile.
 - [ ] **Ánh Dương:** Viết API `POST /api/v1/auth/signup` và `POST /api/v1/auth/login` (kết nối trực tiếp CSDL SQLite).
-- [ ] **Đăng Huy:** Viết API `GET /api/v1/dishes/random` (hỗ trợ lọc ẩm thực, độ cay, thời gian, loại trừ món đã xem) và `GET /api/v1/dishes/{dish_id}`.
+- [x] **Đăng Huy:** Viết API `GET /api/v1/dishes/random` (hỗ trợ lọc ẩm thực, độ cay, thời gian, loại trừ món đã xem) và `GET /api/v1/dishes/{dish_id}`.
 - [ ] **Quang Huy:** Hoàn thiện `SwipeCard.jsx` & `CardStack.jsx` bằng Framer Motion (hiển thị ảnh, tên, badges và description intro trên thẻ; cử chỉ kéo chuột/vuốt ngón tay, stamp YUMMY/NOPE, spring physics, empty state).
 - [ ] **Tùng Dương:** Xây dựng `LikedDishesView.jsx` (danh sách món đã thích, nút xóa) và `DishDetailModal.jsx` (Checkbox tương tác nguyên liệu, 3 bước nấu, mẹo bếp).
 - [ ] **Luân:** Xây dựng `AuthModal.jsx` (Đăng nhập/Đăng ký lưu `localStorage`) và `FilterModal.jsx` (Lọc theo quốc gia, độ cay, thời gian nấu); thiết kế các slide PowerPoint đầu tiên với kho ảnh ẩm thực.
@@ -104,7 +104,7 @@
 
 ### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức & Phím Tắt PC
 - [ ] **Minh Đức:** Thực hiện kiểm thử toàn diện trên PC và Mobile thật qua mạng LAN; phân loại và giao bug cho FE/BE fix.
-- [ ] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc.
+- [x] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc.
 - [ ] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms.
 - [ ] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) và cụm nút bấm nổi (Nút Bỏ qua, Nút Thích).
 - [ ] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp).

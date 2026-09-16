@@ -1,96 +1,213 @@
 /**
- * Mock Data Ngày 1 phục vụ phát triển Swipe Deck & Card Stack độc lập.
- * Trích xuất từ backend/app/data/dishes_seed.json
+ * Mock Data Ngày 1 phục vụ phát triển Swipe Deck & Detail Recipe View.
+ * Đã cập nhật ĐẦY ĐỦ cấu trúc theo chuẩn Backend mới nhất (dishes_seed.json).
  */
 export const MOCK_DISHES = [
   {
-    id: "dish_vn_001",
-    name: "Phở Bò Tái Nạm",
-    english_name: "Traditional Beef Pho",
-    cuisine: "Vietnam",
-    region: "Miền Bắc",
-    cook_time_minutes: 45,
-    difficulty: "Trung bình",
-    spicy_level: 0,
-    calories_approx: 480,
-    short_description: "Món quốc hồn quốc túy với nước dùng thanh ngọt hầm từ xương bò, thơm mùi hồi quế đặc trưng.",
-    image: "/images/dishes/dish_vn_001.jpg",
-    image_url: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80",
-    tips: "Nướng gừng và hành tím trước khi thả vào nồi nước dùng sẽ giúp nước trong và thơm dậy mùi gấp đôi."
+    "id": "dish_vn_001",
+    "name": "Phở Bò Tái Nạm",
+    "english_name": "Traditional Beef Pho",
+    "cuisine": "Vietnam",
+    "region": "Miền Bắc",
+    "image": "/images/dishes/dish_vn_001.jpg",
+    "cook_time_minutes": 45,
+    "prep_time_minutes": 15,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 480,
+    "short_description": "Món quốc hồn quốc túy với nước dùng thanh ngọt hầm từ xương bò, thơm mùi hồi quế đặc trưng.",
+    "tips": "Nướng gừng và hành tím trước khi thả vào nồi nước dùng sẽ giúp nước trong và thơm dậy mùi gấp đôi.",
+    "ingredients": [
+      {
+        "name": "Bánh phở tươi",
+        "amount": "500",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Thịt bò nạm và thăn",
+        "amount": "300",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Xương ống bò",
+        "amount": "1",
+        "unit": "kg",
+        "category": "thịt"
+      },
+      {
+        "name": "Gừng và hành tím nướng",
+        "amount": "3",
+        "unit": "củ",
+        "category": "gia vị"
+      },
+      {
+        "name": "Hoa hồi, quế, thảo quả",
+        "amount": "1",
+        "unit": "gói",
+        "category": "gia vị"
+      },
+      {
+        "name": "Hành lá, ngò gai, chanh, ớt",
+        "amount": "1",
+        "unit": "ít",
+        "category": "rau thơm"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Sơ chế & Trụng xương",
+        "description": "Rửa sạch xương bò với nước muối, đun sôi 5 phút để khử bọt bẩn rồi rửa lại bằng nước lạnh."
+      },
+      {
+        "step_number": 2,
+        "title": "Hầm nước dùng",
+        "description": "Ninh xương bò cùng gừng hành tím nướng và gói thảo quả quế hồi trên lửa nhỏ liu riu trong 40 phút, hớt bọt thường xuyên."
+      },
+      {
+        "step_number": 3,
+        "title": "Hoàn thiện & Thưởng thức",
+        "description": "Trụng bánh phở vào tô, xếp thịt bò thái mỏng lên trên, chan nước dùng thật sôi vào để thịt chín tái, rắc hành lá và ớt tươi."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "dish_vn_002",
-    name: "Cơm Tấm Sườn Bì Chả",
-    english_name: "Broken Rice with Grilled Pork Chops",
-    cuisine: "Vietnam",
-    region: "Miền Nam",
-    cook_time_minutes: 35,
-    difficulty: "Trung bình",
-    spicy_level: 0,
-    calories_approx: 650,
-    short_description: "Đặc sản nức tiếng Sài Gòn với miếng sườn cốt lết nướng mật ong thơm lừng, bì dai giòn và chả trứng béo ngậy.",
-    image: "/images/dishes/dish_vn_002.jpg",
-    image_url: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-    tips: "Ướp sườn với sữa đặc hoặc nước cam sẽ giúp thớ thịt sườn mềm tan và không bị khô khi nướng."
+    "id": "dish_vn_002",
+    "name": "Cơm Tấm Sườn Bì Chả",
+    "english_name": "Broken Rice with Grilled Pork Chops",
+    "cuisine": "Vietnam",
+    "region": "Miền Nam",
+    "image": "/images/dishes/dish_vn_002.jpg",
+    "cook_time_minutes": 35,
+    "prep_time_minutes": 20,
+    "difficulty": "Trung bình",
+    "spicy_level": 0,
+    "calories_approx": 650,
+    "short_description": "Đặc sản nức tiếng Sài Gòn với miếng sườn cốt lết nướng mật ong thơm lừng, bì dai giòn và chả trứng hấp béo ngậy.",
+    "tips": "Ướp sườn với sữa đặc hoặc nước cam sẽ giúp thớ thịt sườn mềm tan và không bị khô khi nướng.",
+    "ingredients": [
+      {
+        "name": "Gạo tấm",
+        "amount": "300",
+        "unit": "g",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Sườn cốt lết heo",
+        "amount": "400",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Bì heo trộn thính",
+        "amount": "100",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Thịt xay & mộc nhĩ làm chả",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Trứng vịt",
+        "amount": "2",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Mỡ hành & Đồ chua",
+        "amount": "1",
+        "unit": "chén",
+        "category": "rau củ"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Ướp sườn & Nướng",
+        "description": "Dần mềm miếng sườn, ướp với tỏi, sả băm, mật ong, nước mắm trong 20 phút rồi nướng vàng xém hai mặt."
+      },
+      {
+        "step_number": 2,
+        "title": "Hấp chả trứng",
+        "description": "Trộn thịt xay, mộc nhĩ, trứng rồi đem hấp cách thủy 20 phút, phết lòng đỏ trứng lên mặt cho vàng óng."
+      },
+      {
+        "step_number": 3,
+        "title": "Trình bày",
+        "description": "Xới cơm tấm nóng ra đĩa, đặt sườn nướng, chả trứng, bì heo lên trên, chan mỡ hành béo ngậy và ăn kèm nước mắm tỏi ớt kẹo."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "dish_kr_001",
-    name: "Cơm Trộn Bibimbap",
-    english_name: "Korean Mixed Rice with Meat and Assorted Vegetables",
-    cuisine: "Korea",
-    region: "Toàn quốc",
-    cook_time_minutes: 25,
-    difficulty: "Dễ",
-    spicy_level: 1,
-    calories_approx: 560,
-    short_description: "Bữa tiệc sắc màu với cơm trắng dẻo, rau củ xào giòn, thịt bò mềm và sốt ớt Gochujang cay ngọt đậm vị.",
-    image: "/images/dishes/dish_kr_001.jpg",
-    image_url: "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80",
-    tips: "Dùng chảo đá nóng để tạo lớp cơm cháy giòn rụm bên dưới đáy thố."
-  },
-  {
-    id: "dish_jp_001",
-    name: "Mì Ramen Xá Xíu",
-    english_name: "Tonkotsu Chashu Ramen",
-    cuisine: "Japan",
-    region: "Fukuoka",
-    cook_time_minutes: 40,
-    difficulty: "Kỳ công",
-    spicy_level: 0,
-    calories_approx: 620,
-    short_description: "Tô mì ấm nồng với nước hầm xương heo béo ngậy đậm đà, sợi mì dai vàng óng cùng thịt xá xíu mềm tan.",
-    image: "/images/dishes/dish_jp_001.jpg",
-    image_url: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
-    tips: "Luộc trứng lòng đào ngâm tương Shoyu qua đêm để lòng đỏ dẻo quánh chuẩn vị Nhật Bản."
-  },
-  {
-    id: "dish_th_001",
-    name: "Pad Thai Tôm Tươi",
-    english_name: "Stir-fried Rice Noodles with Shrimp",
-    cuisine: "Thailand",
-    region: "Bangkok",
-    cook_time_minutes: 20,
-    difficulty: "Dễ",
-    spicy_level: 2,
-    calories_approx: 520,
-    short_description: "Món xào trứ danh xứ Chùa Vàng với sự hòa quyện bùng nổ giữa vị chua thanh của me, ngọt dịu của đường thốt nốt và tôm giòn sần sật.",
-    image: "/images/dishes/dish_th_001.jpg",
-    image_url: "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80",
-    tips: "Xào lửa lớn thật nhanh tay để bánh phở giữ được độ dai và dậy mùi khói chảo Wok."
-  },
-  {
-    id: "dish_it_001",
-    name: "Mì Ý Sốt Bò Bằm Bolognese",
-    english_name: "Spaghetti Bolognese",
-    cuisine: "Italy",
-    region: "Bologna",
-    cook_time_minutes: 30,
-    difficulty: "Dễ",
-    spicy_level: 0,
-    calories_approx: 580,
-    short_description: "Sợi mì Ý luộc chuẩn Al Dente ngập trong sốt cà chua đun chậm cùng thịt bò tươi và lá thơm Oregano quyến rũ.",
-    image: "/images/dishes/dish_it_001.jpg",
-    image_url: "https://images.unsplash.com/photo-1621996346565-e3d5d6281084?auto=format&fit=crop&w=800&q=80",
-    tips: "Giữ lại một muôi nước luộc mì có tinh bột để đảo cùng sốt giúp sốt bám chặt vào từng sợi mì."
+    "id": "dish_kr_001",
+    "name": "Cơm Trộn Bibimbap",
+    "english_name": "Korean Mixed Rice",
+    "cuisine": "Korea",
+    "region": "Toàn quốc",
+    "image": "/images/dishes/dish_kr_001.jpg",
+    "cook_time_minutes": 25,
+    "prep_time_minutes": 15,
+    "difficulty": "Dễ",
+    "spicy_level": 1,
+    "calories_approx": 560,
+    "short_description": "Bữa tiệc sắc màu với cơm trắng dẻo, rau củ xào giòn, thịt bò mềm và sốt ớt Gochujang cay ngọt đậm vị.",
+    "tips": "Dùng chảo đá nóng để tạo lớp cơm cháy giòn rụm bên dưới đáy thố.",
+    "ingredients": [
+      {
+        "name": "Cơm trắng",
+        "amount": "2",
+        "unit": "chén",
+        "category": "tinh bột"
+      },
+      {
+        "name": "Thịt bò thái mỏng",
+        "amount": "150",
+        "unit": "g",
+        "category": "thịt"
+      },
+      {
+        "name": "Rau củ (cà rốt, nấm, cải bó xôi, giá)",
+        "amount": "200",
+        "unit": "g",
+        "category": "rau củ"
+      },
+      {
+        "name": "Trứng gà",
+        "amount": "1",
+        "unit": "quả",
+        "category": "trứng"
+      },
+      {
+        "name": "Tương ớt Gochujang",
+        "amount": "2",
+        "unit": "muỗng",
+        "category": "gia vị"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Sơ chế rau củ",
+        "description": "Thái chỉ các loại rau củ. Chần sơ cải bó xôi và giá đỗ, sau đó xào chín tới cà rốt và nấm với chút dầu mè."
+      },
+      {
+        "step_number": 2,
+        "title": "Xào thịt bò & Ốp la",
+        "description": "Ướp thịt bò với nước tương và đường rồi xào chín nhanh. Chiên một quả trứng ốp la lòng đào."
+      },
+      {
+        "step_number": 3,
+        "title": "Trình bày",
+        "description": "Xới cơm ra thố đá nóng, xếp gọn gàng các loại rau củ và thịt bò xung quanh, đặt trứng ốp la ở giữa và rưới sốt Gochujang lên trên."
+      }
+    ],
+    "image_url": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80"
   }
 ];

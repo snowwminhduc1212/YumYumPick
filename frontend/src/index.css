@@ -43,7 +43,9 @@
   }
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -53,12 +55,17 @@ html, body, #root {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden; /* Ngăn scroll trang khi đang vuốt thẻ */
-  user-select: none; /* Tránh chọn nhầm văn bản khi kéo thẻ */
+  overflow: hidden;
+  /* Ngăn scroll trang khi đang vuốt thẻ */
+  user-select: none;
+  /* Tránh chọn nhầm văn bản khi kéo thẻ */
 }
 
 /* Font chữ tiêu đề món ăn */
-h1, h2, h3, .font-heading {
+h1,
+h2,
+h3,
+.font-heading {
   font-family: var(--font-heading);
 }
 
@@ -72,6 +79,7 @@ h1, h2, h3, .font-heading {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

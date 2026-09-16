@@ -29,6 +29,11 @@ IMAGES_DIR = os.path.join(BASE_DIR,"images")
 if os.path.exists(IMAGES_DIR):
     app.mount("/images",StaticFiles(directory=IMAGES_DIR), name="images")
 
+from app.api.dishes import router as dishes_router
+
+# Đăng ký Routers
+app.include_router(dishes_router, prefix="/api/v1/dishes", tags=["Dishes"])
+
 @app.get("/")
 def health_check():
     return{"status":"ok","message":"Backend is running"}

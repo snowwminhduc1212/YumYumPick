@@ -4,7 +4,7 @@ import { UtensilsCrossed } from 'lucide-react'
 
 function App() {
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen w-full py-4 px-2 bg-[#FFFDF9] dark:bg-[#121214] transition-colors">
+    <main className="flex flex-col items-center justify-between min-h-screen w-full py-4 px-2 transition-colors">
       {/* HEADER ĐƠN GIẢN */}
       <header className="flex flex-col items-center gap-1 mb-2 select-none">
         <div className="flex items-center gap-2">
@@ -20,13 +20,11 @@ function App() {
         </p>
       </header>
 
-      {/* SWIPE DECK WORKSPACE (Day 1 Placeholder) */}
-      <section className="flex-1 flex flex-col items-center justify-center w-full my-auto text-center">
-        <h2 className="text-xl text-stone-700 dark:text-stone-300 font-semibold">Canvas Ngày 1 sẵn sàng!</h2>
-        <p className="text-sm text-stone-500 dark:text-stone-400 mt-2">Dữ liệu mẫu đã có: {MOCK_DISHES.length} món.</p>
-        <p className="text-sm text-stone-500 dark:text-stone-400">Hãy bắt đầu tạo SwipeCard và CardStack (Nhiệm vụ Ngày 2).</p>
+      {/* SWIPE DECK WORKSPACE (Day 1) */}
+      <section className="flex flex-1 flex-col items-center justify-center w-full my-auto text-center">
+        <h2 className="text-xl text-stone-700 dark:text-stone-300 font-semibold">Canvas Ngày 1 hoàn chỉnh!</h2>
+        <p className="text-sm text-stone-500 dark:text-stone-400 mt-2">Dữ liệu mẫu đầy đủ schema: {MOCK_DISHES.length} món.</p>
       </section>
-
     </main>
   )
 }

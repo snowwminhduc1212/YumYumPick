@@ -1,14 +1,13 @@
 from typing import List, Optional, Union
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class CuisineFilterItem(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True, populate_by_name=True)
 
     id: str
     name: str
-    flag: str
-
+    flag: str = Field(validation_alias="flag_emoji")
 
 class FilterOptionItem(BaseModel):
     value: Optional[Union[int, str]] = None

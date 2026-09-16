@@ -25,6 +25,10 @@ app.add_middleware(
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMAGES_DIR = os.path.join(BASE_DIR,"images")
 
+import sys
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 # Mount thư mục images vào url '/images'
 if os.path.exists(IMAGES_DIR):
     app.mount("/images",StaticFiles(directory=IMAGES_DIR), name="images")

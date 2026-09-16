@@ -75,9 +75,9 @@ flowchart LR
         DBBrowser["Quản lý trực tiếp bằng\nDB Browser for SQLite"]
     end
 
-    Client <-->|REST API (JSON / CORS)| Server
+    Client <-->|REST API JSON - CORS| Server
     Server <-->|Local File Access| SQLite
-    DBBrowser -.->|Truy vấn & Sửa data| SQLite
+    DBBrowser -.->|Truy vấn và Sửa data| SQLite
 ```
 
 | Tầng | Công Nghệ | Mô Tả & Nhiệm Vụ |

@@ -90,9 +90,9 @@ flowchart LR
         DBBrowser["DB Browser for SQLite\n(Quản trị trực tiếp)"]
     end
 
-    Client <-->|REST API JSON (Localhost)| Server
-    Server <-->|Local File I/O| SQLite
-    DBBrowser -.->|Thêm/Sửa món| SQLite
+    Client <-->|REST API JSON - Localhost| Server
+    Server <-->|Local File Access| SQLite
+    DBBrowser -.->|Thêm và Sửa món| SQLite
 ```
 
 - **Frontend:** React 18 (Vite template), Framer Motion (xử lý cử chỉ quẹt thẻ), Tailwind CSS (hệ thống utility-first hỗ trợ responsive PC/Mobile), Lucide React (bộ icon hiện đại).

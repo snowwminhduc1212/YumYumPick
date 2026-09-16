@@ -80,7 +80,7 @@
 
 ### Ngày 1: Setup Môi Trường & Chốt API Contract
 - [ ] **Minh Đức (Lead, Data & QA):** Bàn giao CSDL SQLite `yumyumpick.db` (đầy đủ 100 món, 100 ảnh offline) và tài liệu đặc tả cho cả nhóm; chủ trì chốt API Contract.
-- [ ] **Ánh Dương (Backend 1):** Setup FastAPI, CORS, Static Files mount `/images`; cung cấp Mock Data JSON cho Frontend.
+- [X] **Ánh Dương (Backend 1):** Setup FastAPI, CORS, Static Files mount `/images`; cung cấp Mock Data JSON cho Frontend.
 - [ ] **Đăng Huy (Backend 2):** Khởi tạo ORM Models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) kết nối `backend/yumyumpick.db`.
 - [ ] **Quang Huy (Frontend 1):** Khởi tạo project React (Vite + Tailwind CSS + Framer Motion); setup thư viện và khung thẻ quẹt.
 - [ ] **Tùng Dương (Frontend 2):** Khởi tạo cấu trúc các component chi tiết món ăn: `LikedDishesView.jsx` và `DishDetailModal.jsx`.

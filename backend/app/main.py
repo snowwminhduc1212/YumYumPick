@@ -30,9 +30,11 @@ if os.path.exists(IMAGES_DIR):
     app.mount("/images",StaticFiles(directory=IMAGES_DIR), name="images")
 
 from app.api.dishes import router as dishes_router
+from app.api.saved_dishes import router as saved_dishes_router
 
 # Đăng ký Routers
 app.include_router(dishes_router, prefix="/api/v1/dishes", tags=["Dishes"])
+app.include_router(saved_dishes_router, prefix="/api/v1/saved-dishes", tags=["Saved Dishes"])
 
 @app.get("/")
 def health_check():

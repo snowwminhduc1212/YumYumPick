@@ -51,7 +51,7 @@ flowchart TD
         DBTool -.->|Xem & Sửa trực tiếp| SQLite
     end
 
-    Client <-->|REST API JSON (HTTP Localhost)| Server
+    Client <-->|REST API JSON - HTTP Localhost| Server
 ```
 
 ---

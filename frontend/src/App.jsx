@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MOCK_DISHES } from './data/mockDishes'
+import { api } from './services/api'
 import LikedDishesView from './components/LikedDishesView'
 import DishDetailModal from './components/DishDetailModal'
 import AuthModal from './components/AuthModal'
@@ -9,6 +9,9 @@ import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from
 
 function App() {
   const { user, logout } = useAuth()
+  // If not logged in, default to demo user id = 1 in SQLite database
+  const currentUserId = user?.user_id || 1
+
   const [authOpen, setAuthOpen] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
 
@@ -20,40 +23,91 @@ function App() {
 
   // Current view: 'swipe' | 'liked'
   const [currentView, setCurrentView] = useState('liked')
-  // Liked dishes state, pre-populated with first 5 dishes for immediate preview
-  const [likedDishes, setLikedDishes] = useState(MOCK_DISHES.slice(0, 5))
+  // Liked dishes state from SQLite backend
+  const [likedDishes, setLikedDishes] = useState([])
+  const [isLoadingLiked, setIsLoadingLiked] = useState(true)
+
   // Active dish for DishDetailModal
   const [selectedDish, setSelectedDish] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLoadingDetail, setIsLoadingDetail] = useState(false)
 
-  const handleOpenDetail = (dish) => {
+  // Fetch saved dishes on initial load or whenever user session changes
+  useEffect(() => {
+    let isMounted = true
+
+    api.getSavedDishes(currentUserId)
+      .then((dishes) => {
+        if (isMounted) {
+          setLikedDishes(dishes)
+          setIsLoadingLiked(false)
+        }
+      })
+      .catch((err) => {
+        console.error('[App] Failed to load saved dishes:', err)
+        if (isMounted) {
+          setIsLoadingLiked(false)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [currentUserId])
+
+  const handleOpenDetail = async (dish) => {
+    // Immediately open modal with existing dish preview
     setSelectedDish(dish)
     setIsModalOpen(true)
+
+    // Fetch complete recipe details (ingredients, steps, tips) from SQLite DB
+    const dishId = dish.id || dish.dish_id
+    if (dishId) {
+      setIsLoadingDetail(true)
+      try {
+        const fullDetail = await api.getDishDetail(dishId)
+        if (fullDetail) {
+          setSelectedDish(fullDetail)
+        }
+      } catch (err) {
+        console.error('[App] Failed to fetch dish detail:', err)
+      } finally {
+        setIsLoadingDetail(false)
+      }
+    }
   }
 
   const handleCloseDetail = () => {
     setIsModalOpen(false)
   }
 
-  const handleRemoveLiked = (dishId) => {
-    setLikedDishes((prev) => prev.filter((d) => d.id !== dishId))
-    if (selectedDish?.id === dishId) {
+  const handleRemoveLiked = async (dishId) => {
+    // Optimistic UI update
+    setLikedDishes((prev) => prev.filter((d) => (d.id || d.dish_id) !== dishId))
+    if ((selectedDish?.id || selectedDish?.dish_id) === dishId) {
       setSelectedDish(null)
       setIsModalOpen(false)
     }
+
+    // Call DELETE API in background
+    await api.unsaveDish(currentUserId, dishId)
   }
 
-  const handleToggleLike = (dish) => {
-    const isAlreadyLiked = likedDishes.some((d) => d.id === dish.id)
+  const handleToggleLike = async (dish) => {
+    const dishId = dish.id || dish.dish_id
+    const isAlreadyLiked = likedDishes.some((d) => (d.id || d.dish_id) === dishId)
+
     if (isAlreadyLiked) {
-      handleRemoveLiked(dish.id)
+      await handleRemoveLiked(dishId)
     } else {
+      // Optimistic UI update
       setLikedDishes((prev) => [dish, ...prev])
+      await api.saveDish(currentUserId, dishId)
     }
   }
 
   const isCurrentDishLiked = selectedDish
-    ? likedDishes.some((d) => d.id === selectedDish.id)
+    ? likedDishes.some((d) => (d.id || d.dish_id) === (selectedDish.id || selectedDish.dish_id))
     : false
 
   return (
@@ -149,6 +203,7 @@ function App() {
         {currentView === 'liked' ? (
           <LikedDishesView
             likedDishes={likedDishes}
+            isLoading={isLoadingLiked}
             onSelectDish={handleOpenDetail}
             onRemoveDish={handleRemoveLiked}
             onBackToSwipe={() => setCurrentView('swipe')}
@@ -190,11 +245,13 @@ function App() {
 
       {/* RECIPE DETAIL MODAL (Tùng Dương) */}
       <DishDetailModal
+        key={selectedDish?.id || 'dish-detail-modal'}
         dish={selectedDish}
         isOpen={isModalOpen}
         onClose={handleCloseDetail}
         isLiked={isCurrentDishLiked}
         onToggleLike={handleToggleLike}
+        isLoadingDetail={isLoadingDetail}
       />
 
       {/* AUTH & FILTER MODALS (Luân) */}

@@ -29,6 +29,7 @@ const CUISINE_FILTERS = ['Tất cả', 'Việt Nam', 'Hàn Quốc', 'Nhật Bả
 
 export default function LikedDishesView({
   likedDishes = [],
+  isLoading = false,
   onSelectDish,
   onRemoveDish,
   onBackToSwipe
@@ -145,7 +146,23 @@ export default function LikedDishesView({
       )}
 
       {/* CONTENT AREA: GRID OR EMPTY STATE */}
-      {likedDishes.length === 0 ? (
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3, 4, 5, 6].map((idx) => (
+            <div
+              key={idx}
+              className="bg-[#1d0b0d] border border-[#dbe2dc]/15 animate-pulse flex flex-col"
+            >
+              <div className="aspect-[16/10] w-full bg-[#dbe2dc]/10" />
+              <div className="p-5 space-y-3">
+                <div className="h-5 bg-[#dbe2dc]/15 w-3/4 rounded-[1px]" />
+                <div className="h-3 bg-[#dbe2dc]/10 w-1/2 rounded-[1px]" />
+                <div className="h-10 bg-[#dbe2dc]/10 w-full rounded-[1px] mt-4" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : likedDishes.length === 0 ? (
         // Empty State: No dishes liked yet
         <motion.div
           initial={{ opacity: 0, y: 15 }}

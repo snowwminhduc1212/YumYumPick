@@ -6,8 +6,8 @@
  */
 
 import { MOCK_DISHES } from '../data/mockDishes'
-
-const API_BASE = ''
+import { API_BASE_URL } from '../config/api'
+const API_BASE = API_BASE_URL
 
 /**
  * Format raw backend saved dish item into standard frontend dish structure

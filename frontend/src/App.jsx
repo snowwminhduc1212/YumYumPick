@@ -6,11 +6,14 @@ import AuthModal from './components/AuthModal'
 import FilterModal from './components/FilterModal'
 import { useAuth } from './hooks/useAuth'
 import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from 'lucide-react'
+import { useFilterMetadata } from './hooks/useFilterMetadata';
 
 function App() {
-  const { user, logout } = useAuth()
+  const { user, login, logout } = useAuth()
   const [authOpen, setAuthOpen] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
+  const { metadata, isLoading: metaLoading } = useFilterMetadata();
+
 
   // Ensure any previous data-theme attribute is cleared
   useEffect(() => {
@@ -197,9 +200,18 @@ function App() {
         onToggleLike={handleToggleLike}
       />
 
-      {/* AUTH & FILTER MODALS (Luân) */}
-      <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
-      <FilterModal isOpen={filterOpen} onClose={() => setFilterOpen(false)} />
+           {/* AUTH & FILTER MODALS (Luân) */}
+      <AuthModal
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+        onLoginSuccess={login}
+      />
+      <FilterModal
+        isOpen={filterOpen}
+        onClose={() => setFilterOpen(false)}
+        metadata={metadata}
+        onApplyFilter={(filters) => console.log('Filter áp dụng:', filters)}
+      />
     </div>
   )
 }

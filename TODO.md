@@ -92,7 +92,7 @@
 - [x] **Đăng Huy:** Viết API `GET /api/v1/dishes/random` (hỗ trợ lọc ẩm thực, độ cay, thời gian, loại trừ món đã xem) và `GET /api/v1/dishes/{dish_id}`.
 - [ ] **Quang Huy:** Hoàn thiện `SwipeCard.jsx` & `CardStack.jsx` bằng Framer Motion (hiển thị ảnh, tên, badges và description intro trên thẻ; cử chỉ kéo chuột/vuốt ngón tay, stamp YUMMY/NOPE, spring physics, empty state).
 - [X] **Tùng Dương:** Xây dựng `LikedDishesView.jsx` (danh sách món đã thích, nút xóa) và `DishDetailModal.jsx` (Checkbox tương tác nguyên liệu, 3 bước nấu, mẹo bếp).
-- [ ] **Luân:** Xây dựng `AuthModal.jsx` (Đăng nhập/Đăng ký lưu `localStorage`) và `FilterModal.jsx` (Lọc theo quốc gia, độ cay, thời gian nấu); thiết kế các slide PowerPoint đầu tiên với kho ảnh ẩm thực.
+- [X] **Luân:** Xây dựng `AuthModal.jsx` (Đăng nhập/Đăng ký lưu `localStorage`) và `FilterModal.jsx` (Lọc theo quốc gia, độ cay, thời gian nấu); thiết kế các slide PowerPoint đầu tiên với kho ảnh ẩm thực.
 
 ### Ngày 3: Tích Hợp API & Bố Cục Responsive PC/Mobile
 - [ ] **Minh Đức:** Điều phối Daily Sync 09:00; giám sát việc kết nối API giữa FE và BE; kiểm tra dữ liệu ghi nhận vào SQLite.

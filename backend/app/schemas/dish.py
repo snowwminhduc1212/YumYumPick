@@ -60,18 +60,3 @@ class DishDetailResponse(BaseModel):
     tips: Optional[str] = None
     ingredients: List[IngredientResponse] = []
     steps: List[CookingStepResponse] = []
-
-    @field_validator("cuisine", mode="before")
-    @classmethod
-    def extract_cuisine_name(cls, v: Any) -> str:
-        if hasattr(v, "name"):
-            return v.name
-        return str(v) if v is not None else ""
-
-    @field_validator("steps", mode="before")
-    @classmethod
-    def extract_steps(cls, v: Any) -> List[Any]:
-        # If cooking_steps from ORM is passed
-        if hasattr(v, "__iter__"):
-            return list(v)
-        return []

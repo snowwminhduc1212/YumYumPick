@@ -84,6 +84,7 @@ def run_verification():
         )
         print("\n=== 4. PYDANTIC DETAIL SERIALIZATION ===")
         print(f"Detail serialized with {len(detail.ingredients)} ingredients and {len(detail.steps)} steps.")
+        assert len(detail.steps) == len(dish.cooking_steps), f"Expected {len(dish.cooking_steps)} steps, found {len(detail.steps)}"
 
         # 4. Test Random Query with Limit 10 (SQLAlchemy 2.0 select + scalars)
         query = select(Dish).order_by(func.random()).limit(10)

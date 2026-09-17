@@ -1,4 +1,5 @@
 import React from 'react'
+import CardStack from './components/CardStack'
 import { MOCK_DISHES } from './data/mockDishes'
 import { UtensilsCrossed } from 'lucide-react'
 
@@ -11,7 +12,7 @@ function App() {
           <div className="w-9 h-9 rounded-2xl bg-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/30">
             <UtensilsCrossed className="w-5 h-5" />
           </div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100 font-heading">
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-warm-cream font-heading">
             YumYum<span className="text-orange-500">Pick</span>
           </h1>
         </div>
@@ -20,11 +21,15 @@ function App() {
         </p>
       </header>
 
-      {/* SWIPE DECK WORKSPACE (Day 1) */}
-      <section className="flex flex-1 flex-col items-center justify-center w-full my-auto text-center">
-        <h2 className="text-xl text-stone-700 dark:text-stone-300 font-semibold">Canvas Ngày 1 hoàn chỉnh!</h2>
-        <p className="text-sm text-stone-500 dark:text-stone-400 mt-2">Dữ liệu mẫu đầy đủ schema: {MOCK_DISHES.length} món.</p>
+      {/* SWIPE DECK WORKSPACE */}
+      <section className="flex flex-1 items-center justify-center w-full my-auto">
+        <CardStack initialDishes={MOCK_DISHES} />
       </section>
+
+      {/* FOOTER HƯỚNG DẪN TEST */}
+      <footer className="mt-2 text-center text-[11px] text-stone-400 dark:text-stone-600 select-none">
+        Nhánh: <span className="font-mono text-orange-500">feature/fe-swipe-deck</span> • Dữ liệu mẫu Ngày 1 ({MOCK_DISHES.length} món)
+      </footer>
     </main>
   )
 }

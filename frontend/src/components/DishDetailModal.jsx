@@ -8,7 +8,8 @@ import {
   Sparkles,
   Check,
   Gauge,
-  Apple
+  Apple,
+  Utensils
 } from 'lucide-react'
 
 // Country flag mapping helper
@@ -54,9 +55,9 @@ export default function DishDetailModal({
 
   if (!isOpen || !dish) return null
 
-  const displayImage = !imageError && (dish.image_url || dish.image)
-    ? (dish.image_url || dish.image)
-    : '/images/hero.png'
+  const primaryImage = !imageError && (dish.image || dish.image_url)
+    ? (dish.image || dish.image_url)
+    : ''
 
   const ingredientsList = dish.ingredients || []
   const stepsList = dish.steps || []
@@ -107,15 +108,31 @@ export default function DishDetailModal({
           {/* ================= LEFT COLUMN: DISH HERO & OVERVIEW ================= */}
           <div className="w-full lg:w-[46%] xl:w-[42%] flex flex-col shrink-0 lg:border-r border-[#dbe2dc]/15 lg:overflow-y-auto">
             {/* Hero Image Section */}
-            <div className="relative h-52 sm:h-64 lg:h-72 xl:h-80 w-full overflow-hidden bg-black/80 shrink-0">
-              <img
-                src={displayImage}
-                alt={dish.name}
-                onError={() => setImageError(true)}
-                className="w-full h-full object-cover"
-              />
+            <div className="relative h-52 sm:h-64 lg:h-72 xl:h-80 w-full overflow-hidden bg-black/80 shrink-0 flex items-center justify-center">
+              {primaryImage && !imageError ? (
+                <img
+                  src={primaryImage}
+                  alt={dish.name}
+                  onError={(e) => {
+                    // If local image fails, fall back to online Unsplash URL
+                    if (dish.image_url && e.currentTarget.src !== dish.image_url) {
+                      e.currentTarget.src = dish.image_url
+                    } else {
+                      setImageError(true)
+                    }
+                  }}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-[#100607] text-[#f7ea48]/40">
+                  <Utensils className="w-12 h-12 stroke-[1.5] mb-2 text-[#f7ea48]/50" />
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#dbe2dc]/40">
+                    {dish.name}
+                  </span>
+                </div>
+              )}
               {/* Dark gradient overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/40 to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/40 to-black/20 pointer-events-none" />
 
               {/* Mobile-only Close Button */}
               <button

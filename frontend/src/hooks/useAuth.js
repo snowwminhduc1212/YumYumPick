@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const SESSION_KEY = 'yumyum_session';
 
 export function useAuth() {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(SESSION_KEY);
-    if (saved) {
-      try {
-        setUser(JSON.parse(saved));
-      } catch {
-        localStorage.removeItem(SESSION_KEY);
-      }
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem(SESSION_KEY);
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
     }
-    setIsLoading(false);
-  }, []);
+  });
+  const [isLoading] = useState(false);
 
   const login = (userData) => {
     const session = { user_id: userData.user_id, username: userData.username };

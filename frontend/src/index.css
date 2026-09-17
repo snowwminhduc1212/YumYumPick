@@ -25,29 +25,29 @@
   --color-card-dark: #1E1E22;
   --color-text-main: #1C1917;
   --color-text-muted: #78716C;
+
+  /* Limón Design System Tokens (from DESIGN.md) */
+  --color-black-olive: #1d0b0d;
+  --color-forest-ink: #103b15;
+  --color-lemon-zest: #f7ea48;
+  --color-warm-cream: #fcf9f0;
+  --color-sage-mist: #dbe2dc;
+  --color-pure-white: #ffffff;
 }
 
 :root {
-  --app-bg: #FFFDF9;
-  --app-text: #1C1917;
-  --card-bg: #FFFFFF;
-  --card-border: #F3E8E2;
+  --app-bg: #1d0b0d;
+  --app-text: #fcf9f0;
+  --card-bg: #1d0b0d;
+  --card-border: rgba(219, 226, 220, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --app-bg: #121214;
-    --app-text: #F5F5F4;
-    --card-bg: #1E1E22;
-    --card-border: #2E2E35;
-  }
-}
-
-html,
-body,
-#root {
-  width: 100%;
+html {
   height: 100%;
+}
+
+body {
+  min-height: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--app-bg);
@@ -55,10 +55,17 @@ body,
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   /* Ngăn scroll trang khi đang vuốt thẻ */
   user-select: none;
   /* Tránh chọn nhầm văn bản khi kéo thẻ */
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Font chữ tiêu đề món ăn */

@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Heart,
   HeartCrack,
   Search,
   Trash2,
@@ -9,10 +8,7 @@ import {
   Flame,
   ArrowLeft,
   Utensils,
-  BookOpen,
-  ChefHat,
-  Sparkles,
-  Filter
+  ArrowRight
 } from 'lucide-react'
 
 // Country flag mapping helper
@@ -63,63 +59,63 @@ export default function LikedDishesView({
   }, [likedDishes, searchQuery, selectedCuisine])
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-6 flex flex-col min-h-screen">
+    <div className="w-full max-w-6xl mx-auto px-4 py-8 flex flex-col flex-1 text-[#fcf9f0] transition-colors font-sans">
       {/* Top Navigation & Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-[#dbe2dc]/15 mb-8">
+        <div className="flex items-start gap-4">
           {onBackToSwipe && (
             <button
               onClick={onBackToSwipe}
-              className="p-2 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:bg-orange-50 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 transition-colors shadow-sm cursor-pointer active:scale-90"
+              className="p-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/30 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] transition-colors cursor-pointer active:scale-95"
               title="Quay lại quẹt thẻ"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
             </button>
           )}
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-heading">
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-[0.06em] uppercase font-heading text-[#fcf9f0]">
                 Món Ăn Đã Lưu
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 font-bold text-xs">
-                {likedDishes.length} món
+              <span className="px-2.5 py-0.5 rounded-[1px] border border-[#f7ea48]/60 bg-[#f7ea48]/10 text-[#f7ea48] font-mono text-xs font-semibold tracking-wider">
+                {likedDishes.length} MÓN
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-0.5">
-              Bộ sưu tập ẩm thực yêu thích của bạn để nấu bất kỳ lúc nào
+            <p className="text-xs sm:text-sm text-[#dbe2dc]/70 mt-1 tracking-[0.02em]">
+              Bộ sưu tập ẩm thực yêu thích tuyển chọn của bạn
             </p>
           </div>
         </div>
 
-        {/* Back to Swipe button for quick access */}
+        {/* Back to Swipe button */}
         {onBackToSwipe && (
           <button
             onClick={onBackToSwipe}
-            className="self-start sm:self-auto px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs sm:text-sm font-bold shadow-md shadow-orange-500/20 flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer"
+            className="self-start sm:self-auto px-5 py-2.5 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] text-xs font-bold tracking-[0.04em] uppercase transition-transform active:scale-95 cursor-pointer flex items-center gap-2"
           >
-            <Utensils className="w-4 h-4" />
-            <span>Quẹt thêm món</span>
+            <Utensils className="w-3.5 h-3.5" />
+            <span>Khám phá thêm</span>
           </button>
         )}
       </div>
 
       {/* Search Bar & Cuisine Filter Chips */}
       {likedDishes.length > 0 && (
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
           {/* Search input */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#dbe2dc]/50 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Tìm theo tên món, nguyên liệu, quốc gia..."
+              placeholder="Tìm theo tên món, nguyên liệu, phong vị..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-800/90 border border-stone-200 dark:border-stone-700 text-sm text-stone-800 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/40 shadow-sm transition-all"
+              className="w-full pl-10 pr-12 py-2.5 rounded-[1px] bg-[#1d0b0d]/70 border border-[#dbe2dc]/25 text-sm text-[#fcf9f0] placeholder-[#dbe2dc]/40 focus:outline-none focus:border-[#f7ea48] transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-xs text-stone-400 hover:text-stone-600 absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                className="text-xs text-[#dbe2dc]/60 hover:text-[#f7ea48] absolute right-3.5 top-1/2 -translate-y-1/2 cursor-pointer uppercase tracking-wider font-semibold"
               >
                 Xóa
               </button>
@@ -127,17 +123,17 @@ export default function LikedDishesView({
           </div>
 
           {/* Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
             {CUISINE_FILTERS.map((cuisine) => {
               const isActive = selectedCuisine === cuisine
               return (
                 <button
                   key={cuisine}
                   onClick={() => setSelectedCuisine(cuisine)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-[1px] text-xs font-semibold tracking-[0.04em] uppercase whitespace-nowrap transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-orange-500 text-white shadow-sm shadow-orange-500/25'
-                      : 'bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700 text-stone-600 dark:text-stone-300 border border-stone-200 dark:border-stone-700'
+                      ? 'bg-[#f7ea48] text-[#1d0b0d] border border-[#f7ea48]'
+                      : 'bg-[#1d0b0d]/50 text-[#fcf9f0]/80 border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48]'
                   }`}
                 >
                   {cuisine}
@@ -152,66 +148,64 @@ export default function LikedDishesView({
       {likedDishes.length === 0 ? (
         // Empty State: No dishes liked yet
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-stone-800/40 rounded-3xl border border-dashed border-stone-300 dark:border-stone-700 my-auto"
+          className="flex-1 flex flex-col items-center justify-center text-center p-12 bg-[#1d0b0d]/40 rounded-[1px] border border-dashed border-[#dbe2dc]/20 my-auto"
         >
-          <div className="w-20 h-20 rounded-3xl bg-orange-100 dark:bg-orange-950/50 flex items-center justify-center text-orange-500 mb-4 shadow-inner">
-            <HeartCrack className="w-10 h-10 stroke-[1.5]" />
+          <div className="w-16 h-16 rounded-[1px] border border-[#dbe2dc]/30 flex items-center justify-center text-[#f7ea48] mb-5 bg-[#1d0b0d]">
+            <HeartCrack className="w-8 h-8 stroke-[1.5]" />
           </div>
-          <h3 className="text-xl font-bold text-stone-800 dark:text-stone-200 mb-2 font-heading">
-            Chưa có món ăn nào được lưu!
+          <h3 className="text-xl font-bold tracking-[0.06em] uppercase text-[#fcf9f0] mb-2 font-heading">
+            Chưa Có Món Ăn Nào Được Lưu
           </h3>
-          <p className="text-sm text-stone-500 dark:text-stone-400 max-w-sm mb-6 leading-relaxed">
-            Hãy quay lại màn hình chính và quẹt phải <span className="font-semibold text-emerald-600">YUMMY</span> các món ăn hấp dẫn để lưu công thức vào đây nhé!
+          <p className="text-sm text-[#dbe2dc]/70 max-w-md mb-8 leading-relaxed tracking-[0.02em]">
+            Hãy trở về khu vực quẹt thẻ và vuốt phải <span className="font-semibold text-[#f7ea48]">CHỌN</span> các món ăn hấp dẫn để lưu công thức vào thực đơn của bạn.
           </p>
           {onBackToSwipe && (
             <button
               onClick={onBackToSwipe}
-              className="px-6 py-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold shadow-lg shadow-orange-500/30 flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
+              className="px-6 py-3 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] text-xs font-bold tracking-[0.04em] uppercase transition-transform active:scale-95 cursor-pointer flex items-center gap-2"
             >
               <Utensils className="w-4 h-4" />
-              <span>Bắt đầu khám phá món ngon</span>
+              <span>Khám phá món ngon ngay</span>
             </button>
           )}
         </motion.div>
       ) : filteredDishes.length === 0 ? (
         // Search no results state
-        <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-          <p className="text-sm text-stone-500 dark:text-stone-400">
-            Không tìm thấy món nào phù hợp với từ khóa "{searchQuery}".
+        <div className="flex-1 flex flex-col items-center justify-center text-center p-12">
+          <p className="text-sm text-[#dbe2dc]/70 tracking-[0.02em]">
+            Không tìm thấy món ăn nào phù hợp với từ khóa "{searchQuery}".
           </p>
           <button
             onClick={() => {
               setSearchQuery('')
               setSelectedCuisine('Tất cả')
             }}
-            className="mt-3 text-xs text-orange-500 font-bold hover:underline cursor-pointer"
+            className="mt-3 text-xs text-[#f7ea48] font-bold tracking-[0.04em] uppercase hover:underline cursor-pointer"
           >
-            Xóa bộ lọc & tìm kiếm
+            Đặt lại bộ lọc & tìm kiếm
           </button>
         </div>
       ) : (
-        // Grid of Liked Dishes
+        // Grid of Liked Dishes (Editorial Limón Brasserie 3-Column Grid)
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence>
             {filteredDishes.map((dish) => (
               <motion.div
                 key={dish.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.2 } }}
                 onClick={() => onSelectDish?.(dish)}
-                className="group relative bg-white dark:bg-[#1E1E22] rounded-2xl overflow-hidden border border-stone-200/80 dark:border-stone-800 shadow-sm hover:shadow-xl hover:border-orange-200 dark:hover:border-orange-900/40 transition-all cursor-pointer flex flex-col"
+                className="group relative bg-[#1d0b0d] rounded-[0px] overflow-hidden border border-[#dbe2dc]/20 hover:border-[#f7ea48]/80 transition-all duration-300 cursor-pointer flex flex-col"
               >
-                {/* Image Cover */}
-                <div className="relative h-44 w-full overflow-hidden bg-stone-900">
+                {/* Full-bleed Food Image Tile (No card chrome, flat editorial) */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
                   <img
                     src={dish.image_url || dish.image || '/images/hero.png'}
                     alt={dish.name}
@@ -220,12 +214,12 @@ export default function LikedDishesView({
                         e.currentTarget.src = dish.image_url
                       }
                     }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/25 to-transparent" />
 
                   {/* Cuisine Badge */}
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-1">
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-[1px] bg-[#1d0b0d]/80 border border-[#dbe2dc]/30 backdrop-blur-sm text-[#fcf9f0] text-xs font-medium tracking-wider uppercase flex items-center gap-1.5">
                     <span>{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
                     <span>{dish.cuisine}</span>
                   </span>
@@ -237,52 +231,52 @@ export default function LikedDishesView({
                         e.stopPropagation()
                         onRemoveDish(dish.id)
                       }}
-                      className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 hover:bg-rose-600 text-white flex items-center justify-center backdrop-blur-md transition-colors shadow-sm active:scale-90 cursor-pointer"
+                      className="absolute top-3 right-3 w-8 h-8 rounded-[1px] bg-[#1d0b0d]/70 hover:bg-rose-900 border border-[#dbe2dc]/20 text-[#fcf9f0] flex items-center justify-center transition-colors cursor-pointer active:scale-90"
                       title="Bỏ thích món này"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   )}
 
                   {/* Badges on bottom image */}
-                  <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white text-xs">
-                    <span className="flex items-center gap-1 font-medium bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-lg">
-                      <Clock className="w-3 h-3 text-orange-400" />
-                      {dish.cook_time_minutes} phút
+                  <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[#fcf9f0] text-xs">
+                    <span className="flex items-center gap-1 font-mono text-[11px] bg-[#1d0b0d]/80 px-2 py-0.5 rounded-[1px] border border-[#dbe2dc]/15">
+                      <Clock className="w-3 h-3 text-[#f7ea48]" />
+                      {dish.cook_time_minutes} PHÚT
                     </span>
-                    <span className="flex items-center gap-1 font-medium bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-lg text-amber-300">
-                      <Flame className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      {dish.spicy_level === 0 ? 'Không cay' : `Cay cấp ${dish.spicy_level}`}
+                    <span className="flex items-center gap-1 font-mono text-[11px] bg-[#1d0b0d]/80 px-2 py-0.5 rounded-[1px] border border-[#dbe2dc]/15 text-[#f7ea48]">
+                      <Flame className="w-3 h-3 fill-[#f7ea48] text-[#f7ea48]" />
+                      {dish.spicy_level === 0 ? 'KHÔNG CAY' : `CAY CẤP ${dish.spicy_level}`}
                     </span>
                   </div>
                 </div>
 
                 {/* Content Details */}
-                <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 group-hover:text-orange-500 transition-colors line-clamp-1 font-heading">
+                    <h3 className="text-lg font-bold tracking-[0.03em] text-[#fcf9f0] group-hover:text-[#f7ea48] transition-colors line-clamp-1 font-heading uppercase">
                       {dish.name}
                     </h3>
                     {dish.english_name && (
-                      <p className="text-xs text-stone-500 dark:text-stone-400 italic line-clamp-1 mt-0.5">
+                      <p className="text-xs text-[#dbe2dc]/60 italic line-clamp-1 mt-0.5 tracking-wide">
                         {dish.english_name}
                       </p>
                     )}
                     {dish.short_description && (
-                      <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 mt-2 leading-relaxed">
+                      <p className="text-xs text-[#dbe2dc]/80 line-clamp-2 mt-2.5 leading-relaxed tracking-[0.01em]">
                         {dish.short_description}
                       </p>
                     )}
                   </div>
 
-                  {/* Action row */}
-                  <div className="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-stone-500 dark:text-stone-400">
-                      {dish.difficulty || 'Dễ nấu'}
+                  {/* Action row with Limón Ghost Link Button */}
+                  <div className="pt-3 border-t border-[#dbe2dc]/15 flex items-center justify-between">
+                    <span className="text-xs font-mono tracking-wider uppercase text-[#dbe2dc]/60">
+                      ĐỘ KHÓ: {dish.difficulty || 'DỄ'}
                     </span>
-                    <span className="text-xs font-bold text-orange-500 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                      <BookOpen className="w-3.5 h-3.5" />
+                    <span className="text-xs font-bold tracking-[0.04em] uppercase text-[#f7ea48] flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
                       <span>Xem công thức</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </div>
                 </div>

@@ -5,11 +5,8 @@ import {
   Heart,
   Clock,
   Flame,
-  ChefHat,
   Sparkles,
   Check,
-  RotateCcw,
-  Utensils,
   Gauge,
   Apple
 } from 'lucide-react'
@@ -37,16 +34,7 @@ export default function DishDetailModal({
 }) {
   const [activeTab, setActiveTab] = useState('ingredients') // 'ingredients' | 'steps'
   const [checkedIngredients, setCheckedIngredients] = useState({})
-  const [imgSrc, setImgSrc] = useState('')
-
-  // Sync image and reset checked ingredients when dish changes
-  useEffect(() => {
-    if (dish) {
-      setImgSrc(dish.image_url || dish.image || '/images/hero.png')
-      setCheckedIngredients({})
-      setActiveTab('ingredients')
-    }
-  }, [dish])
+  const [imageError, setImageError] = useState(false)
 
   // Close on Escape key press
   useEffect(() => {
@@ -64,6 +52,10 @@ export default function DishDetailModal({
   }, [isOpen, onClose])
 
   if (!isOpen || !dish) return null
+
+  const displayImage = !imageError && (dish.image_url || dish.image)
+    ? (dish.image_url || dish.image)
+    : '/images/hero.png'
 
   const ingredientsList = dish.ingredients || []
   const stepsList = dish.steps || []
@@ -100,310 +92,335 @@ export default function DishDetailModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
+        {/* Modal Window: Limón Brasserie Aesthetic with 1px border & radius */}
         <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 30, scale: 0.95 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-2xl bg-white dark:bg-[#1C1C20] rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col border border-orange-100 dark:border-stone-800"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+          className="relative w-full max-w-2xl lg:max-w-5xl xl:max-w-6xl bg-[#1d0b0d] text-[#fcf9f0] rounded-[1px] border border-[#dbe2dc]/30 overflow-hidden z-10 max-h-[94vh] lg:h-[88vh] flex flex-col lg:flex-row font-sans shadow-2xl"
         >
-          {/* Top Hero Section */}
-          <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-stone-900 shrink-0">
-            <img
-              src={imgSrc}
-              alt={dish.name}
-              onError={() => {
-                if (dish.image_url && imgSrc !== dish.image_url) {
-                  setImgSrc(dish.image_url)
-                }
-              }}
-              className="w-full h-full object-cover"
-            />
-            {/* Dark gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
+          {/* ================= LEFT COLUMN: DISH HERO & OVERVIEW ================= */}
+          <div className="w-full lg:w-[46%] xl:w-[42%] flex flex-col shrink-0 lg:border-r border-[#dbe2dc]/15 lg:overflow-y-auto">
+            {/* Hero Image Section */}
+            <div className="relative h-52 sm:h-64 lg:h-72 xl:h-80 w-full overflow-hidden bg-black/80 shrink-0">
+              <img
+                src={displayImage}
+                alt={dish.name}
+                onError={() => setImageError(true)}
+                className="w-full h-full object-cover"
+              />
+              {/* Dark gradient overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/40 to-black/20" />
 
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center transition-transform active:scale-90 cursor-pointer"
-              title="Đóng (Esc)"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Favorite / Like Button */}
-            {onToggleLike && (
+              {/* Mobile-only Close Button */}
               <button
-                onClick={() => onToggleLike(dish)}
-                className={`absolute top-4 left-4 px-3 py-1.5 rounded-full backdrop-blur-md flex items-center gap-1.5 text-xs font-semibold shadow-md transition-all active:scale-90 cursor-pointer ${
-                  isLiked
-                    ? 'bg-rose-500 text-white'
-                    : 'bg-black/40 hover:bg-black/60 text-white'
-                }`}
+                onClick={onClose}
+                className="lg:hidden absolute top-4 right-4 w-9 h-9 rounded-[1px] bg-[#1d0b0d]/70 hover:bg-[#1d0b0d] border border-[#dbe2dc]/30 text-[#fcf9f0] flex items-center justify-center transition-colors cursor-pointer active:scale-95 z-20"
+                title="Đóng (Esc)"
               >
-                <Heart className={`w-4 h-4 ${isLiked ? 'fill-white' : ''}`} />
-                <span>{isLiked ? 'Đã thích' : 'Lưu món'}</span>
+                <X className="w-4 h-4" />
               </button>
-            )}
 
-            {/* Dish Title & Country on Hero */}
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-500/90 text-white text-xs font-semibold backdrop-blur-sm">
-                  <span>{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
-                  <span>{dish.cuisine}</span>
-                </span>
-                {dish.region && (
-                  <span className="px-2 py-0.5 rounded-full bg-white/20 text-white/90 text-xs backdrop-blur-sm">
-                    {dish.region}
+              {/* Favorite / Like Button */}
+              {onToggleLike && (
+                <button
+                  onClick={() => onToggleLike(dish)}
+                  className={`absolute top-4 left-4 px-3 py-1.5 rounded-[1px] border backdrop-blur-sm flex items-center gap-2 text-xs font-semibold uppercase tracking-wider transition-all active:scale-95 cursor-pointer z-20 ${
+                    isLiked
+                      ? 'bg-[#f7ea48] text-[#1d0b0d] border-[#f7ea48]'
+                      : 'bg-[#1d0b0d]/80 border-[#dbe2dc]/30 text-[#fcf9f0] hover:border-[#f7ea48]'
+                  }`}
+                >
+                  <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#1d0b0d]' : ''}`} />
+                  <span>{isLiked ? 'Đã thích' : 'Lưu món'}</span>
+                </button>
+              )}
+
+              {/* Dish Title & Badges on Hero Bottom */}
+              <div className="absolute bottom-4 left-5 right-5 text-[#fcf9f0]">
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[1px] bg-[#1d0b0d]/90 border border-[#dbe2dc]/20 text-[#f7ea48] text-xs font-medium uppercase tracking-wider font-mono">
+                    <span>{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
+                    <span>{dish.cuisine}</span>
                   </span>
+                  {dish.region && (
+                    <span className="px-2 py-0.5 rounded-[1px] bg-[#1d0b0d]/80 border border-[#dbe2dc]/20 text-[#dbe2dc]/80 text-xs font-mono uppercase tracking-wider">
+                      {dish.region}
+                    </span>
+                  )}
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[1px] bg-[#1d0b0d]/90 border border-[#dbe2dc]/20 text-[#f7ea48] text-xs font-mono uppercase tracking-wider">
+                    <Flame className="w-3 h-3 fill-[#f7ea48] text-[#f7ea48]" />
+                    <span>
+                      {dish.spicy_level === 0
+                        ? 'Không cay'
+                        : dish.spicy_level === 1
+                        ? 'Cay nhẹ'
+                        : dish.spicy_level === 2
+                        ? 'Cay vừa'
+                        : 'Rất cay'}
+                    </span>
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-heading tracking-[0.06em] uppercase text-[#fcf9f0] drop-shadow-sm">
+                  {dish.name}
+                </h2>
+                {dish.english_name && (
+                  <p className="text-xs sm:text-sm text-[#dbe2dc]/70 font-light italic line-clamp-1 mt-0.5 tracking-wide">
+                    {dish.english_name}
+                  </p>
                 )}
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/40 text-amber-300 text-xs backdrop-blur-sm">
-                  <Flame className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  <span>
-                    {dish.spicy_level === 0
-                      ? 'Không cay'
-                      : dish.spicy_level === 1
-                      ? 'Cay nhẹ'
-                      : dish.spicy_level === 2
-                      ? 'Cay vừa'
-                      : 'Rất cay'}
-                  </span>
+              </div>
+            </div>
+
+            {/* Quick Stats Bar */}
+            <div className="grid grid-cols-4 divide-x divide-[#dbe2dc]/15 bg-[#1d0b0d] py-3.5 px-3 border-b border-[#dbe2dc]/15 shrink-0 text-center font-mono">
+              <div className="flex flex-col items-center">
+                <span className="flex items-center gap-1 text-[#dbe2dc]/60 text-[11px] uppercase tracking-wider">
+                  <Clock className="w-3 h-3 text-[#f7ea48]" /> Nấu
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-[#fcf9f0] mt-0.5">
+                  {dish.cook_time_minutes}P
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold font-heading tracking-tight drop-shadow-md">
-                {dish.name}
-              </h2>
-              {dish.english_name && (
-                <p className="text-xs sm:text-sm text-stone-200 font-light line-clamp-1 italic mt-0.5">
-                  {dish.english_name}
+              <div className="flex flex-col items-center">
+                <span className="flex items-center gap-1 text-[#dbe2dc]/60 text-[11px] uppercase tracking-wider">
+                  <Apple className="w-3 h-3 text-[#f7ea48]" /> Chuẩn bị
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-[#fcf9f0] mt-0.5">
+                  {dish.prep_time_minutes || 15}P
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="flex items-center gap-1 text-[#dbe2dc]/60 text-[11px] uppercase tracking-wider">
+                  <Gauge className="w-3 h-3 text-[#f7ea48]" /> Độ khó
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-[#fcf9f0] mt-0.5 uppercase">
+                  {dish.difficulty || 'Dễ'}
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="flex items-center gap-1 text-[#dbe2dc]/60 text-[11px] uppercase tracking-wider">
+                  <Flame className="w-3 h-3 text-[#f7ea48]" /> Calo
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-[#fcf9f0] mt-0.5">
+                  {dish.calories_approx || 450} KCAL
+                </span>
+              </div>
+            </div>
+
+            {/* Short Description */}
+            {dish.short_description && (
+              <div className="p-5 text-xs sm:text-sm text-[#dbe2dc]/85 leading-relaxed tracking-[0.01em]">
+                <p className="border-l-2 border-[#f7ea48] pl-3 italic text-[#fcf9f0]/90">
+                  {dish.short_description}
                 </p>
-              )}
-            </div>
+              </div>
+            )}
+
+            {/* Chef Tips Highlight (Desktop Left Column Extra) */}
+            {dish.tips && (
+              <div className="hidden lg:block p-5 mt-auto border-t border-[#dbe2dc]/15 bg-[#103b15]/15">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-[1px] bg-[#f7ea48]/20 border border-[#f7ea48] text-[#f7ea48] flex items-center justify-center shrink-0 mt-0.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-bold text-[#f7ea48] uppercase tracking-[0.05em] font-mono mb-1">
+                      Mẹo ẩm thực Limón
+                    </h4>
+                    <p className="text-xs text-[#dbe2dc]/85 leading-relaxed">
+                      {dish.tips}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Quick Stats Bar */}
-          <div className="grid grid-cols-4 divide-x divide-stone-200 dark:divide-stone-800 bg-orange-50/60 dark:bg-stone-900/60 py-3 px-2 border-b border-stone-200 dark:border-stone-800 shrink-0 text-center">
-            <div className="flex flex-col items-center">
-              <span className="flex items-center gap-1 text-stone-500 dark:text-stone-400 text-xs">
-                <Clock className="w-3.5 h-3.5 text-orange-500" /> Nấu
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-stone-800 dark:text-stone-200">
-                {dish.cook_time_minutes}p
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="flex items-center gap-1 text-stone-500 dark:text-stone-400 text-xs">
-                <Apple className="w-3.5 h-3.5 text-green-500" /> Chuẩn bị
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-stone-800 dark:text-stone-200">
-                {dish.prep_time_minutes || 15}p
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="flex items-center gap-1 text-stone-500 dark:text-stone-400 text-xs">
-                <Gauge className="w-3.5 h-3.5 text-blue-500" /> Độ khó
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-stone-800 dark:text-stone-200">
-                {dish.difficulty || 'Dễ'}
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="flex items-center gap-1 text-stone-500 dark:text-stone-400 text-xs">
-                <Flame className="w-3.5 h-3.5 text-rose-500" /> Calo
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-stone-800 dark:text-stone-200">
-                {dish.calories_approx || 450} kcal
-              </span>
-            </div>
-          </div>
+          {/* ================= RIGHT COLUMN: NGUYÊN LIỆU & CÁCH NẤU (VÀ CÁC MỤC MỞ RỘNG) ================= */}
+          <div className="w-full lg:w-[54%] xl:w-[58%] flex flex-col flex-1 min-h-0 bg-[#1d0b0d]">
+            {/* Header: Tab Switcher & Desktop Close Button */}
+            <div className="flex items-center justify-between px-6 pt-4 pb-2 border-b border-[#dbe2dc]/15 shrink-0">
+              <div className="flex items-center gap-8">
+                <button
+                  onClick={() => setActiveTab('ingredients')}
+                  className={`pb-2 text-xs sm:text-sm font-bold uppercase tracking-[0.04em] relative transition-colors cursor-pointer ${
+                    activeTab === 'ingredients'
+                      ? 'text-[#f7ea48]'
+                      : 'text-[#dbe2dc]/60 hover:text-[#fcf9f0]'
+                  }`}
+                >
+                  <span>Nguyên liệu ({totalIngredients})</span>
+                  {activeTab === 'ingredients' && (
+                    <motion.div
+                      layoutId="activeTabBadge"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#f7ea48]"
+                    />
+                  )}
+                </button>
 
-          {/* Short Description */}
-          {dish.short_description && (
-            <div className="px-5 pt-3 text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed shrink-0">
-              {dish.short_description}
-            </div>
-          )}
+                <button
+                  onClick={() => setActiveTab('steps')}
+                  className={`pb-2 text-xs sm:text-sm font-bold uppercase tracking-[0.04em] relative transition-colors cursor-pointer ${
+                    activeTab === 'steps'
+                      ? 'text-[#f7ea48]'
+                      : 'text-[#dbe2dc]/60 hover:text-[#fcf9f0]'
+                  }`}
+                >
+                  <span>Cách nấu ({stepsList.length} bước)</span>
+                  {activeTab === 'steps' && (
+                    <motion.div
+                      layoutId="activeTabBadge"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#f7ea48]"
+                    />
+                  )}
+                </button>
+              </div>
 
-          {/* Interactive Tab Switcher */}
-          <div className="flex items-center px-5 pt-3 pb-1 border-b border-stone-200 dark:border-stone-800 shrink-0 gap-6">
-            <button
-              onClick={() => setActiveTab('ingredients')}
-              className={`pb-2 text-sm font-bold relative transition-colors cursor-pointer ${
-                activeTab === 'ingredients'
-                  ? 'text-orange-500'
-                  : 'text-stone-500 dark:text-stone-400 hover:text-stone-700'
-              }`}
-            >
-              <span>Nguyên liệu ({totalIngredients})</span>
+              {/* Desktop Close Button (Clean & Top-Right) */}
+              <button
+                onClick={onClose}
+                className="hidden lg:flex w-8 h-8 rounded-[1px] bg-[#1d0b0d] hover:bg-[#1d0b0d]/80 border border-[#dbe2dc]/30 text-[#fcf9f0] hover:border-[#f7ea48] hover:text-[#f7ea48] items-center justify-center transition-colors cursor-pointer active:scale-95"
+                title="Đóng (Esc)"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Scrollable Content Body for Right Column */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-5">
+              {/* TAB 1: INGREDIENTS WITH INTERACTIVE CHECKBOXES */}
               {activeTab === 'ingredients' && (
                 <motion.div
-                  layoutId="activeTabBadge"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500 rounded-full"
-                />
-              )}
-            </button>
-
-            <button
-              onClick={() => setActiveTab('steps')}
-              className={`pb-2 text-sm font-bold relative transition-colors cursor-pointer ${
-                activeTab === 'steps'
-                  ? 'text-orange-500'
-                  : 'text-stone-500 dark:text-stone-400 hover:text-stone-700'
-              }`}
-            >
-              <span>Cách nấu ({stepsList.length} bước)</span>
-              {activeTab === 'steps' && (
-                <motion.div
-                  layoutId="activeTabBadge"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500 rounded-full"
-                />
-              )}
-            </button>
-          </div>
-
-          {/* Scrollable Content Body */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-4">
-            {/* TAB 1: INGREDIENTS WITH INTERACTIVE CHECKBOXES */}
-            {activeTab === 'ingredients' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-3"
-              >
-                {/* Progress bar & Toggle All */}
-                <div className="flex items-center justify-between gap-3 bg-stone-50 dark:bg-stone-900/60 p-3 rounded-xl border border-stone-200/70 dark:border-stone-800">
-                  <div className="flex-1">
-                    <div className="flex justify-between text-xs font-medium text-stone-600 dark:text-stone-400 mb-1.5">
-                      <span>Đã chuẩn bị nguyên liệu:</span>
-                      <span className="font-bold text-orange-500">
-                        {checkedCount}/{totalIngredients} ({progressPercent}%)
-                      </span>
-                    </div>
-                    <div className="w-full bg-stone-200 dark:bg-stone-700 h-2 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-orange-500 rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${progressPercent}%` }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </div>
-                  </div>
-                  <button
-                    onClick={toggleAllIngredients}
-                    className="text-xs px-2.5 py-1.5 bg-white dark:bg-stone-800 hover:bg-orange-50 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 rounded-lg border border-stone-300 dark:border-stone-700 font-medium transition-colors whitespace-nowrap active:scale-95 cursor-pointer"
-                  >
-                    {checkedCount === totalIngredients ? 'Bỏ chọn hết' : 'Chọn tất cả'}
-                  </button>
-                </div>
-
-                {/* Checkbox List */}
-                <div className="divide-y divide-stone-100 dark:divide-stone-800/80">
-                  {ingredientsList.map((item, idx) => {
-                    const isChecked = !!checkedIngredients[idx]
-                    return (
-                      <div
-                        key={idx}
-                        onClick={() => toggleIngredient(idx)}
-                        className={`flex items-center justify-between py-2.5 px-3 rounded-xl cursor-pointer select-none transition-all ${
-                          isChecked
-                            ? 'bg-orange-50/50 dark:bg-orange-950/20 text-stone-400 line-through'
-                            : 'hover:bg-stone-50 dark:hover:bg-stone-900/60 text-stone-800 dark:text-stone-200'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-5 h-5 rounded-md flex items-center justify-center border transition-all ${
-                              isChecked
-                                ? 'bg-orange-500 border-orange-500 text-white'
-                                : 'border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800'
-                            }`}
-                          >
-                            {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                          </div>
-                          <span className={`text-sm ${isChecked ? 'line-through opacity-70' : 'font-medium'}`}>
-                            {item.name}
-                          </span>
-                        </div>
-                        <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">
-                          {item.amount} {item.unit}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.15 }}
+                  className="space-y-4"
+                >
+                  {/* Progress bar & Toggle All */}
+                  <div className="flex items-center justify-between gap-4 bg-[#1d0b0d]/70 p-3.5 rounded-[1px] border border-[#dbe2dc]/20">
+                    <div className="flex-1">
+                      <div className="flex justify-between text-xs font-mono text-[#dbe2dc]/80 mb-1.5 uppercase tracking-wider">
+                        <span>Đã chuẩn bị:</span>
+                        <span className="font-bold text-[#f7ea48]">
+                          {checkedCount}/{totalIngredients} ({progressPercent}%)
                         </span>
                       </div>
-                    )
-                  })}
-                </div>
-              </motion.div>
-            )}
-
-            {/* TAB 2: COOKING STEPS */}
-            {activeTab === 'steps' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-4"
-              >
-                {stepsList.map((step, idx) => (
-                  <div
-                    key={idx}
-                    className="flex gap-3.5 p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900/50 border border-stone-200/80 dark:border-stone-800 hover:border-orange-200 transition-colors"
-                  >
-                    <div className="w-8 h-8 rounded-xl bg-orange-500 text-white font-bold flex items-center justify-center shrink-0 text-sm shadow-md shadow-orange-500/20">
-                      {step.step_number || idx + 1}
+                      <div className="w-full bg-[#dbe2dc]/15 h-1.5 rounded-[1px] overflow-hidden">
+                        <motion.div
+                          className="h-full bg-[#f7ea48]"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${progressPercent}%` }}
+                          transition={{ duration: 0.25 }}
+                        />
+                      </div>
                     </div>
-                    <div className="flex-1 space-y-1">
-                      <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                        {step.title}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
-                        {step.description}
-                      </p>
-                    </div>
+                    <button
+                      onClick={toggleAllIngredients}
+                      className="text-xs px-3 py-1.5 bg-[#1d0b0d] hover:border-[#f7ea48] text-[#fcf9f0] rounded-[1px] border border-[#dbe2dc]/30 font-mono tracking-wider uppercase transition-colors whitespace-nowrap active:scale-95 cursor-pointer"
+                    >
+                      {checkedCount === totalIngredients ? 'Bỏ chọn hết' : 'Chọn tất cả'}
+                    </button>
                   </div>
-                ))}
-              </motion.div>
-            )}
 
-            {/* CHEF TIPS CALLOUT */}
-            {dish.tips && (
-              <div className="mt-4 p-3.5 rounded-2xl bg-amber-50/90 dark:bg-amber-950/30 border border-amber-200/90 dark:border-amber-800/60 flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-xs font-bold text-amber-900 dark:text-amber-200 uppercase tracking-wider mb-0.5">
-                    Bí quyết của đầu bếp
-                  </h4>
-                  <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-                    {dish.tips}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
+                  {/* Checkbox List */}
+                  <div className="divide-y divide-[#dbe2dc]/10">
+                    {ingredientsList.map((item, idx) => {
+                      const isChecked = !!checkedIngredients[idx]
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => toggleIngredient(idx)}
+                          className={`flex items-center justify-between py-3 px-3 rounded-[1px] cursor-pointer select-none transition-all ${
+                            isChecked
+                              ? 'bg-[#103b15]/20 text-[#dbe2dc]/40 line-through'
+                              : 'hover:bg-[#dbe2dc]/5 text-[#fcf9f0]'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3.5">
+                            <div
+                              className={`w-4 h-4 rounded-[1px] flex items-center justify-center border transition-all ${
+                                isChecked
+                                  ? 'bg-[#f7ea48] border-[#f7ea48] text-[#1d0b0d]'
+                                  : 'border-[#dbe2dc]/40 bg-transparent'
+                              }`}
+                            >
+                              {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                            </div>
+                            <span className={`text-sm tracking-[0.01em] ${isChecked ? 'line-through opacity-60' : 'font-medium'}`}>
+                              {item.name}
+                            </span>
+                          </div>
+                          <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/20 text-[#dbe2dc]/80">
+                            {item.amount} {item.unit}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              )}
 
-          {/* Footer Action Button */}
-          <div className="p-4 bg-stone-50 dark:bg-stone-900/80 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between gap-3 shrink-0">
-            <button
-              onClick={onClose}
-              className="flex-1 py-2.5 px-4 rounded-xl bg-stone-200 hover:bg-stone-300 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 text-sm font-semibold transition-colors cursor-pointer"
-            >
-              Đóng
-            </button>
-            <button
-              onClick={() => {
-                alert(`Bắt đầu nấu món "${dish.name}"! Chúc bạn có một bữa ăn thật ngon miệng! 🍜✨`)
-              }}
-              className="flex-2 py-2.5 px-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 transition-transform active:scale-95 cursor-pointer"
-            >
-              <Utensils className="w-4 h-4" />
-              <span>Nấu món này ngay</span>
-            </button>
+              {/* TAB 2: COOKING STEPS */}
+              {activeTab === 'steps' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.15 }}
+                  className="space-y-4"
+                >
+                  {stepsList.map((step, idx) => (
+                    <div
+                      key={idx}
+                      className="flex gap-4 p-4 rounded-[1px] bg-[#1d0b0d]/60 border border-[#dbe2dc]/20 hover:border-[#f7ea48]/50 transition-colors"
+                    >
+                      <div className="w-7 h-7 rounded-[1px] bg-[#f7ea48] text-[#1d0b0d] font-bold font-mono flex items-center justify-center shrink-0 text-xs">
+                        {step.step_number || idx + 1}
+                      </div>
+                      <div className="flex-1 space-y-1">
+                        <h4 className="text-sm font-bold tracking-[0.03em] uppercase text-[#fcf9f0]">
+                          {step.title}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-[#dbe2dc]/80 leading-relaxed tracking-[0.01em]">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+
+              {/* CHEF TIPS CALLOUT (Mobile View or Tab Footer) */}
+              {dish.tips && (
+                <div className="lg:hidden p-4 rounded-[1px] bg-[#103b15]/20 border border-[#f7ea48]/40 flex items-start gap-3.5">
+                  <div className="w-7 h-7 rounded-[1px] bg-[#f7ea48]/20 border border-[#f7ea48] text-[#f7ea48] flex items-center justify-center shrink-0">
+                    <Sparkles className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xs font-bold text-[#f7ea48] uppercase tracking-[0.04em] mb-1 font-mono">
+                      Bí quyết đầu bếp
+                    </h4>
+                    <p className="text-xs text-[#fcf9f0]/90 leading-relaxed tracking-[0.01em]">
+                      {dish.tips}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Footer Action Button */}
+            <div className="p-4 bg-[#1d0b0d] border-t border-[#dbe2dc]/15 flex items-center justify-end shrink-0">
+              <button
+                onClick={onClose}
+                className="w-full sm:w-auto px-6 py-2.5 rounded-[1px] border border-[#dbe2dc]/30 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] text-xs font-bold tracking-[0.04em] uppercase transition-colors cursor-pointer"
+              >
+                Đóng công thức
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -30,7 +30,8 @@ export default function DishDetailModal({
   isOpen,
   onClose,
   isLiked = true,
-  onToggleLike
+  onToggleLike,
+  isLoadingDetail = false
 }) {
   const [activeTab, setActiveTab] = useState('ingredients') // 'ingredients' | 'steps'
   const [checkedIngredients, setCheckedIngredients] = useState({})
@@ -293,16 +294,25 @@ export default function DishDetailModal({
 
             {/* Scrollable Content Body for Right Column */}
             <div className="flex-1 overflow-y-auto p-6 space-y-5">
-              {/* TAB 1: INGREDIENTS WITH INTERACTIVE CHECKBOXES */}
-              {activeTab === 'ingredients' && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.15 }}
-                  className="space-y-4"
-                >
-                  {/* Progress bar & Toggle All */}
-                  <div className="flex items-center justify-between gap-4 bg-[#1d0b0d]/70 p-3.5 rounded-[1px] border border-[#dbe2dc]/20">
+              {isLoadingDetail ? (
+                <div className="py-20 flex flex-col items-center justify-center space-y-4">
+                  <div className="w-8 h-8 border-2 border-[#f7ea48] border-t-transparent rounded-full animate-spin" />
+                  <p className="text-xs font-mono uppercase tracking-widest text-[#dbe2dc]/70">
+                    Đang tải công thức từ CSDL...
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {/* TAB 1: INGREDIENTS WITH INTERACTIVE CHECKBOXES */}
+                  {activeTab === 'ingredients' && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.15 }}
+                      className="space-y-4"
+                    >
+                      {/* Progress bar & Toggle All */}
+                      <div className="flex items-center justify-between gap-4 bg-[#1d0b0d]/70 p-3.5 rounded-[1px] border border-[#dbe2dc]/20">
                     <div className="flex-1">
                       <div className="flex justify-between text-xs font-mono text-[#dbe2dc]/80 mb-1.5 uppercase tracking-wider">
                         <span>Đã chuẩn bị:</span>
@@ -410,7 +420,9 @@ export default function DishDetailModal({
                   </div>
                 </div>
               )}
-            </div>
+            </>
+          )}
+        </div>
 
             {/* Footer Action Button */}
             <div className="p-4 bg-[#1d0b0d] border-t border-[#dbe2dc]/15 flex items-center justify-end shrink-0">

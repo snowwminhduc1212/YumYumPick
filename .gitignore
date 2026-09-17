@@ -69,3 +69,6 @@ logs/
 
 # Vercel
 .vercel/
+
+# Local Notes
+chat.txt

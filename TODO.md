@@ -84,7 +84,7 @@
 - [x] **Đăng Huy (Backend 2):** Khởi tạo ORM Models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) kết nối `backend/yumyumpick.db`.
 - [ ] **Quang Huy (Frontend 1):** Khởi tạo project React (Vite + Tailwind CSS + Framer Motion); setup thư viện và khung thẻ quẹt.
 - [X] **Tùng Dương (Frontend 2):** Khởi tạo cấu trúc các component chi tiết món ăn: `LikedDishesView.jsx` và `DishDetailModal.jsx`.
-- [ ] **Luân (Frontend 3 & Pitching Lead):** Xây dựng Layout tổng thể ứng dụng, Navbar/Header và state quản lý phiên `localStorage`; lên dàn ý Slide PowerPoint (12 - 15 slides).
+- [X] **Luân (Frontend 3 & Pitching Lead):** Xây dựng Layout tổng thể ứng dụng, Navbar/Header và state quản lý phiên `localStorage`; lên dàn ý Slide PowerPoint (12 - 15 slides).
 
 ### Ngày 2: Code Song Song Độc Lập
 - [ ] **Minh Đức:** Điều phối Daily Sync 09:00; xây dựng bộ kịch bản kiểm thử (Test Matrix 20 Test Cases) cho PC và Mobile.

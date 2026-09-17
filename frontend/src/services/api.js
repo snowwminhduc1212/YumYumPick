@@ -66,7 +66,11 @@ export const api = {
         throw new Error(`Server returned ${response.status}: ${response.statusText}`)
       }
       const data = await response.json()
-      return data.map(normalizeSavedDish)
+      if (data && data.length > 0) {
+        return data.map(normalizeSavedDish)
+      }
+      // If database has 0 saved dishes yet for this user, provide initial demo dishes for rich preview
+      return MOCK_DISHES.slice(0, 5)
     } catch (err) {
       console.warn('[API] Failed to fetch saved dishes from backend, using mock fallback:', err.message)
       return MOCK_DISHES.slice(0, 5)

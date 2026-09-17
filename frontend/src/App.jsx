@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { MOCK_DISHES } from './data/mockDishes'
 import LikedDishesView from './components/LikedDishesView'
 import DishDetailModal from './components/DishDetailModal'
-import { UtensilsCrossed, Heart, Layers } from 'lucide-react'
+import AuthModal from './components/AuthModal'
+import FilterModal from './components/FilterModal'
+import { useAuth } from './hooks/useAuth'
+import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from 'lucide-react'
 
 function App() {
+  const { user, logout } = useAuth()
+  const [authOpen, setAuthOpen] = useState(false)
+  const [filterOpen, setFilterOpen] = useState(false)
+
   // Current view: 'swipe' | 'liked'
   const [currentView, setCurrentView] = useState('liked')
-  // Liked dishes state, pre-populated with first 5 dishes for immediate preview
   const [likedDishes, setLikedDishes] = useState(MOCK_DISHES.slice(0, 5))
-  // Active dish for DishDetailModal
   const [selectedDish, setSelectedDish] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -96,6 +101,35 @@ function App() {
             )}
           </button>
         </nav>
+
+        {/* Auth + Filter buttons */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setFilterOpen(true)}
+            className="p-2 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
+            aria-label="Bộ lọc"
+          >
+            <SlidersHorizontal className="w-4 h-4 text-stone-600 dark:text-stone-300" />
+          </button>
+
+          {user ? (
+            <button
+              onClick={logout}
+              className="flex items-center gap-1 px-3 py-2 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors text-xs font-bold text-stone-700 dark:text-stone-200"
+            >
+              <LogOut className="w-4 h-4" />
+              {user.username}
+            </button>
+          ) : (
+            <button
+              onClick={() => setAuthOpen(true)}
+              className="flex items-center gap-1 px-3 py-2 rounded-full bg-orange-500 hover:bg-orange-600 transition-colors text-xs font-bold text-white shadow-md shadow-orange-500/30"
+            >
+              <LogIn className="w-4 h-4" />
+              Đăng nhập
+            </button>
+          )}
+        </div>
       </header>
 
       {/* MAIN VIEW AREA */}
@@ -108,7 +142,6 @@ function App() {
             onBackToSwipe={() => setCurrentView('swipe')}
           />
         ) : (
-          /* Placeholder for Quang Huy's Swipe Deck */
           <div className="flex-1 flex flex-col items-center justify-center p-6 text-center max-w-md mx-auto">
             <div className="w-16 h-16 rounded-3xl bg-orange-100 dark:bg-orange-950/50 text-orange-500 flex items-center justify-center mb-4 shadow-md">
               <Layers className="w-8 h-8 stroke-[1.5]" />
@@ -140,6 +173,10 @@ function App() {
         isLiked={isCurrentDishLiked}
         onToggleLike={handleToggleLike}
       />
+
+      {/* AUTH + FILTER MODALS */}
+      <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
+      <FilterModal isOpen={filterOpen} onClose={() => setFilterOpen(false)} />
     </div>
   )
 }

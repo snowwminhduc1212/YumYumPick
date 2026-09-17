@@ -14,7 +14,7 @@ function App() {
   const currentUserId = user?.id || 1
   const [authOpen, setAuthOpen] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
-  const { metadata, isLoading: metaLoading } = useFilterMetadata();
+  const { metadata } = useFilterMetadata();
 
 
   // Ensure any previous data-theme attribute is cleared

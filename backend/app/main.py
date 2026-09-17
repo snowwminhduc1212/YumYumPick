@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
+from app.api.auth import router as auth_router
 
 #Khởi tạo ứng dụng
 app = FastAPI(
@@ -25,10 +26,22 @@ app.add_middleware(
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMAGES_DIR = os.path.join(BASE_DIR,"images")
 
+import sys
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 # Mount thư mục images vào url '/images'
 if os.path.exists(IMAGES_DIR):
     app.mount("/images",StaticFiles(directory=IMAGES_DIR), name="images")
 
+from app.api.dishes import router as dishes_router
+from app.api.saved_dishes import router as saved_dishes_router
+
+# Đăng ký Routers
+app.include_router(dishes_router, prefix="/api/v1/dishes", tags=["Dishes"])
+app.include_router(saved_dishes_router, prefix="/api/v1/saved-dishes", tags=["Saved Dishes"])
+
+app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
 @app.get("/")
 def health_check():
     return{"status":"ok","message":"Backend is running"}

@@ -94,7 +94,7 @@ export default function DishDetailModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 bg-black/95"
         />
 
         {/* Modal Window: Limón Brasserie Aesthetic with 1px border & radius */}
@@ -103,7 +103,7 @@ export default function DishDetailModal({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-          className="relative w-full max-w-2xl lg:max-w-5xl xl:max-w-6xl bg-[#1d0b0d] text-[#fcf9f0] rounded-[1px] border border-[#dbe2dc]/30 overflow-hidden z-10 max-h-[94vh] lg:h-[88vh] flex flex-col lg:flex-row font-sans shadow-2xl"
+          className="relative w-full max-w-2xl lg:max-w-5xl xl:max-w-6xl bg-[#1d0b0d] text-[#fcf9f0] rounded-[1px] border border-[#dbe2dc]/30 overflow-hidden z-10 max-h-[94vh] lg:h-[88vh] flex flex-col lg:flex-row font-sans"
         >
           {/* ================= LEFT COLUMN: DISH HERO & OVERVIEW ================= */}
           <div className="w-full lg:w-[46%] xl:w-[42%] flex flex-col shrink-0 lg:border-r border-[#dbe2dc]/15 lg:overflow-y-auto">
@@ -133,6 +133,7 @@ export default function DishDetailModal({
               )}
               {/* Dark gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/40 to-black/20 pointer-events-none" />
+            </div>
 
               {/* Mobile-only Close Button */}
               <button
@@ -147,10 +148,10 @@ export default function DishDetailModal({
               {onToggleLike && (
                 <button
                   onClick={() => onToggleLike(dish)}
-                  className={`absolute top-4 left-4 px-3 py-1.5 rounded-[1px] border backdrop-blur-sm flex items-center gap-2 text-xs font-semibold uppercase tracking-wider transition-all active:scale-95 cursor-pointer z-20 ${
+                  className={`absolute top-4 left-4 px-3 py-1.5 rounded-[1px] border flex items-center gap-2 text-xs font-semibold uppercase tracking-wider transition-all active:scale-95 cursor-pointer z-20 ${
                     isLiked
                       ? 'bg-[#f7ea48] text-[#1d0b0d] border-[#f7ea48]'
-                      : 'bg-[#1d0b0d]/80 border-[#dbe2dc]/30 text-[#fcf9f0] hover:border-[#f7ea48]'
+                      : 'bg-[#1d0b0d]/90 border-[#dbe2dc]/30 text-[#fcf9f0] hover:border-[#f7ea48]'
                   }`}
                 >
                   <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#1d0b0d]' : ''}`} />
@@ -183,7 +184,7 @@ export default function DishDetailModal({
                     </span>
                   </span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold font-heading tracking-[0.06em] uppercase text-[#fcf9f0] drop-shadow-sm">
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-heading tracking-[0.06em] uppercase text-[#fcf9f0] bg-[#1d0b0d] inline-block px-1">
                   {dish.name}
                 </h2>
                 {dish.english_name && (

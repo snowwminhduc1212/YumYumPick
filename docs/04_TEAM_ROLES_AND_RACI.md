@@ -62,13 +62,13 @@ flowchart TD
 ---
 
 ### 3. Đăng Huy — Backend Engineer 2 (Dishes API & Saved Dishes)
-* **Sứ mệnh:** Xây dựng bộ API xử lý nghiệp vụ quẹt món, lọc và lưu trữ món ăn vào CSDL SQLite.
+* **Sứ mệnh:** Xây dựng bộ API xử lý nghiệp vụ quẹt món, lọc và lưu trữ món ăn vào CSDL SQLite. *(Đã hoàn thành 100% Milestone 1 & Milestone 1.x)*
 * **Nhiệm vụ cụ thể:**
-  1. Khởi tạo cấu trúc ORM / Query kết nối với `backend/yumyumpick.db`.
-  2. Xây dựng API gợi ý món ăn ngẫu nhiên: `GET /api/v1/dishes/random` (hỗ trợ lọc theo `cuisine`, `spicy_level`, `max_cook_time`, loại trừ món đã xem/đã lưu, trả về đầy đủ `short_description`).
-  3. Xây dựng API chi tiết món: `GET /api/v1/dishes/{dish_id}` (kèm danh sách nguyên liệu và các bước nấu).
-  4. Xây dựng Saved Dishes API:
-     - `POST /api/v1/saved-dishes/{user_id}`: Lưu món ăn khi quẹt phải (LIKE).
+  1. [x] Khởi tạo cấu trúc ORM / Query kết nối với `backend/yumyumpick.db`.
+  2. [x] Xây dựng API gợi ý món ăn ngẫu nhiên: `GET /api/v1/dishes/random` (hỗ trợ lọc theo `cuisine`, `spicy_level`, `max_cook_time`, loại trừ món đã xem/đã lưu, trả về đầy đủ `short_description`).
+  3. [x] Xây dựng API chi tiết món: `GET /api/v1/dishes/{dish_id}` (kèm danh sách nguyên liệu và các bước nấu).
+  4. [x] Xây dựng Saved Dishes API:
+     - `POST /api/v1/saved-dishes`: Lưu món ăn khi quẹt phải (LIKE).
      - `GET /api/v1/saved-dishes/{user_id}`: Lấy danh sách món đã thích của người dùng.
      - `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`: Xóa/bỏ thích món ăn.
 

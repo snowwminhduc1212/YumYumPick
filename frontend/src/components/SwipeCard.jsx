@@ -54,10 +54,10 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
       whileTap={isFront ? { cursor: 'grabbing' } : undefined}
       className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing select-none"
     >
-      <div className="relative w-full h-full rounded-none overflow-hidden shadow-2xl bg-black-olive border border-sage-mist/20 flex flex-col justify-between">
+      <div className="relative w-full h-full rounded-none overflow-hidden bg-black-olive border border-sage-mist flex flex-col justify-between">
 
-        {/* 1. ẢNH MÓN ĂN & GRADIENT PHỦ */}
-        <div className="relative w-full h-3/5 overflow-hidden bg-black-olive">
+        {/* 1. ẢNH MÓN ĂN */}
+        <div className="relative w-full h-3/5 overflow-hidden bg-black-olive border-b border-sage-mist/20">
           <img
             src={dish.image_url || dish.image}
             alt={dish.name}
@@ -67,10 +67,9 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
               e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80'
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black-olive via-black-olive/40 to-transparent pointer-events-none" />
 
           {/* Huy hiệu Quốc gia góc trên */}
-          <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-black-olive/80 backdrop-blur-md text-warm-cream border border-sage-mist/30 text-[10px] font-semibold uppercase tracking-stenciled">
+          <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-black-olive text-warm-cream border border-sage-mist text-[10px] font-semibold uppercase tracking-stenciled">
             <Globe2 className="w-3 h-3 text-lemon-zest" />
             <span>{dish.cuisine}</span>
           </div>
@@ -79,7 +78,7 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
           {isFront && (
             <motion.div
               style={{ opacity: likeOpacity }}
-              className="absolute top-6 left-6 -rotate-12 border-[3px] border-lemon-zest text-lemon-zest font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive/70 backdrop-blur-sm pointer-events-none"
+              className="absolute top-6 left-6 -rotate-12 border-[3px] border-lemon-zest text-lemon-zest font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive pointer-events-none"
             >
               YUMMY! ❤️
             </motion.div>
@@ -89,18 +88,18 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
           {isFront && (
             <motion.div
               style={{ opacity: nopeOpacity }}
-              className="absolute top-6 right-6 rotate-12 border-[3px] border-pure-white text-pure-white font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive/70 backdrop-blur-sm pointer-events-none"
+              className="absolute top-6 right-6 rotate-12 border-[3px] border-pure-white text-pure-white font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive pointer-events-none"
             >
               NOPE! ✘
             </motion.div>
           )}
 
-          {/* Tên món nằm trên phần chân ảnh */}
-          <div className="absolute bottom-4 left-5 right-5 text-warm-cream">
-            <h2 className="text-[28px] font-bold tracking-neon leading-tight drop-shadow-md">
+          {/* Tên món nằm trên phần chân ảnh (nền solid flat) */}
+          <div className="absolute bottom-0 left-0 right-0 bg-black-olive p-4 border-t border-sage-mist">
+            <h2 className="text-[28px] font-bold tracking-neon leading-none text-warm-cream">
               {dish.name}
             </h2>
-            <p className="text-[11px] text-sage-mist font-medium tracking-stenciled uppercase truncate mt-1">
+            <p className="text-[11px] text-sage-mist font-medium tracking-stenciled uppercase truncate mt-2">
               {dish.english_name}
             </p>
           </div>

@@ -93,9 +93,9 @@ export default function CardStack({ initialDishes = [] }) {
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="flex flex-col items-center justify-center text-center p-8 bg-black-olive rounded-[1px] shadow-xl border border-sage-mist/20 w-full h-[400px]"
+              className="flex flex-col items-center justify-center text-center p-8 bg-black-olive rounded-[1px] border border-sage-mist/50 w-full h-[400px]"
             >
-              <div className="w-16 h-16 rounded-[1px] bg-forest-ink flex items-center justify-center text-lemon-zest mb-5 border border-sage-mist/20 shadow-inner">
+              <div className="w-16 h-16 rounded-[1px] bg-forest-ink flex items-center justify-center text-lemon-zest mb-5 border border-sage-mist/50">
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-warm-cream mb-2 tracking-stenciled uppercase">
@@ -137,7 +137,7 @@ export default function CardStack({ initialDishes = [] }) {
           <div className="flex flex-col items-center gap-1.5">
             <button
               onClick={() => handleButtonClick('right')}
-              className="w-16 h-16 rounded-[1px] bg-lemon-zest border-[1.5px] border-lemon-zest text-black-olive flex items-center justify-center shadow-lg hover:bg-pure-white hover:border-pure-white transition-all active:scale-90"
+              className="w-16 h-16 rounded-[1px] bg-lemon-zest border-[1.5px] border-lemon-zest text-black-olive flex items-center justify-center hover:bg-pure-white hover:border-pure-white transition-all active:scale-90"
               aria-label="Thích món này"
             >
               <Heart className="w-7 h-7 fill-black-olive stroke-black-olive" />

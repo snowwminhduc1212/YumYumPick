@@ -26,11 +26,12 @@
   --card-border: var(--color-sage-mist);
 }
 
-html,
-body,
-#root {
-  width: 100%;
+html {
   height: 100%;
+}
+
+body {
+  min-height: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--app-bg);
@@ -38,10 +39,18 @@ body,
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
-  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  user-select: none; /* Tránh chọn nhầm văn bản khi kéo thẻ */
 }
 
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Font chữ tiêu đề món ăn */
 h1,
 h2,
 h3,

@@ -117,51 +117,53 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#1d0b0d] text-[#fcf9f0] transition-colors font-sans">
       {/* GLOBAL NAVBAR */}
-      <header className="sticky top-0 z-40 bg-[#1d0b0d] border-b border-[#dbe2dc]/15 py-3 px-4 sm:px-8 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-[#1d0b0d] border-b border-[#dbe2dc]/15 py-2.5 sm:py-3 px-3 sm:px-8 flex items-center justify-between gap-2">
         {/* Brand Logo */}
         <div
           onClick={() => setCurrentView('swipe')}
-          className="flex items-center gap-2.5 cursor-pointer select-none"
+          className="flex items-center gap-2 cursor-pointer select-none shrink-0"
         >
-          <div className="w-9 h-9 rounded-[1px] bg-[#f7ea48] flex items-center justify-center text-[#1d0b0d] font-bold">
-            <UtensilsCrossed className="w-5 h-5" />
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[1px] bg-[#f7ea48] flex items-center justify-center text-[#1d0b0d] font-bold">
+            <UtensilsCrossed className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold tracking-[0.06em] uppercase font-heading leading-tight text-[#fcf9f0]">
+            <h1 className="text-lg sm:text-xl font-extrabold tracking-[0.06em] uppercase font-heading leading-tight text-[#fcf9f0]">
               YumYum<span className="text-[#f7ea48]">Pick</span>
             </h1>
-            <p className="text-[10px] text-[#dbe2dc]/60 font-mono tracking-widest uppercase">
+            <p className="hidden sm:block text-[10px] text-[#dbe2dc]/60 font-mono tracking-widest uppercase">
               Tinder for Food
             </p>
           </div>
         </div>
 
-        {/* View Switcher Tabs */}
-        <nav className="flex items-center gap-1.5 bg-[#1d0b0d] p-1 rounded-[1px] border border-[#dbe2dc]/25">
+        {/* View Switcher Tabs - Minimal on Mobile (Icons only), Full on Desktop */}
+        <nav className="flex items-center gap-1 bg-[#1d0b0d] p-1 rounded-[1px] border border-[#dbe2dc]/25 shrink-0">
           <button
             onClick={() => setCurrentView('swipe')}
-            className={`px-3.5 py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer ${
               currentView === 'swipe'
                 ? 'bg-[#f7ea48] text-[#1d0b0d]'
                 : 'text-[#dbe2dc]/70 hover:text-[#fcf9f0]'
             }`}
+            title="Quẹt Thẻ"
           >
             <Layers className="w-3.5 h-3.5" />
-            <span>Quẹt Thẻ</span>
+            <span className="hidden sm:inline">Quẹt Thẻ</span>
           </button>
 
           <button
             onClick={() => setCurrentView('liked')}
-            className={`px-3.5 py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer relative ${
+            className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer relative ${
               currentView === 'liked'
                 ? 'bg-[#f7ea48] text-[#1d0b0d]'
                 : 'text-[#dbe2dc]/70 hover:text-[#fcf9f0]'
             }`}
+            title="Món Đã Lưu"
           >
             <Heart className={`w-3.5 h-3.5 ${likedDishes.length > 0 ? (currentView === 'liked' ? 'fill-[#1d0b0d]' : 'fill-[#f7ea48] text-[#f7ea48]') : ''}`} />
-            <span>Đã Lưu</span>
+            <span className="hidden sm:inline">Đã Lưu</span>
             {likedDishes.length > 0 && (
-              <span className={`ml-0.5 px-1.5 py-0.2 rounded-[1px] text-[10px] font-mono font-bold ${
+              <span className={`px-1.5 py-0.2 rounded-[1px] text-[10px] font-mono font-bold ${
                 currentView === 'liked' ? 'bg-[#1d0b0d] text-[#f7ea48]' : 'bg-[#f7ea48] text-[#1d0b0d]'
               }`}>
                 {likedDishes.length}
@@ -170,8 +172,8 @@ function App() {
           </button>
         </nav>
 
-        {/* Auth + Filter controls (Tích hợp công việc của Luân) */}
-        <div className="flex items-center gap-2.5">
+        {/* Auth + Filter controls (Luân & Ánh Dương) */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <button
             onClick={() => setFilterOpen(true)}
             className="p-2 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] transition-colors cursor-pointer"
@@ -183,20 +185,20 @@ function App() {
           {user ? (
             <button
               onClick={logout}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-rose-500 hover:text-rose-400 text-xs font-mono text-[#fcf9f0] transition-colors cursor-pointer"
-              title="Đăng xuất tài khoản"
+              className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-rose-500 hover:text-rose-400 text-xs font-mono text-[#fcf9f0] transition-colors cursor-pointer"
+              title={`Đăng xuất (${user.username})`}
             >
               <LogOut className="w-3.5 h-3.5" />
-              <span>{user.username}</span>
+              <span className="hidden sm:inline max-w-[80px] truncate">{user.username}</span>
             </button>
           ) : (
             <button
               onClick={() => setAuthOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] text-xs font-bold uppercase tracking-[0.04em] transition-transform active:scale-95 cursor-pointer"
+              className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] text-xs font-bold uppercase tracking-[0.04em] transition-transform active:scale-95 cursor-pointer"
               title="Đăng nhập / Đăng ký (Luân & Ánh Dương)"
             >
               <LogIn className="w-3.5 h-3.5" />
-              <span>Đăng nhập</span>
+              <span className="hidden sm:inline">Đăng nhập</span>
             </button>
           )}
         </div>

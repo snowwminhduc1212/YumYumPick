@@ -133,7 +133,6 @@ export default function DishDetailModal({
               )}
               {/* Dark gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/40 to-black/20 pointer-events-none" />
-            </div>
 
               {/* Mobile-only Close Button */}
               <button

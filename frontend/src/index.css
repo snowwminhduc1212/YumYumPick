@@ -1,45 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'DM Sans', system-ui, -apple-system, sans-serif;
 
-  /* Bảng màu Cam / Đỏ ẩm thực */
-  --color-primary: #FF5722;
-  --color-primary-hover: #E64A19;
-  --color-primary-light: #FF8A65;
-  --color-primary-soft: #FFF3E0;
-
-  /* Màu Vàng mật ong cho huy hiệu (Badges) & Mẹo đầu bếp */
-  --color-amber-food: #F59E0B;
-  --color-amber-soft: #FEF3C7;
-
-  /* Stamp quẹt thẻ: YUMMY (Xanh ngọc) & NOPE (Đỏ cam) */
-  --color-stamp-like: #10B981;
-  --color-stamp-skip: #EF4444;
-
-  /* Màu nền & Thẻ bề mặt */
-  --color-bg-light: #FFFDF9;
-  --color-bg-dark: #121214;
-  --color-card-light: #FFFFFF;
-  --color-card-dark: #1E1E22;
-  --color-text-main: #1C1917;
-  --color-text-muted: #78716C;
-
-  /* Limón Design System Tokens (from DESIGN.md) */
+  /* Limón Palette */
   --color-black-olive: #1d0b0d;
   --color-forest-ink: #103b15;
   --color-lemon-zest: #f7ea48;
   --color-warm-cream: #fcf9f0;
   --color-sage-mist: #dbe2dc;
   --color-pure-white: #ffffff;
+
+  /* Tracking rộng (Neon/Stenciled look) */
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.04em;
+  --tracking-widest: 0.06em;
 }
 
 :root {
-  --app-bg: #1d0b0d;
-  --app-text: #fcf9f0;
-  --card-bg: #1d0b0d;
-  --card-border: rgba(219, 226, 220, 0.2);
+  /* Khóa cứng vào Dark Mode (Black Olive) theo yêu cầu của Limón */
+  --app-bg: var(--color-black-olive);
+  --app-text: var(--color-warm-cream);
+  --card-bg: var(--color-black-olive);
+  --card-border: var(--color-sage-mist);
 }
 
 html {
@@ -57,9 +41,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow-y: auto;
-  /* Ngăn scroll trang khi đang vuốt thẻ */
-  user-select: none;
-  /* Tránh chọn nhầm văn bản khi kéo thẻ */
+  user-select: none; /* Tránh chọn nhầm văn bản khi kéo thẻ */
 }
 
 #root {
@@ -74,15 +56,23 @@ h2,
 h3,
 .font-heading {
   font-family: var(--font-heading);
+  letter-spacing: var(--tracking-widest); /* Áp dụng tracking rộng cho heading */
 }
 
-/* Quy chuẩn khung thẻ Desktop PC theo tài liệu spec: 420px x 600px */
+/* Tracking utility classes */
+.tracking-neon {
+  letter-spacing: var(--tracking-widest);
+}
+
+.tracking-stenciled {
+  letter-spacing: var(--tracking-wider);
+}
+
 .card-container-pc {
   width: 420px;
   height: 600px;
 }
 
-/* Ẩn scrollbar khi cần */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

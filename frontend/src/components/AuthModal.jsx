@@ -64,26 +64,26 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 font-sans text-warm-cream"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
         >
           <motion.div
-            className="bg-white dark:bg-stone-900 rounded-2xl p-6 w-80 shadow-xl"
+            className="bg-black-olive rounded-[1px] border border-sage-mist p-6 w-80"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Tab switch */}
-            <div className="flex gap-2 mb-4">
+            <div className="flex gap-2 mb-6">
               <button
                 type="button"
                 onClick={() => { setMode('login'); setError(''); }}
-                className={`flex-1 py-2 rounded-lg text-sm font-bold ${
-                  mode === 'login' ? 'bg-orange-500 text-white' : 'bg-stone-100 dark:bg-stone-800 text-stone-600'
+                className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
+                  mode === 'login' ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
                 }`}
               >
                 Đăng nhập
@@ -91,8 +91,8 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
               <button
                 type="button"
                 onClick={() => { setMode('signup'); setError(''); }}
-                className={`flex-1 py-2 rounded-lg text-sm font-bold ${
-                  mode === 'signup' ? 'bg-orange-500 text-white' : 'bg-stone-100 dark:bg-stone-800 text-stone-600'
+                className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
+                  mode === 'signup' ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
                 }`}
               >
                 Đăng ký
@@ -106,7 +106,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="px-3 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-transparent text-sm"
+                className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
               />
 
               {mode === 'signup' && (
@@ -116,7 +116,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
-                  className="px-3 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-transparent text-sm"
+                  className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
                 />
               )}
 
@@ -126,7 +126,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="px-3 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-transparent text-sm"
+                className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
               />
 
               {error && (
@@ -136,7 +136,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold disabled:opacity-50"
+                className="w-full mt-2 py-3 rounded-[1px] bg-lemon-zest hover:bg-pure-white text-black-olive text-sm font-extrabold uppercase tracking-[0.04em] disabled:opacity-50 transition-colors"
               >
                 {isSubmitting ? 'Đang xử lý...' : mode === 'login' ? 'Đăng nhập' : 'Đăng ký'}
               </button>

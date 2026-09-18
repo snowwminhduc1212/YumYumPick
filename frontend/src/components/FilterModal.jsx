@@ -26,35 +26,35 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 font-sans text-warm-cream"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
           <motion.div
-            className="bg-white dark:bg-stone-900 rounded-2xl p-6 w-80 shadow-xl max-h-[80vh] overflow-y-auto"
+            className="bg-black-olive rounded-[1px] border border-sage-mist p-6 w-80 max-h-[80vh] overflow-y-auto"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100 mb-4">
+            <h2 className="text-lg font-bold text-warm-cream uppercase tracking-wider mb-5">
               Bộ lọc
             </h2>
 
             {/* Quốc gia */}
-            <div className="mb-4">
-              <p className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-2 uppercase">
+            <div className="mb-5">
+              <p className="text-xs font-bold text-lemon-zest mb-3 uppercase tracking-widest">
                 Quốc gia
               </p>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setCuisine(null)}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium border ${
+                  className={`px-3 py-1.5 rounded-[1px] text-[11px] font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
                     cuisine === null
-                      ? 'bg-orange-500 text-white border-orange-500'
-                      : 'border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300'
+                      ? 'bg-lemon-zest text-black-olive border-lemon-zest'
+                      : 'bg-transparent text-sage-mist border-sage-mist/50 hover:border-pure-white hover:text-pure-white'
                   }`}
                 >
                   Tất cả
@@ -63,10 +63,10 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
                   <button
                     key={c.id}
                     onClick={() => setCuisine(c.id)}
-                    className={`px-3 py-1.5 rounded-full text-sm font-medium border ${
+                    className={`px-3 py-1.5 rounded-[1px] text-[11px] font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
                       cuisine === c.id
-                        ? 'bg-orange-500 text-white border-orange-500'
-                        : 'border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300'
+                        ? 'bg-lemon-zest text-black-olive border-lemon-zest'
+                        : 'bg-transparent text-sage-mist border-sage-mist/50 hover:border-pure-white hover:text-pure-white'
                     }`}
                   >
                     {c.flag} {c.name}
@@ -76,8 +76,8 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
             </div>
 
             {/* Độ cay */}
-            <div className="mb-4">
-              <p className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-2 uppercase">
+            <div className="mb-5">
+              <p className="text-xs font-bold text-lemon-zest mb-3 uppercase tracking-widest">
                 Độ cay
               </p>
               <div className="flex flex-wrap gap-2">
@@ -85,10 +85,10 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
                   <button
                     key={s.label}
                     onClick={() => setSpicyLevel(s.value)}
-                    className={`px-3 py-1.5 rounded-full text-sm font-medium border ${
+                    className={`px-3 py-1.5 rounded-[1px] text-[11px] font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
                       spicyLevel === s.value
-                        ? 'bg-orange-500 text-white border-orange-500'
-                        : 'border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300'
+                        ? 'bg-lemon-zest text-black-olive border-lemon-zest'
+                        : 'bg-transparent text-sage-mist border-sage-mist/50 hover:border-pure-white hover:text-pure-white'
                     }`}
                   >
                     {s.label}
@@ -98,8 +98,8 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
             </div>
 
             {/* Thời gian nấu */}
-            <div className="mb-6">
-              <p className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-2 uppercase">
+            <div className="mb-8">
+              <p className="text-xs font-bold text-lemon-zest mb-3 uppercase tracking-widest">
                 Thời gian nấu
               </p>
               <div className="flex flex-wrap gap-2">
@@ -107,10 +107,10 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
                   <button
                     key={t.label}
                     onClick={() => setMaxTime(t.value)}
-                    className={`px-3 py-1.5 rounded-full text-sm font-medium border ${
+                    className={`px-3 py-1.5 rounded-[1px] text-[11px] font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
                       maxTime === t.value
-                        ? 'bg-orange-500 text-white border-orange-500'
-                        : 'border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300'
+                        ? 'bg-lemon-zest text-black-olive border-lemon-zest'
+                        : 'bg-transparent text-sage-mist border-sage-mist/50 hover:border-pure-white hover:text-pure-white'
                     }`}
                   >
                     {t.label}
@@ -122,13 +122,13 @@ function FilterModal({ isOpen, onClose, metadata, onApplyFilter }) {
             <div className="flex gap-2">
               <button
                 onClick={onClose}
-                className="flex-1 py-2 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-200 text-sm font-bold"
+                className="flex-1 py-2.5 rounded-[1px] bg-transparent border-[1.5px] border-sage-mist/50 hover:border-pure-white text-sage-mist hover:text-pure-white text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer"
               >
                 Đóng
               </button>
               <button
                 onClick={handleApply}
-                className="flex-1 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold"
+                className="flex-1 py-2.5 rounded-[1px] border-[1.5px] border-lemon-zest bg-lemon-zest hover:bg-pure-white hover:border-pure-white text-black-olive text-xs font-extrabold uppercase tracking-widest transition-colors cursor-pointer"
               >
                 Áp dụng
               </button>

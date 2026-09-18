@@ -233,10 +233,9 @@ export default function LikedDishesView({
                     }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1d0b0d] via-black/25 to-transparent" />
 
                   {/* Cuisine Badge */}
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-[1px] bg-[#1d0b0d]/80 border border-[#dbe2dc]/30 backdrop-blur-sm text-[#fcf9f0] text-xs font-medium tracking-wider uppercase flex items-center gap-1.5">
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/30 text-[#fcf9f0] text-[10px] font-medium tracking-wider uppercase flex items-center gap-1.5">
                     <span>{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
                     <span>{dish.cuisine}</span>
                   </span>
@@ -248,7 +247,7 @@ export default function LikedDishesView({
                         e.stopPropagation()
                         onRemoveDish(dish.id)
                       }}
-                      className="absolute top-3 right-3 w-8 h-8 rounded-[1px] bg-[#1d0b0d]/70 hover:bg-rose-900 border border-[#dbe2dc]/20 text-[#fcf9f0] flex items-center justify-center transition-colors cursor-pointer active:scale-90"
+                      className="absolute top-3 right-3 w-8 h-8 rounded-[1px] bg-[#1d0b0d] hover:bg-rose-900 border border-[#dbe2dc]/20 text-[#fcf9f0] flex items-center justify-center transition-colors cursor-pointer active:scale-90"
                       title="Bỏ thích món này"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -257,11 +256,11 @@ export default function LikedDishesView({
 
                   {/* Badges on bottom image */}
                   <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[#fcf9f0] text-xs">
-                    <span className="flex items-center gap-1 font-mono text-[11px] bg-[#1d0b0d]/80 px-2 py-0.5 rounded-[1px] border border-[#dbe2dc]/15">
+                    <span className="flex items-center gap-1 font-mono text-[11px] bg-[#1d0b0d] px-2 py-0.5 rounded-[1px] border border-[#dbe2dc]/15">
                       <Clock className="w-3 h-3 text-[#f7ea48]" />
                       {dish.cook_time_minutes} PHÚT
                     </span>
-                    <span className="flex items-center gap-1 font-mono text-[11px] bg-[#1d0b0d]/80 px-2 py-0.5 rounded-[1px] border border-[#dbe2dc]/15 text-[#f7ea48]">
+                    <span className="flex items-center gap-1 font-mono text-[11px] bg-[#1d0b0d] px-2 py-0.5 rounded-[1px] border border-[#dbe2dc]/15 text-[#f7ea48]">
                       <Flame className="w-3 h-3 fill-[#f7ea48] text-[#f7ea48]" />
                       {dish.spicy_level === 0 ? 'KHÔNG CAY' : `CAY CẤP ${dish.spicy_level}`}
                     </span>

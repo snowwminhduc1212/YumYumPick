@@ -4,6 +4,8 @@ import LikedDishesView from './components/LikedDishesView'
 import DishDetailModal from './components/DishDetailModal'
 import AuthModal from './components/AuthModal'
 import FilterModal from './components/FilterModal'
+import CardStack from './components/CardStack'
+import { MOCK_DISHES } from './data/mockDishes'
 import { useAuth } from './hooks/useAuth'
 import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from 'lucide-react'
 import { useFilterMetadata } from './hooks/useFilterMetadata';
@@ -115,7 +117,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#1d0b0d] text-[#fcf9f0] transition-colors font-sans">
       {/* GLOBAL NAVBAR */}
-      <header className="sticky top-0 z-40 bg-[#1d0b0d]/95 backdrop-blur-md border-b border-[#dbe2dc]/15 py-3 px-4 sm:px-8 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-[#1d0b0d] border-b border-[#dbe2dc]/15 py-3 px-4 sm:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <div
           onClick={() => setCurrentView('swipe')}
@@ -212,36 +214,9 @@ function App() {
           />
         ) : (
           /* Khu vực Quẹt Thẻ (Quang Huy) */
-          <div className="flex-1 flex flex-col items-center justify-center p-8 text-center max-w-lg mx-auto">
-            <div className="w-16 h-16 rounded-[1px] border border-[#dbe2dc]/30 bg-[#1d0b0d] text-[#f7ea48] flex items-center justify-center mb-5 shadow-sm">
-              <Layers className="w-8 h-8 stroke-[1.5]" />
-            </div>
-            <h2 className="text-xl font-bold font-heading tracking-[0.06em] uppercase mb-2 text-[#fcf9f0]">
-              Khu Vực Quẹt Thẻ (Swipe Deck)
-            </h2>
-            <p className="text-xs sm:text-sm text-[#dbe2dc]/70 mb-8 leading-relaxed tracking-[0.02em]">
-              Khu vực vuốt thẻ Tinder ẩm thực do <strong>Quang Huy</strong> xây dựng. 
-              Các bộ lọc quốc gia, độ cay do <strong>Luân</strong> quản lý.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={() => setFilterOpen(true)}
-                className="px-5 py-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/30 hover:border-[#f7ea48] text-[#fcf9f0] text-xs font-bold uppercase tracking-[0.04em] flex items-center justify-center gap-2 cursor-pointer transition-colors"
-              >
-                <SlidersHorizontal className="w-3.5 h-3.5" />
-                <span>Xem bộ lọc (Luân)</span>
-              </button>
-
-              <button
-                onClick={() => setCurrentView('liked')}
-                className="px-5 py-2.5 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] text-xs font-bold uppercase tracking-[0.04em] flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-95"
-              >
-                <Heart className="w-3.5 h-3.5 fill-[#1d0b0d]" />
-                <span>Xem món đã thích ({likedDishes.length})</span>
-              </button>
-            </div>
-          </div>
+          <section className="flex flex-1 items-center justify-center w-full my-auto py-8 relative">
+            <CardStack initialDishes={MOCK_DISHES} />
+          </section>
         )}
       </main>
 

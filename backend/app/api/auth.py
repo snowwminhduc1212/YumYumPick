@@ -43,3 +43,14 @@ def login(user_data: UserLogin, db:Session = Depends(get_db)):
         message="Đăng nhập thành công",
         user=user
     )
+
+@router.get("/me/{user_id}", response_model=AuthResponse)
+def get_current_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Không tìm thấy người dùng")
+    return AuthResponse(
+        success=True,
+        message="Lấy thông tin thành công",
+        user=user
+    )

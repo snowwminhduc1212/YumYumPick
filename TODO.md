@@ -22,14 +22,15 @@
   - Lưu phiên đăng nhập đơn giản vào `localStorage` (chỉ lưu `user_id` và `username`) để tải lại trang (F5) không bị mất session.
   - Nút Đăng xuất: Xóa key phiên khỏi `localStorage`.
 
-- [ ] **Bộ Sưu Tập Món Đã Lưu & Xem Chi Tiết Công Thức (Liked Dishes & Details):**
+- [x] **Bộ Sưu Tập Món Đã Lưu & Xem Chi Tiết Công Thức (Liked Dishes & Details):**
   - Vào phần đã quẹt chỉ để xem chi tiết công thức nấu ăn của các món đã chọn.
-  - Lưu trữ trực tiếp trên SQLite thông qua API `POST /api/v1/saved-dishes/{user_id}`.
-  - Mở xem danh sách các món người dùng đã quẹt phải (kèm nút xóa/bỏ thích).
-  - Bấm vào món để mở màn hình xem chi tiết công thức:
-    - **Danh sách nguyên liệu có Checkbox tương tác:** Mỗi nguyên liệu có ô checkbox `[ ]` để tích chọn đánh dấu đã chuẩn bị/đã có khi nấu ăn.
+  - Lưu trữ trực tiếp trên SQLite thông qua API `POST /api/v1/saved-dishes/{user_id}` và xóa qua `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`.
+  - Mở xem danh sách các món người dùng đã quẹt phải (kèm nút xóa/bỏ thích, badge số lượng tự động cập nhật).
+  - Bấm vào món để mở màn hình xem chi tiết công thức (giao diện 2 cột Limón Brasserie responsive):
+    - **Danh sách nguyên liệu có Checkbox tương tác:** Mỗi nguyên liệu có ô checkbox `[ ]` để tích chọn đánh dấu đã chuẩn bị/đã có khi nấu ăn (thanh tiến độ % động).
     - Hướng dẫn chế biến chuẩn 3 bước (Sơ chế $\rightarrow$ Nấu $\rightarrow$ Trình bày).
     - Khung mẹo vặt từ đầu bếp (`tips`).
+    - Cơ chế fallback ảnh 2 tầng (ảnh offline SQLite $\rightarrow$ Unsplash online $\rightarrow$ banner placeholder Limón).
 
 - [ ] **Bộ Lọc Món Ăn Nhanh (Quick Filters):**
   - Lọc theo nền ẩm thực / quốc gia: Việt Nam, Nhật Bản, Hàn Quốc, Thái Lan, Ý...
@@ -100,14 +101,14 @@
 - [ ] **Đăng Huy + Quang Huy:** Kết nối API lấy danh sách thẻ ngẫu nhiên (kèm `short_description`) và gọi `POST /api/v1/saved-dishes` khi quẹt phải (LIKE).
 - [ ] **Quang Huy:** Tinh chỉnh Responsive: Mobile full viền vuốt chạm mượt; Desktop PC khung thẻ $420 \times 600$px căn giữa màn hình.
 - [ ] **Luân:** Ghép nối `FilterModal.jsx` với API của Đăng Huy để lọc sơ bộ theo quốc gia, độ cay, thời gian; hoàn thiện slide kiến trúc kỹ thuật và dữ liệu.
-- [ ] **Tùng Dương:** Bắt đầu ghép nối `LikedDishesView.jsx` với API `GET /api/v1/saved-dishes/{user_id}` để lấy danh sách món đã lưu.
-
+- [x] **Tùng Dương:** Đã hoàn thành ghép nối `LikedDishesView.jsx` với API `GET /api/v1/saved-dishes/{user_id}` để lấy danh sách món đã lưu từ CSDL SQLite (kèm skeleton loader).
+ 
 ### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức & Phím Tắt PC
 - [ ] **Minh Đức:** Thực hiện kiểm thử toàn diện trên PC và Mobile thật qua mạng LAN; phân loại và giao bug cho FE/BE fix.
 - [x] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc.
 - [ ] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms.
 - [ ] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) và cụm nút bấm nổi (Nút Bỏ qua, Nút Thích).
-- [ ] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp).
+- [x] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp, fallback ảnh 2 lớp, tối ưu header responsive mobile).
 - [ ] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; soạn kịch bản thuyết trình chi tiết (Storytelling 10-12 phút), kịch bản Live Demo từng bước và video dự phòng.
 
 ### Ngày 5: Kiểm Thử Toàn Diện, Tổng Duyệt & Báo Cáo

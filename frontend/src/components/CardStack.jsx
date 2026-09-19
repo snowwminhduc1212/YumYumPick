@@ -8,18 +8,32 @@ import SwipeCard from './SwipeCard'
  * Quản lý ngăn xếp thẻ (tối đa 3 thẻ xếp lớp)
  * Hỗ trợ quẹt kéo chuột/touch, phím tắt PC (←, →) và cụm nút bấm nổi
  */
-export default function CardStack({ initialDishes = [] }) {
+export default function CardStack({ initialDishes = [], onLike, onSkip, onRefresh }) {
   const [dishes, setDishes] = useState(initialDishes)
   const [history, setHistory] = useState([]) // Lưu lịch sử quẹt để phục vụ test
+
+  // Đồng bộ danh sách thẻ khi initialDishes thay đổi từ API hoặc khi đổi bộ lọc
+  useEffect(() => {
+    if (initialDishes && initialDishes.length > 0) {
+      setDishes(initialDishes)
+    }
+  }, [initialDishes])
 
   // Xử lý khi quẹt thẻ (direction: 'left' | 'right')
   const handleSwipe = useCallback((direction, dish) => {
     // Ghi nhận lịch sử
     setHistory((prev) => [{ dish, direction, time: new Date() }, ...prev])
 
+    // Gọi callback tương ứng để lưu CSDL khi Like hoặc Skip
+    if (direction === 'right' && onLike) {
+      onLike(dish)
+    } else if (direction === 'left' && onSkip) {
+      onSkip(dish)
+    }
+
     // Loại bỏ thẻ trên cùng khỏi danh sách
-    setDishes((prev) => prev.filter((item) => item.id !== dish.id))
-  }, [])
+    setDishes((prev) => prev.filter((item) => (item.id || item.dish_id) !== (dish.id || dish.dish_id)))
+  }, [onLike, onSkip])
 
   // Xử lý nút bấm thủ công (bấm nút Skip hoặc Like)
   const handleButtonClick = (direction) => {
@@ -30,7 +44,11 @@ export default function CardStack({ initialDishes = [] }) {
 
   // Khôi phục lại toàn bộ thẻ khi hết
   const handleReset = () => {
-    setDishes(initialDishes)
+    if (onRefresh) {
+      onRefresh()
+    } else {
+      setDishes(initialDishes)
+    }
     setHistory([])
   }
 

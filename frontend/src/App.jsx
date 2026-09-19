@@ -26,10 +26,29 @@ function App() {
   }, [])
 
   // Current view: 'swipe' | 'liked'
-  const [currentView, setCurrentView] = useState('liked')
+  const [currentView, setCurrentView] = useState('swipe')
   // Liked dishes state from SQLite backend
   const [likedDishes, setLikedDishes] = useState([])
   const [isLoadingLiked, setIsLoadingLiked] = useState(true)
+
+  // Swipe deck dishes from SQLite API
+  const [swipeDishes, setSwipeDishes] = useState(MOCK_DISHES)
+  const [activeFilters, setActiveFilters] = useState({})
+
+  const fetchRandomDishes = async (filters = {}) => {
+    try {
+      const dishes = await api.getRandomDishes(filters)
+      if (dishes && dishes.length > 0) {
+        setSwipeDishes(dishes)
+      }
+    } catch (err) {
+      console.error('[App] Failed to fetch random dishes:', err)
+    }
+  }
+
+  useEffect(() => {
+    fetchRandomDishes()
+  }, [])
 
   // Active dish for DishDetailModal
   const [selectedDish, setSelectedDish] = useState(null)
@@ -217,7 +236,11 @@ function App() {
         ) : (
           /* Khu vực Quẹt Thẻ (Quang Huy) */
           <section className="flex flex-1 items-center justify-center w-full my-auto py-8 relative">
-            <CardStack initialDishes={MOCK_DISHES} />
+            <CardStack
+              initialDishes={swipeDishes}
+              onLike={handleToggleLike}
+              onRefresh={() => fetchRandomDishes(activeFilters)}
+            />
           </section>
         )}
       </main>
@@ -243,7 +266,10 @@ function App() {
         isOpen={filterOpen}
         onClose={() => setFilterOpen(false)}
         metadata={metadata}
-        onApplyFilter={(filters) => console.log('Filter áp dụng:', filters)}
+        onApplyFilter={(filters) => {
+          setActiveFilters(filters)
+          fetchRandomDishes(filters)
+        }}
       />
     </div>
   )

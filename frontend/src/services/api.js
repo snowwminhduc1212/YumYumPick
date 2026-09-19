@@ -66,14 +66,61 @@ export const api = {
         throw new Error(`Server returned ${response.status}: ${response.statusText}`)
       }
       const data = await response.json()
-      if (data && data.length > 0) {
+      if (Array.isArray(data)) {
         return data.map(normalizeSavedDish)
       }
-      // If database has 0 saved dishes yet for this user, provide initial demo dishes for rich preview
-      return MOCK_DISHES.slice(0, 5)
+      return []
     } catch (err) {
       console.warn('[API] Failed to fetch saved dishes from backend, using mock fallback:', err.message)
       return MOCK_DISHES.slice(0, 5)
+    }
+  },
+
+  /**
+   * Fetch random dishes from SQLite DB for the Swipe Deck
+   * Supports optional filters: cuisine, spicy_level, max_time, limit, exclude_ids
+   */
+  async getRandomDishes(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      query.append('limit', params.limit || 10)
+      if (params.cuisine && params.cuisine !== 'Tất cả') {
+        query.append('cuisine', params.cuisine)
+      }
+      if (params.spicy_level !== undefined && params.spicy_level !== null) {
+        query.append('spicy_level', params.spicy_level)
+      }
+      if (params.max_time) {
+        query.append('max_time', params.max_time)
+      }
+      if (params.exclude_ids) {
+        query.append('exclude_ids', params.exclude_ids)
+      }
+
+      const url = `${API_BASE}/api/v1/dishes/random?${query.toString()}`
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}: ${response.statusText}`)
+      }
+      const data = await response.json()
+      if (Array.isArray(data) && data.length > 0) {
+        return data.map((item) => ({
+          id: item.id,
+          name: item.name,
+          english_name: item.english_name || '',
+          cuisine: item.cuisine,
+          cook_time_minutes: item.cook_time_minutes ?? 25,
+          spicy_level: item.spicy_level ?? 0,
+          calories_approx: item.calories_approx ?? 400,
+          image: item.image || item.image_url || '',
+          image_url: item.image_url || item.image || '',
+          short_description: item.short_description || ''
+        }))
+      }
+      return MOCK_DISHES
+    } catch (err) {
+      console.warn('[API] Failed to fetch random dishes from backend, using mock fallback:', err.message)
+      return MOCK_DISHES
     }
   },
 

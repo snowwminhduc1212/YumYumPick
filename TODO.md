@@ -89,7 +89,7 @@
 
 ### Ngày 2: Code Song Song Độc Lập
 - [ ] **Minh Đức:** Điều phối Daily Sync 09:00; xây dựng bộ kịch bản kiểm thử (Test Matrix 20 Test Cases) cho PC và Mobile.
-- [ ] **Ánh Dương:** Viết API `POST /api/v1/auth/signup` và `POST /api/v1/auth/login` (kết nối trực tiếp CSDL SQLite).
+- [X] **Ánh Dương:** Viết API `POST /api/v1/auth/signup` và `POST /api/v1/auth/login` (kết nối trực tiếp CSDL SQLite).
 - [x] **Đăng Huy:** Viết API `GET /api/v1/dishes/random` (hỗ trợ lọc ẩm thực, độ cay, thời gian, loại trừ món đã xem) và `GET /api/v1/dishes/{dish_id}`.
 - [ ] **Quang Huy:** Hoàn thiện `SwipeCard.jsx` & `CardStack.jsx` bằng Framer Motion (hiển thị ảnh, tên, badges và description intro trên thẻ; cử chỉ kéo chuột/vuốt ngón tay, stamp YUMMY/NOPE, spring physics, empty state).
 - [X] **Tùng Dương:** Xây dựng `LikedDishesView.jsx` (danh sách món đã thích, nút xóa) và `DishDetailModal.jsx` (Checkbox tương tác nguyên liệu, 3 bước nấu, mẹo bếp).

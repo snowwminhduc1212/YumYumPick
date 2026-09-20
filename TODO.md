@@ -100,7 +100,7 @@
 - [ ] **Ánh Dương + Luân:** Ghép nối `AuthModal.jsx` với Simple Auth API; kiểm tra tự khôi phục phiên đăng nhập khi F5.
 - [ ] **Đăng Huy + Quang Huy:** Kết nối API lấy danh sách thẻ ngẫu nhiên (kèm `short_description`) và gọi `POST /api/v1/saved-dishes` khi quẹt phải (LIKE).
 - [ ] **Quang Huy:** Tinh chỉnh Responsive: Mobile full viền vuốt chạm mượt; Desktop PC khung thẻ $420 \times 600$px căn giữa màn hình.
-- [ ] **Luân:** Ghép nối `FilterModal.jsx` với API của Đăng Huy để lọc sơ bộ theo quốc gia, độ cay, thời gian; hoàn thiện slide kiến trúc kỹ thuật và dữ liệu.
+- [x] **Luân:** Ghép nối `FilterModal.jsx` với API của Đăng Huy để lọc sơ bộ theo quốc gia, độ cay, thời gian; hoàn thiện slide kiến trúc kỹ thuật và dữ liệu.
 - [x] **Tùng Dương:** Đã hoàn thành ghép nối `LikedDishesView.jsx` với API `GET /api/v1/saved-dishes/{user_id}` để lấy danh sách món đã lưu từ CSDL SQLite (kèm skeleton loader).
  
 ### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức & Phím Tắt PC

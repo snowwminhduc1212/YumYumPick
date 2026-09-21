@@ -30,10 +30,6 @@ import sys
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-# Mount thư mục images vào url '/images'
-if os.path.exists(IMAGES_DIR):
-    app.mount("/images",StaticFiles(directory=IMAGES_DIR), name="images")
-
 from app.api.dishes import router as dishes_router
 from app.api.saved_dishes import router as saved_dishes_router
 
@@ -58,3 +54,16 @@ def get_mock_dishes():
         data = json.load(f)
 
     return JSONResponse(content=data)
+
+class CachedStaticFiles(StaticFiles):
+    def is_not_modified(self, response_headers, request_headers) -> bool:
+        return super().is_not_modified(response_headers, request_headers)
+
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+
+        response.headers["Cache-Control"] = "public, max-age=86400"
+        return response
+
+if os.path.exists(IMAGES_DIR):
+    app.mount("/images", CachedStaticFiles(directory=IMAGES_DIR), name="images")

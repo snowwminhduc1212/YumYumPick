@@ -1,6 +1,21 @@
-import React from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import { Clock, Flame, Globe2, Sparkles } from 'lucide-react'
+
+// Country flag mapping helper
+const CUISINE_FLAGS = {
+  'Vietnam': '🇻🇳',
+  'Việt Nam': '🇻🇳',
+  'Korea': '🇰🇷',
+  'Hàn Quốc': '🇰🇷',
+  'Japan': '🇯🇵',
+  'Nhật Bản': '🇯🇵',
+  'Thailand': '🇹🇭',
+  'Thái Lan': '🇹🇭',
+  'China': '🇨🇳',
+  'Trung Quốc': '🇨🇳',
+  'Western': '🌍',
+  'Phương Tây': '🌍'
+}
 
 /**
  * Component SwipeCard: Thẻ món ăn hỗ trợ kéo thả (Framer Motion)
@@ -70,7 +85,7 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
 
           {/* Huy hiệu Quốc gia góc trên */}
           <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-black-olive text-warm-cream border border-sage-mist text-[10px] font-semibold uppercase tracking-stenciled">
-            <Globe2 className="w-3 h-3 text-lemon-zest" />
+            <span className="text-xs">{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
             <span>{dish.cuisine}</span>
           </div>
 

@@ -12,6 +12,7 @@
   --color-sage-mist: #dbe2dc;
   --color-pure-white: #ffffff;
 
+
   /* Tracking rộng (Neon/Stenciled look) */
   --tracking-wide: 0.02em;
   --tracking-wider: 0.04em;
@@ -41,7 +42,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow-y: auto;
-  user-select: none; /* Tránh chọn nhầm văn bản khi kéo thẻ */
+  user-select: none;
+  /* Tránh chọn nhầm văn bản khi kéo thẻ */
 }
 
 #root {
@@ -56,7 +58,8 @@ h2,
 h3,
 .font-heading {
   font-family: var(--font-heading);
-  letter-spacing: var(--tracking-widest); /* Áp dụng tracking rộng cho heading */
+  letter-spacing: var(--tracking-widest);
+  /* Áp dụng tracking rộng cho heading */
 }
 
 /* Tracking utility classes */

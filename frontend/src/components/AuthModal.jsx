@@ -81,6 +81,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
             <div className="flex gap-2 mb-6">
               <button
                 type="button"
+                disabled={isSubmitting}
                 onClick={() => { setMode('login'); setError(''); }}
                 className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
                   mode === 'login' ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
@@ -90,6 +91,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
               </button>
               <button
                 type="button"
+                disabled={isSubmitting}
                 onClick={() => { setMode('signup'); setError(''); }}
                 className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
                   mode === 'signup' ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
@@ -106,6 +108,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                disabled={isSubmitting}
                 className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
               />
 
@@ -116,6 +119,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
+                  disabled={isSubmitting}
                   className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
                 />
               )}
@@ -126,6 +130,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={isSubmitting}
                 className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
               />
 

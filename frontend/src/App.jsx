@@ -195,7 +195,7 @@ function App() {
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <button
             onClick={() => setFilterOpen(true)}
-            className="p-2 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] transition-colors cursor-pointer"
+            className="p-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] transition-colors cursor-pointer"
             title="Mở bộ lọc món ăn (Luân)"
           >
             <SlidersHorizontal className="w-4 h-4" />

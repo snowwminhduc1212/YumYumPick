@@ -109,7 +109,7 @@
 - [ ] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms.
 - [x] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) và cụm nút bấm nổi (Nút Bỏ qua, Nút Thích).
 - [x] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp, fallback ảnh 2 lớp, tối ưu header responsive mobile).
-- [ ] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; soạn kịch bản thuyết trình chi tiết (Storytelling 10-12 phút), kịch bản Live Demo từng bước và video dự phòng.
+- [x] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; soạn kịch bản thuyết trình chi tiết (Storytelling 10-12 phút), kịch bản Live Demo từng bước và video dự phòng.
 
 ### Ngày 5: Kiểm Thử Toàn Diện, Tổng Duyệt & Báo Cáo
 - [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD.

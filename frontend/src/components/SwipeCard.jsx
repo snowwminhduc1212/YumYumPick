@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion'
-import { Clock, Flame, Globe2, Sparkles } from 'lucide-react'
+import { Clock, Flame, Sparkles } from 'lucide-react'
 
 // Country flag mapping helper
 const CUISINE_FLAGS = {

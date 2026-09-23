@@ -53,7 +53,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
       onLoginSuccess(data.user);
       resetForm();
       onClose();
-    } catch (err) {
+    } catch {
       setError('Không kết nối được server. Kiểm tra backend đã chạy chưa.');
     } finally {
       setIsSubmitting(false);

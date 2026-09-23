@@ -4,41 +4,48 @@ Tài liệu này chi tiết hóa toàn bộ hành trình trải nghiệm ngườ
 
 ---
 
-## 1. Sơ Đồ Luồng Trải Nghiệm Người Dùng (End-to-End User Flow)
+## 1. Sơ Đồ Luồng Trải Nghiệm Người Dùng (End-to-End User Flow với Auth Gate & Landing Page)
 
 ```mermaid
 flowchart TD
-    Start(["Khách truy cập Web App"]) --> CheckAuth{"Kiểm tra phiên đăng nhập (LocalStorage: user_id)"}
+    Start(["Khách truy cập Web App"]) --> CheckAuth{"Kiểm tra phiên đăng nhập (LocalStorage: yumyum_session)"}
     
-    CheckAuth -- "Chưa đăng nhập" --> GuestMode["Chế độ Khách (Guest) hoặc Mở Modal Đăng Nhập / Đăng Ký"]
-    CheckAuth -- "Đã đăng nhập" --> LoadCards["Tải danh sách món ăn ngẫu nhiên từ SQLite"]
-    GuestMode --> LoadCards
+    CheckAuth -- "Chưa đăng nhập" --> LandingScreen["Màn hình Landing Page (Giới thiệu web)\n• Hero banner & Slogan 'Tinder for Food'\n• Giới thiệu 3 bước: Lọc ➔ Quẹt ➔ Nấu\n• Showcase ẩm thực 5 nước & Logo thương hiệu\n• Nút CTA: 'Bắt đầu quẹt món / Đăng nhập'"]
     
-    LoadCards --> MainScreen["Màn hình chính: Thẻ món ăn (Swipe Card Deck)\n• Ảnh lớn + Tên món\n• Huy hiệu: Thời gian, Calo, Độ cay, Quốc gia\n• Description Intro: Giới thiệu hương vị & đặc trưng"]
+    LandingScreen -- "Bấm nút CTA hoặc cố vào quẹt" --> OpenAuth["Mở Modal Đăng Nhập / Đăng Ký (Auth Gate)"]
+    OpenAuth -- "Đăng nhập / Đăng ký thành công" --> SetSession["Lưu session & Chuyển hướng vào màn hình Quẹt thẻ"]
+    
+    CheckAuth -- "Đã đăng nhập" --> LoadCards["Tải danh sách món ăn từ SQLite (kèm exclude_ids 7 ngày)"]
+    SetSession --> LoadCards
+    
+    LoadCards --> MainScreen["Màn hình chính: Thẻ món ăn (Swipe Card Deck)\n• Ảnh lớn + Tên món (Việt/Anh)\n• Cờ quốc gia chuẩn (Việt Nam 🇻🇳, Ý 🇮🇹, v.v.)\n• Huy hiệu: Thời gian, Calo, Độ cay\n• Description Intro: Giới thiệu hương vị & đặc trưng"]
     
     MainScreen --> Decision{"Hành động của người dùng"}
     
-    Decision -- "Kéo sang Trái (Swipe Left) hoặc phím [←] hoặc nút Bỏ qua" --> SkipDish["Bỏ qua món ăn (Skip)"]
-    SkipDish --> CheckMore{"Còn thẻ không?"}
+    Decision -- "Kéo sang Trái (Swipe Left) hoặc phím [←] hoặc nút Bỏ qua" --> SkipDish["Bỏ qua món ăn (Skip) & Lưu ID vào lịch sử 7 ngày"]
+    Decision -- "Kéo sang Phải (Swipe Right) hoặc phím [→] hoặc nút Thích" --> PickDish["Lưu món vào CSDL SQLite & Lưu ID vào lịch sử 7 ngày"]
     
-    Decision -- "Kéo sang Phải (Swipe Right) hoặc phím [→] hoặc nút Thích" --> PickDish["Lưu món vào CSDL SQLite (Saved Dishes API)"]
-    PickDish --> ShowToast["Ghi nhận vào CSDL SQLite & Tăng số đếm món đã thích"]
-    ShowToast --> CheckMore
+    SkipDish --> CheckPrefetch{"Thẻ còn lại trong ngăn xếp <= 3?"}
+    PickDish --> CheckPrefetch
+    
+    CheckPrefetch -- "Còn <= 3 thẻ" --> AutoPrefetch["Prefetch ngầm: Gọi API lấy thêm 5 món mới nối tiếp\n(kèm exclude_ids để không trùng món trong 1 tuần)"]
+    AutoPrefetch --> NextCard["Hiển thị thẻ tiếp theo mượt mà (Infinite Deck)"]
+    CheckPrefetch -- "Còn > 3 thẻ" --> NextCard
+    NextCard --> MainScreen
+    
+    Decision -- "Bấm vào Logo YumYumPick trên Header" --> BackToLanding["Điều hướng quay lại màn hình Landing Page"]
+    BackToLanding --> LandingScreen
     
     Decision -- "Bấm nút Bộ Lọc" --> OpenFilter["Mở Modal Bộ Lọc Ẩm Thực"]
-    OpenFilter --> ApplyFilter["Chọn quốc gia, thời gian, độ cay $\rightarrow$ Áp dụng"]
+    OpenFilter --> ApplyFilter["Chọn quốc gia, thời gian, độ cay ➔ Áp dụng"]
     ApplyFilter --> LoadCards
     
-    Decision -- "Bấm nút Món Đã Thích" --> SavedScreen["Mở Danh Sách Món Đã Thích"]
+    Decision -- "Bấm nút Món Đã Thích" --> SavedScreen["Mở Danh Sách Món Đã Thích (Mỗi món có cờ quốc gia chuẩn)"]
     SavedScreen --> SelectSaved["Chọn món ăn để xem chi tiết công thức"]
     SavedScreen --> DeleteSaved["Bấm nút Xóa để bỏ thích món"]
-    SelectSaved --> FullRecipeModal["Xem Công Thức Chi Tiết (Checkbox tương tác nguyên liệu, 3 bước nấu 1-2-3, Mẹo đầu bếp)"]
-    
-    CheckMore -- "Còn thẻ" --> NextCard["Hiển thị thẻ tiếp theo mượt mà"]
-    NextCard --> MainScreen
-    CheckMore -- "Hết thẻ" --> EmptyState["Màn hình hết thẻ: Nút 'Quẹt lại từ đầu'"]
-    EmptyState --> LoadCards
+    SelectSaved --> FullRecipeModal["Xem Công Thức Chi Tiết (Checkbox tương tác nguyên liệu, 3 bước nấu, Mẹo đầu bếp)"]
 ```
+
 
 ---
 
@@ -160,3 +167,81 @@ Khi người dùng mở một món trong danh sách đã thích:
   - **Bước 2 — Chế biến:** Nấu nước dùng, kho, xào, chiên hoặc nướng.
   - **Bước 3 — Trình bày:** Bày biện ra tô/đĩa, rắc rau thơm, thưởng thức khi còn nóng.
 - **Mẹo Đầu Bếp (Chef's Tips):** Khung viền vàng nổi bật chia sẻ bí quyết thực tế giúp món ăn đậm đà chuẩn vị.
+
+---
+
+## 6. Màn Hình Giới Thiệu (Landing Page) & Điều Hướng Thương Hiệu
+
+### 6.1. Mục Đích & Vai Trò Của Landing Page
+- Là **màn hình đầu tiên (Entry Point)** đón tiếp mọi khách truy cập web chưa đăng nhập hoặc khi người dùng click vào **Logo YumYumPick** trên Header từ bất kỳ màn hình nào.
+- Giúp người dùng hiểu ngay giá trị sản phẩm trong 5 giây đầu tiên: Giải quyết vấn nạn *"Hôm nay ăn gì?"* bằng trải nghiệm quẹt thẻ tương tác thú vị.
+
+### 6.2. Cấu Trúc Nội Dung Landing Page (`LandingPage.jsx`)
+1. **Hero Section Ấn Tượng:**
+   - **Logo thương hiệu chính thức:** Đồ họa vector YumYumPick sắc nét kết hợp biểu tượng ẩm thực hiện đại.
+   - **Slogan:** *"Tinder For Food — Random món ngon, giải cứu câu hỏi Hôm nay ăn gì?"*.
+   - **Nút Call-to-Action (CTA):** Nút *"Bắt Đầu Quẹt Món Ngay"* (kích hoạt mở AuthModal nếu chưa đăng nhập, hoặc vào thẳng Swipe Deck nếu đã có phiên).
+2. **Khám Phá 3 Bước Đơn Giản (How It Works):**
+   - **Bước 1: Lọc nhanh:** Chọn ẩm thực quốc gia, thời gian và độ cay theo tâm trạng.
+   - **Bước 2: Quẹt trực quan:** Đọc mô tả hương vị và quẹt phải món ưng ý trong tích tắc.
+   - **Bước 3: Nấu & Thưởng thức:** Xem công thức chi tiết với checkbox nguyên liệu tương tác.
+3. **Showcase Ẩm Thực 5 Nước:**
+   - Trưng bày các món ăn tiêu biểu của 5 nền văn hóa: Việt Nam 🇻🇳, Hàn Quốc 🇰🇷, Nhật Bản 🇯🇵, Thái Lan 🇹🇭, Ý 🇮🇹.
+4. **Quy Tắc Điều Hướng (Navigation Gate):**
+   - Click vào Logo YumYumPick trên thanh Header ở bất kỳ đâu $\rightarrow$ Đưa người dùng về màn hình Landing Page này.
+   - Nút *"Quay lại quẹt thẻ"* (nếu đã đăng nhập) giúp tiếp tục phiên quẹt dang dở.
+
+---
+
+## 7. Giải Pháp Infinite Deck (Tải Thêm Ngầm — Không Bị Limit, Nhẹ DOM & RAM)
+
+### 7.1. Vấn Đề Kỹ Thuật
+- Nếu nạp cùng lúc 100 món ăn từ SQLite vào bộ nhớ trình duyệt, số lượng node DOM và ảnh độ phân giải cao sẽ gây giật lag (frame drop), đặc biệt trên các dòng điện thoại cấu hình tầm trung.
+- Nếu chỉ nạp cố định 10 món (`limit=10`), người dùng quẹt nhanh sẽ bị ngắt quãng và rơi vào màn hình "Hết món" liên tục.
+
+### 7.2. Cơ Chế Prefetch Ngầm Tự Động (Background Prefetching)
+- **Số thẻ hiển thị trên DOM:** Giữ cố định tối đa 3 thẻ xếp lớp bằng Framer Motion (thẻ 0 tương tác, thẻ 1 lót dưới, thẻ 2 đáy).
+- **Ngưỡng kích hoạt (Prefetch Threshold):**
+  - Trong `CardStack.jsx`, khi người dùng quẹt đến lúc danh sách thẻ còn lại **$\le 3$ món**, hệ thống ngầm kích hoạt hàm `onNeedMore()`.
+  - Frontend âm thầm gọi API:
+    ```http
+    GET /api/v1/dishes/random?limit=5&exclude_ids=<danh_sách_món_đã_quẹt_7_ngày>
+    ```
+  - 5 món mới lập tức được nối (`append`) vào đuôi mảng `dishes`.
+- **Hiệu quả:**
+  - Người dùng có thể quẹt thẻ **vô tận (Infinite Swiping)** không bao giờ bị gián đoạn.
+  - Bộ nhớ RAM trình duyệt chỉ duy trì vài thẻ, CPU hoạt động nhẹ nhàng, hiệu ứng spring mượt mà 60 FPS.
+
+---
+
+## 8. Cơ Chế Chống Trùng Món Trong 1 Tuần (7-Day Swipe Exclusion)
+
+### 8.1. Nguyên Lý Hoạt Động
+- Khi người dùng quẹt bất kỳ món nào (kể cả LIKE hay SKIP, bằng kéo chuột, vuốt chạm hay phím mũi tên), ID món ăn được ghi nhận vào `localStorage` kèm thời gian:
+  ```json
+  // Key: yumyum_swiped_history
+  {
+    "dish_vn_001": 1727062544000,
+    "dish_it_003": 1727062610000
+  }
+  ```
+- Trước mỗi lần gọi API lấy món (kể cả khi tải trang, đổi bộ lọc hay prefetch ngầm):
+  - Hệ thống tự động lọc ra các món có `(Hiện tại - Thời gian quẹt) < 7 ngày` (604.800.000 ms).
+  - Ghép thành chuỗi `exclude_ids=dish_vn_001,dish_it_003,...` gửi lên Backend.
+  - Backend SQLite thực thi `WHERE dishes.id NOT IN (...)`, đảm bảo món đã xem **tuyệt đối không xuất hiện lại trong 1 tuần**.
+- **Tự động dọn dẹp (Self-pruning):** Các món có timestamp quá 7 ngày sẽ tự động bị xóa khỏi `localStorage` và được phép quay lại danh sách gợi ý.
+- **Xoay vòng khi cạn món (Full Cycle Reset):** Nếu người dùng đã quẹt sạch 100 món trong 7 ngày, khi bấm nút "Quay lại từ đầu", hệ thống tự động reset lịch sử để người dùng tiếp tục khám phá chu kỳ mới.
+
+---
+
+## 9. Bảng Chuẩn Hóa Cờ Quốc Gia (Cuisine Flags Specification)
+
+Đảm bảo hiển thị đồng bộ trên thẻ quẹt (`SwipeCard.jsx`), danh sách đã lưu (`LikedDishesView.jsx`) và modal công thức (`DishDetailModal.jsx`):
+
+| Mã Quốc Gia | Tên Hiển Thị | Emoji Cờ Chuẩn | Ghi Chú |
+|:---|:---|:---:|:---|
+| `Vietnam` / `Việt Nam` | Việt Nam | 🇻🇳 | Quốc kỳ Việt Nam |
+| `Korea` / `Hàn Quốc` | Hàn Quốc | 🇰🇷 | Quốc kỳ Hàn Quốc |
+| `Japan` / `Nhật Bản` | Nhật Bản | 🇯🇵 | Quốc kỳ Nhật Bản |
+| `Thailand` / `Thái Lan` | Thái Lan | 🇹🇭 | Quốc kỳ Thái Lan |
+| `Italy` / `Ý` | Ý / Âu | 🇮🇹 | **Quốc kỳ Ý (đã chuẩn hóa, thay thế cho cờ 🌍)** |

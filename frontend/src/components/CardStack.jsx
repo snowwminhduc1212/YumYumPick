@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Heart, RotateCcw, Sparkles } from "lucide-react";
 import SwipeCard from "./SwipeCard";
+import { swipeHistory } from "../services/swipeHistory";
 
 /**
  * Component CardStack:
@@ -10,22 +11,21 @@ import SwipeCard from "./SwipeCard";
  */
 export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
   const [dishes, setDishes] = useState(initialDishes);
-  const [history, setHistory] = useState([]); // Lưu lịch sử quẹt để phục vụ test
-  const exitDirectionRef = useRef("right"); // Lưu hướng quẹt ngay lập tức để làm animation
+  const [exitDirection, setExitDirection] = useState("right");
 
   // Đồng bộ state khi danh sách thẻ ngẫu nhiên mới được fetch từ App.jsx
   useEffect(() => {
     setDishes(initialDishes);
-    setHistory([]);
   }, [initialDishes]);
 
   // Xử lý khi quẹt thẻ (direction: 'left' | 'right')
   const handleSwipe = useCallback((direction, dish) => {
-    // Cập nhật ref ngay lập tức để Framer Motion đọc được chính xác hướng bay ra
-    exitDirectionRef.current = direction;
+    setExitDirection(direction);
 
-    // Ghi nhận lịch sử
-    setHistory((prev) => [{ dish, direction, time: new Date() }, ...prev]);
+    // Lưu vào lịch sử đã lướt qua (1 tuần không gặp lại)
+    if (dish?.id) {
+      swipeHistory.recordSwipe(dish.id);
+    }
 
     // Loại bỏ thẻ trên cùng khỏi danh sách
     setDishes((prev) => prev.filter((item) => item.id !== dish.id));
@@ -37,11 +37,11 @@ export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
   }, [onLike]);
 
   // Xử lý nút bấm thủ công (bấm nút Skip hoặc Like)
-  const handleButtonClick = (direction) => {
+  const handleButtonClick = useCallback((direction) => {
     if (dishes.length === 0) return;
     const topDish = dishes[0];
     handleSwipe(direction, topDish);
-  };
+  }, [dishes, handleSwipe]);
 
   // Khôi phục lại toàn bộ thẻ khi hết
   const handleReset = () => {
@@ -49,13 +49,14 @@ export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
       onRefresh(); // Fetch danh sách ngẫu nhiên mới
     } else {
       setDishes(initialDishes);
-      setHistory([]);
     }
   };
 
   // Bắt sự kiện phím tắt bàn phím PC (←: Skip, →: Like)
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Don't trigger when user is typing in an input or textarea
+      if (['INPUT', 'TEXTAREA'].includes(e.target?.tagName)) return;
       if (dishes.length === 0) return;
       if (e.key === "ArrowLeft") {
         e.preventDefault();
@@ -68,15 +69,13 @@ export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [dishes]);
+  }, [dishes, handleButtonClick]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto h-full px-4 select-none">
       {/* 1. KHUNG THẺ QUẸT (420px x 560px) */}
       <div className="relative w-full h-[540px] max-w-[390px] md:max-w-[420px] flex items-center justify-center">
-        <AnimatePresence custom={exitDirectionRef.current}>
-          {" "}
-          {/*khi phần tử bị xóa bởi thì cái này sẽ giữ nó lại */}
+        <AnimatePresence custom={exitDirection}>
           {dishes.length > 0 ? (
             dishes.slice(0, 3).map((dish, index) => {
               const isFront = index === 0;
@@ -84,7 +83,7 @@ export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
               return (
                 <motion.div
                   key={dish.id}
-                  custom={exitDirectionRef.current}
+                  custom={exitDirection}
                   variants={{
                     initial: { scale: 0.9, y: 24, opacity: 0 },
                     animate: {

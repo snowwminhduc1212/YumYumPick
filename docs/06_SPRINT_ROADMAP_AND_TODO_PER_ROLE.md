@@ -210,19 +210,24 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
   - Nút Bỏ qua (SKIP).
   - Nút Thích & Lưu (LIKE).
 
-#### Ngày 4: Bố Cục Responsive Chuẩn PC & Mobile
-- [ ] **Tối ưu chế độ Desktop PC:**
+#### Ngày 4: Bố Cục Responsive Chuẩn PC & Mobile, Chống Trùng Món
+- [x] **Tối ưu chế độ Desktop PC:**
   - Khung thẻ quẹt căn giữa màn hình ($420\text{px} \times 600\text{px}$).
   - Bắt sự kiện phím tắt bàn phím:
     - `←` (Mũi tên trái): Bỏ qua.
     - `→` (Mũi tên phải): Thích & Lưu.
-- [ ] **Tối ưu chế độ Mobile:**
+  - Sửa lỗi chặn phím tắt khi người dùng đang nhập vào input/textarea.
+- [x] **Tối ưu chế độ Mobile:**
   - Giao diện tràn viền (100vw), các nút bấm nằm ở vị trí thuận tiện ngón tay cái.
-- [ ] Sửa các lỗi giật khung hình (frame drop), đảm bảo hoạt ảnh mượt 60 FPS.
+- [x] **Cơ chế chống trùng món 7 ngày:**
+  - Tích hợp `swipeHistory.recordSwipe(dish.id)` vào `handleSwipe` để ghi nhận món đã lướt qua.
 
-#### Ngày 5: Polish Giao Diện & Hỗ Trợ Demo
-- [ ] Bổ sung hiệu ứng âm thanh nhẹ (hoặc rung haptic phản hồi nếu có thể).
-- [ ] Cùng Tùng Dương kiểm tra độ đồng bộ giao diện toàn ứng dụng.
+#### Ngày 5: Triển Khai Infinite Deck & Chỉnh Cờ Ý 🇮🇹
+- [ ] **Triển khai Infinite Deck (Tải Thêm Ngầm — Không Bị Limit, Nhẹ Máy):**
+  - Trong `CardStack.jsx`: Khi ngăn xếp thẻ còn $\le 3$ món, kích hoạt callback prefetch ngầm gọi API `GET /api/v1/dishes/random?limit=5&exclude_ids=...` và nối tiếp vào danh sách thẻ hiện tại.
+  - Đảm bảo hiệu ứng quẹt mượt 60 FPS, không bao giờ bị dừng lại ở màn hình "Hết món" giữa chừng.
+- [ ] **Chỉnh sửa cờ ẩm thực Ý (`SwipeCard.jsx`):**
+  - Cập nhật bảng `CUISINE_FLAGS`: Thêm `Italy: '🇮🇹'` và `'Ý': '🇮🇹'` để các món Ý hiển thị đúng cờ Ý 🇮🇹.
 - [ ] Tham gia buổi tổng duyệt và điều khiển màn hình quẹt thẻ trong buổi Demo.
 
 ---
@@ -256,14 +261,14 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
   - **Hướng dẫn chế biến chuẩn 3 bước:** Bước 1 (Sơ chế) $\rightarrow$ Bước 2 (Nấu/chế biến) $\rightarrow$ Bước 3 (Trình bày & thưởng thức).
   - **Khung Mẹo đầu bếp (`tips`):** Hộp viền vàng nổi bật chia sẻ bí quyết nấu ngon.
 
-#### Ngày 5: Kiểm Thử Giao Diện & Tinh Chỉnh Cuối Cùng
+#### Ngày 5: Kiểm Thử Giao Diện, Đồng Bộ Cờ Ý 🇮🇹 & Tinh Chỉnh Cuối Cùng
 - [ ] Kiểm tra responsive trên cả màn hình Mobile và Desktop PC.
-- [ ] Sửa chữa các lỗi vỡ layout hoặc hiển thị không đẹp do Minh Đức báo cáo.
+- [ ] Đảm bảo cờ Ý 🇮🇹 hiển thị chính xác và đồng bộ trên danh sách đã lưu và modal công thức.
 - [ ] Tham gia tổng duyệt Demo.
 
 ---
 
-### 6. Luân — Frontend Engineer 3 & Pitching Lead (App Shell, Filter, Auth & Presentation)
+### 6. Luân — Frontend Engineer 3 & Pitching Lead (App Shell, Filter, Auth, Landing Page & Presentation)
 
 #### Ngày 1: Khung Layout Chung, Navbar & Dàn Ý Báo Cáo
 - [ ] **Frontend Core:**
@@ -272,7 +277,7 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
     - Nút Lọc món ăn mở Filter Modal.
     - Nút Món đã lưu kèm badge đếm số món (mở Liked Dishes).
     - Nút Tài khoản người dùng (mở Auth Modal).
-  - Xây dựng state quản lý phiên người dùng từ `localStorage` (key `yumyum_user`).
+  - Xây dựng state quản lý phiên người dùng từ `localStorage` (key `yumyum_session`).
 - [ ] **Pitching & Slide:**
   - Lập dàn ý cấu trúc bộ Slide thuyết trình gồm 12 - 15 slide chuẩn học thuật kết hợp thực tiễn (Bối cảnh, Giải pháp, Trải nghiệm Tinder, Kiến trúc SQLite 100% Offline, Demo, Q&A).
 
@@ -297,15 +302,23 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
   - Thiết kế các slide từ 6 đến 10: Sơ đồ kiến trúc FastAPI + SQLite cục bộ, phân bổ kho 100 món ăn và phân công vai trò trong nhóm.
   - Lấy ảnh chụp màn hình giao diện thực tế từ Quang Huy & Tùng Dương đưa vào slide.
 
-#### Ngày 4: Tinh Chỉnh Giao Diện, Kịch Bản Thuyết Trình & Chuẩn Bị Demo
-- [ ] **Frontend Core:**
-  - Tinh chỉnh giao diện Navbar, Filter Modal và Auth Modal đảm bảo chuẩn đẹp trên cả PC và Mobile.
-- [ ] **Pitching & Slide:**
+#### Ngày 4: Thiết Kế Landing Page, Luồng Auth Gate & Logo Thương Hiệu
+- [ ] **Xây dựng màn hình Landing Page (`LandingPage.jsx`):**
+  - Hero banner với slogan "Tinder for Food - Hôm nay ăn gì?", giới thiệu 3 bước (Lọc $\rightarrow$ Quẹt $\rightarrow$ Nấu), showcase ẩm thực 5 nước.
+  - Nút CTA "Bắt đầu quẹt món" kích hoạt luồng đăng nhập nếu chưa có phiên.
+- [ ] **Cấu hình điều hướng Click Logo Header:**
+  - Bấm vào Logo thương hiệu trên Header ở bất kỳ màn hình nào $\rightarrow$ Điều hướng về Landing Page.
+- [ ] **Tích hợp Logo chính thức cho web:**
+  - Chuẩn bị file asset Logo thương hiệu vector/hình ảnh sắc nét, áp dụng trên Header/Navbar, Favicon và Landing Page.
+- [ ] **Kịch bản thuyết trình:**
   - Soạn tài liệu **Kịch Bản Thuyết Trình Chi Tiết (10 - 12 phút)** với phong cách dẫn dắt lôi cuốn, tự nhiên.
   - Lập kịch bản Live Demo chi tiết từng bước: Ai bấm gì, màn hình chiếu gì, nói câu gì.
-  - Phối hợp với Minh Đức quay 1 video màn hình dự phòng (Backup Demo Video).
 
-#### Ngày 5: Tổng Duyệt & Chuẩn Bị Phản Biện (Q&A Cheat Sheet)
-- [ ] Soạn bộ câu hỏi phản biện tiềm năng của hội đồng/giảng viên và câu trả lời gợi ý (về kiến trúc SQLite, tối ưu hiệu năng, lý do tối giản tính năng).
+#### Ngày 5: Hoàn Thiện Auth Gate, Tổng Duyệt & Chuẩn Bị Phản Biện (Q&A Cheat Sheet)
+- [ ] **Kích hoạt Auth Gate hoàn chỉnh:**
+  - Khách chưa đăng nhập vào web $\rightarrow$ Hiện Landing Page.
+  - Bấm quẹt thẻ hoặc CTA $\rightarrow$ Bắt buộc mở AuthModal đăng nhập/đăng ký.
+  - Đăng nhập xong $\rightarrow$ Chuyển thẳng vào màn hình Swipe Deck.
+- [ ] Soạn bộ câu hỏi phản biện tiềm năng của hội đồng/giảng viên và câu trả lời gợi ý (về kiến trúc SQLite, cơ chế chống trùng món 7 ngày, prefetch ngầm, lý do tối giản tính năng).
 - [ ] Cùng cả nhóm chạy thử nghiệm thuyết trình và Live Demo 2 lần trước giờ G.
 - [ ] Tự tin đại diện nhóm tỏa sáng trong buổi báo cáo đồ án!

@@ -37,13 +37,34 @@
   - Lọc theo thời gian nấu: Dưới 20 phút, Kỳ công (>= 20 phút), Tất cả.
   - Lọc theo độ cay: Không cay, Có cay (Cấp 1-3), Tất cả.
 
-- [x] **Giao Diện Responsive Toàn Diện (Mobile + PC):**
-  - **Mobile:** Tràn viền (100vw), vuốt chạm ngón tay cái mượt mà.
-  - **Desktop PC:** Khung thẻ căn giữa màn hình ($420\text{px} \times 600\text{px}$), hỗ trợ phím mũi tên bàn phím (`←` Skip, `→` Like).
+- [x] **Cơ Chế Chống Trùng Món Trong 1 Tuần (7-Day Swipe Exclusion):**
+  - Lưu lịch sử quẹt thẻ (cả LIKE và SKIP) vào `localStorage` (`yumyum_swiped_history: { [dish_id]: timestamp }`).
+  - Tự động lọc ra các món đã quẹt trong vòng 7 ngày gần nhất và gửi tham số `exclude_ids` lên Backend API `GET /api/v1/dishes/random`.
+  - Tự động dọn dẹp các món đã quẹt quá 7 ngày để giải phóng bộ nhớ và cho phép món xuất hiện lại.
+  - Xử lý mảng rỗng `[]` chuẩn xác từ Backend khi đã quẹt hết món thỏa mãn bộ lọc.
 
-- [x] **Quản Lý Dữ Liệu Qua SQLite (Không Admin CMS):**
-  - Quản lý thêm/sửa/xóa món ăn trực tiếp qua file `yumyumpick.db` bằng công cụ **DB Browser for SQLite** hoặc chạy script Python `seed_sqlite.py`.
-  - Không cần xây dựng trang Admin UI, giảm bớt hàng chục API và form phức tạp.
+- [ ] **Landing Page Giới Thiệu Web & Điều Hướng Click Logo:**
+  - Xây dựng component `LandingPage.jsx`: Hero banner bắt mắt, slogan "Tinder for Food - Hôm nay ăn gì?", giới thiệu cách thức hoạt động 3 bước (Lọc $\rightarrow$ Quẹt $\rightarrow$ Nấu), showcase hình ảnh món ăn nổi bật, nút CTA "Bắt đầu khám phá ngay / Đăng nhập để quẹt".
+  - Điều hướng: Bấm vào Logo thương hiệu trên Header/Navbar ở bất kỳ màn hình nào sẽ lập tức chuyển về Landing Page.
+
+- [ ] **Bắt Buộc Đăng Nhập Mới Được Quẹt (Auth Gate Flow):**
+  - Khách chưa đăng nhập khi truy cập web sẽ mặc định dừng ở màn hình **Landing Page**.
+  - Không cho phép quẹt thẻ ở chế độ Khách (Guest Mode) để đảm bảo danh sách món đã lưu và lịch sử quẹt 7 ngày gắn chặt với tài khoản.
+  - Khi bấm nút CTA "Bắt đầu quẹt món" hoặc bấm tab Quẹt Thẻ: Tự động mở `AuthModal` (Đăng nhập / Đăng ký).
+  - Đăng nhập/Đăng ký thành công $\rightarrow$ Tự động chuyển hướng (redirect) vào màn hình quẹt thẻ (Swipe Deck).
+  - Khi bấm Đăng xuất: Xóa session và chuyển ngay về Landing Page.
+
+- [ ] **Infinite Deck — Tự Động Tải Thêm Món Mới, Không Bị Limit & Nhẹ Máy:**
+  - Giải pháp tối ưu: **Không** kéo thẳng 100 món về làm nặng DOM và tốn RAM trình duyệt.
+  - Cơ chế **Prefetch ngầm:** Khi ngăn xếp thẻ trong `CardStack.jsx` còn $\le 3$ món (người dùng quẹt gần cuối), Frontend tự động gọi API ngầm lấy thêm 5 món mới (`limit=5&exclude_ids=...`) và nối tiếp (`append`) vào đuôi danh sách thẻ hiện tại.
+  - Người dùng có thể quẹt liên tục không giới hạn (vô tận) mà giao diện vẫn siêu mượt 60 FPS (Framer Motion chỉ render tối đa 3 thẻ xếp lớp cùng lúc trên màn hình).
+
+- [ ] **Logo Nhận Diện Chính Thức Cho Web:**
+  - Thay thế icon muỗng nĩa tạm thời bằng Logo nhận diện thương hiệu YumYumPick chính thức (vector SVG / PNG sắc nét).
+  - Hiển thị đồng bộ trên Header/Navbar, Favicon trình duyệt và Hero Section của Landing Page.
+
+- [ ] **Chỉnh Sửa Cờ Quốc Gia Của Ý (Italy Flag Fix):**
+  - Cập nhật bảng mapping cờ quốc gia `CUISINE_FLAGS` trong `SwipeCard.jsx`: Bổ sung `Italy: '🇮🇹'` và `'Ý': '🇮🇹'` để các món Ý (Pizza Margherita, Mì Ý Bolognese, Carbonara, Risotto...) hiển thị đúng cờ Ý 🇮🇹 thay vì bị fallback thành cờ địa cầu `🌏`.
 
 ---
 
@@ -103,18 +124,21 @@
 - [x] **Luân:** Ghép nối `FilterModal.jsx` với API của Đăng Huy để lọc sơ bộ theo quốc gia, độ cay, thời gian; hoàn thiện slide kiến trúc kỹ thuật và dữ liệu.
 - [x] **Tùng Dương:** Đã hoàn thành ghép nối `LikedDishesView.jsx` với API `GET /api/v1/saved-dishes/{user_id}` để lấy danh sách món đã lưu từ CSDL SQLite (kèm skeleton loader).
  
-### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức & Phím Tắt PC
-- [ ] **Minh Đức:** Thực hiện kiểm thử toàn diện trên PC và Mobile thật qua mạng LAN; phân loại và giao bug cho FE/BE fix.
-- [x] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc.
-- [ ] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms.
-- [x] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) và cụm nút bấm nổi (Nút Bỏ qua, Nút Thích).
+### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức, Chống Trùng Món & Nâng Cấp UX
+- [ ] **Minh Đức:** Thực hiện kiểm thử toàn diện trên PC và Mobile thật qua mạng LAN; kiểm thử cơ chế chống lặp món 7 ngày (`exclude_ids`); phân loại và giao bug cho FE/BE fix.
+- [x] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc; tối ưu query `exclude_ids` lọc nhanh.
+- [ ] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms; hỗ trợ bảo mật cho luồng Auth Gate.
+- [x] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) có chặn khi gõ input; cụm nút bấm nổi; chuẩn bị nâng cấp Infinite Deck (prefetch 5 món khi $\le 3$ thẻ) và cập nhật cờ Ý 🇮🇹 trong `SwipeCard.jsx`.
 - [x] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp, fallback ảnh 2 lớp, tối ưu header responsive mobile).
-- [x] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; soạn kịch bản thuyết trình chi tiết (Storytelling 10-12 phút), kịch bản Live Demo từng bước và video dự phòng.
+- [x] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; thiết kế giao diện Landing Page giới thiệu web và luồng Auth Gate (bắt buộc đăng nhập mới được quẹt, bấm logo ra Landing Page); cập nhật Logo chính thức.
+- [x] **Minh Đức + Core FE:** Đã hoàn thành cơ chế loại trừ món đã lướt qua trong vòng 1 tuần (7 ngày) qua `swipeHistory.js` và `localStorage`.
 
-### Ngày 5: Kiểm Thử Toàn Diện, Tổng Duyệt & Báo Cáo
-- [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD.
+### Ngày 5: Kiểm Thử Toàn Diện, Hoàn Thiện Tính Năng Mới, Tổng Duyệt & Báo Cáo
+- [ ] **Luân:** Hoàn thiện component `LandingPage.jsx`, gắn sự kiện click Logo Header về Landing Page, áp dụng Logo thương hiệu chính thức và kích hoạt luồng Auth Gate (Chưa đăng nhập $\rightarrow$ Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Mở Quẹt thẻ).
+- [ ] **Quang Huy:** Triển khai cơ chế Infinite Deck trong `CardStack.jsx` (tự động gọi API lấy thêm 5 món nối tiếp khi còn $\le 3$ thẻ, không bị limit mà vẫn nhẹ máy); sửa cờ Ý thành 🇮🇹 trong `SwipeCard.jsx`.
+- [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD (Kiểm tra kỹ: Landing Page, Auth Gate, Infinite Prefetch, 7-day exclusion, cờ Ý).
 - [ ] **Cả team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Chạy kiểm thử End-to-End trơn tru:
-  - Đăng ký user $\rightarrow$ Đăng nhập $\rightarrow$ Đổi bộ lọc $\rightarrow$ Quẹt thẻ $\rightarrow$ Lưu món $\rightarrow$ Xem danh sách đã thích $\rightarrow$ Xem chi tiết công thức.
+  - Khách vào Landing Page $\rightarrow$ Bấm Bắt đầu $\rightarrow$ Đăng ký/Đăng nhập $\rightarrow$ Quẹt thẻ vô tận (prefetch ngầm) $\rightarrow$ Không trùng món 7 ngày $\rightarrow$ Đổi bộ lọc $\rightarrow$ Lưu món $\rightarrow$ Xem chi tiết công thức $\rightarrow$ Bấm Logo về Landing Page.
 - [ ] **Luân:** Soạn bộ câu hỏi phản biện (Q&A Cheat Sheet); đại diện nhóm thuyết trình báo cáo đồ án với bộ Slide hoàn thiện.
 - [ ] **Cả team:** Sẵn sàng bảo vệ đồ án đạt kết quả xuất sắc!
 
@@ -126,23 +150,31 @@
    - Điều phối sprint 5 ngày, Daily Sync 10 phút.
    - Quản trị kho 100 món ăn, 100 ảnh offline, CSDL SQLite `yumyumpick.db`.
    - Kiểm định chất lượng toàn diện (Test Matrix) trên PC và Mobile thật qua mạng LAN.
+   - Nghiệm thu tính năng chống trùng món 7 ngày (`exclude_ids`) và luồng Auth Gate.
 2. **Ánh Dương — Backend Engineer 1:**
    - Setup FastAPI Server, CORS, Mount static `/images`.
    - Xây dựng Simple Auth API (`POST /api/v1/auth/signup`, `POST /api/v1/auth/login`).
    - Cung cấp Mock Data JSON cho Frontend.
+   - Đảm bảo phiên đăng nhập xác thực ổn định phục vụ luồng Auth Gate.
 3. **Đăng Huy — Backend Engineer 2:**
-   - Xây dựng Dishes Core API (`GET /api/v1/dishes/random`, bộ lọc quốc gia, độ cay, thời gian nấu, loại trừ món đã quẹt).
+   - Xây dựng Dishes Core API (`GET /api/v1/dishes/random`, bộ lọc quốc gia, độ cay, thời gian nấu, loại trừ món đã quẹt `exclude_ids`).
    - Xây dựng Saved Dishes API (`POST`, `GET`, `DELETE` món đã lưu vào CSDL SQLite).
+   - Tối ưu hóa API random phục vụ các đợt prefetch 5 món của Infinite Deck.
 4. **Quang Huy — Frontend Engineer 1 (Swipe Deck & Motion):**
    - Xây dựng Swipe Deck Framer Motion (`SwipeCard.jsx`, `CardStack.jsx`, Stamp YUMMY/NOPE, spring physics).
    - Tích hợp ảnh, tên món, huy hiệu và description intro trực tiếp lên mặt thẻ quẹt.
+   - Triển khai **Infinite Deck**: Prefetch tự động 5 món khi ngăn xếp còn $\le 3$ thẻ (giữ DOM nhẹ, quẹt vô tận không bị dừng thẻ).
+   - Cập nhật cờ ẩm thực Ý thành **🇮🇹** trong `SwipeCard.jsx`.
    - Tối ưu Responsive PC (khung $420 \times 600$px, phím tắt `←`, `→`) và Mobile touch gestures.
 5. **Tùng Dương — Frontend Engineer 2 (Liked Dishes & Recipe Detail):**
    - Xây dựng `LikedDishesView.jsx` (danh sách món đã thích kèm nút xóa).
    - Xây dựng `DishDetailModal.jsx` (xem chi tiết công thức với checkbox tương tác nguyên liệu, 3 bước nấu và mẹo đầu bếp).
+   - Đảm bảo hiển thị cờ Ý 🇮🇹 đồng bộ trên danh sách đã lưu và modal công thức.
 6. **Luân — Frontend Engineer 3 & Pitching Lead (App Shell, Filter, Auth & Presentation):**
    - Xây dựng Layout tổng thể, Header/Navbar, `AuthModal.jsx` (session `localStorage`), `FilterModal.jsx` (bộ lọc 5 nước, độ cay, thời gian).
+   - Xây dựng **Landing Page** giới thiệu web; cấu hình sự kiện click Logo trên Header điều hướng về Landing Page.
+   - Triển khai **Auth Gate**: Bắt buộc đăng nhập mới được vào quẹt thẻ (Khách vào web xem Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Chuyển sang Swipe Deck).
+   - Tích hợp **Logo thương hiệu chính thức** của YumYumPick lên Header, Favicon và Landing Page.
    - Thiết kế bộ Slide PowerPoint báo cáo đồ án chuyên nghiệp (12 - 15 slides, phong cách ẩm thực hiện đại).
-   - Soạn Kịch bản Thuyết trình lôi cuốn (Storytelling 10-12 phút).
-   - Lập kịch bản Live Demo chi tiết và chuẩn bị video demo dự phòng.
-   - Biên soạn bộ câu hỏi - câu trả lời phản biện (Q&A Cheat Sheet) cho buổi bảo vệ.
+   - Soạn Kịch bản Thuyết trình lôi cuốn (Storytelling 10-12 phút), kịch bản Live Demo và Q&A Cheat Sheet.
+

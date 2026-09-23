@@ -9,6 +9,7 @@ import { MOCK_DISHES } from './data/mockDishes'
 import { useAuth } from './hooks/useAuth'
 import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from 'lucide-react'
 import { useFilterMetadata } from './hooks/useFilterMetadata';
+import { swipeHistory } from './services/swipeHistory';
 
 function App() {
   const { user, login, logout } = useAuth()
@@ -37,12 +38,48 @@ function App() {
 
   const fetchRandomDishes = async (filters = {}) => {
     try {
-      const dishes = await api.getRandomDishes(filters)
+      const excludedIds = swipeHistory.getExcludedDishIds()
+      const dishes = await api.getRandomDishes({
+        ...filters,
+        exclude_ids: excludedIds.length > 0 ? excludedIds.join(',') : undefined
+      })
+
       if (dishes && dishes.length > 0) {
         setSwipeDishes(dishes)
+      } else {
+        // Nếu đã quẹt hết sạch toàn bộ món trong 7 ngày qua (không còn món nào)
+        if (excludedIds.length > 0 && !filters.cuisine && !filters.spicy_level && !filters.max_time) {
+          swipeHistory.clearHistory()
+          const fresh = await api.getRandomDishes(filters)
+          setSwipeDishes(fresh || [])
+        } else {
+          setSwipeDishes([])
+        }
       }
     } catch (err) {
       console.error('[App] Failed to fetch random dishes:', err)
+    }
+  }
+
+  const handleRefreshDeck = async () => {
+    // Khi bấm "Quay lại từ đầu", ưu tiên lấy các món tiếp theo chưa quẹt trong 7 ngày
+    const excludedIds = swipeHistory.getExcludedDishIds()
+    try {
+      const nextDishes = await api.getRandomDishes({
+        ...activeFilters,
+        exclude_ids: excludedIds.length > 0 ? excludedIds.join(',') : undefined
+      })
+
+      if (nextDishes && nextDishes.length > 0) {
+        setSwipeDishes(nextDishes)
+      } else {
+        // Đã hết toàn bộ món chưa quẹt trong 7 ngày -> Reset lịch sử để bắt đầu vòng tuần hoàn mới
+        swipeHistory.clearHistory()
+        const fresh = await api.getRandomDishes(activeFilters)
+        setSwipeDishes(fresh || [])
+      }
+    } catch (err) {
+      console.error('[App] Failed to refresh dishes:', err)
     }
   }
 
@@ -239,7 +276,7 @@ function App() {
             <CardStack
               initialDishes={swipeDishes}
               onLike={handleToggleLike}
-              onRefresh={() => fetchRandomDishes(activeFilters)}
+              onRefresh={handleRefreshDeck}
             />
           </section>
         )}

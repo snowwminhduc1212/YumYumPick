@@ -103,7 +103,7 @@ export const api = {
         throw new Error(`Server returned ${response.status}: ${response.statusText}`)
       }
       const data = await response.json()
-      if (Array.isArray(data) && data.length > 0) {
+      if (Array.isArray(data)) {
         return data.map((item) => ({
           id: item.id,
           name: item.name,
@@ -117,7 +117,7 @@ export const api = {
           short_description: item.short_description || ''
         }))
       }
-      return MOCK_DISHES
+      return []
     } catch (err) {
       console.warn('[API] Failed to fetch random dishes from backend, using mock fallback:', err.message)
       return MOCK_DISHES

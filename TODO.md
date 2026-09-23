@@ -15,7 +15,7 @@
   - Stamp hiệu ứng Like ("YUMMY") màu xanh và Skip ("NOPE") màu đỏ nổi bật khi kéo.
   - Cụm nút bấm trợ năng: Nút Bỏ qua (SKIP) và Nút Thích (LIKE).
 
-- [ ] **Đăng Ký & Đăng Nhập Đơn Giản (Simple User Auth):**
+- [x] **Đăng Ký & Đăng Nhập Đơn Giản (Simple User Auth):**
   - Không cần email verification, OTP, quên mật khẩu phức tạp.
   - Đăng ký: Nhập `username`, `password`, `full_name` $\rightarrow$ tạo ngay bản ghi trong bảng `users` của SQLite.
   - Đăng nhập: Nhập `username`, `password` $\rightarrow$ xác thực khớp dữ liệu $\rightarrow$ trả về thông tin user.
@@ -32,16 +32,16 @@
     - Khung mẹo vặt từ đầu bếp (`tips`).
     - Cơ chế fallback ảnh 2 tầng (ảnh offline SQLite $\rightarrow$ Unsplash online $\rightarrow$ banner placeholder Limón).
 
-- [ ] **Bộ Lọc Món Ăn Nhanh (Quick Filters):**
+- [x] **Bộ Lọc Món Ăn Nhanh (Quick Filters):**
   - Lọc theo nền ẩm thực / quốc gia: Việt Nam, Nhật Bản, Hàn Quốc, Thái Lan, Ý...
   - Lọc theo thời gian nấu: Dưới 20 phút, Kỳ công (>= 20 phút), Tất cả.
   - Lọc theo độ cay: Không cay, Có cay (Cấp 1-3), Tất cả.
 
-- [ ] **Giao Diện Responsive Toàn Diện (Mobile + PC):**
+- [x] **Giao Diện Responsive Toàn Diện (Mobile + PC):**
   - **Mobile:** Tràn viền (100vw), vuốt chạm ngón tay cái mượt mà.
   - **Desktop PC:** Khung thẻ căn giữa màn hình ($420\text{px} \times 600\text{px}$), hỗ trợ phím mũi tên bàn phím (`←` Skip, `→` Like).
 
-- [ ] **Quản Lý Dữ Liệu Qua SQLite (Không Admin CMS):**
+- [x] **Quản Lý Dữ Liệu Qua SQLite (Không Admin CMS):**
   - Quản lý thêm/sửa/xóa món ăn trực tiếp qua file `yumyumpick.db` bằng công cụ **DB Browser for SQLite** hoặc chạy script Python `seed_sqlite.py`.
   - Không cần xây dựng trang Admin UI, giảm bớt hàng chục API và form phức tạp.
 

@@ -22,10 +22,33 @@ const CUISINE_FLAGS = {
   Thailand: '🇹🇭',
   'Thái Lan': '🇹🇭',
   Italy: '🇮🇹',
-  'Ý': '🇮🇹'
+  'Ý': '🇮🇹',
+  China: '🇨🇳',
+  'Trung Quốc': '🇨🇳',
+  France: '🇫🇷',
+  'Pháp': '🇫🇷',
+  Mexico: '🇲🇽',
+  India: '🇮🇳',
+  'Ấn Độ': '🇮🇳',
+  USA: '🇺🇸',
+  'Mỹ': '🇺🇸',
+  Spain: '🇪🇸',
+  'Tây Ban Nha': '🇪🇸',
+  Greece: '🇬🇷',
+  'Hy Lạp': '🇬🇷',
+  Germany: '🇩🇪',
+  'Đức': '🇩🇪',
+  Turkey: '🇹🇷',
+  'Thổ Nhĩ Kỳ': '🇹🇷',
+  'Southeast Asia': '🇸🇬',
+  'Đông Nam Á': '🇸🇬'
 }
 
-const CUISINE_FILTERS = ['Tất cả', 'Việt Nam', 'Hàn Quốc', 'Nhật Bản', 'Thái Lan', 'Ý']
+const CUISINE_FILTERS = [
+  'Tất cả', 'Việt Nam', 'Hàn Quốc', 'Nhật Bản', 'Thái Lan', 'Ý',
+  'Trung Quốc', 'Pháp', 'Mexico', 'Ấn Độ', 'Mỹ', 'Tây Ban Nha',
+  'Hy Lạp', 'Đức', 'Thổ Nhĩ Kỳ', 'Đông Nam Á'
+]
 
 export default function LikedDishesView({
   likedDishes = [],

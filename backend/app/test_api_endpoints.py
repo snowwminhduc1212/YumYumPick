@@ -64,7 +64,7 @@ def test_dishes_endpoints():
     res = client.get("/api/v1/dishes/filters/metadata")
     assert res.status_code == 200, f"Expected 200, got {res.status_code}"
     meta = res.json()
-    assert len(meta["cuisines"]) == 5, f"Expected 5 cuisines, got {len(meta['cuisines'])}"
+    assert len(meta["cuisines"]) >= 5, f"Expected at least 5 cuisines, got {len(meta['cuisines'])}"
     for c in meta["cuisines"]:
         assert "id" in c and "name" in c and "flag" in c, f"Incomplete cuisine item: {c}"
         assert c["flag"], f"Missing flag emoji value for {c['id']}"

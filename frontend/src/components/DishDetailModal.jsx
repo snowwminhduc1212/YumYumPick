@@ -23,7 +23,28 @@ const CUISINE_FLAGS = {
   Thailand: '🇹🇭',
   'Thái Lan': '🇹🇭',
   Italy: '🇮🇹',
-  'Ý': '🇮🇹'
+  'Ý': '🇮🇹',
+  China: '🇨🇳',
+  'Trung Quốc': '🇨🇳',
+  France: '🇫🇷',
+  'Pháp': '🇫🇷',
+  Mexico: '🇲🇽',
+  India: '🇮🇳',
+  'Ấn Độ': '🇮🇳',
+  USA: '🇺🇸',
+  'Mỹ': '🇺🇸',
+  Spain: '🇪🇸',
+  'Tây Ban Nha': '🇪🇸',
+  Greece: '🇬🇷',
+  'Hy Lạp': '🇬🇷',
+  Germany: '🇩🇪',
+  'Đức': '🇩🇪',
+  Turkey: '🇹🇷',
+  'Thổ Nhĩ Kỳ': '🇹🇷',
+  'Southeast Asia': '🇸🇬',
+  'Đông Nam Á': '🇸🇬',
+  Western: '🌍',
+  'Phương Tây': '🌍'
 }
 
 export default function DishDetailModal({

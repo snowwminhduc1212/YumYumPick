@@ -9,7 +9,12 @@ import { swipeHistory } from "../services/swipeHistory";
  * Quản lý ngăn xếp thẻ (tối đa 3 thẻ xếp lớp)
  * Hỗ trợ quẹt kéo chuột/touch, phím tắt PC (←, →) và cụm nút bấm nổi
  */
-export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
+export default function CardStack({
+  initialDishes = [],
+  onLike,
+  onRefresh,
+  onCardSwiped
+}) {
   const [dishes, setDishes] = useState(initialDishes);
   const [exitDirection, setExitDirection] = useState("right");
 
@@ -27,14 +32,19 @@ export default function CardStack({ initialDishes = [], onLike, onRefresh }) {
       swipeHistory.recordSwipe(dish.id);
     }
 
-    // Loại bỏ thẻ trên cùng khỏi danh sách
+    // Loại bỏ thẻ trên cùng khỏi danh sách local
     setDishes((prev) => prev.filter((item) => item.id !== dish.id));
+
+    // Thông báo cho App.jsx để xóa khỏi danh sách thẻ trong RAM
+    if (onCardSwiped) {
+      onCardSwiped(dish);
+    }
 
     // Nếu quẹt phải (LIKE), gọi hàm onLike để gửi API lưu món
     if (direction === "right" && onLike) {
       onLike(dish);
     }
-  }, [onLike]);
+  }, [onLike, onCardSwiped]);
 
   // Xử lý nút bấm thủ công (bấm nút Skip hoặc Like)
   const handleButtonClick = useCallback((direction) => {

@@ -28,24 +28,38 @@ function App() {
   const [likedDishes, setLikedDishes] = useState([])
   const [isLoadingLiked, setIsLoadingLiked] = useState(true)
 
-  const [swipeDishes, setSwipeDishes] = useState(MOCK_DISHES)
+  const [swipeDishes, setSwipeDishes] = useState([])
   const [activeFilters, setActiveFilters] = useState({})
 
-  const fetchRandomDishes = async (filters = {}) => {
+  const fetchRandomDishes = async (filters = activeFilters, currentLiked = likedDishes) => {
     try {
-      const excludedIds = swipeHistory.getExcludedDishIds()
+      const excludedHistoryIds = swipeHistory.getExcludedDishIds()
+      const savedIds = currentLiked.map((d) => d.id || d.dish_id).filter(Boolean)
+      const allExcludedIds = Array.from(new Set([...excludedHistoryIds, ...savedIds]))
+
       const dishes = await api.getRandomDishes({
         ...filters,
-        exclude_ids: excludedIds.length > 0 ? excludedIds.join(',') : undefined
+        exclude_ids: allExcludedIds.length > 0 ? allExcludedIds.join(',') : undefined
       })
 
-      if (dishes && dishes.length > 0) {
-        setSwipeDishes(dishes)
+      // Client-side defensive filter: eliminate any dish already in saved list
+      const cleanDishes = (dishes || []).filter(
+        (dish) => !savedIds.includes(dish.id || dish.dish_id)
+      )
+
+      if (cleanDishes && cleanDishes.length > 0) {
+        setSwipeDishes(cleanDishes)
       } else {
-        if (excludedIds.length > 0 && !filters.cuisine && !filters.spicy_level && !filters.max_time) {
+        if (excludedHistoryIds.length > 0 && !filters.cuisine && !filters.spicy_level && !filters.max_time) {
           swipeHistory.clearHistory()
-          const fresh = await api.getRandomDishes(filters)
-          setSwipeDishes(fresh || [])
+          const fresh = await api.getRandomDishes({
+            ...filters,
+            exclude_ids: savedIds.length > 0 ? savedIds.join(',') : undefined
+          })
+          const cleanFresh = (fresh || []).filter(
+            (dish) => !savedIds.includes(dish.id || dish.dish_id)
+          )
+          setSwipeDishes(cleanFresh)
         } else {
           setSwipeDishes([])
         }
@@ -56,28 +70,43 @@ function App() {
   }
 
   const handleRefreshDeck = async () => {
-    const excludedIds = swipeHistory.getExcludedDishIds()
+    const excludedHistoryIds = swipeHistory.getExcludedDishIds()
+    const savedIds = likedDishes.map((d) => d.id || d.dish_id).filter(Boolean)
+    const allExcludedIds = Array.from(new Set([...excludedHistoryIds, ...savedIds]))
+
     try {
       const nextDishes = await api.getRandomDishes({
         ...activeFilters,
-        exclude_ids: excludedIds.length > 0 ? excludedIds.join(',') : undefined
+        exclude_ids: allExcludedIds.length > 0 ? allExcludedIds.join(',') : undefined
       })
 
-      if (nextDishes && nextDishes.length > 0) {
-        setSwipeDishes(nextDishes)
+      const cleanDishes = (nextDishes || []).filter(
+        (dish) => !savedIds.includes(dish.id || dish.dish_id)
+      )
+
+      if (cleanDishes && cleanDishes.length > 0) {
+        setSwipeDishes(cleanDishes)
       } else {
         swipeHistory.clearHistory()
-        const fresh = await api.getRandomDishes(activeFilters)
-        setSwipeDishes(fresh || [])
+        const fresh = await api.getRandomDishes({
+          ...activeFilters,
+          exclude_ids: savedIds.length > 0 ? savedIds.join(',') : undefined
+        })
+        const cleanFresh = (fresh || []).filter(
+          (dish) => !savedIds.includes(dish.id || dish.dish_id)
+        )
+        setSwipeDishes(cleanFresh)
       }
     } catch (err) {
       console.error('[App] Failed to refresh dishes:', err)
     }
   }
 
-  useEffect(() => {
-    fetchRandomDishes()
-  }, [])
+  // Remove card from RAM immediately upon swipe
+  const handleCardSwiped = (swipedDish) => {
+    const swipedId = swipedDish.id || swipedDish.dish_id
+    setSwipeDishes((prev) => prev.filter((d) => (d.id || d.dish_id) !== swipedId))
+  }
 
   const [selectedDish, setSelectedDish] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -89,14 +118,17 @@ function App() {
     api.getSavedDishes(currentUserId)
       .then((dishes) => {
         if (isMounted) {
-          setLikedDishes(dishes)
+          const list = dishes || []
+          setLikedDishes(list)
           setIsLoadingLiked(false)
+          fetchRandomDishes(activeFilters, list)
         }
       })
       .catch((err) => {
         console.error('[App] Failed to load saved dishes:', err)
         if (isMounted) {
           setIsLoadingLiked(false)
+          fetchRandomDishes(activeFilters, [])
         }
       })
 
@@ -139,6 +171,18 @@ function App() {
     await api.unsaveDish(currentUserId, dishId)
   }
 
+  // Swiping right is strictly additive (saves to SQLite if not already saved)
+  const handleLikeDish = async (dish) => {
+    const dishId = dish.id || dish.dish_id
+    const isAlreadyLiked = likedDishes.some((d) => (d.id || d.dish_id) === dishId)
+
+    if (!isAlreadyLiked) {
+      setLikedDishes((prev) => [dish, ...prev])
+      await api.saveDish(currentUserId, dishId)
+    }
+  }
+
+  // Heart toggle inside DishDetailModal
   const handleToggleLike = async (dish) => {
     const dishId = dish.id || dish.dish_id
     const isAlreadyLiked = likedDishes.some((d) => (d.id || d.dish_id) === dishId)
@@ -160,6 +204,14 @@ function App() {
       setAuthOpen(true)
     } else {
       setCurrentView('swipe')
+      setSwipeDishes((prev) => {
+        const savedIds = new Set(likedDishes.map((d) => d.id || d.dish_id))
+        const remaining = prev.filter((d) => !savedIds.has(d.id || d.dish_id))
+        if (remaining.length <= 3) {
+          fetchRandomDishes(activeFilters, likedDishes)
+        }
+        return remaining
+      })
     }
   }
 
@@ -271,8 +323,9 @@ function App() {
           <section className="flex flex-1 items-center justify-center w-full my-auto py-8 relative">
             <CardStack
               initialDishes={swipeDishes}
-              onLike={handleToggleLike}
+              onLike={handleLikeDish}
               onRefresh={handleRefreshDeck}
+              onCardSwiped={handleCardSwiped}
             />
           </section>
         )}

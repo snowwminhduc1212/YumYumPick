@@ -156,10 +156,10 @@
    - Xây dựng Simple Auth API (`POST /api/v1/auth/signup`, `POST /api/v1/auth/login`).
    - Cung cấp Mock Data JSON cho Frontend.
    - Đảm bảo phiên đăng nhập xác thực ổn định phục vụ luồng Auth Gate.
-3. **Đăng Huy — Backend Engineer 2:**
-   - Xây dựng Dishes Core API (`GET /api/v1/dishes/random`, bộ lọc quốc gia, độ cay, thời gian nấu, loại trừ món đã quẹt `exclude_ids`).
-   - Xây dựng Saved Dishes API (`POST`, `GET`, `DELETE` món đã lưu vào CSDL SQLite).
-   - Tối ưu hóa API random phục vụ các đợt prefetch 5 món của Infinite Deck.
+3. **Đăng Huy — Backend Engineer 2:** *(Đã hoàn thành 100%)*
+   - [x] Xây dựng Dishes Core API (`GET /api/v1/dishes/random`, bộ lọc quốc gia, độ cay, thời gian nấu, loại trừ món đã quẹt `exclude_ids`).
+   - [x] Xây dựng Saved Dishes API (`POST`, `GET`, `DELETE` món đã lưu vào CSDL SQLite).
+   - [x] Tối ưu hóa API random phục vụ các đợt prefetch 5 món của Infinite Deck.
 4. **Quang Huy — Frontend Engineer 1 (Swipe Deck & Motion):**
    - Xây dựng Swipe Deck Framer Motion (`SwipeCard.jsx`, `CardStack.jsx`, Stamp YUMMY/NOPE, spring physics).
    - Tích hợp ảnh, tên món, huy hiệu và description intro trực tiếp lên mặt thẻ quẹt.

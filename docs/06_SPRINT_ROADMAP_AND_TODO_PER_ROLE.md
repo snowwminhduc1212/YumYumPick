@@ -235,25 +235,25 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 ### 5. Tùng Dương — Frontend Engineer 2 (Liked Dishes & Detail Recipe View)
 
 #### Ngày 1: Setup Khung Component Món Đã Lưu & Chi Tiết Công Thức
-- [ ] Khởi tạo thư mục và file component: `LikedDishesView.jsx` và `DishDetailModal.jsx`.
-- [ ] Định nghĩa cấu trúc dữ liệu hiển thị (Dish Title, Image, Badges, Ingredients, Steps, Tips) dựa trên Mock JSON của Backend.
-- [ ] Phối hợp với Luân để thống nhất điểm gắn kết (trigger) mở LikedDishesView từ nút Trái Tim trên Header.
+- [x] Khởi tạo thư mục và file component: `LikedDishesView.jsx` và `DishDetailModal.jsx`.
+- [x] Định nghĩa cấu trúc dữ liệu hiển thị (Dish Title, Image, Badges, Ingredients, Steps, Tips) dựa trên Mock JSON của Backend.
+- [x] Phối hợp với Luân để thống nhất điểm gắn kết (trigger) mở LikedDishesView từ nút Trái Tim trên Header.
 
 #### Ngày 2: Xây Dựng Giao Diện Danh Sách Món Đã Thích
-- [ ] Xây dựng component `LikedDishesView.jsx`:
+- [x] Xây dựng component `LikedDishesView.jsx`:
   - Hiển thị danh sách các món ăn đã thích dưới dạng lưới (Grid) hoặc danh sách thẻ trực quan.
   - Mỗi item gồm: Ảnh thu nhỏ sắc nét, tên món (Việt/Anh), quốc gia, thời gian chế biến.
   - Nút biểu tượng thùng rác: Thao tác xóa/bỏ thích món ăn khỏi danh sách.
   - Xử lý trạng thái trống (Empty State): *"Bạn chưa lưu món ăn nào. Hãy quẹt phải để thêm món nhé!"*.
 
 #### Ngày 3: Tích Hợp API Saved Dishes Với Backend
-- [ ] Ghép nối `LikedDishesView.jsx` với API của Đăng Huy:
+- [x] Ghép nối `LikedDishesView.jsx` với API của Đăng Huy:
   - Gọi `GET /api/v1/saved-dishes/{user_id}` để tải danh sách món đã lưu vào SQLite.
   - Gọi `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` khi bấm nút thùng rác để cập nhật CSDL SQLite tức thì.
   - Cập nhật số đếm badge hiển thị trên Header (phối hợp với Luân).
 
 #### Ngày 4: Hoàn Thiện Modal Chi Tiết Công Thức & Checkbox Nguyên Liệu
-- [ ] Xây dựng hoàn thiện component `DishDetailModal.jsx`:
+- [x] Xây dựng hoàn thiện component `DishDetailModal.jsx`:
   - Bấm vào bất kỳ món nào trong danh sách đã thích $\rightarrow$ Mở modal chi tiết công thức nấu ăn.
   - **Header:** Ảnh lớn sắc nét, tên món (Việt/Anh), badges thông số và đoạn giới thiệu ngắn (`short_description`).
   - **Danh sách nguyên liệu kèm Checkbox tương tác `[ ]`:**
@@ -262,8 +262,8 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
   - **Khung Mẹo đầu bếp (`tips`):** Hộp viền vàng nổi bật chia sẻ bí quyết nấu ngon.
 
 #### Ngày 5: Kiểm Thử Giao Diện, Đồng Bộ Cờ Ý 🇮🇹 & Tinh Chỉnh Cuối Cùng
-- [ ] Kiểm tra responsive trên cả màn hình Mobile và Desktop PC.
-- [ ] Đảm bảo cờ Ý 🇮🇹 hiển thị chính xác và đồng bộ trên danh sách đã lưu và modal công thức.
+- [x] Kiểm tra responsive trên cả màn hình Mobile và Desktop PC.
+- [x] Đảm bảo cờ Ý 🇮🇹 hiển thị chính xác và đồng bộ trên danh sách đã lưu và modal công thức (đồng bộ toàn bộ 16 nước).
 - [ ] Tham gia tổng duyệt Demo.
 
 ---

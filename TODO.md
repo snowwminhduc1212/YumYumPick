@@ -43,11 +43,11 @@
   - Tự động dọn dẹp các món đã quẹt quá 7 ngày để giải phóng bộ nhớ và cho phép món xuất hiện lại.
   - Xử lý mảng rỗng `[]` chuẩn xác từ Backend khi đã quẹt hết món thỏa mãn bộ lọc.
 
-- [ ] **Landing Page Giới Thiệu Web & Điều Hướng Click Logo:**
+- [x] **Landing Page Giới Thiệu Web & Điều Hướng Click Logo:**
   - Xây dựng component `LandingPage.jsx`: Hero banner bắt mắt, slogan "Tinder for Food - Hôm nay ăn gì?", giới thiệu cách thức hoạt động 3 bước (Lọc $\rightarrow$ Quẹt $\rightarrow$ Nấu), showcase hình ảnh món ăn nổi bật, nút CTA "Bắt đầu khám phá ngay / Đăng nhập để quẹt".
   - Điều hướng: Bấm vào Logo thương hiệu trên Header/Navbar ở bất kỳ màn hình nào sẽ lập tức chuyển về Landing Page.
 
-- [ ] **Bắt Buộc Đăng Nhập Mới Được Quẹt (Auth Gate Flow):**
+- [x] **Bắt Buộc Đăng Nhập Mới Được Quẹt (Auth Gate Flow):**
   - Khách chưa đăng nhập khi truy cập web sẽ mặc định dừng ở màn hình **Landing Page**.
   - Không cho phép quẹt thẻ ở chế độ Khách (Guest Mode) để đảm bảo danh sách món đã lưu và lịch sử quẹt 7 ngày gắn chặt với tài khoản.
   - Khi bấm nút CTA "Bắt đầu quẹt món" hoặc bấm tab Quẹt Thẻ: Tự động mở `AuthModal` (Đăng nhập / Đăng ký).
@@ -63,7 +63,7 @@
   - Thay thế icon muỗng nĩa tạm thời bằng Logo nhận diện thương hiệu YumYumPick chính thức (vector SVG / PNG sắc nét).
   - Hiển thị đồng bộ trên Header/Navbar, Favicon trình duyệt và Hero Section của Landing Page.
 
-- [ ] **Chỉnh Sửa Cờ Quốc Gia Của Ý (Italy Flag Fix):**
+- [x] **Chỉnh Sửa Cờ Quốc Gia Của Ý (Italy Flag Fix):**
   - Cập nhật bảng mapping cờ quốc gia `CUISINE_FLAGS` trong `SwipeCard.jsx`: Bổ sung `Italy: '🇮🇹'` và `'Ý': '🇮🇹'` để các món Ý (Pizza Margherita, Mì Ý Bolognese, Carbonara, Risotto...) hiển thị đúng cờ Ý 🇮🇹 thay vì bị fallback thành cờ địa cầu `🌏`.
 
 ---
@@ -101,7 +101,7 @@
 ```
 
 ### Ngày 1: Setup Môi Trường & Chốt API Contract
-- [ ] **Minh Đức (Lead, Data & QA):** Bàn giao CSDL SQLite `yumyumpick.db` (đầy đủ 100 món, 100 ảnh offline) và tài liệu đặc tả cho cả nhóm; chủ trì chốt API Contract.
+- [x] **Minh Đức (Lead, Data & QA):** Bàn giao CSDL SQLite `yumyumpick.db` (đầy đủ 100 món, 100 ảnh offline) và tài liệu đặc tả cho cả nhóm; chủ trì chốt API Contract.
 - [X] **Ánh Dương (Backend 1):** Setup FastAPI, CORS, Static Files mount `/images`; cung cấp Mock Data JSON cho Frontend.
 - [x] **Đăng Huy (Backend 2):** Khởi tạo ORM Models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) kết nối `backend/yumyumpick.db`.
 - [x] **Quang Huy (Frontend 1):** Khởi tạo project React (Vite + Tailwind CSS + Framer Motion); setup thư viện và khung thẻ quẹt.
@@ -117,8 +117,8 @@
 - [X] **Luân:** Xây dựng `AuthModal.jsx` (Đăng nhập/Đăng ký lưu `localStorage`) và `FilterModal.jsx` (Lọc theo quốc gia, độ cay, thời gian nấu); thiết kế các slide PowerPoint đầu tiên với kho ảnh ẩm thực.
 
 ### Ngày 3: Tích Hợp API & Bố Cục Responsive PC/Mobile
-- [ ] **Minh Đức:** Điều phối Daily Sync 09:00; giám sát việc kết nối API giữa FE và BE; kiểm tra dữ liệu ghi nhận vào SQLite.
-- [ ] **Ánh Dương + Luân:** Ghép nối `AuthModal.jsx` với Simple Auth API; kiểm tra tự khôi phục phiên đăng nhập khi F5.
+- [x] **Minh Đức:** Điều phối Daily Sync 09:00; giám sát việc kết nối API giữa FE và BE; kiểm tra dữ liệu ghi nhận vào SQLite.
+- [x] **Ánh Dương + Luân:** Ghép nối `AuthModal.jsx` với Simple Auth API; kiểm tra tự khôi phục phiên đăng nhập khi F5.
 - [x] **Đăng Huy + Quang Huy:** Kết nối API lấy danh sách thẻ ngẫu nhiên (kèm `short_description`) và gọi `POST /api/v1/saved-dishes` khi quẹt phải (LIKE).
 - [x] **Quang Huy:** Tinh chỉnh Responsive: Mobile full viền vuốt chạm mượt; Desktop PC khung thẻ $420 \times 600$px căn giữa màn hình.
 - [x] **Luân:** Ghép nối `FilterModal.jsx` với API của Đăng Huy để lọc sơ bộ theo quốc gia, độ cay, thời gian; hoàn thiện slide kiến trúc kỹ thuật và dữ liệu.
@@ -127,14 +127,14 @@
 ### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức, Chống Trùng Món & Nâng Cấp UX
 - [ ] **Minh Đức:** Thực hiện kiểm thử toàn diện trên PC và Mobile thật qua mạng LAN; kiểm thử cơ chế chống lặp món 7 ngày (`exclude_ids`); phân loại và giao bug cho FE/BE fix.
 - [x] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc; tối ưu query `exclude_ids` lọc nhanh.
-- [ ] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms; hỗ trợ bảo mật cho luồng Auth Gate.
+- [x] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms; hỗ trợ bảo mật cho luồng Auth Gate.
 - [x] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) có chặn khi gõ input; cụm nút bấm nổi; chuẩn bị nâng cấp Infinite Deck (prefetch 5 món khi $\le 3$ thẻ) và cập nhật cờ Ý 🇮🇹 trong `SwipeCard.jsx`.
 - [x] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp, fallback ảnh 2 lớp, tối ưu header responsive mobile).
 - [x] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; thiết kế giao diện Landing Page giới thiệu web và luồng Auth Gate (bắt buộc đăng nhập mới được quẹt, bấm logo ra Landing Page); cập nhật Logo chính thức.
 - [x] **Minh Đức + Core FE:** Đã hoàn thành cơ chế loại trừ món đã lướt qua trong vòng 1 tuần (7 ngày) qua `swipeHistory.js` và `localStorage`.
 
 ### Ngày 5: Kiểm Thử Toàn Diện, Hoàn Thiện Tính Năng Mới, Tổng Duyệt & Báo Cáo
-- [ ] **Luân:** Hoàn thiện component `LandingPage.jsx`, gắn sự kiện click Logo Header về Landing Page, áp dụng Logo thương hiệu chính thức và kích hoạt luồng Auth Gate (Chưa đăng nhập $\rightarrow$ Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Mở Quẹt thẻ).
+- [x] **Luân:** Hoàn thiện component `LandingPage.jsx`, gắn sự kiện click Logo Header về Landing Page, áp dụng Logo thương hiệu chính thức và kích hoạt luồng Auth Gate (Chưa đăng nhập $\rightarrow$ Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Mở Quẹt thẻ).
 - [ ] **Quang Huy:** Triển khai cơ chế Infinite Deck trong `CardStack.jsx` (tự động gọi API lấy thêm 5 món nối tiếp khi còn $\le 3$ thẻ, không bị limit mà vẫn nhẹ máy); sửa cờ Ý thành 🇮🇹 trong `SwipeCard.jsx`.
 - [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD (Kiểm tra kỹ: Landing Page, Auth Gate, Infinite Prefetch, 7-day exclusion, cờ Ý).
 - [ ] **Cả team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Chạy kiểm thử End-to-End trơn tru:

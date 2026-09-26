@@ -27,11 +27,11 @@ gantt
     Kiểm thử hiệu năng & Backup CSDL          :ad_5, 2026-09-19, 1d
 
     section Đăng Huy (Backend 2: Dishes & Saved)
-    Xây dựng ORM query Dishes từ SQLite       :active, dh_1, 2026-09-15, 1d
-    API Random Dishes & Bộ lọc thông minh     :dh_2, 2026-09-16, 1d
-    API Saved Dishes (Lưu, Lấy, Xóa món)      :dh_3, 2026-09-17, 1d
-    API Metadata Filters & Tối ưu Index SQLite:dh_4, 2026-09-18, 1d
-    Hoàn thiện Swagger Docs tại /docs         :dh_5, 2026-09-19, 1d
+    Xây dựng ORM query Dishes từ SQLite       :done, dh_1, 2026-09-15, 1d
+    API Random Dishes & Bộ lọc thông minh     :done, dh_2, 2026-09-16, 1d
+    API Saved Dishes (Lưu, Lấy, Xóa món)      :done, dh_3, 2026-09-17, 1d
+    API Metadata Filters & Tối ưu Index SQLite:done, dh_4, 2026-09-18, 1d
+    Hoàn thiện Swagger Docs tại /docs         :done, dh_5, 2026-09-19, 1d
 
     section Quang Huy (Frontend 1: Swipe Deck)
     Setup Vite, Tailwind & Framer Motion      :active, qh_1, 2026-09-15, 1d
@@ -146,40 +146,40 @@ Mỗi tính năng chỉ được xem là hoàn thành khi đáp ứng đủ các
 ### 3. Đăng Huy — Backend Engineer 2 (Dishes & Saved Recipes API)
 
 #### Ngày 1: Khởi Tạo ORM Models Cho Dishes & Recipes
-- [ ] Tạo các SQLAlchemy Models khớp với cấu trúc bảng SQLite:
+- [x] Tạo các SQLAlchemy Models khớp với cấu trúc bảng SQLite:
   - `Dish` (id, name, english_name, cuisine_id, image, cook_time_minutes, spicy_level, calories_approx, short_description, tips).
   - `Ingredient` (id, dish_id, name, amount, unit, category).
   - `CookingStep` (id, dish_id, step_number, title, description).
   - `UserSavedDish` (id, user_id, dish_id, saved_at).
-- [ ] Viết hàm query thử nghiệm để kiểm tra việc đọc dữ liệu từ `backend/yumyumpick.db`.
+- [x] Viết hàm query thử nghiệm để kiểm tra việc đọc dữ liệu từ `backend/yumyumpick.db`.
 
 #### Ngày 2: Xây Dựng Dishes Core API & Bộ Lọc
-- [ ] Xây dựng endpoint `GET /api/v1/dishes/random`:
+- [x] Xây dựng endpoint `GET /api/v1/dishes/random`:
   - Lấy ngẫu nhiên các món ăn (sử dụng `ORDER BY RANDOM() LIMIT :limit`).
   - Hỗ trợ tham số lọc: `cuisine` (Việt, Hàn, Nhật, Thái, Ý), `spicy_level` (0-3), `max_cook_time` (phút).
   - Hỗ trợ tham số loại trừ: `exclude_ids` (danh sách ID món người dùng đã quẹt để không lặp lại).
-- [ ] Xây dựng endpoint `GET /api/v1/dishes/{dish_id}`:
+- [x] Xây dựng endpoint `GET /api/v1/dishes/{dish_id}`:
   - Trả về thông tin chi tiết của món kèm danh sách nguyên liệu và 3 bước nấu ăn.
 
 #### Ngày 3: Xây Dựng Saved Dishes Collection API
-- [ ] Xây dựng endpoint `POST /api/v1/saved-dishes`:
+- [x] Xây dựng endpoint `POST /api/v1/saved-dishes`:
   - Lưu cặp `{ user_id, dish_id }` vào bảng `user_saved_dishes` khi người dùng quẹt phải.
-- [ ] Xây dựng endpoint `GET /api/v1/saved-dishes/{user_id}`:
+- [x] Xây dựng endpoint `GET /api/v1/saved-dishes/{user_id}`:
   - Lấy danh sách toàn bộ các món đã lưu kèm đầy đủ nguyên liệu và các bước nấu ăn.
-- [ ] Xây dựng endpoint `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`:
+- [x] Xây dựng endpoint `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`:
   - Bỏ lưu món ăn khỏi bộ sưu tập của người dùng.
-- [ ] Xây dựng endpoint `GET /api/v1/filters/metadata`:
+- [x] Xây dựng endpoint `GET /api/v1/filters/metadata`:
   - Trả về danh sách quốc gia (5 nước), các mức độ cay và khoảng thời gian nấu phục vụ vẽ Filter UI.
 
 #### Ngày 4: Hỗ Trợ Ghép Nối API Với Frontend
-- [ ] Phối hợp với Quang Huy ghép nối API lấy thẻ ngẫu nhiên và lưu món khi quẹt phải.
-- [ ] Phối hợp với Tùng Dương ghép nối API lấy danh sách món đã thích và chi tiết công thức.
-- [ ] Xử lý các bug liên quan đến logic lọc và truy vấn do Minh Đức báo cáo.
+- [x] Phối hợp với Quang Huy ghép nối API lấy thẻ ngẫu nhiên và lưu món khi quẹt phải.
+- [x] Phối hợp với Tùng Dương ghép nối API lấy danh sách món đã thích và chi tiết công thức.
+- [x] Xử lý các bug liên quan đến logic lọc và truy vấn do Minh Đức báo cáo.
 
 #### Ngày 5: Kiểm Thử Swagger UI & Hoàn Thiện Tài Liệu API
-- [ ] Kiểm tra toàn bộ các endpoint trên Swagger UI (`http://localhost:8000/docs`).
-- [ ] Bổ sung mô tả (Docstrings) rõ ràng cho từng API để phục vụ phần thuyết trình kỹ thuật của Luân.
-- [ ] Tham gia tổng duyệt Demo.
+- [x] Kiểm tra toàn bộ các endpoint trên Swagger UI (`http://localhost:8000/docs`).
+- [x] Bổ sung mô tả (Docstrings) rõ ràng cho từng API để phục vụ phần thuyết trình kỹ thuật của Luân.
+- [x] Tham gia tổng duyệt Demo.
 
 ---
 

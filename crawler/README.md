@@ -63,6 +63,16 @@ python crawler/verify_dataset.py
   python crawler/crawl_dish_images.py --force-all
   ```
 
+### 5. Thu thập & Nâng cấp toàn diện công thức nấu ăn chi tiết (1.100 món):
+Để làm mới hoặc tái tạo công thức chi tiết 5 bước chuẩn đầu bếp (từ cách chọn mua, sơ chế, khử mùi, tẩm ướp sốt gốc, kiểm soát lửa, nêm nếm, dấu hiệu nhận biết khi chín đạt chuẩn đến trình bày thưởng thức):
+```powershell
+python crawler/crawl_and_refine_recipes.py
+```
+*Script sẽ tự động cập nhật và đồng bộ đồng thời vào:*
+1. SQLite Database: `backend/yumyumpick.db` (`ingredients`, `cooking_steps`, `dishes.tips`).
+2. Seed JSON: `backend/app/data/dishes_seed.json` (1.100 món có đầy đủ `ingredients` và `steps`).
+3. Frontend Mock: `frontend/src/data/mockDishes.js` (1.100 món đầy đủ công thức phục vụ fallback/offline).
+
 ---
 
 ## 🛡️ Cơ Chế Lọc & Chống Ảnh AI / Ảnh Stock Giả Lập

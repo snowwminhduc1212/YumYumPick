@@ -433,7 +433,7 @@ export default function DishDetailModal({
                         <h4 className="text-sm font-bold tracking-[0.03em] uppercase text-[#fcf9f0]">
                           {step.title}
                         </h4>
-                        <p className="text-xs sm:text-sm text-[#dbe2dc]/80 leading-relaxed tracking-[0.01em]">
+                        <p className="text-xs sm:text-sm text-[#dbe2dc]/80 leading-relaxed tracking-[0.01em] whitespace-pre-line">
                           {step.description}
                         </p>
                       </div>

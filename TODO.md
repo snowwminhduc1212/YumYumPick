@@ -135,7 +135,7 @@
 
 ### Ngày 5: Kiểm Thử Toàn Diện, Hoàn Thiện Tính Năng Mới, Tổng Duyệt & Báo Cáo
 - [x] **Luân:** Hoàn thiện component `LandingPage.jsx`, gắn sự kiện click Logo Header về Landing Page, áp dụng Logo thương hiệu chính thức và kích hoạt luồng Auth Gate (Chưa đăng nhập $\rightarrow$ Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Mở Quẹt thẻ).
-- [ ] **Quang Huy:** Triển khai cơ chế Infinite Deck trong `CardStack.jsx` (tự động gọi API lấy thêm 5 món nối tiếp khi còn $\le 3$ thẻ, không bị limit mà vẫn nhẹ máy); sửa cờ Ý thành 🇮🇹 trong `SwipeCard.jsx`.
+- [x] **Quang Huy:** Triển khai cơ chế Infinite Deck trong `CardStack.jsx` (tự động gọi API lấy thêm 5 món nối tiếp khi còn $\le 3$ thẻ, không bị limit mà vẫn nhẹ máy); sửa cờ Ý thành 🇮🇹 trong `SwipeCard.jsx`.
 - [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD (Kiểm tra kỹ: Landing Page, Auth Gate, Infinite Prefetch, 7-day exclusion, cờ Ý).
 - [ ] **Cả team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Chạy kiểm thử End-to-End trơn tru:
   - Khách vào Landing Page $\rightarrow$ Bấm Bắt đầu $\rightarrow$ Đăng ký/Đăng nhập $\rightarrow$ Quẹt thẻ vô tận (prefetch ngầm) $\rightarrow$ Không trùng món 7 ngày $\rightarrow$ Đổi bộ lọc $\rightarrow$ Lưu món $\rightarrow$ Xem chi tiết công thức $\rightarrow$ Bấm Logo về Landing Page.

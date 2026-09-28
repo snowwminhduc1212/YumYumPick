@@ -55,7 +55,7 @@ function normalizeDishDetail(item) {
 }
 
 export const api = {
-  /**
+  /**F
    * Fetch all saved dishes for a user from SQLite DB
    * Fallback to mockDishes if backend is offline
    */
@@ -93,6 +93,9 @@ export const api = {
       if (params.max_time) {
         query.append('max_time', params.max_time)
       }
+      if (params.difficulty) {
+        query.append('difficulty', params.difficulty)
+      }
       if (params.exclude_ids) {
         query.append('exclude_ids', params.exclude_ids)
       }
@@ -108,6 +111,7 @@ export const api = {
           id: item.id,
           name: item.name,
           english_name: item.english_name || '',
+          difficulty: item.difficulty || '',
           cuisine: item.cuisine,
           cook_time_minutes: item.cook_time_minutes ?? 25,
           spicy_level: item.spicy_level ?? 0,

@@ -28,6 +28,7 @@ class DishCardResponse(BaseModel):
     english_name: Optional[str] = None
     cuisine: str
     cook_time_minutes: int
+    difficulty: str = "Dễ"
     spicy_level: int = 0
     calories_approx: int = 400
     image: str

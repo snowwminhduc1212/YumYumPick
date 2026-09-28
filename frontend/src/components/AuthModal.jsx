@@ -2,6 +2,46 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { API_PREFIX } from '../config/api';
 
+// Tên hiển thị tiếng Việt cho từng trường
+const FIELD_LABELS = {
+  username: 'Username',
+  password: 'Mật khẩu',
+  full_name: 'Họ và tên',
+};
+
+// Dịch 1 lỗi validation (422) của FastAPI sang tiếng Việt
+function translateValidationError(err) {
+  // Lỗi từ field_validator của backend: đã có sẵn câu tiếng Việt, chỉ bỏ tiền tố
+  if (err.type === 'value_error' && typeof err.msg === 'string') {
+    return err.msg.replace(/^Value error,\s*/, '');
+  }
+
+  const field = Array.isArray(err.loc) ? err.loc[err.loc.length - 1] : '';
+  const label = FIELD_LABELS[field] || field || 'Dữ liệu';
+  const ctx = err.ctx || {};
+
+  switch (err.type) {
+    case 'string_too_short':
+      return `${label} phải có ít nhất ${ctx.min_length} ký tự`;
+    case 'string_too_long':
+      return `${label} không được vượt quá ${ctx.max_length} ký tự`;
+    case 'missing':
+      return `Thiếu ${label}`;
+    default:
+      return `${label}: ${err.msg}`;
+  }
+}
+
+// FastAPI trả detail dạng chuỗi (400/401) hoặc mảng object (422 validation)
+function extractErrorMessage(detail) {
+  if (!detail) return 'Có lỗi xảy ra, thử lại sau.';
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) {
+    return detail.map(translateValidationError).join('. ');
+  }
+  return 'Có lỗi xảy ra, thử lại sau.';
+}
+
 function AuthModal({ isOpen, onClose, onLoginSuccess }) {
   const [mode, setMode] = useState('login'); // 'login' | 'signup'
   const [username, setUsername] = useState('');
@@ -27,11 +67,14 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     setError('');
     setIsSubmitting(true);
 
+    // Backend lưu username dạng chữ thường khi đăng ký → gửi chữ thường cho cả login
+    const normalizedUsername = username.trim().toLowerCase();
+
     const endpoint = mode === 'login' ? 'login' : 'signup';
     const body =
       mode === 'login'
-        ? { username, password }
-        : { username, password, full_name: fullName };
+        ? { username: normalizedUsername, password }
+        : { username: normalizedUsername, password, full_name: fullName.trim() };
 
     try {
       const res = await fetch(`${API_PREFIX}/auth/${endpoint}`, {
@@ -43,9 +86,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
       const data = await res.json();
 
       if (!res.ok) {
-        // Backend trả {"detail": "..."} khi lỗi
-        setError(data.detail || 'Có lỗi xảy ra, thử lại sau.');
-        setIsSubmitting(false);
+        setError(extractErrorMessage(data.detail));
         return;
       }
 
@@ -59,6 +100,8 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
       setIsSubmitting(false);
     }
   };
+
+  const isSignup = mode === 'signup';
 
   return (
     <AnimatePresence>
@@ -94,7 +137,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 disabled={isSubmitting}
                 onClick={() => { setMode('signup'); setError(''); }}
                 className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
-                  mode === 'signup' ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
+                  isSignup ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
                 }`}
               >
                 Đăng ký
@@ -104,15 +147,16 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input
                 type="text"
-                placeholder="Username"
+                placeholder={isSignup ? 'Username (3–20 ký tự, chữ/số/_ )' : 'Username'}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 disabled={isSubmitting}
+                autoComplete="username"
                 className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
               />
 
-              {mode === 'signup' && (
+              {isSignup && (
                 <input
                   type="text"
                   placeholder="Họ và tên"
@@ -120,17 +164,19 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                   onChange={(e) => setFullName(e.target.value)}
                   required
                   disabled={isSubmitting}
+                  autoComplete="name"
                   className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
                 />
               )}
 
               <input
                 type="password"
-                placeholder="Password"
+                placeholder={isSignup ? 'Mật khẩu (tối thiểu 6 ký tự)' : 'Mật khẩu'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isSubmitting}
+                autoComplete={isSignup ? 'new-password' : 'current-password'}
                 className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
               />
 
@@ -143,7 +189,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 disabled={isSubmitting}
                 className="w-full mt-2 py-3 rounded-[1px] bg-lemon-zest hover:bg-pure-white text-black-olive text-sm font-extrabold uppercase tracking-[0.04em] disabled:opacity-50 transition-colors"
               >
-                {isSubmitting ? 'Đang xử lý...' : mode === 'login' ? 'Đăng nhập' : 'Đăng ký'}
+                {isSubmitting ? 'Đang xử lý...' : isSignup ? 'Đăng ký' : 'Đăng nhập'}
               </button>
             </form>
           </motion.div>

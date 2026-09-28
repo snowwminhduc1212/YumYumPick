@@ -13,6 +13,7 @@ class DishRepository:
         self,
         limit: int = 10,
         cuisine: Optional[str] = None,
+        difficulty: Optional[str] = None,
         spicy_level: Optional[int] = None,
         max_time: Optional[int] = None,
         exclude_ids: Optional[List[str]] = None,
@@ -21,6 +22,9 @@ class DishRepository:
 
         if cuisine:
             stmt = stmt.where(func.lower(Dish.cuisine) == cuisine.strip().lower())
+
+        if difficulty:
+            stmt = stmt.where(func.lower(Dish.difficulty) == difficulty.strip().lower())
 
         if spicy_level is not None:
             stmt = stmt.where(Dish.spicy_level == spicy_level)

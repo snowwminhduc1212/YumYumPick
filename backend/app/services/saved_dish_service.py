@@ -40,6 +40,7 @@ class SavedDishService:
                     english_name=dish.english_name if dish else None,
                     cuisine=dish.cuisine if dish else "",
                     cook_time_minutes=dish.cook_time_minutes if dish else 0,
+                    difficulty=dish.difficulty if dish and dish.difficulty else "Dễ",
                     image=dish.image if dish else "",
                     short_description=dish.short_description if dish else "",
                 )

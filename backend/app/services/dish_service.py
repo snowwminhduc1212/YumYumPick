@@ -18,6 +18,7 @@ class DishService:
         self,
         limit: int = 10,
         cuisine: Optional[str] = None,
+        difficulty: Optional[str] = None,
         spicy_level: Optional[int] = None,
         max_time: Optional[int] = None,
         exclude_ids: Optional[str] = None,
@@ -29,6 +30,7 @@ class DishService:
         dishes = self.repo.get_random_dishes(
             limit=limit,
             cuisine=cuisine,
+            difficulty=difficulty,
             spicy_level=spicy_level,
             max_time=max_time,
             exclude_ids=parsed_excludes,
@@ -44,6 +46,13 @@ class DishService:
     def get_filter_metadata(self) -> FilterMetadataResponse:
         cuisines = self.repo.get_all_cuisines()
         cuisines_data = [CuisineFilterItem.model_validate(c) for c in cuisines]
+
+        difficulties = [
+            FilterOptionItem(value=None, label="Tất cả"),
+            FilterOptionItem(value="Dễ", label="Dễ"),
+            FilterOptionItem(value="Trung bình", label="Trung bình"),
+            FilterOptionItem(value="Kỳ công", label="Kỳ công"),
+        ]
 
         spicy_levels = [
             FilterOptionItem(value=None, label="Tất cả"),
@@ -63,6 +72,7 @@ class DishService:
 
         return FilterMetadataResponse(
             cuisines=cuisines_data,
+            difficulties=difficulties,
             spicy_levels=spicy_levels,
             time_ranges=time_ranges,
         )

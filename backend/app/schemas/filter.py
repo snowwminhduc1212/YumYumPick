@@ -17,5 +17,6 @@ class FilterOptionItem(BaseModel):
 class FilterMetadataResponse(BaseModel):
     """Metadata for rendering the quick filter modal."""
     cuisines: List[CuisineFilterItem]
+    difficulties: List[FilterOptionItem]
     spicy_levels: List[FilterOptionItem]
     time_ranges: List[FilterOptionItem]

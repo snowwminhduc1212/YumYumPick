@@ -167,6 +167,13 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
               {dish.short_description}
             </p>
           </div>
+
+          {/* 4. ĐỘ KHÓ — dòng cuối thẻ, cùng kiểu màn Đã Lưu */}
+          {dish.difficulty && (
+            <div className="pt-3 border-t border-sage-mist/15 text-[11px] font-mono uppercase tracking-widest text-sage-mist">
+              Độ khó: {dish.difficulty}
+            </div>
+          )}
         </div>
 
       </div>

@@ -44,6 +44,34 @@ const CUISINE_FLAGS = {
   'Đông Nam Á': '🇸🇬'
 }
 
+const CUISINE_MAP = {
+  'Việt Nam': ['viet', 'việt'],
+  'Hàn Quốc': ['korea', 'hàn'],
+  'Nhật Bản': ['japan', 'nhật'],
+  'Thái Lan': ['thai', 'thái'],
+  'Ý': ['ital', 'ý'],
+  'Trung Quốc': ['china', 'chinese', 'trung'],
+  'Pháp': ['franc', 'french', 'pháp'],
+  'Mexico': ['mexic'],
+  'Ấn Độ': ['india', 'ấn'],
+  'Mỹ': ['usa', 'us', 'mỹ', 'america'],
+  'Tây Ban Nha': ['spain', 'spanish', 'tây ban nha'],
+  'Hy Lạp': ['gree', 'hy lạp'],
+  'Đức': ['german', 'đức'],
+  'Thổ Nhĩ Kỳ': ['turk', 'thổ'],
+  'Đông Nam Á': ['southeast asia', 'đông nam á']
+}
+
+function getCuisineFlag(cuisine) {
+  if (!cuisine) return '🌏'
+  if (CUISINE_FLAGS[cuisine]) return CUISINE_FLAGS[cuisine]
+  const lower = cuisine.toLowerCase().trim()
+  for (const [key, flag] of Object.entries(CUISINE_FLAGS)) {
+    if (key.toLowerCase() === lower) return flag
+  }
+  return '🌏'
+}
+
 const CUISINE_FILTERS = [
   'Tất cả', 'Việt Nam', 'Hàn Quốc', 'Nhật Bản', 'Thái Lan', 'Ý',
   'Trung Quốc', 'Pháp', 'Mexico', 'Ấn Độ', 'Mỹ', 'Tây Ban Nha',
@@ -70,12 +98,14 @@ export default function LikedDishesView({
 
       let matchCuisine = true
       if (selectedCuisine !== 'Tất cả') {
-        const c = dish.cuisine?.toLowerCase()
-        if (selectedCuisine === 'Việt Nam') matchCuisine = c.includes('viet') || c.includes('việt')
-        else if (selectedCuisine === 'Hàn Quốc') matchCuisine = c.includes('korea') || c.includes('hàn')
-        else if (selectedCuisine === 'Nhật Bản') matchCuisine = c.includes('japan') || c.includes('nhật')
-        else if (selectedCuisine === 'Thái Lan') matchCuisine = c.includes('thai') || c.includes('thái')
-        else if (selectedCuisine === 'Ý') matchCuisine = c.includes('ital') || c.includes('ý')
+        const rawCuisine = dish.cuisine || dish.cuisine_id || ''
+        const c = rawCuisine.toLowerCase().trim()
+        const keywords = CUISINE_MAP[selectedCuisine]
+        if (keywords) {
+          matchCuisine = keywords.some((kw) => kw === 'us' ? (c === 'us' || c === 'usa') : c.includes(kw))
+        } else {
+          matchCuisine = c.includes(selectedCuisine.toLowerCase())
+        }
       }
 
       return matchSearch && matchCuisine
@@ -259,8 +289,8 @@ export default function LikedDishesView({
 
                   {/* Cuisine Badge */}
                   <span className="absolute top-3 left-3 px-2.5 py-1 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/30 text-[#fcf9f0] text-[10px] font-medium tracking-wider uppercase flex items-center gap-1.5">
-                    <span>{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
-                    <span>{dish.cuisine}</span>
+                    <span>{getCuisineFlag(dish.cuisine || dish.cuisine_id)}</span>
+                    <span>{dish.cuisine || dish.cuisine_id}</span>
                   </span>
 
                   {/* Delete / Unlike Button */}

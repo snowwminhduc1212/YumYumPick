@@ -353,6 +353,7 @@ function App() {
         isOpen={filterOpen}
         onClose={() => setFilterOpen(false)}
         metadata={metadata}
+        initialFilters={activeFilters}
         onApplyFilter={(filters) => {
           setActiveFilters(filters)
           fetchRandomDishes(filters)

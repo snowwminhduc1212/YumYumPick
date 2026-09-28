@@ -109,7 +109,7 @@ flowchart LR
 
 ## 3. Báo Cáo Tổng Hợp Dữ Liệu 100 Món Ăn (Data Audit)
 
-File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](file:///D:/LT/YunYumPick/backend/app/data/dishes_seed.json) đã được nạp sẵn vào file CSDL [`backend/yumyumpick.db`](file:///D:/LT/YunYumPick/backend/yumyumpick.db):
+File dữ liệu chuẩn [`backend/app/data/dishes_seed.json`](../backend/app/data/dishes_seed.json) đã được nạp sẵn vào file CSDL [`backend/yumyumpick.db`](../backend/yumyumpick.db):
 
 * **Tổng số món ăn:** **100 món**
 * **Tổng số nguyên liệu chi tiết:** **495 bản ghi nguyên liệu** (đầy đủ định lượng, đơn vị tính và phân loại nhóm nguyên liệu phục vụ Smart Grocery List).

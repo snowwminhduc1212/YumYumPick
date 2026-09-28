@@ -19,6 +19,7 @@ class SavedDishItemResponse(BaseModel):
     english_name: Optional[str] = None
     cuisine: str
     cook_time_minutes: int
+    difficulty: str = "Dễ"
     image: str
     short_description: str
 

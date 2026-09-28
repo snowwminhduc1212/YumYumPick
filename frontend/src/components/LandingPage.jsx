@@ -1,17 +1,52 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { UtensilsCrossed, Filter, Layers, ChefHat, ArrowRight, Sparkles } from 'lucide-react';
+import { UtensilsCrossed, Filter, Layers, ChefHat, ArrowRight, Sparkles, Clock, Flame } from 'lucide-react';
 import { api } from '../services/api';
 import { API_BASE_URL } from '../config/api';
+
+// Mã quốc gia (theo backend) → tên tiếng Việt
+const CUISINE_LABELS = {
+  Vietnam: 'Việt Nam',
+  Korea: 'Hàn Quốc',
+  Japan: 'Nhật Bản',
+  Thailand: 'Thái Lan',
+  Italy: 'Ý',
+  China: 'Trung Quốc',
+  France: 'Pháp',
+  Mexico: 'Mexico',
+  India: 'Ấn Độ',
+  USA: 'Mỹ',
+  Spain: 'Tây Ban Nha',
+  Greece: 'Hy Lạp',
+  Germany: 'Đức',
+  Turkey: 'Thổ Nhĩ Kỳ',
+  'Southeast Asia': 'Đông Nam Á',
+};
+
+// Các tab hiển thị ở phần "Khám phá ẩm thực"
+const SHOWCASE_CUISINES = ['Vietnam', 'Korea', 'Japan', 'Thailand', 'Italy', 'France', 'Mexico'];
+
+const SPICY_LABELS = ['Không cay', 'Cay nhẹ', 'Cay vừa', 'Cay nhiều'];
 
 const toImageUrl = (img) => {
   if (!img) return null;
   return img.startsWith('http') ? img : `${API_BASE_URL}${img}`;
 };
 
+const cuisineName = (id) => CUISINE_LABELS[id] || id;
+
+const scrollToSection = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
 function LandingPage({ onStart }) {
   const [previewDishes, setPreviewDishes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // Showcase theo quốc gia
+  const [activeCuisine, setActiveCuisine] = useState(SHOWCASE_CUISINES[0]);
+  const [showcaseCache, setShowcaseCache] = useState({});
+  const [isLoadingShowcase, setIsLoadingShowcase] = useState(false);
 
   // Lấy 10 món ngẫu nhiên: dùng cho ảnh nền + card demo
   useEffect(() => {
@@ -33,8 +68,29 @@ function LandingPage({ onStart }) {
     return () => clearInterval(timer);
   }, [previewDishes]);
 
+  // Tải 3 món của quốc gia đang chọn (có cache, bấm lại tab cũ không gọi API nữa)
+  useEffect(() => {
+    if (showcaseCache[activeCuisine]) return;
+    let mounted = true;
+    setIsLoadingShowcase(true);
+    api.getRandomDishes({ cuisine: activeCuisine, limit: 3 })
+      .then((dishes) => {
+        if (mounted) {
+          setShowcaseCache((prev) => ({
+            ...prev,
+            [activeCuisine]: Array.isArray(dishes) ? dishes : [],
+          }));
+        }
+      })
+      .finally(() => {
+        if (mounted) setIsLoadingShowcase(false);
+      });
+    return () => { mounted = false; };
+  }, [activeCuisine, showcaseCache]);
+
   const activeDish = previewDishes[activeIndex];
   const bgImages = previewDishes.map((d) => toImageUrl(d.image)).filter(Boolean);
+  const showcaseDishes = showcaseCache[activeCuisine] || [];
 
   return (
     <div className="relative flex-1 flex flex-col bg-[#1d0b0d] text-[#fcf9f0] overflow-hidden">
@@ -120,7 +176,7 @@ function LandingPage({ onStart }) {
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                     <p className="text-sm font-bold text-white line-clamp-1">{activeDish.name}</p>
                     <p className="text-[10px] text-white/70 uppercase tracking-wide">
-                      {activeDish.cuisine}
+                      {cuisineName(activeDish.cuisine)}
                       {activeDish.cook_time_minutes ? ` · ${activeDish.cook_time_minutes} phút` : ''}
                     </p>
                   </div>
@@ -143,8 +199,98 @@ function LandingPage({ onStart }) {
         </div>
       </section>
 
+      {/* CUISINE SHOWCASE */}
+      <section id="showcase" className="relative z-10 px-6 sm:px-10 py-16 border-t border-[#dbe2dc]/10 bg-[#1d0b0d]">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-center text-xs font-bold uppercase tracking-widest text-[#f7ea48] mb-3">
+            Khám phá ẩm thực thế giới
+          </h2>
+          <p className="text-center text-sm text-[#dbe2dc]/60 mb-10">
+            Mỗi nền ẩm thực một câu chuyện - chọn một quốc gia để xem thử vài món tiêu biểu
+          </p>
+
+          {/* Tabs quốc gia */}
+          <div className="flex gap-6 sm:gap-10 overflow-x-auto pb-4 mb-8 sm:justify-center">
+            {SHOWCASE_CUISINES.map((id) => {
+              const isActive = id === activeCuisine;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setActiveCuisine(id)}
+                  className="relative shrink-0 flex flex-col items-center gap-2 cursor-pointer"
+                >
+                  <span
+                    className={`text-xl sm:text-3xl font-extrabold font-heading whitespace-nowrap transition-colors ${
+                      isActive ? 'text-[#fcf9f0]' : 'text-[#dbe2dc]/30 hover:text-[#dbe2dc]/60'
+                    }`}
+                  >
+                    {cuisineName(id)}
+                  </span>
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                      isActive ? 'bg-[#f7ea48]' : 'bg-transparent'
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Danh sách món */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {isLoadingShowcase && showcaseDishes.length === 0
+              ? [0, 1, 2].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-[4/3] rounded-xl bg-[#2a1315] mb-4" />
+                    <div className="h-4 w-2/3 bg-[#2a1315] mb-2" />
+                    <div className="h-3 w-full bg-[#2a1315]" />
+                  </div>
+                ))
+              : showcaseDishes.map((dish) => (
+                  <div key={dish.id} className="group">
+                    <div className="aspect-[4/3] overflow-hidden rounded-xl bg-[#2a1315] mb-4">
+                      <img
+                        src={toImageUrl(dish.image)}
+                        alt={dish.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
+                    </div>
+                    <h3 className="text-base font-extrabold uppercase tracking-wide line-clamp-1 mb-1">
+                      {dish.name}
+                    </h3>
+                    {dish.english_name && (
+                      <p className="text-xs italic text-[#dbe2dc]/50 line-clamp-1 mb-2">{dish.english_name}</p>
+                    )}
+                    <p className="text-sm text-[#dbe2dc]/70 leading-relaxed line-clamp-3 mb-3">
+                      {dish.short_description}
+                    </p>
+                    <div className="flex items-center gap-4 text-[11px] font-mono uppercase tracking-wide text-[#dbe2dc]/50">
+                      {dish.cook_time_minutes != null && (
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" /> {dish.cook_time_minutes} phút
+                        </span>
+                      )}
+                      {dish.spicy_level != null && (
+                        <span className="flex items-center gap-1">
+                          <Flame className="w-3 h-3" /> {SPICY_LABELS[dish.spicy_level] || ''}
+                        </span>
+                      )}
+                      {dish.calories_approx != null && <span>{dish.calories_approx} kcal</span>}
+                    </div>
+                  </div>
+                ))}
+          </div>
+
+          {!isLoadingShowcase && showcaseDishes.length === 0 && (
+            <p className="text-center text-sm text-[#dbe2dc]/50">Chưa tải được món cho quốc gia này</p>
+          )}
+        </div>
+      </section>
+
       {/* MISSION */}
-      <section className="relative z-10 px-6 sm:px-10 py-14 border-t border-[#dbe2dc]/10 bg-[#1d0b0d]">
+      <section id="mission" className="relative z-10 px-6 sm:px-10 py-14 border-t border-[#dbe2dc]/10 bg-[#1d0b0d]">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-xs font-bold uppercase tracking-widest text-[#f7ea48] mb-3">Sứ mệnh của chúng tôi</h2>
           <p className="text-lg sm:text-2xl font-bold font-heading leading-snug mb-4">
@@ -198,6 +344,74 @@ function LandingPage({ onStart }) {
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="relative z-10 border-t border-[#dbe2dc]/10 bg-[#150809] px-6 sm:px-10 pt-12 pb-8">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
+          {/* Brand */}
+          <div className="max-w-xs">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-[1px] bg-[#f7ea48] flex items-center justify-center text-[#1d0b0d]">
+                <UtensilsCrossed className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-extrabold uppercase tracking-wider">
+                YumYum<span className="text-[#f7ea48]">Pick</span>
+              </span>
+            </div>
+            <p className="text-sm text-[#dbe2dc]/60 leading-relaxed">
+              Tinder for Food - quẹt để tìm món, nấu để thưởng thức. Không còn phải hỏi "Hôm nay ăn gì?"
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="flex gap-16">
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-[#f7ea48] mb-4">Khám phá</h4>
+              <ul className="space-y-2 text-sm text-[#dbe2dc]/60">
+                <li>
+                  <button type="button" onClick={() => scrollToSection('showcase')} className="hover:text-[#fcf9f0] transition-colors cursor-pointer">
+                    Ẩm thực thế giới
+                  </button>
+                </li>
+                <li>
+                  <button type="button" onClick={() => scrollToSection('mission')} className="hover:text-[#fcf9f0] transition-colors cursor-pointer">
+                    Sứ mệnh
+                  </button>
+                </li>
+                <li>
+                  <button type="button" onClick={() => scrollToSection('how-it-works')} className="hover:text-[#fcf9f0] transition-colors cursor-pointer">
+                    Cách hoạt động
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-[#f7ea48] mb-4">Ẩm thực</h4>
+              <ul className="space-y-2 text-sm text-[#dbe2dc]/60">
+                {['Vietnam', 'Korea', 'Japan', 'Thailand', 'Italy'].map((id) => (
+                  <li key={id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveCuisine(id);
+                        scrollToSection('showcase');
+                      }}
+                      className="hover:text-[#fcf9f0] transition-colors cursor-pointer"
+                    >
+                      {cuisineName(id)}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-[#dbe2dc]/10 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[#dbe2dc]/40">
+          <span>YumYumPick - sản phẩm của nhóm 1</span>
+          <span>1100+ món ăn - 15 nền ẩm thực</span>
+        </div>
+      </footer>
     </div>
   );
 }

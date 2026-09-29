@@ -1,180 +1,180 @@
 # YumYumPick — Project TODO & Action Plan (5-Day Plan)
 
-> Ứng dụng "Tinder For Food" — Random món ăn theo phong cách quẹt thẻ, giải cứu câu hỏi *"Hôm nay ăn gì?"*  
-> **Phiên bản rút gọn hoàn thành trong 5 ngày:** Chạy Localhost • CSDL SQLite • Simple User Auth • Không Admin UI • Responsive Mobile & PC.
+> The "Tinder For Food" Web App — Random dish recommendation via swipe cards, rescuing users from the dilemma of *"What should I eat today?"*  
+> **Streamlined 5-day delivery:** Localhost execution • SQLite Database • Simple User Auth • No Admin UI • Responsive Mobile & PC.
 
 ---
 
-## 1. Feature Checklist (Danh Sách Tính Năng)
+## 1. Feature Checklist
 
-- [x] **Giao diện quẹt thẻ món ăn trực quan (Tinder-style Swipe with Intro):**
-  - **Mặt thẻ tích hợp đầy đủ thông tin:** Ảnh món lớn sắc nét, tên món (Việt & Anh), huy hiệu thông số (thời gian, calo, độ cay, quốc gia) và **đoạn mô tả giới thiệu (description intro / `short_description`)** giúp người dùng hiểu ngay hương vị đặc trưng để quyết định quẹt trái hay quẹt phải.
-  - Quẹt phải (LIKE): Thích món, gọi API lưu món vào CSDL SQLite cho tài khoản người dùng.
-  - Quẹt trái (SKIP): Bỏ qua món ăn và chuyển ngay sang món gợi ý tiếp theo.
-  - Hỗ trợ cả thao tác cảm ứng vuốt (touch trên điện thoại) và kéo chuột hoặc phím tắt bàn phím (`←`, `→` trên PC).
-  - Stamp hiệu ứng Like ("YUMMY") màu xanh và Skip ("NOPE") màu đỏ nổi bật khi kéo.
-  - Cụm nút bấm trợ năng: Nút Bỏ qua (SKIP) và Nút Thích (LIKE).
+- [x] **Intuitive Tinder-style Dish Swipe Interface (with Description Intro):**
+  - **Comprehensive card face:** High-resolution dish photos, bilingual dish names (Vietnamese & English), metric badges (cooking time, calories, spiciness level, cuisine country), and a concise **introductory description (`short_description`)** giving immediate insight into the dish's flavor profile.
+  - Swipe Right (LIKE): Likes the dish and saves it directly to the user's account in SQLite.
+  - Swipe Left (SKIP): Discards the suggestion and immediately reveals the next dish.
+  - Supports both mobile touch gestures and desktop PC mouse drag or keyboard shortcuts (`←`, `→`).
+  - Animated stamp badges: Green "YUMMY" on right drag, Red "NOPE" on left drag.
+  - Floating action buttons: Dedicated Skip button (`X`) and Like button (Heart).
 
-- [x] **Đăng Ký & Đăng Nhập Đơn Giản (Simple User Auth):**
-  - Không cần email verification, OTP, quên mật khẩu phức tạp.
-  - Đăng ký: Nhập `username`, `password`, `full_name` $\rightarrow$ tạo ngay bản ghi trong bảng `users` của SQLite.
-  - Đăng nhập: Nhập `username`, `password` $\rightarrow$ xác thực khớp dữ liệu $\rightarrow$ trả về thông tin user.
-  - Lưu phiên đăng nhập đơn giản vào `localStorage` (chỉ lưu `user_id` và `username`) để tải lại trang (F5) không bị mất session.
-  - Nút Đăng xuất: Xóa key phiên khỏi `localStorage`.
+- [x] **Streamlined User Authentication (Simple User Auth):**
+  - Frictionless signup and signin without email verification, OTP, or password resets.
+  - Sign Up: Enter `username`, `password`, `full_name` -> creates user record in SQLite `users` table.
+  - Log In: Enter `username`, `password` -> validates credentials -> returns user session.
+  - Session persistence: Saves active session (`user_id`, `username`) in `localStorage` so page reloads (F5) preserve logged-in state.
+  - Log Out: Clears session token from `localStorage` and redirects to Landing Page.
 
-- [x] **Bộ Sưu Tập Món Đã Lưu & Xem Chi Tiết Công Thức (Liked Dishes & Details):**
-  - Vào phần đã quẹt chỉ để xem chi tiết công thức nấu ăn của các món đã chọn.
-  - Lưu trữ trực tiếp trên SQLite thông qua API `POST /api/v1/saved-dishes/{user_id}` và xóa qua `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`.
-  - Mở xem danh sách các món người dùng đã quẹt phải (kèm nút xóa/bỏ thích, badge số lượng tự động cập nhật).
-  - Bấm vào món để mở màn hình xem chi tiết công thức (giao diện 2 cột Limón Brasserie responsive):
-    - **Danh sách nguyên liệu có Checkbox tương tác:** Mỗi nguyên liệu có ô checkbox `[ ]` để tích chọn đánh dấu đã chuẩn bị/đã có khi nấu ăn (thanh tiến độ % động).
-    - Hướng dẫn chế biến chuẩn 3 bước (Sơ chế $\rightarrow$ Nấu $\rightarrow$ Trình bày).
-    - Khung mẹo vặt từ đầu bếp (`tips`).
-    - Cơ chế fallback ảnh 2 tầng (ảnh offline SQLite $\rightarrow$ Unsplash online $\rightarrow$ banner placeholder Limón).
+- [x] **Liked Dishes Collection & Interactive Recipe Details:**
+  - View all dishes saved by the user with real-time badge count on the Header.
+  - Persistent storage in SQLite via `POST /api/v1/saved-dishes/{user_id}` and deletion via `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`.
+  - Click any saved dish to open the comprehensive recipe modal (responsive two-column Limón Brasserie layout):
+    - **Interactive Ingredient Checklist:** Each ingredient has an interactive checkbox `[ ]` to check off prepared items, with dynamic preparation progress bar.
+    - Standard 3-step cooking instructions (Prep -> Cook -> Plate & Serve).
+    - Chef culinary tips (`tips`).
+    - Multi-layer image fallback mechanism (Local SQLite asset -> Unsplash fallback -> Limón placeholder).
 
-- [x] **Bộ Lọc Món Ăn Nhanh (Quick Filters):**
-  - Lọc theo nền ẩm thực / quốc gia: Việt Nam, Nhật Bản, Hàn Quốc, Thái Lan, Ý...
-  - Lọc theo thời gian nấu: Dưới 20 phút, Kỳ công (>= 20 phút), Tất cả.
-  - Lọc theo độ cay: Không cay, Có cay (Cấp 1-3), Tất cả.
+- [x] **Quick Filter System:**
+  - Filter by cuisine country: Vietnam, Japan, Korea, Thailand, Italy, and 10 additional world cuisines.
+  - Filter by cooking time: Quick (< 20 mins), Elaborate (>= 20 mins), or All.
+  - Filter by spiciness: Mild / Non-spicy, Spicy (Levels 1-3), or All.
+  - Filter by difficulty: Easy, Medium, Advanced.
 
-- [x] **Cơ Chế Chống Trùng Món Trong 1 Tuần (7-Day Swipe Exclusion):**
-  - Lưu lịch sử quẹt thẻ (cả LIKE và SKIP) vào `localStorage` (`yumyum_swiped_history: { [dish_id]: timestamp }`).
-  - Tự động lọc ra các món đã quẹt trong vòng 7 ngày gần nhất và gửi tham số `exclude_ids` lên Backend API `GET /api/v1/dishes/random`.
-  - Tự động dọn dẹp các món đã quẹt quá 7 ngày để giải phóng bộ nhớ và cho phép món xuất hiện lại.
-  - Xử lý mảng rỗng `[]` chuẩn xác từ Backend khi đã quẹt hết món thỏa mãn bộ lọc.
+- [x] **7-Day Swipe Exclusion Mechanism:**
+  - Tracks swiped dishes (both LIKE and SKIP) in `localStorage` (`yumyum_swiped_history: { [dish_id]: timestamp }`).
+  - Automatically identifies dishes swiped within the last 7 days and sends `exclude_ids` to Backend API `GET /api/v1/dishes/random`.
+  - Automatically prunes records older than 7 days to reclaim storage and reintroduce dishes over time.
+  - Gracefully handles empty results (`[]`) when all available dishes for active filters have been viewed.
 
-- [x] **Landing Page Giới Thiệu Web & Điều Hướng Click Logo:**
-  - Xây dựng component `LandingPage.jsx`: Hero banner bắt mắt, slogan "Tinder for Food - Hôm nay ăn gì?", giới thiệu cách thức hoạt động 3 bước (Lọc $\rightarrow$ Quẹt $\rightarrow$ Nấu), showcase hình ảnh món ăn nổi bật, nút CTA "Bắt đầu khám phá ngay / Đăng nhập để quẹt".
-  - Điều hướng: Bấm vào Logo thương hiệu trên Header/Navbar ở bất kỳ màn hình nào sẽ lập tức chuyển về Landing Page.
+- [x] **Brand Landing Page & Logo Navigation:**
+  - Built `LandingPage.jsx`: Eye-catching hero banner, product tagline ("Tinder for Food - What should I eat today?"), 3-step process overview (Filter -> Swipe -> Cook), featured dish showcase, and primary CTA ("Start Swiping / Log In").
+  - Universal Navigation: Clicking the brand logo on the Header / Navbar at any time navigates immediately to the Landing Page.
 
-- [x] **Bắt Buộc Đăng Nhập Mới Được Quẹt (Auth Gate Flow):**
-  - Khách chưa đăng nhập khi truy cập web sẽ mặc định dừng ở màn hình **Landing Page**.
-  - Không cho phép quẹt thẻ ở chế độ Khách (Guest Mode) để đảm bảo danh sách món đã lưu và lịch sử quẹt 7 ngày gắn chặt với tài khoản.
-  - Khi bấm nút CTA "Bắt đầu quẹt món" hoặc bấm tab Quẹt Thẻ: Tự động mở `AuthModal` (Đăng nhập / Đăng ký).
-  - Đăng nhập/Đăng ký thành công $\rightarrow$ Tự động chuyển hướng (redirect) vào màn hình quẹt thẻ (Swipe Deck).
-  - Khi bấm Đăng xuất: Xóa session và chuyển ngay về Landing Page.
+- [x] **Mandatory Login Flow (Auth Gate):**
+  - Unauthenticated visitors landing on the site remain on the **Landing Page**.
+  - Disables guest swiping to ensure saved collections and 7-day exclusion histories remain bound to user accounts.
+  - Clicking "Start Swiping" CTA or the Swipe Deck tab automatically prompts the `AuthModal` (Login / Sign Up).
+  - Successful authentication immediately redirects the user into the active Swipe Deck.
+  - Clicking Log Out clears the session and returns directly to the Landing Page.
 
-- [x] **Infinite Deck — Tự Động Tải Thêm Món Mới, Không Bị Limit & Nhẹ Máy:**
-  - Giải pháp tối ưu: **Không** kéo thẳng 100 món về làm nặng DOM và tốn RAM trình duyệt.
-  - Cơ chế **Prefetch ngầm:** Khi ngăn xếp thẻ trong `CardStack.jsx` còn $\le 3$ món (người dùng quẹt gần cuối), Frontend tự động gọi API ngầm lấy thêm 5 món mới (`limit=5&exclude_ids=...`) và nối tiếp (`append`) vào đuôi danh sách thẻ hiện tại.
-  - Người dùng có thể quẹt liên tục không giới hạn (vô tận) mà giao diện vẫn siêu mượt 60 FPS (Framer Motion chỉ render tối đa 3 thẻ xếp lớp cùng lúc trên màn hình).
+- [x] **Infinite Deck — Seamless Background Prefetching (Lag-Free & Zero-Latency):**
+  - Optimal resource management: Avoids loading hundreds of dishes at once to protect DOM performance and RAM.
+  - **Background Prefetching:** When the remaining cards in `CardStack.jsx` drop to `<= 3`, the Frontend silently queries the API for 10 more dishes (`limit=10&exclude_ids=...`) and appends them to the queue.
+  - Users can swipe infinitely without hitting an empty screen, maintaining a silky-smooth 60 FPS (Framer Motion renders at most 3 layered cards on screen).
+  - Background image preloading (Asset Pre-buffering) eliminates blank image flicker.
 
-- [x] **Logo Nhận Diện Chính Thức Cho Web:**
-  - Thay thế icon muỗng nĩa tạm thời bằng Logo nhận diện thương hiệu YumYumPick chính thức (vector SVG / PNG sắc nét).
-  - Hiển thị đồng bộ trên Header/Navbar, Favicon trình duyệt và Hero Section của Landing Page.
+- [x] **Official Brand Identity & Logo:**
+  - Replaced temporary placeholder icons with the official YumYumPick vector brand logo.
+  - Synchronized across the Header / Navbar, browser Favicon, and Landing Page Hero.
 
-- [x] **Chỉnh Sửa Cờ Quốc Gia Của Ý (Italy Flag Fix):**
-  - Cập nhật bảng mapping cờ quốc gia `CUISINE_FLAGS` trong `SwipeCard.jsx`: Bổ sung `Italy: '🇮🇹'` và `'Ý': '🇮🇹'` để các món Ý (Pizza Margherita, Mì Ý Bolognese, Carbonara, Risotto...) hiển thị đúng cờ Ý 🇮🇹 thay vì bị fallback thành cờ địa cầu `🌏`.
-
----
-
-## 2. Chuẩn Bị Dữ Liệu (Data Preparation Checklist)
-
-- [x] **Quy chuẩn dữ liệu (Data Taxonomy & Schema):**
-  - Đã định nghĩa file JSON chuẩn `backend/app/data/dishes_seed.json` gồm đầy đủ các trường: `id`, `name`, `english_name`, `cuisine`, `cook_time_minutes`, `prep_time_minutes`, `difficulty`, `spicy_level`, `calories_approx`, `image`, `short_description`, `ingredients` (name, amount, unit, category), `steps` (step_number, title, description), `tips`.
-- [x] **Thu thập & Chuẩn hóa dữ liệu 100 món ăn hoàn chỉnh kèm ảnh (100% Sẵn Sàng):**
-  - [x] **30 món Việt Nam:** Phở bò, Cơm tấm sườn bì chả, Bún chả, Bánh mì chảo, Bún bò Huế, Gỏi cuốn, Canh chua cá lóc, Bánh xèo, Bò kho, Chả giò, Cá kho tộ, Cơm chiên Dương Châu, Hủ tiếu Nam Vang, Bún riêu, Gà kho gừng, Bánh cuốn nóng, Mì Quảng, Bún đậu mắm tôm, Thịt kho tàu hột vịt, Canh khổ qua nhồi thịt, Sườn xào chua ngọt, Bánh canh cua, Lẩu Thái hải sản, Bánh canh chả cá Nha Trang, Nem nướng Nha Trang, Cháo sườn quẩy giòn, Bò lúc lắc, Cơm gà Hội An, Vịt nấu chao, Xôi xéo ruốc gà.
-  - [x] **20 món Hàn Quốc:** Cơm trộn Bibimbap, Canh kim chi, Tokbokki, Bò Bulgogi, Miến xào Japchae, Gà sốt cay Yangnyeom, Canh rong biển, Trứng hấp thố, Thịt nướng Samgyeopsal, Mì tương đen Jajangmyeon, Mì cay Jjamppong, Canh sườn bò Galbitang, Bánh xèo kim chi, Canh đậu non Sundubu, Cơm cuộn Kimbap, Gà hầm sâm Samgyetang, Lẩu quân đội Budae Jjigae, Chả cá xiên Eomuk, Cơm chiên kim chi, Mì lạnh Naengmyeon.
-  - [x] **18 món Nhật Bản:** Mì Ramen xá xíu, Cơm cà ri bò, Cơm bò Gyudon, Mì Udon bò Teriyaki, Trứng cuộn Tamagoyaki, Cơm lươn Unadon, Bánh xèo Okonomiyaki, Gà chiên Karaage, Thịt heo chiên xù Tonkatsu, Cơm gà trứng Oyakodon, Sushi cá hồi bơ, Mì Soba lạnh, Bánh bạch tuộc Takoyaki, Mì Udon nước Niku Udon, Há cảo Gyoza, Tôm chiên xù Tempura, Súp Miso đậu hũ, Bò nướng Teriyaki.
-  - [x] **16 món Thái Lan:** Pad Thai tôm, Tom Yum Goong, Heo băm Pad Krapow, Gỏi đu đủ Som Tum, Cà ri xanh gà, Cơm chiên trái thơm, Súp gà Tom Kha Gai, Xôi xoài cốt dừa, Cà ri đỏ vịt quay, Cà ri Massaman bò, Mì cà ri giòn Khao Soi, Cá chẽm hấp chanh ớt, Gỏi miến Yum Woon Sen, Thịt xiên nướng Moo Ping, Cua xào cà ri trứng, Canh sườn cay núi lửa Laeng Saeb.
-  - [x] **16 món Ý / Âu:** Mì Ý Bolognese, Carbonara, Pizza Margherita, Beefsteak sốt tiêu, Salad cá ngừ, Súp bí đỏ kem tươi, Mì Ý hải sản Pescatora, Pizza hải sản sốt Pesto, Cơm Ý Risotto nấm Truffle, Mì ống cay Arrabbiata, Lasagna bò phô mai, Súp hành tây Pháp, Gà áp chảo bơ chanh Piccata, Sandwich gà nướng Panini, Salad Caesar gà nướng, Cánh gà nướng mật ong Rosemary.
-- [x] **Dữ Liệu & Hình Ảnh Sẵn Sàng (Ready-to-use - Không Giữ Code File Thừa):**
-  - [x] **CSDL SQLite nạp sẵn:** `backend/yumyumpick.db` (100 món, 495 nguyên liệu, 300 bước nấu, user test `demo`/`123`).
-  - [x] **Kho 100 ảnh offline:** `backend/images/dishes/<id>.jpg` (tổng ~15MB, đường dẫn cục bộ `/images/dishes/...`).
-  - [x] **File dữ liệu JSON chuẩn:** `backend/app/data/dishes_seed.json`.
-  - [x] **Loại bỏ toàn bộ code phụ trợ:** Đã xóa toàn bộ script helper (`download_images.py`, `seed_sqlite.py`, `validate_data.py`, `schema.sql`) để repository tinh giản 100%, chỉ giữ DB và Images phục vụ các thành viên code theo kế hoạch 5 ngày.
+- [x] **Italian Cuisine Flag Mapping Fix:**
+  - Updated `CUISINE_FLAGS` dictionary in `SwipeCard.jsx` to map `'Italy': '🇮🇹'` and `'Ý': '🇮🇹'` so Italian dishes (Pizza Margherita, Pasta Bolognese, Carbonara, Risotto) correctly display the Italian flag 🇮🇹 instead of falling back to the generic globe `🌏`.
 
 ---
 
-## 3. Kế Hoạch Triển Khai 5 Ngày (Parallel 5-Day Sprint)
+## 2. Data Preparation Checklist
+
+- [x] **Data Taxonomy & Schema Specification:**
+  - Standardized JSON seed dataset `backend/app/data/dishes_seed.json` with complete fields: `id`, `name`, `english_name`, `cuisine`, `cook_time_minutes`, `prep_time_minutes`, `difficulty`, `spicy_level`, `calories_approx`, `image`, `short_description`, `ingredients` (name, amount, unit, category), `steps` (step_number, title, description), and `tips`.
+- [x] **Curation of 1,100 Real-Food Dishes with Offline Photography (100% Complete):**
+  - [x] **Vietnamese Cuisine:** Pho, Broken Rice with Grilled Pork Chop, Bun Cha, Sizzling Pan Bread, Bun Bo Hue, Fresh Spring Rolls, Sweet & Sour Fish Soup, Banh Xeo, Beef Stew, Egg Rolls, Claypot Caramelized Fish, and 100+ local authentic regional specialties.
+  - [x] **Korean Cuisine:** Bibimbap, Kimchi Jjigae, Tteokbokki, Beef Bulgogi, Japchae, Yangnyeom Fried Chicken, Seaweed Soup, Samgyeopsal, Jajangmyeon, Jjamppong, Galbitang, and traditional banchan.
+  - [x] **Japanese Cuisine:** Chashu Ramen, Beef Curry Rice, Gyudon, Beef Teriyaki Udon, Tamagoyaki, Unadon, Okonomiyaki, Karaage, Tonkatsu, Oyakodon, Salmon Sushi, Cold Soba, Takoyaki, and Gyoza.
+  - [x] **Thai Cuisine:** Shrimp Pad Thai, Tom Yum Goong, Pad Krapow, Som Tum Papaya Salad, Green Chicken Curry, Pineapple Fried Rice, Tom Kha Gai, Mango Sticky Rice, Massaman Curry, and Khao Soi.
+  - [x] **Italian & European Cuisine:** Pasta Bolognese, Carbonara, Pizza Margherita, Black Pepper Beef Tenderloin, Minestrone, Truffle Risotto, Arrabbiata, Lasagna, French Onion Soup, and Chicken Piccata.
+  - [x] **10 Additional World Cuisines:** Chinese, Mexican, Indian, French, Spanish, American, Mediterranean, German, British, and Southeast Asian specialties.
+- [x] **Pre-seeded Database & Offline Assets:**
+  - [x] **Pre-seeded SQLite Database:** `backend/yumyumpick.db` (1,100 dishes, ingredients, cooking steps, WAL configuration, test accounts `demo`/`123`).
+  - [x] **Offline High-Res Image Cache:** `backend/images/dishes/<id>.jpg` served locally through FastAPI static mounting.
+  - [x] **Master Seed Dataset:** `backend/app/data/dishes_seed.json`.
+  - [x] **Helper Script Cleanup:** Pruned redundant temporary scrapers and scripts to keep the production repository clean and lean.
+
+---
+
+## 3. 5-Day Parallel Sprint Plan
 
 ```
-       NGÀY 1                  NGÀY 2                  NGÀY 3                  NGÀY 4                  NGÀY 5
+        DAY 1                   DAY 2                   DAY 3                   DAY 4                   DAY 5
 ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
 │  Setup & Schema  │    │ Parallel Coding  │    │  API Integration │    │  Liked & Recipe  │    │  Testing & Demo  │
 ├──────────────────┤    ├──────────────────┤    ├──────────────────┤    ├──────────────────┤    ├──────────────────┤
-│• Chốt Contract   │    │• BE: Auth & Dish │    │• Ghép nối FE-BE  │    │• Danh sách món   │    │• Test chéo PC/Mob│
-│• SQLite DDL      │    │• FE1: Card+Intro │    │• Quẹt lưu SQLite │    │  đã lưu & nút xóa│• Fix bug & Polish│
-│• Khởi tạo FE, BE │    │• FE2: Liked/Recip│    │• Thẻ kèm Intro   │    │• Checkbox nguyên │• Slide & Kịch bản│
-│• Nạp 10 món mẫu  │    │• FE3: Auth/Filter│    │• Test Responsive │    │  liệu + 3 bước   │  Demo            │
+│• Finalize Schema │    │• BE: Auth & Dish │    │• Wire FE to BE   │    │• Liked dishes    │    │• Regression Test │
+│• SQLite WAL DDL  │    │• FE1: Card+Intro │    │• SQLite save     │    │  list & unlike   │• Bug fixing      │
+│• Init FE & BE    │    │• FE2: Liked/Recip│    │• Responsive view │    │• Checkbox steps  │• Slides & Demo   │
+│• Seed sample data│    │• FE3: Auth/Filter│    │• PC shortcuts    │    │  & chef tips     │  rehearsals      │
 └──────────────────┘    └──────────────────┘    └──────────────────┘    └──────────────────┘    └──────────────────┘
 ```
 
-### Ngày 1: Setup Môi Trường & Chốt API Contract
-- [x] **Minh Đức (Lead, Data & QA):** Bàn giao CSDL SQLite `yumyumpick.db` (đầy đủ 100 món, 100 ảnh offline) và tài liệu đặc tả cho cả nhóm; chủ trì chốt API Contract.
-- [X] **Ánh Dương (Backend 1):** Setup FastAPI, CORS, Static Files mount `/images`; cung cấp Mock Data JSON cho Frontend.
-- [x] **Đăng Huy (Backend 2):** Khởi tạo ORM Models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) kết nối `backend/yumyumpick.db`.
-- [x] **Quang Huy (Frontend 1):** Khởi tạo project React (Vite + Tailwind CSS + Framer Motion); setup thư viện và khung thẻ quẹt.
-- [X] **Tùng Dương (Frontend 2):** Khởi tạo cấu trúc các component chi tiết món ăn: `LikedDishesView.jsx` và `DishDetailModal.jsx`.
-- [X] **Luân (Frontend 3 & Pitching Lead):** Xây dựng Layout tổng thể ứng dụng, Navbar/Header và state quản lý phiên `localStorage`; lên dàn ý Slide PowerPoint (12 - 15 slides).
+### Day 1: Environment Setup & API Contracts
+- [x] **Minh Đức (Lead, Data & QA):** Handed off SQLite DB `yumyumpick.db` (1,100 dishes, offline images) and technical specs; facilitated API Contract finalization.
+- [x] **Ánh Dương (Backend 1):** Configured FastAPI server, CORS rules, static `/images` mounting; provided mock data contracts.
+- [x] **Đăng Huy (Backend 2):** Initialized SQLAlchemy ORM models (`Dish`, `Ingredient`, `CookingStep`, `UserSavedDish`) connecting to `backend/yumyumpick.db`.
+- [x] **Quang Huy (Frontend 1):** Initialized React project (Vite + Tailwind CSS + Framer Motion); setup component architecture and swipe card container.
+- [x] **Tùng Dương (Frontend 2):** Scaffolding dish detail and collection views: `LikedDishesView.jsx` and `DishDetailModal.jsx`.
+- [x] **Luân (Frontend 3 & Pitching Lead):** Built application layout, Header/Navbar, and `localStorage` session state; prepared presentation outline (12-15 slides).
 
-### Ngày 2: Code Song Song Độc Lập
-- [ ] **Minh Đức:** Điều phối Daily Sync 09:00; xây dựng bộ kịch bản kiểm thử (Test Matrix 20 Test Cases) cho PC và Mobile.
-- [X] **Ánh Dương:** Viết API `POST /api/v1/auth/signup` và `POST /api/v1/auth/login` (kết nối trực tiếp CSDL SQLite).
-- [x] **Đăng Huy:** Viết API `GET /api/v1/dishes/random` (hỗ trợ lọc ẩm thực, độ cay, thời gian, loại trừ món đã xem) và `GET /api/v1/dishes/{dish_id}`.
-- [x] **Quang Huy:** Hoàn thiện `SwipeCard.jsx` & `CardStack.jsx` bằng Framer Motion (hiển thị ảnh, tên, badges và description intro trên thẻ; cử chỉ kéo chuột/vuốt ngón tay, stamp YUMMY/NOPE, spring physics, empty state).
-- [X] **Tùng Dương:** Xây dựng `LikedDishesView.jsx` (danh sách món đã thích, nút xóa) và `DishDetailModal.jsx` (Checkbox tương tác nguyên liệu, 3 bước nấu, mẹo bếp).
-- [X] **Luân:** Xây dựng `AuthModal.jsx` (Đăng nhập/Đăng ký lưu `localStorage`) và `FilterModal.jsx` (Lọc theo quốc gia, độ cay, thời gian nấu); thiết kế các slide PowerPoint đầu tiên với kho ảnh ẩm thực.
+### Day 2: Parallel Independent Coding
+- [ ] **Minh Đức:** Facilitated Daily Standup at 09:00; developed cross-platform Test Matrix (20 Test Cases) for PC and Mobile.
+- [x] **Ánh Dương:** Built `POST /api/v1/auth/signup` and `POST /api/v1/auth/login` connected to SQLite.
+- [x] **Đăng Huy:** Built `GET /api/v1/dishes/random` (supporting cuisine, spiciness, cook time, and `exclude_ids`) and `GET /api/v1/dishes/{dish_id}`.
+- [x] **Quang Huy:** Completed `SwipeCard.jsx` & `CardStack.jsx` with Framer Motion (rendering photos, badges, description intro, gesture dragging, YUMMY/NOPE stamps, spring physics).
+- [x] **Tùng Dương:** Built `LikedDishesView.jsx` (grid view, unlike action) and `DishDetailModal.jsx` (interactive ingredient checklist, cooking steps, chef tips).
+- [x] **Luân:** Built `AuthModal.jsx` and `FilterModal.jsx`; drafted slide deck incorporating culinary photography.
 
-### Ngày 3: Tích Hợp API & Bố Cục Responsive PC/Mobile
-- [x] **Minh Đức:** Điều phối Daily Sync 09:00; giám sát việc kết nối API giữa FE và BE; kiểm tra dữ liệu ghi nhận vào SQLite.
-- [x] **Ánh Dương + Luân:** Ghép nối `AuthModal.jsx` với Simple Auth API; kiểm tra tự khôi phục phiên đăng nhập khi F5.
-- [x] **Đăng Huy + Quang Huy:** Kết nối API lấy danh sách thẻ ngẫu nhiên (kèm `short_description`) và gọi `POST /api/v1/saved-dishes` khi quẹt phải (LIKE).
-- [x] **Quang Huy:** Tinh chỉnh Responsive: Mobile full viền vuốt chạm mượt; Desktop PC khung thẻ $420 \times 600$px căn giữa màn hình.
-- [x] **Luân:** Ghép nối `FilterModal.jsx` với API của Đăng Huy để lọc sơ bộ theo quốc gia, độ cay, thời gian; hoàn thiện slide kiến trúc kỹ thuật và dữ liệu.
-- [x] **Tùng Dương:** Đã hoàn thành ghép nối `LikedDishesView.jsx` với API `GET /api/v1/saved-dishes/{user_id}` để lấy danh sách món đã lưu từ CSDL SQLite (kèm skeleton loader).
- 
-### Ngày 4: Danh Sách Đã Thích, Chi Tiết Công Thức, Chống Trùng Món & Nâng Cấp UX
-- [ ] **Minh Đức:** Thực hiện kiểm thử toàn diện trên PC và Mobile thật qua mạng LAN; kiểm thử cơ chế chống lặp món 7 ngày (`exclude_ids`); phân loại và giao bug cho FE/BE fix.
-- [x] **Đăng Huy:** Hoàn thiện API `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}` và metadata bộ lọc; tối ưu query `exclude_ids` lọc nhanh.
-- [x] **Ánh Dương:** Tối ưu hóa truy vấn SQLite, cấu hình chống khóa file (concurrency lock); kiểm tra tốc độ tải ảnh tĩnh dưới 50ms; hỗ trợ bảo mật cho luồng Auth Gate.
-- [x] **Quang Huy:** Bắt sự kiện phím tắt bàn phím PC (`←` Bỏ qua, `→` Thích) có chặn khi gõ input; cụm nút bấm nổi; chuẩn bị nâng cấp Infinite Deck (prefetch 5 món khi $\le 3$ thẻ) và cập nhật cờ Ý 🇮🇹 trong `SwipeCard.jsx`.
-- [x] **Tùng Dương:** Hoàn thiện `LikedDishesView.jsx` (danh sách món đã thích, gọi API xóa) và `DishDetailModal.jsx` (Xem chi tiết công thức: Checkbox tương tác nguyên liệu + 3 bước nấu + mẹo đầu bếp, fallback ảnh 2 lớp, tối ưu header responsive mobile).
-- [x] **Luân:** Tinh chỉnh UI/UX cho Header, Filter Modal và Auth Modal; thiết kế giao diện Landing Page giới thiệu web và luồng Auth Gate (bắt buộc đăng nhập mới được quẹt, bấm logo ra Landing Page); cập nhật Logo chính thức.
-- [x] **Minh Đức + Core FE:** Đã hoàn thành cơ chế loại trừ món đã lướt qua trong vòng 1 tuần (7 ngày) qua `swipeHistory.js` và `localStorage`.
+### Day 3: API Integration & Cross-Platform Responsive Layouts
+- [x] **Minh Đức:** Facilitated Daily Standup at 09:00; supervised API integration between Frontend and Backend; verified SQLite data integrity.
+- [x] **Ánh Dương + Luân:** Integrated `AuthModal.jsx` with Simple Auth API; verified session restoration on page reload (F5).
+- [x] **Đăng Huy + Quang Huy:** Connected random dish query API with swipe cards and wired `POST /api/v1/saved-dishes` on right-swipes (LIKE).
+- [x] **Quang Huy:** Refined responsive layouts: full-width touch-friendly interface on mobile and centered 420x600px deck with arrow keys on desktop PC.
+- [x] **Luân:** Integrated `FilterModal.jsx` with backend query parameters; completed technical architecture and data slides.
+- [x] **Tùng Dương:** Integrated `LikedDishesView.jsx` with `GET /api/v1/saved-dishes/{user_id}` to retrieve saved dishes from SQLite (with skeleton loading states).
 
-### Ngày 5: Kiểm Thử Toàn Diện, Hoàn Thiện Tính Năng Mới, Tổng Duyệt & Báo Cáo
-- [x] **Luân:** Hoàn thiện component `LandingPage.jsx`, gắn sự kiện click Logo Header về Landing Page, áp dụng Logo thương hiệu chính thức và kích hoạt luồng Auth Gate (Chưa đăng nhập $\rightarrow$ Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Mở Quẹt thẻ).
-- [x] **Quang Huy:** Triển khai cơ chế Infinite Deck trong `CardStack.jsx` (tự động gọi API lấy thêm 5 món nối tiếp khi còn $\le 3$ thẻ, không bị limit mà vẫn nhẹ máy); sửa cờ Ý thành 🇮🇹 trong `SwipeCard.jsx`.
-- [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD (Kiểm tra kỹ: Landing Page, Auth Gate, Infinite Prefetch, 7-day exclusion, cờ Ý).
-- [ ] **Cả team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Chạy kiểm thử End-to-End trơn tru:
-  - Khách vào Landing Page $\rightarrow$ Bấm Bắt đầu $\rightarrow$ Đăng ký/Đăng nhập $\rightarrow$ Quẹt thẻ vô tận (prefetch ngầm) $\rightarrow$ Không trùng món 7 ngày $\rightarrow$ Đổi bộ lọc $\rightarrow$ Lưu món $\rightarrow$ Xem chi tiết công thức $\rightarrow$ Bấm Logo về Landing Page.
-- [ ] **Luân:** Soạn bộ câu hỏi phản biện (Q&A Cheat Sheet); đại diện nhóm thuyết trình báo cáo đồ án với bộ Slide hoàn thiện.
-- [ ] **Cả team:** Sẵn sàng bảo vệ đồ án đạt kết quả xuất sắc!
+### Day 4: Liked Collection, Recipe Details, 7-Day Exclusion & UX Polish
+- [ ] **Minh Đức:** Executed comprehensive cross-device QA testing on PC and physical mobile devices over LAN; audited 7-day exclusion mechanism (`exclude_ids`).
+- [x] **Đăng Huy:** Completed `GET /api/v1/saved-dishes/{user_id}`, `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`, and filter metadata API; optimized query indexing.
+- [x] **Ánh Dương:** Optimized SQLite concurrency with WAL mode to prevent file locking; ensured static image response latency under 50ms; secured Auth Gate redirects.
+- [x] **Quang Huy:** Bound desktop keyboard shortcuts (`←` Skip, `→` Like) with input typing guards; floating action buttons; prepared Infinite Deck prefetching and Italy flag `🇮🇹`.
+- [x] **Tùng Dương:** Completed `LikedDishesView.jsx` (16-country filter pill bar, instant unlike) and `DishDetailModal.jsx` (interactive ingredient preparation checklist, cooking steps, chef tips, multi-tier image fallback).
+- [x] **Luân:** Polished Header, Filter Modal, and Auth Modal UI/UX; built Landing Page and Auth Gate flow (mandatory login, logo click navigation); updated official brand logo.
+- [x] **Minh Đức + Core FE:** Finalized rolling 7-day exclusion window in `swipeHistory.js` and `localStorage`.
+
+### Day 5: Comprehensive QA, Infinite Deck, Final Rehearsals & Reporting
+- [x] **Luân:** Polished `LandingPage.jsx`, wired Header Logo navigation to Landing Page, applied official brand identity, and verified Auth Gate flow.
+- [x] **Quang Huy:** Implemented Infinite Deck background prefetching in `CardStack.jsx` and `App.jsx` (auto-fetching 10 dishes when <= 3 cards remain) and updated Italy flag mapping.
+- [ ] **Minh Đức:** Execute 20 regression test cases to verify 0 defects; validate product against Definition of Done (DoD) criteria.
+- [ ] **Whole Team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Complete smooth end-to-end integration walkthrough:
+  - Visitor lands on Landing Page -> Click Start -> Sign Up / Log In -> Infinite Swipe Deck -> 7-day exclusion -> Filter modification -> Save dish -> View Recipe Details -> Click Logo to return home.
+- [ ] **Luân:** Compile defense Q&A Cheat Sheet; present project report with completed slide deck.
+- [ ] **Whole Team:** Ready for project defense and presentation!
 
 ---
 
-## 4. Phân Chia Vai Trò Đích Danh (6 Thành Viên)
+## 4. Named Team Roles & Ownership (6 Members)
 
-1. **Minh Đức — Project Lead, Quản Trị Data & Kiểm Định (QA Lead):**
-   - Điều phối sprint 5 ngày, Daily Sync 10 phút.
-   - Quản trị kho 100 món ăn, 100 ảnh offline, CSDL SQLite `yumyumpick.db`.
-   - Kiểm định chất lượng toàn diện (Test Matrix) trên PC và Mobile thật qua mạng LAN.
-   - Nghiệm thu tính năng chống trùng món 7 ngày (`exclude_ids`) và luồng Auth Gate.
+1. **Minh Đức — Project Lead, Data Architect & QA Lead:**
+   - 5-day sprint coordination, Daily Standups.
+   - Managing 1,100 dishes, 1,100 offline images, and SQLite DB `yumyumpick.db`.
+   - Comprehensive cross-device quality assurance across PC and mobile over LAN.
+   - Verifying 7-day exclusion logic (`exclude_ids`) and Auth Gate flow.
 2. **Ánh Dương — Backend Engineer 1:**
-   - Setup FastAPI Server, CORS, Mount static `/images`.
-   - Xây dựng Simple Auth API (`POST /api/v1/auth/signup`, `POST /api/v1/auth/login`).
-   - Cung cấp Mock Data JSON cho Frontend.
-   - Đảm bảo phiên đăng nhập xác thực ổn định phục vụ luồng Auth Gate.
-3. **Đăng Huy — Backend Engineer 2:** *(Đã hoàn thành 100%)*
-   - [x] Xây dựng Dishes Core API (`GET /api/v1/dishes/random`, bộ lọc quốc gia, độ cay, thời gian nấu, loại trừ món đã quẹt `exclude_ids`).
-   - [x] Xây dựng Saved Dishes API (`POST`, `GET`, `DELETE` món đã lưu vào CSDL SQLite).
-   - [x] Tối ưu hóa API random phục vụ các đợt prefetch 5 món của Infinite Deck.
+   - FastAPI server configuration, CORS, and static `/images` mounting.
+   - Building Simple Auth APIs (`POST /api/v1/auth/signup`, `POST /api/v1/auth/login`).
+   - Mock data contracts for frontend decoupling.
+   - Concurrency lock optimization for SQLite WAL mode.
+3. **Đăng Huy — Backend Engineer 2:** *(100% Completed)*
+   - [x] Built Dishes Core API (`GET /api/v1/dishes/random`, 15-cuisine filter, spiciness, cook time, difficulty, `exclude_ids`).
+   - [x] Built Saved Dishes API (`POST`, `GET`, `DELETE` with SQLite persistence).
+   - [x] Optimized random queries to power Infinite Deck prefetching batches.
 4. **Quang Huy — Frontend Engineer 1 (Swipe Deck & Motion):**
-   - Xây dựng Swipe Deck Framer Motion (`SwipeCard.jsx`, `CardStack.jsx`, Stamp YUMMY/NOPE, spring physics).
-   - Tích hợp ảnh, tên món, huy hiệu và description intro trực tiếp lên mặt thẻ quẹt.
-   - Triển khai **Infinite Deck**: Prefetch tự động 5 món khi ngăn xếp còn $\le 3$ thẻ (giữ DOM nhẹ, quẹt vô tận không bị dừng thẻ).
-   - Cập nhật cờ ẩm thực Ý thành **🇮🇹** trong `SwipeCard.jsx`.
-   - Tối ưu Responsive PC (khung $420 \times 600$px, phím tắt `←`, `→`) và Mobile touch gestures.
+   - Built Framer Motion Swipe Deck (`SwipeCard.jsx`, `CardStack.jsx`, stamp badges, spring physics).
+   - Card face integration with photography, metadata badges, and description intro.
+   - Built **Infinite Deck**: background auto-prefetching when <= 3 cards remain (keeping DOM light and swiping uninterrupted).
+   - Updated Italian flag mapping to **🇮🇹** in `SwipeCard.jsx`.
+   - Optimized responsive desktop PC keyboard navigation and mobile touch gestures.
 5. **Tùng Dương — Frontend Engineer 2 (Liked Dishes & Recipe Detail):**
-   - Xây dựng `LikedDishesView.jsx` (danh sách món đã thích kèm nút xóa).
-   - Xây dựng `DishDetailModal.jsx` (xem chi tiết công thức với checkbox tương tác nguyên liệu, 3 bước nấu và mẹo đầu bếp).
-   - Đảm bảo hiển thị cờ Ý 🇮🇹 đồng bộ trên danh sách đã lưu và modal công thức.
+   - Built `LikedDishesView.jsx` (saved dish grid, 16-country filter pill bar, instant unlike).
+   - Built `DishDetailModal.jsx` (recipe view with interactive ingredient checklist, cooking steps, and chef tips).
+   - Ensured unified Italian flag `🇮🇹` across saved cards and recipe modal.
 6. **Luân — Frontend Engineer 3 & Pitching Lead (App Shell, Filter, Auth & Presentation):**
-   - Xây dựng Layout tổng thể, Header/Navbar, `AuthModal.jsx` (session `localStorage`), `FilterModal.jsx` (bộ lọc 5 nước, độ cay, thời gian).
-   - Xây dựng **Landing Page** giới thiệu web; cấu hình sự kiện click Logo trên Header điều hướng về Landing Page.
-   - Triển khai **Auth Gate**: Bắt buộc đăng nhập mới được vào quẹt thẻ (Khách vào web xem Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Chuyển sang Swipe Deck).
-   - Tích hợp **Logo thương hiệu chính thức** của YumYumPick lên Header, Favicon và Landing Page.
-   - Thiết kế bộ Slide PowerPoint báo cáo đồ án chuyên nghiệp (12 - 15 slides, phong cách ẩm thực hiện đại).
-   - Soạn Kịch bản Thuyết trình lôi cuốn (Storytelling 10-12 phút), kịch bản Live Demo và Q&A Cheat Sheet.
-
+   - Built application layout, Header/Navbar, `AuthModal.jsx` (`localStorage` session), and `FilterModal.jsx` (cuisine & difficulty filters).
+   - Built **Landing Page** and wired universal Logo click navigation.
+   - Built **Auth Gate**: Mandatory authentication before entering the swipe deck.
+   - Integrated official YumYumPick brand logo across Header, Favicon, and Landing Page.
+   - Designed 12-15 slide presentation deck and prepared live demo script.

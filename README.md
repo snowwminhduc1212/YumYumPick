@@ -22,11 +22,11 @@
 - **Thẻ quẹt tích hợp Description Intro:** Mặt thẻ hiển thị hình ảnh lớn sắc nét, tên món (Việt/Anh), huy hiệu thông số (thời gian, calo, độ cay, quốc gia) và **đoạn mô tả giới thiệu ngắn (`short_description`)** giúp người dùng hiểu ngay hương vị đặc trưng để quyết định quẹt trái hay quẹt phải.
 - **Quẹt Phải (Swipe Right / LIKE):** Thích món này! Tự động lưu món ăn vào tài khoản cá nhân trên CSDL SQLite.
 - **Quẹt Trái (Swipe Left / SKIP):** Bỏ qua món ăn này và ngay lập tức xem gợi ý tiếp theo.
-- **Bộ lọc nhanh (Quick Filter):** Lọc theo quốc gia (Việt, Hàn, Nhật, Thái, Ý), độ cay, thời gian nấu trước khi quẹt.
+- **Bộ lọc nhanh (Quick Filter):** Lọc theo 15 quốc gia ẩm thực, độ khó (Dễ / Trung bình / Nâng cao), độ cay, thời gian nấu trước khi quẹt.
 - **Xem chi tiết công thức sau khi quẹt:** Vào danh sách món đã quẹt chỉ để xem chi tiết công thức chuẩn (danh sách nguyên liệu có **Checkbox tương tác `[ ]`** tiện đánh dấu khi chuẩn bị/nấu ăn, hướng dẫn nấu từng bước 1-2-3 và mẹo nhỏ từ đầu bếp).
 - **Đăng ký & Đăng nhập siêu đơn giản:** Chỉ cần nhập `username` & `password` để tạo tài khoản hoặc đăng nhập, lưu session qua `localStorage`.
 - **Responsive toàn diện:** Trải nghiệm mượt mà trên cả điện thoại (Mobile touch swipe) và máy tính (Desktop PC kèm phím tắt `←`, `→`).
-- **Quản lý dữ liệu qua SQLite:** Quản trị 100 món ăn và 100 ảnh offline trực tiếp thông qua file CSDL SQLite `backend/yumyumpick.db`.
+- **Quản lý dữ liệu qua SQLite:** Quản trị 1.100 món ăn và 1.100 ảnh offline thực tế trực tiếp thông qua file CSDL SQLite `backend/yumyumpick.db`.
 
 ---
 
@@ -111,10 +111,7 @@ source venv/bin/activate
 # 4. Cài đặt các thư viện cần thiết (rất nhẹ)
 pip install -r requirements.txt
 
-# 5. Khởi tạo CSDL SQLite và nạp dữ liệu món ăn mẫu (Chỉ chạy 1 lần)
-python -m app.db.seed_sqlite
-
-# 6. Chạy server FastAPI
+# 5. Chạy server FastAPI (CSDL SQLite 'yumyumpick.db' đã có sẵn 1.100 món và 15 quốc gia, không cần seed)
 uvicorn app.main:app --reload --port 8000
 ```
 > Server hoạt động tại: `http://localhost:8000`  
@@ -150,12 +147,12 @@ flowchart TD
 
 | Thành Viên | Vai Trò Chính | Nhiệm Vụ Cốt Lõi (Song Song) | Sản Phẩm Bàn Giao (Deliverables) |
 |---|---|---|---|
-| **Minh Đức** | **Project Lead • Data & QA** | Điều phối tiến độ 5 ngày, Daily Sync; Quản trị kho 100 món ăn, 100 ảnh offline, CSDL SQLite; Kiểm định chất lượng (QA) PC & Mobile. | `backend/yumyumpick.db`, `backend/images/dishes/`, Test Matrix |
+| **Minh Đức** | **Project Lead • Data & QA** | Điều phối tiến độ 5 ngày, Daily Sync; Quản trị kho 1.100 món ăn, 1.100 ảnh offline, CSDL SQLite; Kiểm định chất lượng (QA) PC & Mobile. | `backend/yumyumpick.db`, `backend/images/dishes/`, Test Matrix |
 | **Ánh Dương** | **Backend Engineer 1** | Setup FastAPI server, CORS, Static mount `/images`; Xây dựng Simple Auth API (`signup`, `login` vào SQLite); Mock Data JSON cho FE. | `app/main.py`, `app/api/auth.py`, Mock API Contract |
-| **Đăng Huy** | **Backend Engineer 2** | Xây dựng Dishes Core API (`random`, bộ lọc 5 nước, độ cay, thời gian, loại trừ món đã quẹt) và Saved Dishes API (`POST`, `GET`, `DELETE`). | `app/api/dishes.py`, `app/api/saved_dishes.py`, Swagger Docs |
-| **Quang Huy** | **Frontend Engineer 1 (Swipe Deck & Motion)** | Xây dựng Swipe Deck Framer Motion (SwipeCard, CardStack, Stamp YUMMY/NOPE); Tích hợp Description Intro lên thẻ; Tối ưu Responsive PC (phím tắt `←`/`→`) & Mobile touch. | `SwipeCard.jsx`, `CardStack.jsx`, Responsive layout |
-| **Tùng Dương** | **Frontend Engineer 2 (Liked & Recipe Detail)** | Xây dựng Liked Dishes View (danh sách món đã thích, nút xóa) và Dish Detail Modal (xem chi tiết công thức kèm Checkbox tương tác nguyên liệu, 3 bước nấu, mẹo bếp). | `LikedDishesView.jsx`, `DishDetailModal.jsx` |
-| **Luân** | **Frontend Engineer 3 & Pitching Lead** | Xây dựng App Layout, Header/Navbar, Auth Modal (LocalStorage session), Filter Modal (bộ lọc 5 nước); Thiết kế Slide PowerPoint (12-15 slides), Kịch bản Thuyết trình & Live Demo. | `Navbar.jsx`, `AuthModal.jsx`, `FilterModal.jsx`, `Slide_YumYumPick.pptx`, Kịch bản Demo |
+| **Đăng Huy** | **Backend Engineer 2** | Xây dựng Dishes Core API (`random`, bộ lọc 15 nước, độ khó, độ cay, thời gian, loại trừ món đã quẹt) và Saved Dishes API (`POST`, `GET`, `DELETE`). | `app/api/dishes.py`, `app/api/saved_dishes.py`, Swagger Docs |
+| **Quang Huy** | **Frontend Engineer 1 (Swipe Deck & Motion)** | Xây dựng Swipe Deck Framer Motion (SwipeCard, CardStack, Infinite Deck prefetch, Stamp YUMMY/NOPE); Tối ưu Responsive PC (phím tắt `←`/`→`) & Mobile touch. | `SwipeCard.jsx`, `CardStack.jsx`, Responsive layout |
+| **Tùng Dương** | **Frontend Engineer 2 (Liked & Recipe Detail)** | Xây dựng Liked Dishes View (danh sách món đã thích, bộ lọc 16 nước, nút xóa) và Dish Detail Modal (xem chi tiết công thức kèm Checkbox tương tác nguyên liệu, bước nấu, mẹo bếp). | `LikedDishesView.jsx`, `DishDetailModal.jsx` |
+| **Luân** | **Frontend Engineer 3 & Pitching Lead** | Xây dựng Landing Page, Auth Gate, Filter Modal (bộ lọc quốc gia & độ khó), Vite Proxy & Tunnel; Thiết kế Slide PowerPoint, Kịch bản Thuyết trình & Live Demo. | `LandingPage.jsx`, `AuthModal.jsx`, `FilterModal.jsx`, `Slide_YumYumPick.pptx`, Kịch bản Demo |
 
 
 ---
@@ -193,5 +190,6 @@ Mọi tài liệu chi tiết của dự án nằm trong thư mục [`docs/`](./d
 - [**04. Team Roles & RACI Matrix**](./docs/04_TEAM_ROLES_AND_RACI.md): Phân công 6 vai trò làm việc song song không bị nghẽn.
 - [**05. Git Workflow & Collaboration Rules**](./docs/05_GIT_WORKFLOW_AND_COLLABORATION_RULES.md): Quy chuẩn nhánh Git, Conventional Commits.
 - [**06. Sprint Roadmap & Actionable Checklist**](./docs/06_SPRINT_ROADMAP_AND_TODO_PER_ROLE.md): Lộ trình 5 ngày chi tiết từng giờ, checklist theo từng vai trò.
-- [**07. Data Schema, SQLite & Seeds**](./docs/07_DATA_SCHEMA_AND_SEEDS.md): Cấu trúc SQLite DDL, bảng users, danh mục 100 món ăn và kho ảnh offline.
+- [**07. Data Schema, SQLite & Seeds**](./docs/07_DATA_SCHEMA_AND_SEEDS.md): Cấu trúc SQLite DDL, bảng users, danh mục 1.100 món ăn và kho ảnh offline.
 - [**08. Core Features Specification**](./docs/08_CORE_FEATURES_SPEC.md): Đặc tả 3 tính năng cốt lõi tinh giản, loại bỏ tính năng phụ rườm rà.
+- [**⭐ Hướng Dẫn Đọc Hiểu Code Cho Người Mới (Codebase Reading Guide)**](./docs/CODEBASE_READING_GUIDE.md): Lộ trình 5 bước đọc hiểu toàn bộ mã nguồn Frontend & Backend từ A-Z.

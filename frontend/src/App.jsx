@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { api } from './services/api'
 import LikedDishesView from './components/LikedDishesView'
 import DishDetailModal from './components/DishDetailModal'
 import AuthModal from './components/AuthModal'
 import FilterModal from './components/FilterModal'
 import CardStack from './components/CardStack'
-import { MOCK_DISHES } from './data/mockDishes'
 import { useAuth } from './hooks/useAuth'
 import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from 'lucide-react'
 import { useFilterMetadata } from './hooks/useFilterMetadata';
@@ -31,7 +30,12 @@ function App() {
   const [swipeDishes, setSwipeDishes] = useState([])
   const [activeFilters, setActiveFilters] = useState({})
 
+  // Flag kiểm soát tiến trình nạp ngầm (Infinite Prefetching)
+  const isPrefetchingRef = useRef(false)
+  const hasMoreRef = useRef(true)
+
   const fetchRandomDishes = async (filters = activeFilters, currentLiked = likedDishes) => {
+    hasMoreRef.current = true
     try {
       const excludedHistoryIds = swipeHistory.getExcludedDishIds()
       const savedIds = currentLiked.map((d) => d.id || d.dish_id).filter(Boolean)
@@ -49,8 +53,16 @@ function App() {
 
       if (cleanDishes && cleanDishes.length > 0) {
         setSwipeDishes(cleanDishes)
+        // Asset Pre-buffering: Tải trước hình ảnh cho 3 thẻ đầu tiên
+        cleanDishes.slice(0, 3).forEach((d) => {
+          const src = d.image || d.image_url
+          if (src) {
+            const img = new Image()
+            img.src = src
+          }
+        })
       } else {
-        if (excludedHistoryIds.length > 0 && !filters.cuisine && !filters.spicy_level && !filters.max_time) {
+        if (excludedHistoryIds.length > 0 && !filters.cuisine && !filters.spicy_level && !filters.max_time && !filters.difficulty) {
           swipeHistory.clearHistory()
           const fresh = await api.getRandomDishes({
             ...filters,
@@ -62,6 +74,7 @@ function App() {
           setSwipeDishes(cleanFresh)
         } else {
           setSwipeDishes([])
+          hasMoreRef.current = false
         }
       }
     } catch (err) {
@@ -69,7 +82,68 @@ function App() {
     }
   }
 
+  // Cơ chế Infinite Deck: Tự động tải ngầm mẻ 10 món tiếp theo khi ngăn xếp còn <= 3 thẻ
+  const handlePrefetchDishes = async (remainingDishes) => {
+    if (isPrefetchingRef.current || !hasMoreRef.current) return
+    isPrefetchingRef.current = true
+
+    try {
+      const excludedHistoryIds = swipeHistory.getExcludedDishIds()
+      const savedIds = likedDishes.map((d) => d.id || d.dish_id).filter(Boolean)
+      const remainingIds = (remainingDishes || []).map((d) => d.id || d.dish_id).filter(Boolean)
+      const currentDeckIds = swipeDishes.map((d) => d.id || d.dish_id).filter(Boolean)
+
+      const allExcludedIds = Array.from(new Set([
+        ...excludedHistoryIds,
+        ...savedIds,
+        ...remainingIds,
+        ...currentDeckIds
+      ]))
+
+      const nextDishes = await api.getRandomDishes({
+        ...activeFilters,
+        limit: 10,
+        exclude_ids: allExcludedIds.length > 0 ? allExcludedIds.join(',') : undefined
+      })
+
+      const cleanNew = (nextDishes || []).filter(
+        (dish) => !allExcludedIds.includes(dish.id || dish.dish_id)
+      )
+
+      if (cleanNew && cleanNew.length > 0) {
+        // Preload hình ảnh của mẻ mới nạp
+        cleanNew.slice(0, 3).forEach((d) => {
+          const src = d.image || d.image_url
+          if (src) {
+            const img = new Image()
+            img.src = src
+          }
+        })
+
+        // Nối mẻ mới vào đuôi danh sách thẻ hiện tại
+        setSwipeDishes((prev) => {
+          const existingIds = new Set(prev.map((d) => d.id || d.dish_id))
+          const trulyNew = cleanNew.filter((d) => !existingIds.has(d.id || d.dish_id))
+          return [...prev, ...trulyNew]
+        })
+      } else {
+        // Nếu đã lướt hết toàn bộ DB, xóa lịch sử để lặp lại vô tận (nếu không có bộ lọc ngặt nghèo)
+        if (excludedHistoryIds.length > 0 && !activeFilters.cuisine && !activeFilters.difficulty && !activeFilters.spicy_level && !activeFilters.max_time) {
+          swipeHistory.clearHistory()
+        } else {
+          hasMoreRef.current = false
+        }
+      }
+    } catch (err) {
+      console.warn('[App] Prefetch error:', err)
+    } finally {
+      isPrefetchingRef.current = false
+    }
+  }
+
   const handleRefreshDeck = async () => {
+    hasMoreRef.current = true
+    isPrefetchingRef.current = false
     const excludedHistoryIds = swipeHistory.getExcludedDishIds()
     const savedIds = likedDishes.map((d) => d.id || d.dish_id).filter(Boolean)
     const allExcludedIds = Array.from(new Set([...excludedHistoryIds, ...savedIds]))
@@ -326,6 +400,7 @@ function App() {
               onLike={handleLikeDish}
               onRefresh={handleRefreshDeck}
               onCardSwiped={handleCardSwiped}
+              onPrefetch={handlePrefetchDishes}
             />
           </section>
         )}
@@ -356,6 +431,7 @@ function App() {
         initialFilters={activeFilters}
         onApplyFilter={(filters) => {
           setActiveFilters(filters)
+          hasMoreRef.current = true
           fetchRandomDishes(filters)
         }}
       />

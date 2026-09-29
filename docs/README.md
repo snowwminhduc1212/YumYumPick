@@ -24,6 +24,7 @@ Hệ thống tài liệu bao gồm **14 chuyên đề độc lập**, phân tác
 | **11** | [**Code Deep-Dive Frontend**](./11_CODE_DEEP_DIVE_FRONTEND.md) | **Giải phẫu 100% từng dòng code Frontend: App.jsx, CardStack, SwipeCard (MotionValue/Transform), DishDetailModal, swipeHistory.** | **Frontend Engineers, UI/UX** |
 | **12** | [**Code Deep-Dive Crawler**](./12_CODE_DEEP_DIVE_CRAWLER.md) | **Giải phẫu 100% hệ thống Crawler & Anti-AI: config.py, crawl_dish_images, Pillow verification, crawl_recipes bản xứ.** | **Data Engineers, QA Lead** |
 | **13** | [**System Evaluation & Scalability Roadmap**](./13_SYSTEM_EVALUATION_AND_SCALABILITY_ROADMAP.md) | **Đánh giá hệ thống, phân tích điểm mạnh - điểm yếu - đánh đổi (Trade-offs) và lộ trình mở rộng quy mô (PostgreSQL, Redis, Docker).** | **Tech Lead, Architect** |
+| **⭐** | [**Codebase Reading Guide**](./CODEBASE_READING_GUIDE.md) | **Cẩm nang hướng dẫn đọc hiểu toàn bộ mã nguồn cho người mới: lộ trình 5 bước, kiến trúc, luồng E2E & cạm bẫy.** | **Newcomers, Onboarding Devs** |
 
 ---
 

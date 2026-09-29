@@ -23,7 +23,7 @@ function App() {
     localStorage.removeItem('yumyum_theme')
   }, [])
 
-  const [currentView, setCurrentView] = useState('landing')
+  const [currentView, setCurrentView] = useState(user ? 'swipe' : 'landing')
   const [likedDishes, setLikedDishes] = useState([])
   const [isLoadingLiked, setIsLoadingLiked] = useState(true)
 
@@ -295,7 +295,7 @@ function App() {
       {currentView !== 'landing' && (
         <header className="sticky top-0 z-40 bg-[#1d0b0d] border-b border-[#dbe2dc]/15 py-2.5 sm:py-3 px-3 sm:px-8 flex items-center justify-between gap-2">
           <div
-            onClick={() => setCurrentView('landing')}
+            onClick={() => setCurrentView(user ? 'swipe' : 'landing')}
             className="flex items-center gap-2 cursor-pointer select-none shrink-0"
           >
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[1px] bg-[#f7ea48] flex items-center justify-center text-[#1d0b0d] font-bold">
@@ -350,7 +350,7 @@ function App() {
             <button
               onClick={() => setFilterOpen(true)}
               className="p-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] transition-colors cursor-pointer"
-              title="Mở bộ lọc món ăn (Luân)"
+              title="Mở bộ lọc món ăn"
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>

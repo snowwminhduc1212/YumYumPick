@@ -9,7 +9,7 @@ SEED_JSON_PATH = os.path.join(BASE_DIR, 'backend', 'app', 'data', 'dishes_seed.j
 FRONTEND_MOCK_PATH = os.path.join(BASE_DIR, 'frontend', 'src', 'data', 'mockDishes.js')
 PROGRESS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'crawler_progress.json')
 
-# Strict ban list: stock photo websites and AI generator domains
+# Strict ban list: stock photo websites, AI generator domains, video thumbnails, and non-food retailers
 BANNED_WORDS = [
     'freepik', 'vecteezy', 'ftcdn', 'dreamstime', 'alamy', 'shutterstock',
     'istock', 'stock.adobe', 'depositphotos', '123rf', 'pinimg',
@@ -19,7 +19,11 @@ BANNED_WORDS = [
     'leonardo', 'civitai', 'koala.sh', 'dream',
     'generative', 'ai-generated', 'render', 'illustration', 'stock',
     'pexels', 'pixabay', 'unsplash', 'clipart', 'vector', 'transparent-png',
-    'cleanpng', 'pngwing', 'pngtree', 'kissclipart'
+    'cleanpng', 'pngwing', 'pngtree', 'kissclipart',
+    'tgdd.vn', 'fptshop.com.vn', 'dienmayxanh.com', 'bachhoaxanh.com',
+    'tiki.vn', 'shopee.vn', 'lazada.vn', 'sendo.vn',
+    'imimg.com', 'indiamart.com', 'alibaba', 'aliexpress',
+    'ytimg.com', 'youtube.com', 'wallpaper', 'shutterphoto', 'twinkl', 'lecongnang'
 ]
 
 # Patterns for automated AI recipe content farms
@@ -62,8 +66,11 @@ FAMOUS_LEGIT_DOMAINS = [
     'maangchi.com', 'beyondkimchee.com', 'marionskitchen.com', 'recipesfromitaly.com',
     'sallysbakingaddiction.com', 'delish.com', 'foodnetwork.com', 'tasteatlas.com',
     'cooking.nytimes.com', 'saveur.com', 'foodandwine.com', 'bepmina.vn',
-    'dienmayxanh.com', 'tgdd.vn', 'fptshop.com.vn', 'vinpearl.com',
-    'vinwonders.com', 'dulichviet.com.vn', 'cookpad.com', 'youtube.com',
-    'ytimg.com', 'wikimedia.org', 'wikipedia.org', 'netspace.edu.vn',
-    'cookidoo', 'thespruceeats.com', 'damndelicious.net', 'gimmesomeoven.com'
+    'vinpearl.com', 'vinwonders.com', 'dulichviet.com.vn', 'cookpad.com',
+    'wikimedia.org', 'wikipedia.org', 'netspace.edu.vn', 'daubepgiadinh.vn',
+    'cookidoo', 'thespruceeats.com', 'damndelicious.net', 'gimmesomeoven.com',
+    'tamlong.com.vn', 'mia.vn', 'nucuoimekong.com', 'dimitrasdishes.com',
+    'mygreekdish.com', 'bestyumrecipes.com', 'hungryhuy.com', 'omnivorescookbook.com',
+    'hot-thai-kitchen.com', 'eatingthai.com', 'mexicanplease.com', 'spainonafork.com',
+    'indianhealthyrecipes.com', 'vegrecipesofindia.com', 'tastingtable.com'
 ]

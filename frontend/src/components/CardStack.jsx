@@ -13,15 +13,58 @@ export default function CardStack({
   initialDishes = [],
   onLike,
   onRefresh,
-  onCardSwiped
+  onCardSwiped,
+  onPrefetch
 }) {
   const [dishes, setDishes] = useState(initialDishes);
   const [exitDirection, setExitDirection] = useState("right");
 
-  // Đồng bộ state khi danh sách thẻ ngẫu nhiên mới được fetch từ App.jsx
+  // Đồng bộ state khi danh sách thẻ thay đổi hoặc có thẻ mới được prefetch từ App.jsx
   useEffect(() => {
-    setDishes(initialDishes);
+    setDishes((prevDishes) => {
+      if (!initialDishes || initialDishes.length === 0) {
+        return [];
+      }
+      const prevIds = new Set(prevDishes.map((d) => d.id || d.dish_id));
+      const isCompletelyNew =
+        prevDishes.length === 0 ||
+        !initialDishes.some((d) => prevIds.has(d.id || d.dish_id));
+
+      // Nếu là danh sách mới (do đổi bộ lọc hoặc bấm Quay lại từ đầu)
+      if (isCompletelyNew) {
+        return initialDishes;
+      }
+
+      // Nếu là các thẻ mới được nạp ngầm (prefetch) từ server, nối tiếp vào đuôi
+      const newItems = initialDishes.filter(
+        (d) => !prevIds.has(d.id || d.dish_id)
+      );
+      if (newItems.length > 0) {
+        return [...prevDishes, ...newItems];
+      }
+      return prevDishes;
+    });
   }, [initialDishes]);
+
+  // Asset Pre-buffering: Tải trước hình ảnh của các thẻ tiếp theo trong hàng đợi
+  useEffect(() => {
+    if (dishes.length > 3) {
+      dishes.slice(3, 7).forEach((dish) => {
+        const src = dish.image || dish.image_url;
+        if (src) {
+          const img = new Image();
+          img.src = src;
+        }
+      });
+    }
+  }, [dishes]);
+
+  // Kiểm tra ngưỡng Watermark: khi số thẻ còn lại <= 3, tự động gọi prefetch ngầm
+  useEffect(() => {
+    if (dishes.length > 0 && dishes.length <= 3 && onPrefetch) {
+      onPrefetch(dishes);
+    }
+  }, [dishes, onPrefetch]);
 
   // Xử lý khi quẹt thẻ (direction: 'left' | 'right')
   const handleSwipe = useCallback((direction, dish) => {
@@ -32,10 +75,16 @@ export default function CardStack({
       swipeHistory.recordSwipe(dish.id);
     }
 
-    // Loại bỏ thẻ trên cùng khỏi danh sách local
-    setDishes((prev) => prev.filter((item) => item.id !== dish.id));
+    // Loại bỏ thẻ trên cùng khỏi danh sách local và kiểm tra prefetch ngay
+    setDishes((prev) => {
+      const remaining = prev.filter((item) => item.id !== dish.id);
+      if (remaining.length <= 3 && onPrefetch) {
+        onPrefetch(remaining);
+      }
+      return remaining;
+    });
 
-    // Thông báo cho App.jsx để xóa khỏi danh sách thẻ trong RAM
+    // Thông báo cho App.jsx để cập nhật danh sách thẻ trong RAM
     if (onCardSwiped) {
       onCardSwiped(dish);
     }
@@ -44,7 +93,7 @@ export default function CardStack({
     if (direction === "right" && onLike) {
       onLike(dish);
     }
-  }, [onLike, onCardSwiped]);
+  }, [onLike, onCardSwiped, onPrefetch]);
 
   // Xử lý nút bấm thủ công (bấm nút Skip hoặc Like)
   const handleButtonClick = useCallback((direction) => {

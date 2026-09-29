@@ -46,13 +46,17 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
   const [mode, setMode] = useState('login'); // 'login' | 'signup'
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isSignup = mode === 'signup';
+
   const resetForm = () => {
     setUsername('');
     setPassword('');
+    setConfirmPassword('');
     setFullName('');
     setError('');
   };
@@ -62,19 +66,31 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     onClose();
   };
 
+  const switchMode = (nextMode) => {
+    setMode(nextMode);
+    setConfirmPassword('');
+    setError('');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Kiểm tra nhập lại mật khẩu ngay tại frontend, không gửi lên backend
+    if (isSignup && password !== confirmPassword) {
+      setError('Mật khẩu nhập lại không khớp');
+      return;
+    }
+
     setIsSubmitting(true);
 
     // Backend lưu username dạng chữ thường khi đăng ký → gửi chữ thường cho cả login
     const normalizedUsername = username.trim().toLowerCase();
 
-    const endpoint = mode === 'login' ? 'login' : 'signup';
-    const body =
-      mode === 'login'
-        ? { username: normalizedUsername, password }
-        : { username: normalizedUsername, password, full_name: fullName.trim() };
+    const endpoint = isSignup ? 'signup' : 'login';
+    const body = isSignup
+      ? { username: normalizedUsername, password, full_name: fullName.trim() }
+      : { username: normalizedUsername, password };
 
     try {
       const res = await fetch(`${API_PREFIX}/auth/${endpoint}`, {
@@ -101,7 +117,11 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     }
   };
 
-  const isSignup = mode === 'signup';
+  const inputClass =
+    'px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors';
+
+  // Viền đỏ ở ô nhập lại khi đã gõ mà chưa khớp
+  const confirmMismatch = isSignup && confirmPassword.length > 0 && confirmPassword !== password;
 
   return (
     <AnimatePresence>
@@ -125,9 +145,9 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
               <button
                 type="button"
                 disabled={isSubmitting}
-                onClick={() => { setMode('login'); setError(''); }}
+                onClick={() => switchMode('login')}
                 className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
-                  mode === 'login' ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
+                  !isSignup ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
                 }`}
               >
                 Đăng nhập
@@ -135,7 +155,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
               <button
                 type="button"
                 disabled={isSubmitting}
-                onClick={() => { setMode('signup'); setError(''); }}
+                onClick={() => switchMode('signup')}
                 className={`flex-1 py-2 rounded-[1px] text-xs font-bold uppercase tracking-wider transition-colors border ${
                   isSignup ? 'bg-lemon-zest text-black-olive border-lemon-zest' : 'bg-transparent text-sage-mist border-sage-mist/50 hover:text-pure-white hover:border-pure-white'
                 }`}
@@ -153,7 +173,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 required
                 disabled={isSubmitting}
                 autoComplete="username"
-                className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
+                className={inputClass}
               />
 
               {isSignup && (
@@ -165,7 +185,7 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                   required
                   disabled={isSubmitting}
                   autoComplete="name"
-                  className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
+                  className={inputClass}
                 />
               )}
 
@@ -177,8 +197,21 @@ function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                 required
                 disabled={isSubmitting}
                 autoComplete={isSignup ? 'new-password' : 'current-password'}
-                className="px-3 py-2.5 rounded-[1px] border border-sage-mist bg-black-olive text-warm-cream focus:outline-none focus:border-lemon-zest text-sm transition-colors"
+                className={inputClass}
               />
+
+              {isSignup && (
+                <input
+                  type="password"
+                  placeholder="Nhập lại mật khẩu"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  autoComplete="new-password"
+                  className={`${inputClass} ${confirmMismatch ? 'border-red-500 focus:border-red-500' : ''}`}
+                />
+              )}
 
               {error && (
                 <p className="text-xs text-red-500 font-medium">{error}</p>

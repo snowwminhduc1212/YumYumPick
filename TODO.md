@@ -54,12 +54,12 @@
   - Đăng nhập/Đăng ký thành công $\rightarrow$ Tự động chuyển hướng (redirect) vào màn hình quẹt thẻ (Swipe Deck).
   - Khi bấm Đăng xuất: Xóa session và chuyển ngay về Landing Page.
 
-- [ ] **Infinite Deck — Tự Động Tải Thêm Món Mới, Không Bị Limit & Nhẹ Máy:**
+- [x] **Infinite Deck — Tự Động Tải Thêm Món Mới, Không Bị Limit & Nhẹ Máy:**
   - Giải pháp tối ưu: **Không** kéo thẳng 100 món về làm nặng DOM và tốn RAM trình duyệt.
   - Cơ chế **Prefetch ngầm:** Khi ngăn xếp thẻ trong `CardStack.jsx` còn $\le 3$ món (người dùng quẹt gần cuối), Frontend tự động gọi API ngầm lấy thêm 5 món mới (`limit=5&exclude_ids=...`) và nối tiếp (`append`) vào đuôi danh sách thẻ hiện tại.
   - Người dùng có thể quẹt liên tục không giới hạn (vô tận) mà giao diện vẫn siêu mượt 60 FPS (Framer Motion chỉ render tối đa 3 thẻ xếp lớp cùng lúc trên màn hình).
 
-- [ ] **Logo Nhận Diện Chính Thức Cho Web:**
+- [x] **Logo Nhận Diện Chính Thức Cho Web:**
   - Thay thế icon muỗng nĩa tạm thời bằng Logo nhận diện thương hiệu YumYumPick chính thức (vector SVG / PNG sắc nét).
   - Hiển thị đồng bộ trên Header/Navbar, Favicon trình duyệt và Hero Section của Landing Page.
 
@@ -136,11 +136,11 @@
 ### Ngày 5: Kiểm Thử Toàn Diện, Hoàn Thiện Tính Năng Mới, Tổng Duyệt & Báo Cáo
 - [x] **Luân:** Hoàn thiện component `LandingPage.jsx`, gắn sự kiện click Logo Header về Landing Page, áp dụng Logo thương hiệu chính thức và kích hoạt luồng Auth Gate (Chưa đăng nhập $\rightarrow$ Landing Page $\rightarrow$ Đăng nhập $\rightarrow$ Mở Quẹt thẻ).
 - [x] **Quang Huy:** Triển khai cơ chế Infinite Deck trong `CardStack.jsx` (tự động gọi API lấy thêm 5 món nối tiếp khi còn $\le 3$ thẻ, không bị limit mà vẫn nhẹ máy); sửa cờ Ý thành 🇮🇹 trong `SwipeCard.jsx`.
-- [ ] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD (Kiểm tra kỹ: Landing Page, Auth Gate, Infinite Prefetch, 7-day exclusion, cờ Ý).
-- [ ] **Cả team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Chạy kiểm thử End-to-End trơn tru:
+- [x] **Minh Đức:** Chạy Regression Test toàn bộ 20 Test Cases đảm bảo 0 bug; nghiệm thu sản phẩm cuối theo tiêu chí DoD (Kiểm tra kỹ: Landing Page, Auth Gate, Infinite Prefetch, 7-day exclusion, cờ Ý).
+- [x] **Cả team (Minh Đức, Ánh Dương, Đăng Huy, Quang Huy, Tùng Dương, Luân):** Chạy kiểm thử End-to-End trơn tru:
   - Khách vào Landing Page $\rightarrow$ Bấm Bắt đầu $\rightarrow$ Đăng ký/Đăng nhập $\rightarrow$ Quẹt thẻ vô tận (prefetch ngầm) $\rightarrow$ Không trùng món 7 ngày $\rightarrow$ Đổi bộ lọc $\rightarrow$ Lưu món $\rightarrow$ Xem chi tiết công thức $\rightarrow$ Bấm Logo về Landing Page.
-- [ ] **Luân:** Soạn bộ câu hỏi phản biện (Q&A Cheat Sheet); đại diện nhóm thuyết trình báo cáo đồ án với bộ Slide hoàn thiện.
-- [ ] **Cả team:** Sẵn sàng bảo vệ đồ án đạt kết quả xuất sắc!
+- [x] **Luân:** Soạn bộ câu hỏi phản biện (Q&A Cheat Sheet); đại diện nhóm thuyết trình báo cáo đồ án với bộ Slide hoàn thiện.
+- [x] **Cả team:** Sẵn sàng bảo vệ đồ án đạt kết quả xuất sắc!
 
 ---
 

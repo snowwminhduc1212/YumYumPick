@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Heart, RotateCcw, Sparkles } from "lucide-react";
 import SwipeCard from "./SwipeCard";
-import { swipeHistory } from "../services/swipeHistory";
 
 /**
  * Component CardStack:
@@ -12,6 +11,7 @@ import { swipeHistory } from "../services/swipeHistory";
 export default function CardStack({
   initialDishes = [],
   onLike,
+  onSkip,
   onRefresh,
   onCardSwiped,
   onPrefetch
@@ -70,11 +70,6 @@ export default function CardStack({
   const handleSwipe = useCallback((direction, dish) => {
     setExitDirection(direction);
 
-    // Lưu vào lịch sử đã lướt qua (1 tuần không gặp lại)
-    if (dish?.id) {
-      swipeHistory.recordSwipe(dish.id);
-    }
-
     // Loại bỏ thẻ trên cùng khỏi danh sách local và kiểm tra prefetch ngay
     setDishes((prev) => {
       const remaining = prev.filter((item) => item.id !== dish.id);
@@ -93,7 +88,12 @@ export default function CardStack({
     if (direction === "right" && onLike) {
       onLike(dish);
     }
-  }, [onLike, onCardSwiped, onPrefetch]);
+
+    // Nếu quẹt trái (SKIP), gọi hàm onSkip để gửi API lưu vào DB loại trừ 7 ngày
+    if (direction === "left" && onSkip) {
+      onSkip(dish);
+    }
+  }, [onLike, onSkip, onCardSwiped, onPrefetch]);
 
   // Xử lý nút bấm thủ công (bấm nút Skip hoặc Like)
   const handleButtonClick = useCallback((direction) => {

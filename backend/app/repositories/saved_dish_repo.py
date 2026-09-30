@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
@@ -10,7 +11,17 @@ class SavedDishRepository:
         self.db = db
 
     def create_saved_dish(self, user_id: int, dish_id: str) -> UserSavedDish:
-        saved = UserSavedDish(user_id=user_id, dish_id=dish_id)
+        stmt = select(UserSavedDish).where(
+            UserSavedDish.user_id == user_id,
+            UserSavedDish.dish_id == dish_id,
+        )
+        existing = self.db.scalars(stmt).first()
+        if existing:
+            existing.saved_at = datetime.utcnow()
+            self.db.flush()
+            return existing
+
+        saved = UserSavedDish(user_id=user_id, dish_id=dish_id, saved_at=datetime.utcnow())
         self.db.add(saved)
         self.db.flush()
         return saved

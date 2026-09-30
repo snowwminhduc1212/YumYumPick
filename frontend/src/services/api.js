@@ -5,7 +5,6 @@
  * - /api/v1/dishes (Dish details and random swipe cards)
  */
 
-import { MOCK_DISHES } from '../data/mockDishes'
 import { API_BASE_URL } from '../config/api'
 const API_BASE = API_BASE_URL
 
@@ -55,9 +54,8 @@ function normalizeDishDetail(item) {
 }
 
 export const api = {
-  /**F
+  /**
    * Fetch all saved dishes for a user from SQLite DB
-   * Fallback to mockDishes if backend is offline
    */
   async getSavedDishes(userId = 1) {
     try {
@@ -71,8 +69,8 @@ export const api = {
       }
       return []
     } catch (err) {
-      console.warn('[API] Failed to fetch saved dishes from backend, using mock fallback:', err.message)
-      return MOCK_DISHES.slice(0, 5)
+      console.error('[API] Failed to fetch saved dishes from backend:', err.message)
+      return []
     }
   },
 
@@ -123,8 +121,8 @@ export const api = {
       }
       return []
     } catch (err) {
-      console.warn('[API] Failed to fetch random dishes from backend, using mock fallback:', err.message)
-      return MOCK_DISHES
+      console.error('[API] Failed to fetch random dishes from backend:', err.message)
+      return []
     }
   },
 
@@ -187,7 +185,6 @@ export const api = {
 
   /**
    * Fetch complete dish recipe details (ingredients, steps, tips)
-   * Fallback to mock data if backend request fails
    */
   async getDishDetail(dishId) {
     try {
@@ -198,9 +195,8 @@ export const api = {
       const data = await response.json()
       return normalizeDishDetail(data)
     } catch (err) {
-      console.warn('[API] Failed to fetch dish detail from backend, falling back to mock:', err.message)
-      const mock = MOCK_DISHES.find((d) => d.id === dishId)
-      return mock ? normalizeDishDetail(mock) : null
+      console.error('[API] Failed to fetch dish detail from backend:', err.message)
+      return null
     }
   }
 }

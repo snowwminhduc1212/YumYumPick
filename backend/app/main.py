@@ -1,9 +1,7 @@
 import os
-import json
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
 from app.api.auth import router as auth_router
 
 #Khởi tạo ứng dụng
@@ -41,19 +39,6 @@ app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
 @app.get("/")
 def health_check():
     return{"status":"ok","message":"Backend is running"}
-
-@app.get("/api/v1/mock/dishes")
-def get_mock_dishes():
-    """
-    API cung cấp Mock Data (Dữ liệu giả lập) cho Frontend làm giao diện Ngày 1.
-    Đọc thẳng từ file dishes_seed.json và trả về.
-    """
-    file_path = os.path.join(BASE_DIR, "app", "data", "dishes_seed.json")
-
-    with open(file_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    return JSONResponse(content=data)
 
 class CachedStaticFiles(StaticFiles):
     def is_not_modified(self, response_headers, request_headers) -> bool:

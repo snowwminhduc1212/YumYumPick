@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Heart, RotateCcw, Sparkles } from "lucide-react";
+import { X, Heart, ChefHat, SlidersHorizontal, ArrowRight } from "lucide-react";
 import SwipeCard from "./SwipeCard";
 
 /**
@@ -12,7 +12,8 @@ export default function CardStack({
   initialDishes = [],
   onLike,
   onSkip,
-  onRefresh,
+  onGoToLiked,
+  onOpenFilter,
   onCardSwiped,
   onPrefetch
 }) {
@@ -102,15 +103,6 @@ export default function CardStack({
     handleSwipe(direction, topDish);
   }, [dishes, handleSwipe]);
 
-  // Khôi phục lại toàn bộ thẻ khi hết
-  const handleReset = () => {
-    if (onRefresh) {
-      onRefresh(); // Fetch danh sách ngẫu nhiên mới
-    } else {
-      setDishes(initialDishes);
-    }
-  };
-
   // Bắt sự kiện phím tắt bàn phím PC (←: Skip, →: Like)
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -175,28 +167,42 @@ export default function CardStack({
           ) : (
             /* EMPTY STATE KHI QUẸT HẾT THẺ */
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="flex flex-col items-center justify-center text-center p-8 bg-black-olive rounded-[1px] border border-sage-mist/50 w-full h-[400px]"
+              className="flex flex-col items-center justify-center text-center p-8 bg-[#1d0b0d] rounded-[1px] border border-[#dbe2dc]/20 w-full max-w-sm mx-auto shadow-2xl"
             >
-              <div className="w-16 h-16 rounded-[1px] bg-forest-ink flex items-center justify-center text-lemon-zest mb-5 border border-sage-mist/50">
-                <Sparkles className="w-6 h-6" />
+              <div className="w-16 h-16 rounded-full bg-[#f7ea48]/10 flex items-center justify-center text-[#f7ea48] mb-5 border border-[#f7ea48]/30">
+                <ChefHat className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-warm-cream mb-2 tracking-stenciled uppercase">
-                Hết món rồi!
+              <h3 className="text-xl font-extrabold text-[#fcf9f0] mb-2 font-heading tracking-[0.04em] uppercase">
+                Đã Khám Phá Hết Món!
               </h3>
-              <p className="text-sm text-sage-mist mb-8 max-w-xs leading-relaxed">
-                Bạn đã lướt qua toàn bộ thực đơn. Hãy quay lại từ đầu để cân
-                nhắc nhé.
+              <p className="text-xs text-[#dbe2dc]/70 mb-6 max-w-xs leading-relaxed tracking-[0.01em]">
+                Bạn đã duyệt qua toàn bộ thực đơn phù hợp. Giờ là lúc ghé vào danh sách đã lưu để chọn món nấu ngay hôm nay!
               </p>
-              <button
-                onClick={handleReset}
-                className="flex items-center gap-2.5 px-8 py-3.5 rounded-[1px] bg-lemon-zest hover:bg-white text-black-olive font-bold transition-colors uppercase tracking-neon"
-              >
-                <RotateCcw className="w-4 h-4 stroke-[3]" />
-                {/*RotateCcw là iconcó hình lấp lánh*/}
-                <span>Quay Lại TỪ ĐẦU</span>
-              </button>
+
+              <div className="flex flex-col gap-2.5 w-full">
+                {onGoToLiked && (
+                  <button
+                    onClick={onGoToLiked}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] font-bold text-xs uppercase tracking-[0.04em] transition-all cursor-pointer active:scale-95 shadow-md"
+                  >
+                    <Heart className="w-4 h-4 fill-[#1d0b0d]" />
+                    <span>Xem các món đã lưu</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+
+                {onOpenFilter && (
+                  <button
+                    onClick={onOpenFilter}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] text-[#fcf9f0] hover:text-[#f7ea48] text-xs font-semibold uppercase tracking-[0.04em] transition-colors cursor-pointer"
+                  >
+                    <SlidersHorizontal className="w-3.5 h-3.5" />
+                    <span>Đổi tiêu chí bộ lọc</span>
+                  </button>
+                )}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

@@ -1,22 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const SESSION_KEY = 'yumyum_session';
 
-export function useAuth() {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
+// Đọc phiên đã lưu NGAY lúc khởi tạo (không chờ useEffect)
+// → App biết đã đăng nhập hay chưa ngay từ lần vẽ đầu tiên
+function readSession() {
+  try {
     const saved = localStorage.getItem(SESSION_KEY);
-    if (saved) {
-      try {
-        setUser(JSON.parse(saved));
-      } catch {
-        localStorage.removeItem(SESSION_KEY);
-      }
-    }
-    setIsLoading(false);
-  }, []);
+    return saved ? JSON.parse(saved) : null;
+  } catch {
+    localStorage.removeItem(SESSION_KEY);
+    return null;
+  }
+}
+
+export function useAuth() {
+  const [user, setUser] = useState(readSession);
 
   const login = (userData) => {
     // userData: { id, username, full_name } — đúng theo AuthResponse.user
@@ -30,5 +29,5 @@ export function useAuth() {
     setUser(null);
   };
 
-  return { user, isLoading, login, logout };
+  return { user, isLoading: false, login, logout };
 }

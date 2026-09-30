@@ -21,6 +21,7 @@ function normalizeSavedDish(item) {
     english_name: item.english_name || '',
     cuisine: item.cuisine,
     cook_time_minutes: item.cook_time_minutes ?? 25,
+    difficulty: item.difficulty || 'Dễ',
     image: item.image || item.image_url || '',
     image_url: item.image_url || item.image || '',
     short_description: item.short_description || '',

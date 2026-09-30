@@ -116,28 +116,6 @@ function App() {
     }
   }
 
-  const handleRefreshDeck = async () => {
-    hasMoreRef.current = true
-    isPrefetchingRef.current = false
-
-    try {
-      // Đặt lại các món đã bỏ qua để cho phép quẹt lại từ đầu
-      await api.clearSkips(currentUserId)
-
-      const nextDishes = await api.getRandomDishes({
-        ...activeFilters,
-        user_id: currentUserId,
-      })
-
-      if (nextDishes && nextDishes.length > 0) {
-        setSwipeDishes(nextDishes)
-      } else {
-        setSwipeDishes([])
-      }
-    } catch (err) {
-      console.error('[App] Failed to refresh dishes:', err)
-    }
-  }
 
   // Remove card from RAM immediately upon swipe
   const handleCardSwiped = (swipedDish) => {
@@ -374,7 +352,8 @@ function App() {
               initialDishes={swipeDishes}
               onLike={handleLikeDish}
               onSkip={handleSkipDish}
-              onRefresh={handleRefreshDeck}
+              onGoToLiked={() => changeView('liked')}
+              onOpenFilter={() => setFilterOpen(true)}
               onCardSwiped={handleCardSwiped}
               onPrefetch={handlePrefetchDishes}
             />

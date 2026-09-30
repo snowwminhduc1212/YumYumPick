@@ -78,6 +78,17 @@ const CUISINE_FILTERS = [
   'Hy Lạp', 'Đức', 'Thổ Nhĩ Kỳ', 'Đông Nam Á'
 ]
 
+// Chuẩn hóa văn bản tiếng Việt để tìm kiếm không phân biệt có dấu / không dấu
+function removeVietnameseDiacritics(str) {
+  if (!str) return ''
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, (m) => (m === 'đ' ? 'd' : 'D'))
+    .toLowerCase()
+    .trim()
+}
+
 export default function LikedDishesView({
   likedDishes = [],
   isLoading = false,
@@ -88,13 +99,24 @@ export default function LikedDishesView({
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCuisine, setSelectedCuisine] = useState('Tất cả')
 
-  // Filter dishes by search keyword and cuisine
+  // Filter dishes by search keyword (hỗ trợ cả có dấu và không dấu) and cuisine
   const filteredDishes = useMemo(() => {
+    const cleanQuery = removeVietnameseDiacritics(searchQuery)
+
     return likedDishes.filter((dish) => {
-      const matchSearch =
-        dish.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dish.english_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dish.cuisine?.toLowerCase().includes(searchQuery.toLowerCase())
+      let matchSearch = true
+      if (cleanQuery) {
+        const cleanName = removeVietnameseDiacritics(dish.name)
+        const cleanEnglishName = removeVietnameseDiacritics(dish.english_name)
+        const cleanCuisine = removeVietnameseDiacritics(dish.cuisine)
+        const cleanDesc = removeVietnameseDiacritics(dish.short_description)
+
+        matchSearch =
+          cleanName.includes(cleanQuery) ||
+          cleanEnglishName.includes(cleanQuery) ||
+          cleanCuisine.includes(cleanQuery) ||
+          cleanDesc.includes(cleanQuery)
+      }
 
       let matchCuisine = true
       if (selectedCuisine !== 'Tất cả') {

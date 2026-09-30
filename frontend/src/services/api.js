@@ -97,6 +97,9 @@ export const api = {
       if (params.exclude_ids) {
         query.append('exclude_ids', params.exclude_ids)
       }
+      if (params.user_id) {
+        query.append('user_id', params.user_id)
+      }
 
       const url = `${API_BASE}/api/v1/dishes/random?${query.toString()}`
       const response = await fetch(url)
@@ -179,6 +182,52 @@ export const api = {
       return await response.json()
     } catch (err) {
       console.warn('[API] Failed to unsave dish from backend:', err.message)
+      return { success: false, error: err.message }
+    }
+  },
+
+  /**
+   * Record a swiped-left (skipped) dish in SQLite DB
+   * This dish will automatically be excluded for 7 days
+   */
+  async skipDish(userId = 1, dishId) {
+    try {
+      const response = await fetch(`${API_BASE}/api/v1/dishes/skip`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: Number(userId),
+          dish_id: dishId
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error(`Failed to record skip (${response.status})`)
+      }
+
+      return await response.json()
+    } catch (err) {
+      console.warn('[API] Failed to record skip in backend:', err.message)
+      return { success: false, error: err.message }
+    }
+  },
+
+  /**
+   * Reset skip history for user in SQLite DB (allow swiping from start)
+   */
+  async clearSkips(userId = 1) {
+    try {
+      const response = await fetch(`${API_BASE}/api/v1/dishes/skip/${userId}`, {
+        method: 'DELETE'
+      })
+      if (!response.ok) {
+        throw new Error(`Failed to clear skips (${response.status})`)
+      }
+      return await response.json()
+    } catch (err) {
+      console.warn('[API] Failed to clear skips in backend:', err.message)
       return { success: false, error: err.message }
     }
   },

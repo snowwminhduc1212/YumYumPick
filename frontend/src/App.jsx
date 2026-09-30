@@ -8,7 +8,6 @@ import CardStack from './components/CardStack'
 import { useAuth } from './hooks/useAuth'
 import { UtensilsCrossed, Heart, Layers, SlidersHorizontal, LogIn, LogOut } from 'lucide-react'
 import { useFilterMetadata } from './hooks/useFilterMetadata';
-import { swipeHistory } from './services/swipeHistory';
 import LandingPage from './components/LandingPage'
 
 function App() {
@@ -34,27 +33,18 @@ function App() {
   const isPrefetchingRef = useRef(false)
   const hasMoreRef = useRef(true)
 
-  const fetchRandomDishes = async (filters = activeFilters, currentLiked = likedDishes) => {
+  const fetchRandomDishes = async (filters = activeFilters) => {
     hasMoreRef.current = true
     try {
-      const excludedHistoryIds = swipeHistory.getExcludedDishIds()
-      const savedIds = currentLiked.map((d) => d.id || d.dish_id).filter(Boolean)
-      const allExcludedIds = Array.from(new Set([...excludedHistoryIds, ...savedIds]))
-
       const dishes = await api.getRandomDishes({
         ...filters,
-        exclude_ids: allExcludedIds.length > 0 ? allExcludedIds.join(',') : undefined
+        user_id: currentUserId,
       })
 
-      // Client-side defensive filter: eliminate any dish already in saved list
-      const cleanDishes = (dishes || []).filter(
-        (dish) => !savedIds.includes(dish.id || dish.dish_id)
-      )
-
-      if (cleanDishes && cleanDishes.length > 0) {
-        setSwipeDishes(cleanDishes)
+      if (dishes && dishes.length > 0) {
+        setSwipeDishes(dishes)
         // Asset Pre-buffering: Tải trước hình ảnh cho 3 thẻ đầu tiên
-        cleanDishes.slice(0, 3).forEach((d) => {
+        dishes.slice(0, 3).forEach((d) => {
           const src = d.image || d.image_url
           if (src) {
             const img = new Image()
@@ -62,20 +52,8 @@ function App() {
           }
         })
       } else {
-        if (excludedHistoryIds.length > 0 && !filters.cuisine && !filters.spicy_level && !filters.max_time && !filters.difficulty) {
-          swipeHistory.clearHistory()
-          const fresh = await api.getRandomDishes({
-            ...filters,
-            exclude_ids: savedIds.length > 0 ? savedIds.join(',') : undefined
-          })
-          const cleanFresh = (fresh || []).filter(
-            (dish) => !savedIds.includes(dish.id || dish.dish_id)
-          )
-          setSwipeDishes(cleanFresh)
-        } else {
-          setSwipeDishes([])
-          hasMoreRef.current = false
-        }
+        setSwipeDishes([])
+        hasMoreRef.current = false
       }
     } catch (err) {
       console.error('[App] Failed to fetch random dishes:', err)
@@ -88,26 +66,19 @@ function App() {
     isPrefetchingRef.current = true
 
     try {
-      const excludedHistoryIds = swipeHistory.getExcludedDishIds()
-      const savedIds = likedDishes.map((d) => d.id || d.dish_id).filter(Boolean)
       const remainingIds = (remainingDishes || []).map((d) => d.id || d.dish_id).filter(Boolean)
       const currentDeckIds = swipeDishes.map((d) => d.id || d.dish_id).filter(Boolean)
-
-      const allExcludedIds = Array.from(new Set([
-        ...excludedHistoryIds,
-        ...savedIds,
-        ...remainingIds,
-        ...currentDeckIds
-      ]))
+      const deckExcludedIds = Array.from(new Set([...remainingIds, ...currentDeckIds]))
 
       const nextDishes = await api.getRandomDishes({
         ...activeFilters,
+        user_id: currentUserId,
         limit: 10,
-        exclude_ids: allExcludedIds.length > 0 ? allExcludedIds.join(',') : undefined
+        exclude_ids: deckExcludedIds.length > 0 ? deckExcludedIds.join(',') : undefined
       })
 
       const cleanNew = (nextDishes || []).filter(
-        (dish) => !allExcludedIds.includes(dish.id || dish.dish_id)
+        (dish) => !deckExcludedIds.includes(dish.id || dish.dish_id)
       )
 
       if (cleanNew && cleanNew.length > 0) {
@@ -127,12 +98,7 @@ function App() {
           return [...prev, ...trulyNew]
         })
       } else {
-        // Nếu đã lướt hết toàn bộ DB, xóa lịch sử để lặp lại vô tận (nếu không có bộ lọc ngặt nghèo)
-        if (excludedHistoryIds.length > 0 && !activeFilters.cuisine && !activeFilters.difficulty && !activeFilters.spicy_level && !activeFilters.max_time) {
-          swipeHistory.clearHistory()
-        } else {
-          hasMoreRef.current = false
-        }
+        hasMoreRef.current = false
       }
     } catch (err) {
       console.warn('[App] Prefetch error:', err)
@@ -144,32 +110,20 @@ function App() {
   const handleRefreshDeck = async () => {
     hasMoreRef.current = true
     isPrefetchingRef.current = false
-    const excludedHistoryIds = swipeHistory.getExcludedDishIds()
-    const savedIds = likedDishes.map((d) => d.id || d.dish_id).filter(Boolean)
-    const allExcludedIds = Array.from(new Set([...excludedHistoryIds, ...savedIds]))
 
     try {
+      // Đặt lại các món đã bỏ qua để cho phép quẹt lại từ đầu
+      await api.clearSkips(currentUserId)
+
       const nextDishes = await api.getRandomDishes({
         ...activeFilters,
-        exclude_ids: allExcludedIds.length > 0 ? allExcludedIds.join(',') : undefined
+        user_id: currentUserId,
       })
 
-      const cleanDishes = (nextDishes || []).filter(
-        (dish) => !savedIds.includes(dish.id || dish.dish_id)
-      )
-
-      if (cleanDishes && cleanDishes.length > 0) {
-        setSwipeDishes(cleanDishes)
+      if (nextDishes && nextDishes.length > 0) {
+        setSwipeDishes(nextDishes)
       } else {
-        swipeHistory.clearHistory()
-        const fresh = await api.getRandomDishes({
-          ...activeFilters,
-          exclude_ids: savedIds.length > 0 ? savedIds.join(',') : undefined
-        })
-        const cleanFresh = (fresh || []).filter(
-          (dish) => !savedIds.includes(dish.id || dish.dish_id)
-        )
-        setSwipeDishes(cleanFresh)
+        setSwipeDishes([])
       }
     } catch (err) {
       console.error('[App] Failed to refresh dishes:', err)
@@ -253,6 +207,14 @@ function App() {
     if (!isAlreadyLiked) {
       setLikedDishes((prev) => [dish, ...prev])
       await api.saveDish(currentUserId, dishId)
+    }
+  }
+
+  // Swiping left saves to SQLite with 7-day exclusion TTL
+  const handleSkipDish = async (dish) => {
+    const dishId = dish.id || dish.dish_id
+    if (dishId) {
+      await api.skipDish(currentUserId, dishId)
     }
   }
 
@@ -398,6 +360,7 @@ function App() {
             <CardStack
               initialDishes={swipeDishes}
               onLike={handleLikeDish}
+              onSkip={handleSkipDish}
               onRefresh={handleRefreshDeck}
               onCardSwiped={handleCardSwiped}
               onPrefetch={handlePrefetchDishes}

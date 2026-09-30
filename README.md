@@ -72,9 +72,9 @@ flowchart LR
         DBBrowser["Direct DB Management\nvia DB Browser for SQLite"]
     end
 
-    Client <-->|REST API JSON via Vite Proxy| Server
-    Server <-->|Local File Access (WAL Mode)| SQLite
-    DBBrowser -.->|Query & Inspect Data| SQLite
+    Client <-->|"REST API JSON via Vite Proxy"| Server
+    Server <-->|"Local File Access (WAL Mode)"| SQLite
+    DBBrowser -.->|"Query & Inspect Data"| SQLite
 ```
 
 | Layer | Technology | Role & Responsibility |

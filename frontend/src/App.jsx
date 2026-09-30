@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { api } from './services/api'
 import LikedDishesView from './components/LikedDishesView'
 import DishDetailModal from './components/DishDetailModal'
@@ -22,9 +22,18 @@ function App() {
     localStorage.removeItem('yumyum_theme')
   }, [])
 
-  const [currentView, setCurrentView] = useState(user ? 'swipe' : 'landing')
+  const [currentView, setCurrentView] = useState(() => {
+    const saved = sessionStorage.getItem('yumyum_view')
+    if (saved && user) return saved
+    return user ? 'swipe' : 'landing'
+  })
   const [likedDishes, setLikedDishes] = useState([])
   const [isLoadingLiked, setIsLoadingLiked] = useState(true)
+
+  const changeView = useCallback((view) => {
+    setCurrentView(view)
+    sessionStorage.setItem('yumyum_view', view)
+  }, [])
 
   const [swipeDishes, setSwipeDishes] = useState([])
   const [activeFilters, setActiveFilters] = useState({})
@@ -140,30 +149,32 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoadingDetail, setIsLoadingDetail] = useState(false)
 
-  useEffect(() => {
-    let isMounted = true
-
-    api.getSavedDishes(currentUserId)
-      .then((dishes) => {
-        if (isMounted) {
-          const list = dishes || []
-          setLikedDishes(list)
-          setIsLoadingLiked(false)
-          fetchRandomDishes(activeFilters, list)
-        }
-      })
-      .catch((err) => {
-        console.error('[App] Failed to load saved dishes:', err)
-        if (isMounted) {
-          setIsLoadingLiked(false)
-          fetchRandomDishes(activeFilters, [])
-        }
-      })
-
-    return () => {
-      isMounted = false
+  const fetchSavedDishes = useCallback(async (userId = currentUserId) => {
+    if (!userId) return
+    setIsLoadingLiked(true)
+    try {
+      const dishes = await api.getSavedDishes(userId)
+      setLikedDishes(dishes || [])
+    } catch (err) {
+      console.error('[App] Failed to load saved dishes:', err)
+      setLikedDishes([])
+    } finally {
+      setIsLoadingLiked(false)
     }
   }, [currentUserId])
+
+  // Tải danh sách món đã lưu và khởi tạo bộ thẻ khi currentUserId thay đổi (hoặc khi F5)
+  useEffect(() => {
+    fetchSavedDishes(currentUserId)
+    fetchRandomDishes(activeFilters)
+  }, [currentUserId, fetchSavedDishes])
+
+  // Tự động tải lại danh sách đã lưu từ DB mỗi khi chuyển sang tab 'liked'
+  useEffect(() => {
+    if (currentView === 'liked') {
+      fetchSavedDishes(currentUserId)
+    }
+  }, [currentView, currentUserId, fetchSavedDishes])
 
   const handleOpenDetail = async (dish) => {
     setSelectedDish(dish)
@@ -239,12 +250,12 @@ function App() {
     if (!user) {
       setAuthOpen(true)
     } else {
-      setCurrentView('swipe')
+      changeView('swipe')
       setSwipeDishes((prev) => {
         const savedIds = new Set(likedDishes.map((d) => d.id || d.dish_id))
         const remaining = prev.filter((d) => !savedIds.has(d.id || d.dish_id))
         if (remaining.length <= 3) {
-          fetchRandomDishes(activeFilters, likedDishes)
+          fetchRandomDishes(activeFilters)
         }
         return remaining
       })
@@ -257,7 +268,7 @@ function App() {
       {currentView !== 'landing' && (
         <header className="sticky top-0 z-40 bg-[#1d0b0d] border-b border-[#dbe2dc]/15 py-2.5 sm:py-3 px-3 sm:px-8 flex items-center justify-between gap-2">
           <div
-            onClick={() => setCurrentView(user ? 'swipe' : 'landing')}
+            onClick={() => changeView(user ? 'swipe' : 'landing')}
             className="flex items-center gap-2 cursor-pointer select-none shrink-0"
           >
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[1px] bg-[#f7ea48] flex items-center justify-center text-[#1d0b0d] font-bold">
@@ -288,7 +299,7 @@ function App() {
             </button>
 
             <button
-              onClick={() => setCurrentView('liked')}
+              onClick={() => changeView('liked')}
               className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer relative ${
                 currentView === 'liked'
                   ? 'bg-[#f7ea48] text-[#1d0b0d]'
@@ -321,7 +332,9 @@ function App() {
               <button
                 onClick={() => {
                   logout()
-                  setCurrentView('landing')
+                  setLikedDishes([])
+                  sessionStorage.removeItem('yumyum_view')
+                  changeView('landing')
                 }}
                 className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-rose-500 hover:text-rose-400 text-xs font-mono text-[#fcf9f0] transition-colors cursor-pointer"
                 title={`Đăng xuất (${user.username})`}
@@ -384,7 +397,8 @@ function App() {
         onClose={() => setAuthOpen(false)}
         onLoginSuccess={(userData) => {
           login(userData)
-          setCurrentView('swipe')
+          fetchSavedDishes(userData.id)
+          changeView('swipe')
         }}
       />
       <FilterModal

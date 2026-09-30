@@ -61,3 +61,14 @@ class DishDetailResponse(BaseModel):
     tips: Optional[str] = None
     ingredients: List[IngredientResponse] = []
     steps: List[CookingStepResponse] = []
+
+
+class DishSkipCreate(BaseModel):
+    user_id: int
+    dish_id: str
+
+
+class DishSkipResponse(BaseModel):
+    success: bool
+    message: str
+

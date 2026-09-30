@@ -2,7 +2,7 @@ from typing import List, Optional
 from fastapi import HTTPException
 
 from app.repositories.dish_repo import DishRepository
-from app.schemas.dish import DishCardResponse, DishDetailResponse
+from app.schemas.dish import DishCardResponse, DishDetailResponse, DishSkipResponse
 from app.schemas.filter import (
     FilterMetadataResponse,
     CuisineFilterItem,
@@ -22,6 +22,7 @@ class DishService:
         spicy_level: Optional[int] = None,
         max_time: Optional[int] = None,
         exclude_ids: Optional[str] = None,
+        user_id: Optional[int] = None,
     ) -> List[DishCardResponse]:
         parsed_excludes: Optional[List[str]] = None
         if exclude_ids:
@@ -34,8 +35,17 @@ class DishService:
             spicy_level=spicy_level,
             max_time=max_time,
             exclude_ids=parsed_excludes,
+            user_id=user_id,
         )
         return [DishCardResponse.model_validate(d) for d in dishes]
+
+    def skip_dish(self, user_id: int, dish_id: str) -> DishSkipResponse:
+        self.repo.skip_dish(user_id, dish_id)
+        return DishSkipResponse(success=True, message="Đã ghi nhận bỏ qua món ăn")
+
+    def clear_user_skips(self, user_id: int) -> DishSkipResponse:
+        count = self.repo.clear_user_skips(user_id)
+        return DishSkipResponse(success=True, message=f"Đã đặt lại {count} món đã bỏ qua")
 
     def get_dish_detail(self, dish_id: str) -> DishDetailResponse:
         dish = self.repo.get_dish_by_id(dish_id)

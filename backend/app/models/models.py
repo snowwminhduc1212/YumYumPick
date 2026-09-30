@@ -27,6 +27,10 @@ class User(Base):
         back_populates="user",
         cascade="all, delete-orphan",
     )
+    skipped_dishes: Mapped[List["UserSkippedDish"]] = relationship(
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
 
 
 class Cuisine(Base):
@@ -150,3 +154,31 @@ class UserSavedDish(Base):
     # Relationships
     user: Mapped["User"] = relationship(back_populates="saved_dishes")
     dish: Mapped["Dish"] = relationship(back_populates="saved_by_users")
+
+
+class UserSkippedDish(Base):
+    __tablename__ = "user_skipped_dishes"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    dish_id: Mapped[str] = mapped_column(
+        String,
+        ForeignKey("dishes.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    skipped_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "dish_id", name="uq_user_skipped_dish"),
+    )
+
+    # Relationships
+    user: Mapped["User"] = relationship(back_populates="skipped_dishes")
+    dish: Mapped["Dish"] = relationship()
+

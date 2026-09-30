@@ -78,6 +78,17 @@ const CUISINE_FILTERS = [
   'Hy Lạp', 'Đức', 'Thổ Nhĩ Kỳ', 'Đông Nam Á'
 ]
 
+// Chuẩn hóa văn bản tiếng Việt để tìm kiếm không phân biệt có dấu / không dấu
+function removeVietnameseDiacritics(str) {
+  if (!str) return ''
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, (m) => (m === 'đ' ? 'd' : 'D'))
+    .toLowerCase()
+    .trim()
+}
+
 export default function LikedDishesView({
   likedDishes = [],
   isLoading = false,
@@ -88,13 +99,24 @@ export default function LikedDishesView({
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCuisine, setSelectedCuisine] = useState('Tất cả')
 
-  // Filter dishes by search keyword and cuisine
+  // Filter dishes by search keyword (hỗ trợ cả có dấu và không dấu) and cuisine
   const filteredDishes = useMemo(() => {
+    const cleanQuery = removeVietnameseDiacritics(searchQuery)
+
     return likedDishes.filter((dish) => {
-      const matchSearch =
-        dish.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dish.english_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dish.cuisine?.toLowerCase().includes(searchQuery.toLowerCase())
+      let matchSearch = true
+      if (cleanQuery) {
+        const cleanName = removeVietnameseDiacritics(dish.name)
+        const cleanEnglishName = removeVietnameseDiacritics(dish.english_name)
+        const cleanCuisine = removeVietnameseDiacritics(dish.cuisine)
+        const cleanDesc = removeVietnameseDiacritics(dish.short_description)
+
+        matchSearch =
+          cleanName.includes(cleanQuery) ||
+          cleanEnglishName.includes(cleanQuery) ||
+          cleanCuisine.includes(cleanQuery) ||
+          cleanDesc.includes(cleanQuery)
+      }
 
       let matchCuisine = true
       if (selectedCuisine !== 'Tất cả') {
@@ -155,36 +177,59 @@ export default function LikedDishesView({
 
       {/* Search Bar & Cuisine Filter Chips */}
       {likedDishes.length > 0 && (
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          {/* Search input */}
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-[#dbe2dc]/50 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Tìm theo tên món, nguyên liệu, phong vị..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-12 py-2.5 rounded-[1px] bg-[#1d0b0d]/70 border border-[#dbe2dc]/25 text-sm text-[#fcf9f0] placeholder-[#dbe2dc]/40 focus:outline-none focus:border-[#f7ea48] transition-colors"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="text-xs text-[#dbe2dc]/60 hover:text-[#f7ea48] absolute right-3.5 top-1/2 -translate-y-1/2 cursor-pointer uppercase tracking-wider font-semibold"
-              >
-                Xóa
-              </button>
+        <div className="flex flex-col gap-4 mb-8">
+          {/* Search input & Active Match Summary */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="relative w-full sm:max-w-md">
+              <Search className="w-4 h-4 text-[#dbe2dc]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Tìm theo tên món, nguyên liệu, phong vị..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-14 py-2.5 rounded-[1px] bg-[#1d0b0d]/70 border border-[#dbe2dc]/25 text-sm text-[#fcf9f0] placeholder-[#dbe2dc]/40 focus:outline-none focus:border-[#f7ea48] focus:ring-1 focus:ring-[#f7ea48] transition-all"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="text-xs text-[#dbe2dc]/60 hover:text-[#f7ea48] absolute right-3.5 top-1/2 -translate-y-1/2 cursor-pointer uppercase tracking-wider font-semibold px-1 py-0.5"
+                >
+                  Xóa
+                </button>
+              )}
+            </div>
+
+            {/* Results count & Quick reset button */}
+            {(searchQuery.trim() !== '' || selectedCuisine !== 'Tất cả') && (
+              <div className="flex items-center gap-2 text-xs text-[#dbe2dc]/70">
+                <span>
+                  Tìm thấy <strong className="text-[#f7ea48]">{filteredDishes.length}</strong> món
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery('')
+                    setSelectedCuisine('Tất cả')
+                  }}
+                  className="text-[#f7ea48] hover:underline uppercase text-[10px] tracking-wider font-bold cursor-pointer"
+                >
+                  [Đặt lại]
+                </button>
+              </div>
             )}
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
+          {/* Filter Pills row: Dedicated horizontal scrollable row with proper spacing */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2.5 pt-0.5 no-scrollbar w-full border-b border-[#dbe2dc]/10">
             {CUISINE_FILTERS.map((cuisine) => {
               const isActive = selectedCuisine === cuisine
               return (
                 <button
                   key={cuisine}
+                  type="button"
                   onClick={() => setSelectedCuisine(cuisine)}
-                  className={`px-3.5 py-2 rounded-[1px] text-xs font-semibold tracking-[0.04em] uppercase whitespace-nowrap transition-all cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-[1px] text-xs font-semibold tracking-[0.04em] uppercase whitespace-nowrap transition-all cursor-pointer flex-shrink-0 ${
                     isActive
                       ? 'bg-[#f7ea48] text-[#1d0b0d] border border-[#f7ea48]'
                       : 'bg-[#1d0b0d]/50 text-[#fcf9f0]/80 border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48]'
@@ -245,9 +290,14 @@ export default function LikedDishesView({
         // Search no results state
         <div className="flex-1 flex flex-col items-center justify-center text-center p-12">
           <p className="text-sm text-[#dbe2dc]/70 tracking-[0.02em]">
-            Không tìm thấy món ăn nào phù hợp với từ khóa "{searchQuery}".
+            {searchQuery && selectedCuisine !== 'Tất cả'
+              ? `Không tìm thấy món ăn nào thuộc "${selectedCuisine}" phù hợp với từ khóa "${searchQuery}".`
+              : searchQuery
+              ? `Không tìm thấy món ăn nào phù hợp với từ khóa "${searchQuery}".`
+              : `Chưa có món ăn nào thuộc nền ẩm thực "${selectedCuisine}" trong danh sách đã lưu.`}
           </p>
           <button
+            type="button"
             onClick={() => {
               setSearchQuery('')
               setSelectedCuisine('Tất cả')

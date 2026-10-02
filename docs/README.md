@@ -4,9 +4,9 @@ Chào mừng bạn đến với kho tài liệu chuẩn kỹ thuật của **Yum
 
 ---
 
-## 🗺️ Bản Đồ Hệ Thống Tài Liệu (Master Documentation Map)
+## 1. Bản Đồ Hệ Thống Tài Liệu (Master Documentation Map)
 
-Hệ thống tài liệu bao gồm **14 chuyên đề độc lập**, phân tách rõ ràng từ khâu lập kế hoạch, đặc tả kiến trúc, giải phẫu chi tiết 100% mã nguồn từng tầng cho đến đánh giá hệ thống và lộ trình mở rộng quy mô:
+Hệ thống tài liệu bao gồm **15 chuyên đề chuẩn mực**, phân tách rõ ràng từ khâu lập kế hoạch, đặc tả kiến trúc, giải phẫu chi tiết 100% mã nguồn từng tầng cho đến đánh giá hệ thống và lộ trình mở rộng quy mô:
 
 | Mã Số | Tài Liệu Chuyên Đề | Nội Dung Trọng Tâm | Đối Tượng Quan Tâm |
 |:---:|:---|:---|:---|
@@ -20,29 +20,30 @@ Hệ thống tài liệu bao gồm **14 chuyên đề độc lập**, phân tác
 | **07** | [**Data Schema, SQLite & Seeds**](./07_DATA_SCHEMA_AND_SEEDS.md) | Thiết kế CSDL SQLite DDL, bảng users, danh mục món ăn và kho lưu trữ ảnh cục bộ offline. | Backend, Data Specialist |
 | **08** | [**Core Features Specification**](./08_CORE_FEATURES_SPEC.md) | Đặc tả 3 tính năng cốt lõi: Quẹt Tinder, Lọc đa tiêu chí, Món đã thích & Chi tiết công thức nấu. | Toàn bộ Team |
 | **09** | [**Technical Architecture Deep-Dive**](./09_TECHNICAL_ARCHITECTURE_DEEP_DIVE.md) | **Phân tích kiến trúc chuyên sâu: Clean Architecture 3 lớp, SQLite WAL Mode, Framer Motion Physics, Thuật toán 7 ngày.** | **Tech Lead, Backend, Frontend** |
-| **10** | [**Code Deep-Dive Backend**](./10_CODE_DEEP_DIVE_BACKEND.md) | **Giải phẫu 100% từng dòng code Backend: main.py, database.py (WAL), models.py, repositories, services, api routers.** | **Backend Engineers, Architect** |
-| **11** | [**Code Deep-Dive Frontend**](./11_CODE_DEEP_DIVE_FRONTEND.md) | **Giải phẫu 100% từng dòng code Frontend: App.jsx, CardStack, SwipeCard (MotionValue/Transform), DishDetailModal, swipeHistory.** | **Frontend Engineers, UI/UX** |
-| **12** | [**Code Deep-Dive Crawler**](./12_CODE_DEEP_DIVE_CRAWLER.md) | **Giải phẫu 100% hệ thống Crawler & Anti-AI: config.py, crawl_dish_images, Pillow verification, crawl_recipes bản xứ.** | **Data Engineers, QA Lead** |
-| **13** | [**System Evaluation & Scalability Roadmap**](./13_SYSTEM_EVALUATION_AND_SCALABILITY_ROADMAP.md) | **Đánh giá hệ thống, phân tích điểm mạnh - điểm yếu - đánh đổi (Trade-offs) và lộ trình mở rộng quy mô (PostgreSQL, Redis, Docker).** | **Tech Lead, Architect** |
-| **⭐** | [**Codebase Reading Guide**](./CODEBASE_READING_GUIDE.md) | **Cẩm nang hướng dẫn đọc hiểu toàn bộ mã nguồn cho người mới: lộ trình 5 bước, kiến trúc, luồng E2E & cạm bẫy.** | **Newcomers, Onboarding Devs** |
+| **10** | [**Code Deep-Dive Backend (Line-by-Line)**](./10_LINE_BY_LINE_CODE_BACKEND.md) | **Giải phẫu chi tiết 100% từng dòng code & từng function Backend: database.py, models.py, repos, services, api routers.** | **Backend Engineers, Architect** |
+| **11** | [**Code Deep-Dive Frontend (Line-by-Line)**](./11_LINE_BY_LINE_CODE_FRONTEND.md) | **Giải phẫu chi tiết 100% từng dòng code & từng function Frontend: App.jsx, CardStack, SwipeCard, DishDetailModal, api.js.** | **Frontend Engineers, UI/UX** |
+| **12** | [**System Evaluation & Scalability Roadmap**](./12_SYSTEM_EVALUATION_AND_SCALABILITY_ROADMAP.md) | **Đánh giá hệ thống SWOT, phân tích đánh đổi kỹ thuật (Trade-offs) và lộ trình mở rộng quy mô (PostgreSQL, Redis, Docker).** | **Tech Lead, Architect** |
+| **13** | [**Comprehensive System Architecture, Code & Flows**](./13_COMPREHENSIVE_SYSTEM_ARCHITECTURE_CODE_AND_FLOWS.md) | **Tài liệu tối cao tổng hợp toàn diện: Sơ đồ kiến trúc, giải thích toàn bộ code Backend & Frontend, 8 luồng E2E & cạm bẫy.** | **Toàn bộ Team, Hội đồng phản biện** |
+| **Guide** | [**Codebase Reading Guide**](./CODEBASE_READING_GUIDE.md) | **Cẩm nang hướng dẫn đọc hiểu toàn bộ mã nguồn cho người mới: lộ trình 5 bước, kiến trúc, luồng E2E & cạm bẫy.** | **Newcomers, Onboarding Devs** |
 
 ---
 
-## 📌 Tóm Tắt Nhanh Về Dự Án (Executive Summary)
+## 2. Tóm Tắt Nhanh Về Dự Án (Executive Summary)
 
 - **Tên dự án:** YumYumPick (*"Quẹt là măm – Không lăn tăn nghĩ món"*)
 - **Ý tưởng cốt lõi:** Lấy cảm hứng từ cơ chế tương tác trực quan của Tinder để xóa bỏ hội chứng **Tê liệt phân tích (Analysis Paralysis)** trong việc lựa chọn món ăn hàng ngày:
-  1. **Landing Page Nhận Diện Thương Hiệu:** Giới thiệu định vị sản phẩm, bấm logo ở bất kỳ đâu đều quay về trang chủ.
-  2. **Bắt Buộc Đăng Nhập:** Khách vào trang web bấm khám phá sẽ được yêu cầu đăng nhập để cá nhân hóa danh sách món và lưu vết lịch sử.
-  3. **Quẹt Thẻ Tinder 60 FPS:** Ngăn xếp ảo hóa 3 thẻ, kéo thả theo góc nghiêng vật lý thực tế `rotate = x / 15`, phím tắt PC `[←]` Skip, `[→]` Like.
-  4. **Lọc Đa Chiều:** Lọc theo 15 quốc gia, 4 cấp độ cay, 5 mốc thời gian nấu.
-  5. **Khử Trùng Lặp 7 Ngày:** Thuật toán Rolling Window TTL trong LocalStorage ngăn không cho món đã quẹt xuất hiện lại trong vòng 1 tuần.
-  6. **Chi Tiết Công Thức Chuẩn Bản Xứ:** Danh sách nguyên liệu có Checkbox tương tác kèm thanh tiến độ chuẩn bị (Progress Bar) + 5 bước nấu chuẩn ẩm thực + bí quyết riêng từ đầu bếp.
+  1. **Landing Page Nhận Diện Thương Hiệu:** Giới thiệu định vị sản phẩm, Showcase 7 quốc gia, Collage ảnh nền động, bấm logo ở bất kỳ đâu đều quay về trang chủ.
+  2. **Bắt Buộc Đăng Nhập:** Khách vào trang web bấm khám phá sẽ được yêu cầu đăng nhập để cá nhân hóa danh sách món và lưu vết lịch sử trên CSDL.
+  3. **Quẹt Thẻ Tinder 60 FPS:** Ngăn xếp ảo hóa 3 thẻ (Stack Windowing), kéo thả theo góc nghiêng vật lý thực tế `rotate = x / 15`, phím tắt PC `[←]` Skip, `[→]` Like.
+  4. **Nạp Thẻ Ngầm Vô Tận (Infinite Prefetching):** Khi số thẻ còn lại $\le 3$, hệ thống tự động tải thêm mẻ 10 món tiếp theo, đảm bảo quẹt liên tục không gián đoạn.
+  5. **Lọc Đa Chiều:** Lọc theo 15 quốc gia, 4 cấp độ cay, 4 mốc thời gian nấu, 3 mức độ khó.
+  6. **Khử Trùng Lặp 7 Ngày:** Thuật toán Rolling Window TTL lưu trên SQLite (`user_skipped_dishes` và `user_saved_dishes`) ngăn không cho món đã quẹt xuất hiện lại trong vòng 1 tuần, đồng bộ trên mọi thiết bị.
+  7. **Chi Tiết Công Thức Chuẩn Bản Xứ:** Danh sách nguyên liệu có Checkbox tương tác kèm thanh tiến độ chuẩn bị (Progress Bar %) + 5 bước nấu chuẩn ẩm thực + bí quyết riêng từ đầu bếp.
 - **Dữ Liệu Đỉnh Cao (100% Real Food & Offline):**
   - **1.100 món ăn** thuộc 15 nền văn hóa ẩm thực thế giới.
   - **1.100 tệp ảnh JPG thực tế** lưu trực tiếp tại [`backend/images/dishes/`](../backend/images/dishes) (0% ảnh AI render, 0% ảnh stock giả lập).
-  - Công cụ Crawler chuyên dụng [`crawler/`](../crawler) truy vấn bằng chính ngôn ngữ bản xứ (tiếng Việt, Hàn, Nhật, Ý, Trung, Pháp, Thái...).
+  - Tích hợp lớp `CachedStaticFiles` với header `Cache-Control: public, max-age=86400`, tải ảnh tức thì từ disk cache trình duyệt với mã 304 Not Modified.
 - **Tech Stack Tinh Gọn & Hiện Đại:**
-  - **Frontend:** React 18 (Vite), Tailwind CSS, Framer Motion, Lucide React Icons.
-  - **Backend:** Python FastAPI, SQLAlchemy 2.0 ORM Typed Mappings, Pydantic v2, SQLite WAL Mode.
+  - **Frontend:** React 19 (Vite 8), Tailwind CSS v4, Framer Motion 13, Lucide React Icons.
+  - **Backend:** Python FastAPI, SQLAlchemy 2.0 ORM Typed Mappings, Pydantic v2, SQLite WAL Mode (Write-Ahead Logging).
   - **Cơ sở dữ liệu:** SQLite 3 ([`backend/yumyumpick.db`](../backend/yumyumpick.db) ~7.6 MB) với chỉ mục B-Tree và quan hệ ràng buộc toàn vẹn.

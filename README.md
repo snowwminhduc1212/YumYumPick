@@ -1,191 +1,244 @@
-# YumYumPick — "Tinder For Food"
+# YumYumPick — "Swipe to Feast, Zero Indecision"
 
 <div align="center">
 
+[![React](https://img.shields.io/badge/Frontend-React_19_(Vite)-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Style-Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Framer Motion](https://img.shields.io/badge/Motion-Framer_Motion_13-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![SQLite](https://img.shields.io/badge/Database-SQLite_3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org)
-[![React](https://img.shields.io/badge/Frontend-React_18_(Vite)-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
-[![TailwindCSS](https://img.shields.io/badge/Style-Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Framer Motion](https://img.shields.io/badge/Motion-Framer_Motion-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![SQLAlchemy](https://img.shields.io/badge/ORM-SQLAlchemy_2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite_3_(WAL)-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org)
 
-**A smart random dish recommendation platform powered by Tinder-style swipe mechanics**  
-*Solving the classic question: "What should I eat today?" in just 30 seconds!*
+**A smart dish discovery and recommendation platform powered by Tinder-style swipe mechanics**  
+*Eliminating "Decision Paralysis" — Answering "What should I eat today?" in under 30 seconds.*
+
+[Features](#1-core-features) • [Architecture](#2-system-architecture) • [Project Structure](#3-project-structure) • [Installation & Setup](#4-installation--quickstart) • [API Reference](#5-core-api-endpoints) • [Technical Documentation](#6-in-depth-technical-documentation) • [License](#7-license)
 
 </div>
 
 ---
 
-## 1. Project Overview (About YumYumPick)
+## Overview
 
-**YumYumPick** was created to eliminate *"Decision Paralysis"* when choosing daily meals. Instead of scrolling through endlessly exhausting food delivery menus, users focus on **one dish at a time** and make intuitive snap decisions:
+Every day, millions of people spend 20 to 45 minutes pondering: *"What should I eat today?"*. Traditional food delivery platforms overwhelm users with thousands of restaurants, complex rating matrices, and endless promotional feeds (**Analysis Paralysis**).
 
-- **Swipe Cards with Description Intro:** Each card showcases high-resolution imagery, dish names (Bilingual Vietnamese & English), info badges (cooking time, calories, spiciness, cuisine), and a concise **introductory description (`short_description`)** highlighting the dish's distinct flavor profile.
-- **Swipe Right (LIKE):** Loved it! Automatically saves the dish to the user's personal account in the SQLite database.
-- **Swipe Left (SKIP):** Not feeling it! Discards the dish and instantly reveals the next suggestion.
-- **Quick Filters:** Filter by 15 culinary cuisines, difficulty (Easy / Medium / Advanced), spiciness level, and maximum cooking time prior to swiping.
-- **Post-Swipe Recipe Details:** Access the saved dishes tab to view comprehensive authentic cooking recipes (interactive ingredient checklist `[ ]` with dynamic preparation progress, step-by-step instructions, and chef cooking tips).
-- **Streamlined Authentication:** Simple `username` & `password` registration and login, with session persistence via `localStorage`.
-- **Comprehensive Responsiveness:** Seamless user experience across Mobile (touch gesture swipes) and Desktop PC (keyboard navigation with `←`, `→` arrow keys).
-- **Offline Data via SQLite:** Pre-seeded with 1,100 dishes and 1,100 authentic offline images managed directly via SQLite (`backend/yumyumpick.db`).
+**YumYumPick** solves this problem by applying the intuitive, binary decision model of **Tinder**:
+- Focus on **one dish at a time**.
+- **Swipe Right (Like):** Save the dish to your personal favorites menu.
+- **Swipe Left (Skip):** Pass and instantly reveal the next curated suggestion.
+- **Zero Duplicate Fatigue:** An automated 7-day rolling window exclusion engine ensures swiped dishes will not reappear for an entire week.
+- **Cook at Home:** Access authentic recipes with interactive ingredient checklists, real-time completion progress tracking, and 5 step-by-step culinary instructions.
 
 ---
 
-## 2. Key Architecture Decisions
+## 1. Core Features
 
-### 2.1. Local-First Focus (Dropping Cloud Deploy & Admin CMS)
-- **Dropping Cloud Deploy (CI/CD / Cloud Hosting):** Transitioned 100% to local execution (`npm run dev` + `uvicorn`). This eliminates all cloud hosting expenses, SSL issues, complex CORS setups, and deployment risks.
-- **Dropping Admin CMS UI:** All dish and recipe data is managed directly via the local **SQLite** database using GUI tools such as **DB Browser for SQLite** or DBeaver. This saved over 40% of development overhead on administrative endpoints and views.
+### 1.1. 60 FPS Physics-Driven Tinder Swipe Deck
+- Natural drag-and-drop physics powered by **Framer Motion**: dynamic rotation angle `rotate = x / 15` (bounded within $\pm 18^\circ$), responsive **YUMMY!** (neon green) and **NOPE** (crimson) stamp opacity transitions.
+- Full multi-touch mobile gesture support alongside dedicated **Desktop PC keyboard navigation**: `[←]` (Skip), `[→]` (Like).
 
-### 2.2. Role of `LocalStorage`
-- **In Previous Drafts:** Without user accounts, LocalStorage was forced to store all liked dishes and swipe histories.
-- **In Current Architecture (SQLite & Simple User Auth):**
-  - Liked dishes are persistently stored in the `user_saved_dishes` table on the SQLite database via Backend REST APIs.
-  - **LocalStorage is kept strictly for lightweight session management:** It holds the active session token (`user_id`, `username`) so page reloads (F5) do not log the user out, alongside a local rolling history buffer for guest fallback.
+### 1.2. 3-Card Stack Virtualization & Infinite Background Prefetching
+- **Stack Windowing:** Regardless of dataset size, the DOM tree maintains exactly **3 rendered cards** at any time (Scale `1.0`, `0.95`, `0.90`), eliminating memory leaks and frame drops.
+- **Infinite Deck Prefetching:** When remaining cards in memory drop to $\le 3$, the system automatically fetches the next batch of 10 dishes in the background without interrupting the user experience.
+- **Asset Pre-buffering:** Preloads upcoming dish images directly into the browser disk cache.
 
-### 2.3. Responsive UI for Mobile & Desktop PC
-- **Mobile Web (<= 640px):** Edge-to-edge card layout (100vw / 100vh), native thumb touch gestures, floating bottom action buttons, and bottom-sheet modals.
-- **Desktop PC (>= 1024px):** Centered card deck viewport (420px x 600px), dedicated keyboard shortcuts (`←` to Skip, `→` to Like, `Space` for recipe details), and comfortable spacing with side panels.
+### 1.3. 7-Day Rolling Window Anti-Duplication Engine
+- Every user decision (Like or Skip) is persistently recorded in the SQLite database on the server (`user_saved_dishes` and `user_skipped_dishes`).
+- Subsequent discovery queries automatically exclude dishes interacted with in the preceding 7 days, maintaining a fresh rotation that is synchronized across all user devices.
+
+### 1.4. 1,100 Authentic Global Dishes & 100% Offline Photographic Assets
+- **15 World Cuisines:** Vietnam, South Korea, Japan, Thailand, Italy, China, France, Mexico, India, United States, Spain, Greece, Germany, Turkey, and Southeast Asia.
+- **1,100 High-Resolution JPGs:** Locally hosted authentic food photographs (0% AI generated, 0% generic stock assets), served via `CachedStaticFiles` with `Cache-Control: public, max-age=86400` (HTTP 304 Not Modified support).
+
+### 1.5. Authentic Recipes & Smart Ingredient Checklist
+- **Interactive Checklists:** Users can check off ingredients as they shop or prep.
+- **Real-Time Progress Bar:** Dynamically calculates completion percentage:
+  $$\text{progressPercent} = \text{round}\left(\frac{\text{checkedCount}}{\text{totalIngredients}} \times 100\right)$$
+- **5 Sequential Cooking Steps** accompanied by culinary secrets and technique tips (`tips`) from native chefs.
+
+### 1.6. Multi-Criteria Filtering & Diacritic-Insensitive Search
+- Filter by cuisine, difficulty (*Easy, Medium, Complex*), 4 spiciness levels (0–3), and maximum cooking time (*< 15m, 30m, 45m, 60m*).
+- Smart search engine featuring diacritic removal (`removeVietnameseDiacritics`), allowing users to search without worrying about accent marks (`bun cha` matches `Bún chả`).
 
 ---
 
-## 3. Technology Stack
+## 2. System Architecture
+
+The application adopts a **Decoupled Layered Client-Server Architecture**:
 
 ```mermaid
-flowchart LR
-    subgraph Client["Frontend (Local Dev: Port 5173)"]
-        React["React.js (Vite)"]
-        Framer["Framer Motion (Swipe Physics)"]
-        Tailwind["Tailwind CSS (Limón Dark Theme)"]
-        AuthUI["Simple Auth Modal (Login/Signup)"]
-        LS[("LocalStorage (Session User Info)")]
+graph LR
+    subgraph CLIENT["Frontend (Port 5173)"]
+        UI["React 19 + Tailwind v4"]
+        Motion["Framer Motion Deck"]
+        State["LocalStorage (Session)"]
     end
 
-    subgraph Server["Backend (Local Dev: Port 8000)"]
-        FastAPI["Python FastAPI"]
-        Pydantic["Pydantic v2"]
-        SQLAlchemy["SQLAlchemy 2.0 ORM"]
-        Uvicorn["Uvicorn Local Server"]
+    subgraph PROXY["Vite Reverse Proxy"]
+        VP["/api & /images Proxy"]
     end
 
-    subgraph Database["Local Database"]
-        SQLite[("SQLite 3 Database\n(File: yumyumpick.db)")]
-        DBBrowser["Direct DB Management\nvia DB Browser for SQLite"]
+    subgraph SERVER["Backend (Port 8000)"]
+        FastAPI["FastAPI 0.110+"]
+        Services["Business Services"]
+        Repos["Data Repositories"]
+        ORM["SQLAlchemy 2.0"]
     end
 
-    Client <-->|"REST API JSON via Vite Proxy"| Server
-    Server <-->|"Local File Access (WAL Mode)"| SQLite
-    DBBrowser -.->|"Query & Inspect Data"| SQLite
+    subgraph STORAGE["Local Storage"]
+        DB[("SQLite 3 (WAL Mode)\nyumyumpick.db")]
+        IMG[("1,100 Offline Images\nbackend/images/")]
+    end
+
+    CLIENT <--> PROXY
+    PROXY <--> SERVER
+    SERVER <--> ORM
+    ORM <--> DB
+    SERVER --> IMG
 ```
 
-| Layer | Technology | Role & Responsibility |
-|---|---|---|
-| **Frontend** | **React (Vite) + Tailwind CSS** | Fast, responsive Single Page Application with custom Limón Flat Dark Brasserie design tokens. |
-| **Motion & Physics** | **Framer Motion** | 60 FPS gesture-driven card swipe mechanics, spring physics, and animated stamp badges. |
-| **Backend** | **Python FastAPI + Uvicorn** | High-performance asynchronous RESTful API with automated OpenAPI / Swagger documentation at `/docs`. |
-| **Database** | **SQLite 3 + SQLAlchemy 2.0** | Zero-configuration single-file database (`yumyumpick.db`) with Write-Ahead Logging (WAL) concurrency. |
-| **Authentication** | **Simple Auth** | Frictionless registration and authentication using username and password without OTP/Email requirements. |
-| **Database GUI** | **DB Browser for SQLite** | Visual desktop tool for browsing, querying, and updating dishes and ingredients. |
+### Technology Stack
+
+| Layer | Technology | Version | Purpose & Rationale |
+|:---|:---|:---:|:---|
+| **Frontend Framework** | **React.js** | 19.2.8 | Fast, concurrent rendering for smooth 60 FPS gesture handling. |
+| **Tooling & Bundler** | **Vite** | 8.3.0 | Instant Hot Module Replacement (HMR) and integrated reverse proxy. |
+| **Styling** | **Tailwind CSS v4** | 4.3.3 | Built with `@tailwindcss/vite`, implementing the Limón Flat Dark Brasserie design tokens (`#1d0b0d`, `#f7ea48`). |
+| **Physics Animation** | **Framer Motion** | 13.3.0 | Spring physics, velocity-sensitive drag gestures, and dynamic stamp feedback. |
+| **Backend Framework** | **Python FastAPI** | 0.110+ | Asynchronous RESTful API framework with automatic Swagger UI documentation. |
+| **ORM** | **SQLAlchemy** | 2.0+ | Modern typed mapping (`Mapped[...]`), relationship management, and eager loading (`selectinload`). |
+| **Database** | **SQLite 3** | Local | Zero-configuration single-file database (`yumyumpick.db`) configured with Write-Ahead Logging (`PRAGMA journal_mode=WAL`) for non-blocking concurrent reads and writes. |
 
 ---
 
-## 4. Installation & Quickstart Guide
+## 3. Project Structure
 
-### Step 1: Launch Backend & SQLite Database
+```text
+YunYumPick/
+├── backend/                             # SERVER-SIDE CODEBASE
+│   ├── app/
+│   │   ├── api/                         # Controller layer (auth, dishes, saved_dishes)
+│   │   ├── db/                          # SQLite connection & WAL configuration (database.py)
+│   │   ├── models/                      # 6 SQLAlchemy 2.0 Models (models.py)
+│   │   ├── repositories/                # Data access layer (dish_repo, saved_dish_repo)
+│   │   ├── schemas/                     # Pydantic v2 DTOs (auth, dish, filter, saved_dish)
+│   │   ├── services/                    # Business logic layer (dish_service, saved_dish_service)
+│   │   └── main.py                      # FastAPI entry point & CachedStaticFiles handler
+│   ├── images/dishes/                   # 1,100 authentic high-resolution food photographs
+│   ├── requirements.txt                 # Python backend dependencies
+│   └── yumyumpick.db                    # Pre-seeded SQLite database (~7.6 MB)
+│
+├── frontend/                            # CLIENT-SIDE CODEBASE
+│   ├── src/
+│   │   ├── components/                  # User interface components
+│   │   │   ├── CardStack.jsx            # 3-card virtualization, prefetching, PC hotkeys
+│   │   │   ├── SwipeCard.jsx            # Drag physics, rotational transform, stamp badges
+│   │   │   ├── DishDetailModal.jsx      # Recipe details, interactive checklist & progress bar
+│   │   │   ├── LikedDishesView.jsx      # Saved collection, diacritic-insensitive search
+│   │   │   ├── FilterModal.jsx          # Multi-criteria filter modal
+│   │   │   ├── LandingPage.jsx          # Hero branding, 4s auto-preview showcase
+│   │   │   └── AuthModal.jsx            # Registration and login modal
+│   │   ├── hooks/                       # Custom React hooks (useAuth, useFilterMetadata)
+│   │   ├── services/                    # REST client adapter (api.js)
+│   │   ├── config/                      # API prefix configuration
+│   │   ├── App.jsx                      # Central state machine & global sticky navbar
+│   │   └── index.css                    # Tailwind CSS v4 tokens, Limón dark palette
+│   ├── package.json                     # Frontend npm dependencies
+│   └── vite.config.js                   # Vite dev server & reverse proxy configuration
+│
+└── docs/                                # IN-DEPTH ENGINEERING DOCUMENTATION
+    ├── README.md                        # Master documentation map
+    ├── 10_LINE_BY_LINE_CODE_BACKEND.md  # 100% line-by-line backend code explanation
+    ├── 11_LINE_BY_LINE_CODE_FRONTEND.md # 100% line-by-line frontend code explanation
+    └── 13_COMPREHENSIVE...              # Master architecture, full code & 8 E2E flows
+```
+
+---
+
+## 4. Installation & Quickstart
+
+### Prerequisites
+- **Python:** $\ge$ 3.10
+- **Node.js:** $\ge$ 18.x and npm $\ge$ 9.x
+
+---
+
+### Step 1: Start Backend (FastAPI + SQLite)
 
 ```bash
 # 1. Navigate to backend directory
 cd backend
 
-# 2. Create Python virtual environment
-python -m venv venv
+# 2. Create and activate virtual environment
+# Windows:
+python -m venv .venv
+.venv\Scripts\activate
 
-# 3. Activate virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
+# macOS / Linux:
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 4. Install required dependencies
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 5. Start the FastAPI development server
-# (The 'yumyumpick.db' database already contains 1,100 dishes and 15 cuisines; no seeding needed)
+# 4. Start the development server
 uvicorn app.main:app --reload --port 8000
 ```
-> API Server running at: `http://localhost:8000`  
-> Interactive Swagger Documentation: `http://localhost:8000/docs`
+- API Server: `http://localhost:8000`
+- Interactive Swagger UI: `http://localhost:8000/docs`
+*(The `yumyumpick.db` database is pre-seeded with 1,100 dishes and 15 cuisines; no database migrations or seeding scripts are needed).*
 
-### Step 2: Launch Frontend (React + Vite)
+---
+
+### Step 2: Start Frontend (React + Vite)
+
+Open a new terminal session:
 
 ```bash
-# Open a new terminal window
+# 1. Navigate to frontend directory
 cd frontend
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start Vite development server
+# 3. Start the Vite development server
 npm run dev
 ```
-> Web Application running at: `http://localhost:5173`
+- Web Application: `http://localhost:5173`
+- The Vite development server automatically proxies `/api` and `/images` requests to `http://127.0.0.1:8000`.
 
 ---
 
-## 5. Team Structure & Parallel Ownership
+## 5. Core API Endpoints
 
-The project was executed by **6 specialized team members** operating concurrently without blocking dependencies:
-
-```mermaid
-flowchart TD
-    Lead["Minh Đức: Project Lead • Data • QA"]
-    Lead --> BE["Backend: Ánh Dương & Đăng Huy\n(FastAPI • SQLite • Simple Auth • Dishes & Saved APIs)"]
-    Lead --> FE["Frontend: Quang Huy, Tùng Dương & Luân\n(Vite React • Framer Motion Deck • Modals & Checkbox • Responsive)"]
-    Lead --> PITCH["Presentation: Luân (Pitching Lead & Slide Deck)"]
-```
-
-| Member | Primary Role | Core Ownership (Parallel Tasks) | Key Deliverables |
-|---|---|---|---|
-| **Minh Đức** | **Project Lead • Data & QA** | 5-day sprint coordination, Daily Standups; Curating 1,100 dishes, 1,100 offline images, SQLite DB; End-to-end QA on PC & Mobile. | `backend/yumyumpick.db`, `backend/images/dishes/`, Test Matrix |
-| **Ánh Dương** | **Backend Engineer 1** | FastAPI server bootstrap, CORS, static `/images` mounting; Simple Auth APIs (`signup`, `login`); Concurrency lock optimization. | `app/main.py`, `app/api/auth.py`, Mock API Contract |
-| **Đăng Huy** | **Backend Engineer 2** | Dishes Core API (`random`, 15 cuisines, difficulty, spiciness, cook time, 7-day exclusion) and Saved Dishes API (`POST`, `GET`, `DELETE`). | `app/api/dishes.py`, `app/api/saved_dishes.py`, Swagger Docs |
-| **Quang Huy** | **Frontend Engineer 1 (Swipe Deck & Motion)** | Framer Motion Swipe Deck (`SwipeCard.jsx`, `CardStack.jsx`, Infinite Deck auto-prefetch, stamp badges); Responsive PC & Mobile tuning. | `SwipeCard.jsx`, `CardStack.jsx`, Responsive layout |
-| **Tùng Dương** | **Frontend Engineer 2 (Liked Dishes & Recipe Detail)** | Liked Dishes View (16-country filter pill bar, instant unlike) and Dish Detail Modal (interactive ingredient checklist, cooking steps, chef tips). | `LikedDishesView.jsx`, `DishDetailModal.jsx` |
-| **Luân** | **Frontend Engineer 3 & Pitching Lead** | Landing Page, Auth Gate flow, Filter Modal (country & difficulty), Vite Proxy & Tunneling; Presentation slide deck (12-15 slides) and Live Demo script. | `LandingPage.jsx`, `AuthModal.jsx`, `FilterModal.jsx`, Slide Deck, Demo Script |
+| Method | Endpoint | Description |
+|:---:|:---|:---|
+| `POST` | `/api/v1/auth/signup` | Register a new user account. |
+| `POST` | `/api/v1/auth/login` | Authenticate user credentials and return active session. |
+| `GET` | `/api/v1/dishes/random` | Fetch random swipe cards with optional filters and automatic 7-day exclusion via `user_id`. |
+| `POST` | `/api/v1/dishes/skip` | Record a left swipe (pass) in `user_skipped_dishes` to exclude the dish for 7 days. |
+| `DELETE` | `/api/v1/dishes/skip/{user_id}` | Reset a user's skip history to restart discovery from scratch. |
+| `GET` | `/api/v1/dishes/{dish_id}` | Retrieve complete recipe details including ingredients and sequential cooking steps. |
+| `GET` | `/api/v1/dishes/filters/metadata` | Fetch dynamic filter options for cuisines, spiciness, difficulty, and cooking durations. |
+| `POST` | `/api/v1/saved-dishes/` | Save a dish to the user's liked collection (idempotent; handles re-likes gracefully). |
+| `GET` | `/api/v1/saved-dishes/{user_id}` | Retrieve all saved dishes for a given user, ordered by most recently saved. |
+| `DELETE` | `/api/v1/saved-dishes/{user_id}/{dish_id}` | Remove a dish from the user's liked collection. |
 
 ---
 
-## 6. 5-Day Sprint Crash Plan
+## 6. In-Depth Technical Documentation
 
-- **Day 1 (Foundation & Schema):** Finalized API Contracts, initialized repository directory structures, configured SQLite database with pre-seeded data and offline assets.
-- **Day 2 (Core Features in Parallel):**
-  - Backend: Implemented Auth APIs (Login/Signup) and Random/Filter dish query endpoints.
-  - Frontend 1: Built Framer Motion swipe cards with spring physics and responsive containers.
-  - Frontend 2: Built initial Liked Dishes collection and recipe detail modal skeleton.
-  - Frontend 3 & Pitch: Scaffolded Auth Modal, Filter Modal, and project slide deck.
-- **Day 3 (Integration & Responsive):**
-  - Integrated Frontend with Backend APIs (swiping right saves directly to SQLite).
-  - Wired Auth Modal and Filter Modal states.
-  - Validated responsive layouts on both Mobile touch and Desktop PC keyboard navigation.
-- **Day 4 (Liked Dishes, Recipe Details & Polish):**
-  - Completed Liked Dishes View with instant unlike updates and 16-country filter bar.
-  - Completed Recipe Detail Modal with interactive ingredient preparation checklist and cooking steps.
-  - Executed end-to-end integration flow: Register -> Login -> Filter -> Swipe -> Like -> View Recipe.
-- **Day 5 (Polish, Infinite Deck, Bug Fixing & Final Presentation):**
-  - Implemented Infinite Deck background prefetching (auto-fetching when <= 3 cards remain).
-  - Performed cross-browser testing, code cleanup, and final demo rehearsals.
+For comprehensive engineering specifications, code dissections, and project architecture reports, refer to the [`docs/`](./docs) directory:
+
+- [**Master Documentation Map**](./docs/README.md)
+- [**Comprehensive System Architecture, Codebase Breakdown & End-to-End Flows**](./docs/13_COMPREHENSIVE_SYSTEM_ARCHITECTURE_CODE_AND_FLOWS.md)
+- [**100% Line-by-Line Backend Code & Function Breakdown**](./docs/10_LINE_BY_LINE_CODE_BACKEND.md)
+- [**100% Line-by-Line Frontend Code & Function Breakdown**](./docs/11_LINE_BY_LINE_CODE_FRONTEND.md)
+- [**Codebase Reading Guide for Newcomers**](./docs/CODEBASE_READING_GUIDE.md)
+- [**System Evaluation & Scalability Roadmap (SWOT & Production Architecture)**](./docs/12_SYSTEM_EVALUATION_AND_SCALABILITY_ROADMAP.md)
 
 ---
 
-## 7. Detailed Documentation Index
+## 7. License
 
-Comprehensive engineering specifications are located in the [`docs/`](./docs/README.md) directory:
-- [**00. Master Project Overview**](./docs/00_PROJECT_OVERVIEW.md): Comprehensive system overview and project philosophy.
-- [**01. Project Charter & Scope**](./docs/01_PROJECT_CHARTER_AND_SCOPE.md): 5-day MVP scope and Definition of Done (DoD).
-- [**02. System Architecture & Design**](./docs/02_SYSTEM_ARCHITECTURE_AND_DESIGN.md): Layered architecture, RESTful API specs, SQLite schema, and responsive UI specs.
-- [**03. User Flow & UI/UX Spec**](./docs/03_USER_FLOW_AND_UIUX_SPEC.md): User journey maps, card physics guidelines, and typography.
-- [**04. Team Roles & RACI Matrix**](./docs/04_TEAM_ROLES_AND_RACI.md): Responsibility assignment matrix across 6 roles.
-- [**05. Git Workflow & Collaboration Rules**](./docs/05_GIT_WORKFLOW_AND_COLLABORATION_RULES.md): Branching strategies, PR standards, and Conventional Commits.
-- [**06. Sprint Roadmap & Actionable Checklist**](./docs/06_SPRINT_ROADMAP_AND_TODO_PER_ROLE.md): Hour-by-hour roadmap and role-specific tasks.
-- [**07. Data Schema, SQLite & Seeds**](./docs/07_DATA_SCHEMA_AND_SEEDS.md): DDL schema, tables, 1,100 dishes, and offline image assets.
-- [**08. Core Features Specification**](./docs/08_CORE_FEATURES_SPEC.md): Detailed specifications for Swipe, Filter, Liked Dishes, and Recipe views.
-- [**⭐ Codebase Reading Guide for Newcomers**](./docs/CODEBASE_READING_GUIDE.md): 5-step onboarding guide to reading and understanding the full codebase.
+Distributed under the **MIT License**. Free for personal, educational, and commercial use.

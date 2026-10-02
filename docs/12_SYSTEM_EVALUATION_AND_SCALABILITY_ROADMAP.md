@@ -1,4 +1,4 @@
-# 13. Đánh Giá Hệ Thống & Lộ Trình Mở Rộng Quy Mô (System Evaluation & Scalability Roadmap)
+# 12. Đánh Giá Hệ Thống & Lộ Trình Mở Rộng Quy Mô (System Evaluation & Scalability Roadmap)
 
 > **Tài liệu phân tích giới hạn kỹ thuật (Trade-offs) và định hướng kiến trúc tương lai**  
 > **Dự án:** YumYumPick — Nền tảng gợi ý thực đơn thông minh theo cơ chế quẹt thẻ (Tinder for Food)  
@@ -17,12 +17,12 @@ graph TD
         S2["Zero Network Overhead: SQLite nhúng không cần server CSDL"]
         S3["1.100 ảnh thật 100% không dính AI, lưu offline hoàn toàn"]
         S4["Giao diện quẹt thẻ 60 FPS chuẩn vật lý Tinder"]
-        S5["Cơ chế khử trùng lặp 7 ngày thông minh"]
+        S5["Cơ chế khử trùng lặp 7 ngày trên CSDL SQLite"]
     end
 
     subgraph WEAKNESSES["ĐIỂM HẠN CHẾ (WEAKNESSES)"]
         W1["SQLite khóa ghi khi tải đồng thời cực lớn (Single Writer)"]
-        W2["Lịch sử 7 ngày gắn với LocalStorage từng thiết bị"]
+        W2["Cần đăng nhập tài khoản để đồng bộ danh sách đã lưu và skip"]
         W3["Chưa có hệ thống AI gợi ý theo hành vi người dùng"]
         W4["Ảnh phục vụ trực tiếp từ ổ cứng server chưa qua CDN"]
     end

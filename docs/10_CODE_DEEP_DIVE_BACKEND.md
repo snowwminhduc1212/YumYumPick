@@ -233,14 +233,14 @@ class CookingStep(Base):
         nullable=False,
         index=True,
     )
-    step_number: Mapped[int] = mapped_column(Integer, nullable=False) # Bước 1, 2, 3, 4, 5
+    step_number: Mapped[int] = mapped_column(Integer, nullable=False) # Thứ tự bước: 1, 2, 3, 4, 5
     title: Mapped[str] = mapped_column(String, nullable=False)       # Tiêu đề kỹ thuật chế biến
     description: Mapped[str] = mapped_column(String, nullable=False) # Hướng dẫn chi tiết lửa, nhiệt độ
 
     dish: Mapped["Dish"] = relationship(back_populates="cooking_steps")
 ```
 
-#### E. Model `User` & `UserSavedDish` (Xác Thực & Món Đã Lưu)
+#### E. Model `User` (Tài Khoản Người Dùng)
 ```python
 class User(Base):
     __tablename__ = "users"
@@ -248,25 +248,67 @@ class User(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     username: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
     password: Mapped[str] = mapped_column(String, nullable=False)
-    full_name: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    full_name: Mapped[str] = mapped_column(String, nullable=False)
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, server_default=func.now())
 
+    # Quan hệ 1-N: Xóa user tự động dọn sạch món đã lưu & món đã skip
+    saved_dishes: Mapped[List["UserSavedDish"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+    skipped_dishes: Mapped[List["UserSkippedDish"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+```
+
+#### F. Model `UserSavedDish` (Món Đã Thích / Quẹt Phải)
+```python
 class UserSavedDish(Base):
     __tablename__ = "user_saved_dishes"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    dish_id: Mapped[str] = mapped_column(String, ForeignKey("dishes.id", ondelete="CASCADE"), nullable=False)
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    dish_id: Mapped[str] = mapped_column(
+        String, ForeignKey("dishes.id", ondelete="CASCADE"), nullable=False, index=True
+    )
     saved_at: Mapped[Optional[datetime]] = mapped_column(DateTime, server_default=func.now())
 
+    __table_args__ = (
+        UniqueConstraint("user_id", "dish_id", name="uq_user_saved_dish"),
+    )
+
+    user: Mapped["User"] = relationship(back_populates="saved_dishes")
     dish: Mapped["Dish"] = relationship(back_populates="saved_by_users")
+```
+
+#### G. Model `UserSkippedDish` (Món Đã Bỏ Qua / Quẹt Trái - 7-Day TTL)
+```python
+class UserSkippedDish(Base):
+    __tablename__ = "user_skipped_dishes"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    dish_id: Mapped[str] = mapped_column(
+        String, ForeignKey("dishes.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    skipped_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "dish_id", name="uq_user_skipped_dish"),
+    )
+
+    user: Mapped["User"] = relationship(back_populates="skipped_dishes")
+    dish: Mapped["Dish"] = relationship()
 ```
 
 ---
 
-### 3.3. File `backend/app/repositories/dish_repo.py` (Tầng Thao Tác CSDL Chuyên Biệt)
+### 3.3. File `backend/app/repositories/dish_repo.py` (Tầng Thao Tác CSDL Chuyên Biệt Món Ăn)
 
-Tệp này độc quyền quản lý các câu lệnh SQL thông qua đối tượng `Session` của SQLAlchemy.
+Tệp này thực hiện các câu truy vấn phức tạp kết hợp logic loại trừ 7 ngày tự động trên SQLite:
 
 ```python
 class DishRepository:
@@ -277,40 +319,78 @@ class DishRepository:
         self,
         limit: int = 10,
         cuisine: Optional[str] = None,
+        difficulty: Optional[str] = None,
         spicy_level: Optional[int] = None,
         max_time: Optional[int] = None,
         exclude_ids: Optional[List[str]] = None,
+        user_id: Optional[int] = None,
     ) -> List[Dish]:
-        # Khởi tạo câu lệnh select cơ sở
         stmt = select(Dish)
+        final_exclude_ids: Set[str] = set(exclude_ids or [])
 
-        # Lọc theo quốc gia (so khớp chữ thường, loại bỏ khoảng trắng)
+        # TỰ ĐỘNG LOẠI TRỪ 7 NGÀY PHÍA SERVER KHI CÓ USER_ID
+        if user_id is not None:
+            seven_days_ago = datetime.utcnow() - timedelta(days=7)
+
+            # 1. Loại trừ món đã thích (Saved) trong 7 ngày qua
+            saved_stmt = select(UserSavedDish.dish_id).where(
+                UserSavedDish.user_id == user_id,
+                UserSavedDish.saved_at >= seven_days_ago,
+            )
+            saved_ids = self.db.scalars(saved_stmt).all()
+            final_exclude_ids.update(saved_ids)
+
+            # 2. Loại trừ món đã quẹt trái (Skipped) trong 7 ngày qua
+            skipped_stmt = select(UserSkippedDish.dish_id).where(
+                UserSkippedDish.user_id == user_id,
+                UserSkippedDish.skipped_at >= seven_days_ago,
+            )
+            skipped_ids = self.db.scalars(skipped_stmt).all()
+            final_exclude_ids.update(skipped_ids)
+
+        # Lọc động theo tiêu chí người dùng chọn
         if cuisine:
             stmt = stmt.where(func.lower(Dish.cuisine) == cuisine.strip().lower())
-
-        # Lọc theo độ cay (0, 1, 2, 3)
+        if difficulty:
+            stmt = stmt.where(func.lower(Dish.difficulty) == difficulty.strip().lower())
         if spicy_level is not None:
             stmt = stmt.where(Dish.spicy_level == spicy_level)
-
-        # Lọc theo thời gian nấu tối đa
         if max_time is not None:
             stmt = stmt.where(Dish.cook_time_minutes <= max_time)
+        if final_exclude_ids:
+            stmt = stmt.where(Dish.id.notin_(list(final_exclude_ids)))
 
-        # LOẠI TRỪ DANH SÁCH MÓN ĐÃ QUẸT TRONG 7 NGÀY
-        if exclude_ids:
-            stmt = stmt.where(Dish.id.notin_(exclude_ids))
-
-        # Sắp xếp ngẫu nhiên bằng engine SQLite và giới hạn số lượng nạp
+        # Sắp xếp ngẫu nhiên tối ưu & giới hạn số lượng trả về
         stmt = stmt.order_by(func.random()).limit(limit)
         return list(self.db.scalars(stmt).all())
 
+    def skip_dish(self, user_id: int, dish_id: str) -> None:
+        """Ghi nhận quẹt trái (Upsert thời điểm skipped_at)"""
+        stmt = select(UserSkippedDish).where(
+            UserSkippedDish.user_id == user_id,
+            UserSkippedDish.dish_id == dish_id,
+        )
+        existing = self.db.scalars(stmt).first()
+        if existing:
+            existing.skipped_at = datetime.utcnow()
+        else:
+            self.db.add(UserSkippedDish(user_id=user_id, dish_id=dish_id, skipped_at=datetime.utcnow()))
+        self.db.commit()
+
+    def clear_user_skips(self, user_id: int) -> int:
+        """Xóa lịch sử skip khi người dùng muốn bắt đầu lại"""
+        stmt = delete(UserSkippedDish).where(UserSkippedDish.user_id == user_id)
+        result = self.db.execute(stmt)
+        self.db.commit()
+        return result.rowcount
+
     def get_dish_by_id(self, dish_id: str) -> Optional[Dish]:
-        # Kỹ thuật Eager Loading triệt tiêu N+1 Query Problem:
+        """Eager Loading giải quyết triệt để N+1 Query Problem"""
         stmt = (
             select(Dish)
             .options(
-                selectinload(Dish.ingredients),   # Nạp trước toàn bộ nguyên liệu
-                selectinload(Dish.cooking_steps), # Nạp trước toàn bộ bước nấu
+                selectinload(Dish.ingredients),
+                selectinload(Dish.cooking_steps),
             )
             .where(Dish.id == dish_id)
         )
@@ -319,52 +399,93 @@ class DishRepository:
 
 ---
 
-### 3.4. File `backend/app/services/dish_service.py` (Tầng Nghiệp Vụ & Xử Lý Dữ Liệu)
-
-Tệp này xử lý logic nghiệp vụ và định dạng dữ liệu (DTO - Data Transfer Object) trước khi gửi về client:
+### 3.4. File `backend/app/repositories/saved_dish_repo.py` (Tầng Thao Tác Món Đã Lưu)
 
 ```python
-class DishService:
-    def __init__(self, repo: DishRepository):
-        self.repo = repo
+class SavedDishRepository:
+    def __init__(self, db: Session):
+        self.db = db
 
-    def get_random_dishes(
-        self,
-        limit: int = 10,
-        cuisine: Optional[str] = None,
-        spicy_level: Optional[int] = None,
-        max_time: Optional[int] = None,
-        exclude_ids: Optional[str] = None, # Nhận chuỗi phân tách bởi dấu phẩy từ query param
-    ) -> List[DishCardResponse]:
-        parsed_excludes: Optional[List[str]] = None
-        
-        # Xử lý chuỗi exclude_ids an toàn: tách mảng, loại bỏ khoảng trắng và phần tử rỗng
-        if exclude_ids:
-            parsed_excludes = [x.strip() for x in exclude_ids.split(",") if x.strip()]
-
-        # Gọi repository lấy dữ liệu từ CSDL
-        dishes = self.repo.get_random_dishes(
-            limit=limit,
-            cuisine=cuisine,
-            spicy_level=spicy_level,
-            max_time=max_time,
-            exclude_ids=parsed_excludes,
+    def create_saved_dish(self, user_id: int, dish_id: str) -> UserSavedDish:
+        """Tạo mới hoặc cập nhật thời gian saved_at nếu đã thích lại"""
+        stmt = select(UserSavedDish).where(
+            UserSavedDish.user_id == user_id,
+            UserSavedDish.dish_id == dish_id,
         )
-        
-        # Validate và serialize sang Schema DishCardResponse
-        return [DishCardResponse.model_validate(d) for d in dishes]
+        existing = self.db.scalars(stmt).first()
+        if existing:
+            existing.saved_at = datetime.utcnow()
+            self.db.flush()
+            return existing
 
-    def get_dish_detail(self, dish_id: str) -> DishDetailResponse:
-        dish = self.repo.get_dish_by_id(dish_id)
-        # Bắt lỗi không tìm thấy món ăn và trả về đúng chuẩn HTTP 404
-        if not dish:
-            raise HTTPException(status_code=404, detail="Không tìm thấy món ăn")
-        return DishDetailResponse.model_validate(dish)
+        saved = UserSavedDish(user_id=user_id, dish_id=dish_id, saved_at=datetime.utcnow())
+        self.db.add(saved)
+        self.db.flush()
+        return saved
+
+    def get_saved_dishes_by_user(self, user_id: int) -> List[UserSavedDish]:
+        """Lấy toàn bộ món đã lưu của user, nạp kèm thông tin món qua Eager Loading"""
+        stmt = (
+            select(UserSavedDish)
+            .options(selectinload(UserSavedDish.dish))
+            .where(UserSavedDish.user_id == user_id)
+            .order_by(UserSavedDish.saved_at.desc())
+        )
+        return list(self.db.scalars(stmt).all())
+
+    def delete_saved_dish(self, user_id: int, dish_id: str) -> bool:
+        """Hủy thích món ăn khỏi bộ sưu tập cá nhân"""
+        stmt = select(UserSavedDish).where(
+            UserSavedDish.user_id == user_id,
+            UserSavedDish.dish_id == dish_id,
+        )
+        saved = self.db.scalars(stmt).first()
+        if not saved:
+            return False
+        self.db.delete(saved)
+        self.db.flush()
+        return True
 ```
 
 ---
 
-### 3.5. File `backend/app/main.py` (Cấu Hình Server & Caching Tệp Tĩnh)
+### 3.5. File `backend/app/services/dish_service.py` & `saved_dish_service.py` (Tầng Nghiệp Vụ)
+
+#### A. `DishService`
+- Nhận diện và parse chuỗi `exclude_ids` từ frontend dạng `"dish_01,dish_02"` thành mảng Python an toàn `List[str]`.
+- Gọi Repository thực thi truy vấn lọc và sắp xếp ngẫu nhiên.
+- Chuyển đổi dữ liệu ORM thành Pydantic response models (`DishCardResponse`, `DishDetailResponse`) qua `model_validate()`.
+- Cung cấp danh mục Filter Metadata đầy đủ 15 quốc gia kèm emoji cờ, 3 mức độ khó, 4 cấp độ cay, và 4 khoảng thời gian nấu.
+
+#### B. `SavedDishService`
+- Thực hiện giao dịch lưu món an toàn với `try...except IntegrityError` và `db.rollback()`.
+- Biến đổi danh sách bản ghi quan hệ `UserSavedDish` thành danh sách `SavedDishItemResponse` cho giao diện Grid của Frontend.
+- Xử lý xóa món ăn và ném ngoại lệ `HTTPException(404, detail="Không tìm thấy món ăn đã lưu")` nếu bản ghi không tồn tại.
+
+---
+
+### 3.6. File `backend/app/api/` (Tầng Endpoints & Định Tuyến)
+
+1. **`api/auth.py`:**
+   - `POST /api/v1/auth/signup`: Đăng ký tài khoản mới, kiểm tra trùng lặp `username`, lưu mật khẩu.
+   - `POST /api/v1/auth/login`: Xác thực tài khoản và mật khẩu, trả về thông tin `user: {id, username, full_name}`.
+   - `GET /api/v1/auth/me/{user_id}`: Lấy thông tin phiên người dùng hiện tại.
+
+2. **`api/dishes.py`:**
+   - `GET /api/v1/dishes/random`: Lấy danh sách thẻ quẹt ngẫu nhiên (hỗ trợ các bộ lọc và tham số `user_id` để tự động loại trừ 7 ngày).
+   - `POST /api/v1/dishes/skip`: Ghi nhận quẹt trái vào bảng `user_skipped_dishes`.
+   - `DELETE /api/v1/dishes/skip/{user_id}`: Đặt lại lịch sử quẹt trái của người dùng để khám phá lại từ đầu.
+   - `GET /api/v1/dishes/filters/metadata`: Lấy thông tin cấu hình bộ lọc động.
+   - `GET /api/v1/dishes/{dish_id}`: Lấy toàn bộ chi tiết công thức, nguyên liệu và các bước nấu chuẩn bản xứ.
+
+3. **`api/saved_dishes.py`:**
+   - `POST /api/v1/saved-dishes`: Lưu món vào danh sách yêu thích của người dùng.
+   - `GET /api/v1/saved-dishes/{user_id}`: Lấy danh sách toàn bộ món đã lưu của người dùng theo thứ tự thời gian mới nhất.
+   - `DELETE /api/v1/saved-dishes/{user_id}/{dish_id}`: Xóa món khỏi danh sách đã lưu.
+
+---
+
+### 3.7. File `backend/app/main.py` (Cấu Hình Server & Caching Tệp Tĩnh)
 
 ```python
 # Cấu hình đường dẫn thư mục ảnh tĩnh cục bộ
@@ -383,3 +504,4 @@ if os.path.exists(IMAGES_DIR):
     app.mount("/images", CachedStaticFiles(directory=IMAGES_DIR), name="images")
 ```
 - **Tác dụng:** Trình duyệt khi tải ảnh món ăn lần đầu sẽ lưu ảnh vào Disk Cache. Trong các lần xem tiếp theo, trình duyệt gửi header `If-None-Match`, Server kiểm tra và trả về mã `304 Not Modified` ngay lập tức mà không cần truyền lại nội dung file ảnh, tiết kiệm 100% băng thông tải ảnh.
+

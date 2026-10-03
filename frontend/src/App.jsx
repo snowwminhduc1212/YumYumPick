@@ -241,34 +241,35 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#1d0b0d] text-[#fcf9f0] transition-colors font-sans">
+    <div className="flex flex-col min-h-screen w-full bg-black-olive text-warm-cream transition-colors font-sans">
       {/* GLOBAL NAVBAR — chỉ hiện khi KHÔNG ở Landing Page */}
       {currentView !== 'landing' && (
-        <header className="sticky top-0 z-40 bg-[#1d0b0d] border-b border-[#dbe2dc]/15 py-2.5 sm:py-3 px-3 sm:px-8 flex items-center justify-between gap-2">
+        <header className="sticky top-0 z-40 bg-black-olive border-b border-sage-mist/20 py-2.5 sm:py-3 px-3 sm:px-8 flex items-center justify-between gap-2">
           <div
-            onClick={() => changeView(user ? 'swipe' : 'landing')}
+            onClick={() => changeView('landing')}
             className="flex items-center gap-2 cursor-pointer select-none shrink-0"
+            title="Trang chủ YumYumPick"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[1px] bg-[#f7ea48] flex items-center justify-center text-[#1d0b0d] font-bold">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[1px] bg-lemon-zest flex items-center justify-center text-black-olive font-bold">
               <UtensilsCrossed className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl font-extrabold tracking-[0.06em] uppercase font-heading leading-tight text-[#fcf9f0]">
-                YumYum<span className="text-[#f7ea48]">Pick</span>
+              <h1 className="text-lg sm:text-xl font-extrabold tracking-neon uppercase font-heading leading-tight text-warm-cream">
+                YumYum<span className="text-lemon-zest">Pick</span>
               </h1>
-              <p className="hidden sm:block text-[10px] text-[#dbe2dc]/60 font-mono tracking-widest uppercase">
+              <p className="hidden sm:block text-[10px] text-sage-mist/60 font-mono tracking-widest uppercase">
                 Tinder for Food
               </p>
             </div>
           </div>
 
-          <nav className="flex items-center gap-1 bg-[#1d0b0d] p-1 rounded-[1px] border border-[#dbe2dc]/25 shrink-0">
+          <nav className="flex items-center gap-1 bg-black-olive p-1 rounded-[1px] border border-sage-mist/25 shrink-0">
             <button
               onClick={handleRequestSwipe}
-              className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-stenciled transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentView === 'swipe'
-                  ? 'bg-[#f7ea48] text-[#1d0b0d]'
-                  : 'text-[#dbe2dc]/70 hover:text-[#fcf9f0]'
+                  ? 'bg-lemon-zest text-black-olive'
+                  : 'text-sage-mist/70 hover:text-warm-cream'
               }`}
               title="Quẹt Thẻ"
             >
@@ -278,18 +279,18 @@ function App() {
 
             <button
               onClick={() => changeView('liked')}
-              className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-[0.04em] transition-all flex items-center gap-1.5 cursor-pointer relative ${
+              className={`p-2 sm:px-3.5 sm:py-1.5 rounded-[1px] text-xs font-bold uppercase tracking-stenciled transition-all flex items-center gap-1.5 cursor-pointer relative ${
                 currentView === 'liked'
-                  ? 'bg-[#f7ea48] text-[#1d0b0d]'
-                  : 'text-[#dbe2dc]/70 hover:text-[#fcf9f0]'
+                  ? 'bg-lemon-zest text-black-olive'
+                  : 'text-sage-mist/70 hover:text-warm-cream'
               }`}
               title="Món Đã Lưu"
             >
-              <Heart className={`w-3.5 h-3.5 ${likedDishes.length > 0 ? (currentView === 'liked' ? 'fill-[#1d0b0d]' : 'fill-[#f7ea48] text-[#f7ea48]') : ''}`} />
+              <Heart className={`w-3.5 h-3.5 ${likedDishes.length > 0 ? (currentView === 'liked' ? 'fill-black-olive' : 'fill-lemon-zest text-lemon-zest') : ''}`} />
               <span className="hidden sm:inline">Đã Lưu</span>
               {likedDishes.length > 0 && (
                 <span className={`px-1.5 py-0.2 rounded-[1px] text-[10px] font-mono font-bold ${
-                  currentView === 'liked' ? 'bg-[#1d0b0d] text-[#f7ea48]' : 'bg-[#f7ea48] text-[#1d0b0d]'
+                  currentView === 'liked' ? 'bg-black-olive text-lemon-zest' : 'bg-lemon-zest text-black-olive'
                 }`}>
                   {likedDishes.length}
                 </span>
@@ -300,7 +301,7 @@ function App() {
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             <button
               onClick={() => setFilterOpen(true)}
-              className="p-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] hover:text-[#f7ea48] text-[#fcf9f0] transition-colors cursor-pointer"
+              className="p-2.5 rounded-[1px] bg-black-olive border border-sage-mist/25 hover:border-lemon-zest hover:text-lemon-zest text-warm-cream transition-colors cursor-pointer"
               title="Mở bộ lọc món ăn"
             >
               <SlidersHorizontal className="w-4 h-4" />
@@ -314,7 +315,7 @@ function App() {
                   sessionStorage.removeItem('yumyum_view')
                   changeView('landing')
                 }}
-                className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-rose-500 hover:text-rose-400 text-xs font-mono text-[#fcf9f0] transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-black-olive border border-sage-mist/25 hover:border-rose-500 hover:text-rose-400 text-xs font-mono text-warm-cream transition-colors cursor-pointer"
                 title={`Đăng xuất (${user.username})`}
               >
                 <LogOut className="w-3.5 h-3.5" />
@@ -323,8 +324,8 @@ function App() {
             ) : (
               <button
                 onClick={() => setAuthOpen(true)}
-                className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] text-xs font-bold uppercase tracking-[0.04em] transition-transform active:scale-95 cursor-pointer"
-                title="Đăng nhập / Đăng ký (Luân & Ánh Dương)"
+                className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-[1px] bg-lemon-zest hover:bg-pure-white text-black-olive text-xs font-bold uppercase tracking-stenciled transition-all active:scale-95 cursor-pointer"
+                title="Đăng nhập / Đăng ký"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Đăng nhập</span>
@@ -337,7 +338,10 @@ function App() {
       {/* MAIN VIEW AREA */}
       <main className="flex-1 flex flex-col">
         {currentView === 'landing' ? (
-          <LandingPage onStart={handleRequestSwipe} />
+          <LandingPage
+            onStart={handleRequestSwipe}
+            onSelectDish={handleOpenDetail}
+          />
         ) : currentView === 'liked' ? (
           <LikedDishesView
             likedDishes={likedDishes}

@@ -1,30 +1,136 @@
 @import "tailwindcss";
 
 @theme {
+  /* ========================================================
+   * 1. FONT CHỮ (FONTS)
+   * ======================================================== */
   --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
   --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
 
-  /* Limón Palette */
+  /* ========================================================
+   * 2. BẢNG MÀU CHỦ ĐẠO (COLOR PALETTE - LIMÓN SYSTEM)
+   * Thay đổi mã hex tại đây để đổi màu toàn bộ ứng dụng:
+   * ======================================================== */
+  /* Nền tối chủ đạo: Toàn trang, thẻ quẹt, modal, navbar, footer */
   --color-black-olive: #1d0b0d;
-  --color-forest-ink: #103b15;
-  --color-lemon-zest: #f7ea48;
+
+  /* Màu chữ chính: Màu kem ấm áp dịu mắt trên nền tối */
   --color-warm-cream: #fcf9f0;
+
+  /* Vàng chanh Neon: Nút chính CTA, highlight tiêu đề, stamp YUMMY! */
+  --color-lemon-zest: #f7ea48;
+
+  /* Đỏ cảnh báo / Từ chối: Stamp NOPE!, nút xóa món, thông báo lỗi */
+  --color-accent-red: #ef4444;
+
+  /* Đường viền & chữ phụ: Xám xô thơm thanh mảnh (viền thẻ, divider, text phụ) */
   --color-sage-mist: #dbe2dc;
+
+  /* Xanh thẫm thực vật (Botanical): Chip calo, độ cay, badge dinh dưỡng */
+  --color-forest-ink: #103b15;
+
+  /* Trắng tinh khiết: Điểm sáng tương phản */
   --color-pure-white: #ffffff;
 
+  /* ========================================================
+   * 3. ĐỘ BO GÓC THEME (BORDER RADIUS)
+   * ======================================================== */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
 
-  /* Tracking rộng (Neon/Stenciled look) */
+  /* ========================================================
+   * 4. ĐỘ GIÃN KÝ TỰ (LETTER TRACKING)
+   * ======================================================== */
   --tracking-wide: 0.02em;
   --tracking-wider: 0.04em;
   --tracking-widest: 0.06em;
+
+  /* ========================================================
+   * 5. THANG CỠ CHỮ CHUẨN (FONT SIZES)
+   * ======================================================== */
+  --text-badge: 10px;
+  --text-caption: 12px;
+  --text-body: 14px;
+  --text-subheading: 18px;
+  --text-title: 24px;
+  --text-hero: 44px;
+
+  /* ========================================================
+   * 6. HIỆU ỨNG ĐỔ BÓNG (BOX SHADOWS)
+   * ======================================================== */
+  --shadow-neon-lemon: 0 4px 20px -2px rgba(247, 234, 72, 0.25);
+  --shadow-neon-red: 0 4px 20px -2px rgba(239, 68, 68, 0.25);
+  --shadow-card-elevated: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
 }
 
 :root {
-  /* Khóa cứng vào Dark Mode (Black Olive) theo yêu cầu của Limón */
+  /* ========================================================
+   * 7. ĐIỀU KHIỂN BO GÓC TẬP TRUNG TOÀN ỨNG DỤNG (GLOBAL RADIUS)
+   * Đổi giá trị này (1px -> 8px -> 12px) để chuyển từ phẳng góc cạnh
+   * sang bo tròn mềm mại cho TẤT CẢ các thẻ, nút bấm, modal, badge!
+   * ======================================================== */
+  --radius-base: 1px;
+
+  /* ========================================================
+   * 8. KÍCH THƯỚC KHUNG THẺ QUẸT TRÊN MÁY TÍNH (CARD SIZES)
+   * ======================================================== */
+  --card-width-pc: 420px;
+  --card-height-pc: 560px;
+
+  /* ========================================================
+   * 9. ĐỘ DÀY ĐƯỜNG VIỀN & PADDING (BORDER & SPACING)
+   * ======================================================== */
+  --border-width-hairline: 1px;
+  --border-width-stamp: 3px;
+  --card-padding: 1.25rem;
+
+  /* ========================================================
+   * 10. MÀU NỀN MỜ PHỦ KHI MỞ MODAL (BACKDROP OVERLAY)
+   * ======================================================== */
+  --backdrop-overlay: rgba(0, 0, 0, 0.8);
+
+  /* ========================================================
+   * 11. CHIỀU CAO HEADER & ĐIỀU HƯỚNG (NAV & HEADER)
+   * ======================================================== */
+  --header-height: 64px;
+
+  /* ========================================================
+   * 12. THỜI GIAN HIỆU ỨNG CHUYỂN CẢNH (TRANSITIONS)
+   * ======================================================== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+
+  /* ========================================================
+   * 13. CẤP ĐỘ NỔI TẬP TRUNG (Z-INDEX LAYERS)
+   * ======================================================== */
+  --z-base: 1;
+  --z-card-stamp: 10;
+  --z-header: 40;
+  --z-modal: 50;
+
+  /* Biến hệ thống */
   --app-bg: var(--color-black-olive);
   --app-text: var(--color-warm-cream);
   --card-bg: var(--color-black-olive);
   --card-border: var(--color-sage-mist);
+}
+
+/* Áp dụng màu bôi đen chữ theo tông Limón (nền vàng chanh, chữ đen ô liu) */
+::selection {
+  background-color: var(--color-lemon-zest);
+  color: var(--color-black-olive);
+}
+
+/* Áp dụng độ bo góc tập trung --radius-base cho toàn bộ các phần tử */
+button,
+input,
+[class*="rounded-\[1px\]"] {
+  border-radius: var(--radius-base);
 }
 
 html {
@@ -43,7 +149,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   user-select: none;
-  /* Tránh chọn nhầm văn bản khi kéo thẻ */
+  /* Tránh chọn nhầm văn bản khi kéo thả thẻ quẹt */
 }
 
 #root {
@@ -52,17 +158,16 @@ body {
   flex-direction: column;
 }
 
-/* Font chữ tiêu đề món ăn */
+/* Font chữ tiêu đề món ăn & Heading */
 h1,
 h2,
 h3,
 .font-heading {
   font-family: var(--font-heading);
   letter-spacing: var(--tracking-widest);
-  /* Áp dụng tracking rộng cho heading */
 }
 
-/* Tracking utility classes */
+/* Lớp tiện ích tracking rộng phong cách Neon / Stenciled */
 .tracking-neon {
   letter-spacing: var(--tracking-widest);
 }
@@ -71,11 +176,34 @@ h3,
   letter-spacing: var(--tracking-wider);
 }
 
+/* Kích thước khung thẻ quẹt trên PC */
 .card-container-pc {
-  width: 420px;
-  height: 600px;
+  width: var(--card-width-pc);
+  height: var(--card-height-pc);
 }
 
+/* ========================================================
+ * 11. THANH CUỘN TINH TẾ (CUSTOM SCROLLBAR)
+ * ======================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black-olive);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(219, 226, 220, 0.25);
+  border-radius: var(--radius-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-lemon-zest);
+}
+
+/* Tiện ích ẩn thanh cuộn nhưng vẫn cuộn được */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

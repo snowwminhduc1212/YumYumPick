@@ -169,15 +169,15 @@ export default function CardStack({
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="flex flex-col items-center justify-center text-center p-8 bg-[#1d0b0d] rounded-[1px] border border-[#dbe2dc]/20 w-full max-w-sm mx-auto shadow-2xl"
+              className="flex flex-col items-center justify-center text-center p-8 bg-black-olive rounded-[1px] border border-sage-mist/20 w-full max-w-sm mx-auto shadow-2xl"
             >
-              <div className="w-16 h-16 rounded-full bg-[#f7ea48]/10 flex items-center justify-center text-[#f7ea48] mb-5 border border-[#f7ea48]/30">
+              <div className="w-16 h-16 rounded-[1px] bg-lemon-zest/10 flex items-center justify-center text-lemon-zest mb-5 border border-lemon-zest/30">
                 <ChefHat className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-extrabold text-[#fcf9f0] mb-2 font-heading tracking-[0.04em] uppercase">
+              <h3 className="text-xl font-extrabold text-warm-cream mb-2 font-heading tracking-stenciled uppercase">
                 Đã Khám Phá Hết Món!
               </h3>
-              <p className="text-xs text-[#dbe2dc]/70 mb-6 max-w-xs leading-relaxed tracking-[0.01em]">
+              <p className="text-xs text-sage-mist/70 mb-6 max-w-xs leading-relaxed tracking-wide">
                 Bạn đã duyệt qua toàn bộ thực đơn phù hợp. Giờ là lúc ghé vào danh sách đã lưu để chọn món nấu ngay hôm nay!
               </p>
 
@@ -185,9 +185,9 @@ export default function CardStack({
                 {onGoToLiked && (
                   <button
                     onClick={onGoToLiked}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-[1px] bg-[#f7ea48] hover:bg-[#e4d73f] text-[#1d0b0d] font-bold text-xs uppercase tracking-[0.04em] transition-all cursor-pointer active:scale-95 shadow-md"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-[1px] bg-lemon-zest hover:bg-pure-white text-black-olive font-bold text-xs uppercase tracking-stenciled transition-all cursor-pointer active:scale-95 shadow-md"
                   >
-                    <Heart className="w-4 h-4 fill-[#1d0b0d]" />
+                    <Heart className="w-4 h-4 fill-black-olive" />
                     <span>Xem các món đã lưu</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
@@ -196,7 +196,7 @@ export default function CardStack({
                 {onOpenFilter && (
                   <button
                     onClick={onOpenFilter}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-[1px] bg-[#1d0b0d] border border-[#dbe2dc]/25 hover:border-[#f7ea48] text-[#fcf9f0] hover:text-[#f7ea48] text-xs font-semibold uppercase tracking-[0.04em] transition-colors cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-[1px] bg-black-olive border border-sage-mist/25 hover:border-lemon-zest text-warm-cream hover:text-lemon-zest text-xs font-semibold uppercase tracking-stenciled transition-colors cursor-pointer"
                   >
                     <SlidersHorizontal className="w-3.5 h-3.5" />
                     <span>Đổi tiêu chí bộ lọc</span>

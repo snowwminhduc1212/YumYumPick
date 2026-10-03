@@ -88,7 +88,7 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
       whileTap={isFront ? { cursor: 'grabbing' } : undefined}
       className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing select-none"
     >
-      <div className="relative w-full h-full rounded-none overflow-hidden bg-black-olive border border-sage-mist flex flex-col justify-between">
+      <div className="relative w-full h-full rounded-none overflow-hidden bg-black-olive border border-sage-mist/20 flex flex-col justify-between shadow-2xl">
 
         {/* 1. ẢNH MÓN ĂN */}
         <div className="relative w-full h-3/5 overflow-hidden bg-black-olive border-b border-sage-mist/20">
@@ -103,7 +103,7 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
           />
 
           {/* Huy hiệu Quốc gia góc trên */}
-          <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-black-olive text-warm-cream border border-sage-mist text-[10px] font-semibold uppercase tracking-stenciled">
+          <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-[1px] bg-black-olive text-warm-cream border border-sage-mist/20 text-[10px] font-semibold uppercase tracking-stenciled">
             <span className="text-xs">{CUISINE_FLAGS[dish.cuisine] || '🌏'}</span>
             <span>{dish.cuisine}</span>
           </div>
@@ -112,24 +112,24 @@ export default function SwipeCard({ dish, isFront, onSwipe }) {
           {isFront && (
             <motion.div
               style={{ opacity: likeOpacity }}
-              className="absolute top-6 left-6 -rotate-12 border-[3px] border-lemon-zest text-lemon-zest font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive pointer-events-none"
+              className="absolute top-6 left-6 -rotate-12 border-[3px] border-lemon-zest text-lemon-zest font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive pointer-events-none shadow-lg shadow-lemon-zest/20"
             >
               YUMMY! ❤️
             </motion.div>
           )}
 
-          {/* STAMP NOPE (Hiện khi kéo sang TRÁI) */}
+          {/* STAMP NOPE (Hiện khi kéo sang TRÁI - bg-accent-red) */}
           {isFront && (
             <motion.div
               style={{ opacity: nopeOpacity }}
-              className="absolute top-6 right-6 rotate-12 border-[3px] border-pure-white text-pure-white font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon bg-black-olive pointer-events-none"
+              className="absolute top-6 right-6 rotate-12 border-[3px] border-accent-red bg-accent-red text-white font-extrabold text-2xl md:text-3xl px-4 py-1.5 rounded-[1px] uppercase tracking-neon pointer-events-none shadow-lg shadow-accent-red/20"
             >
               NOPE! ✘
             </motion.div>
           )}
 
           {/* Tên món nằm trên phần chân ảnh (nền solid flat) */}
-          <div className="absolute bottom-0 left-0 right-0 bg-black-olive p-4 border-t border-sage-mist">
+          <div className="absolute bottom-0 left-0 right-0 bg-black-olive p-4 border-t border-sage-mist/20">
             <h2 className="text-[28px] font-bold tracking-neon leading-none text-warm-cream">
               {dish.name}
             </h2>

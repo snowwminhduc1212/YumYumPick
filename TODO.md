@@ -1,4 +1,4 @@
-# YumYumPick — Project TODO & Action Plan (5-Day Plan)
+# YumYumPick — Project TODO & Action Plan
 
 > The "Tinder For Food" Web App — Random dish recommendation via swipe cards, rescuing users from the dilemma of *"What should I eat today?"*  
 > **Streamlined 5-day delivery:** Localhost execution • SQLite Database • Simple User Auth • No Admin UI • Responsive Mobile & PC.
